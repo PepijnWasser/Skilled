@@ -8,12 +8,14 @@ using System;
 
 public class LocalHostServer : MonoBehaviour
 {
+	public float timeOutTime = 5f;
+
 	List<MyClient> connectedClients = new List<MyClient>();
 	int newPlayerID = 0;
 	private TcpListener _listener;
 
 
-    private void Start()
+    public void Initialize()
     {
 		Debug.Log("Server started on port 55555");
 
@@ -37,18 +39,16 @@ public class LocalHostServer : MonoBehaviour
 		{
 			try
 			{
-				MyClient newClient = new MyClient(_listener.AcceptTcpClient(), newPlayerID);
+				MyClient newClient = new MyClient(_listener.AcceptTcpClient(), newPlayerID, timeOutTime);
 				connectedClients.Add(newClient);
 				newPlayerID++;
 
-				//send create message to all users
 				Packet outPacket = new Packet();
-				//MakeAgentMessage outMessage = new MakeAgentMessage(newClient.avatarModel, newClient.playerID);
-				//outPacket.Write(outMessage);
-				//SendMessageToAllUsers(outPacket);
+				UpdatePlayerCountMessage playerCountMessage = new UpdatePlayerCountMessage(connectedClients.Count);
+				outPacket.Write(playerCountMessage);
+				SendMessageToAllUsers(outPacket);
 
-				Console.WriteLine(connectedClients.Count);
-				Console.WriteLine("Accepted new client.");
+				Debug.Log("Accepted new client.");
 			}
 			catch (Exception e)
 			{
@@ -76,26 +76,10 @@ public class LocalHostServer : MonoBehaviour
 
 			var tempOBJ = inPacket.ReadObject();
 
-			/*
-			if (tempOBJ is ChatMessage)
-			{
-				ChatMessage message = tempOBJ as ChatMessage;
-				HandleChat(message, client);
-			}
-			else if (tempOBJ is AgentMovingMessage)
-			{
-				AgentMovingMessage message = tempOBJ as AgentMovingMessage;
-				HandleMoving(message, client);
-			}
-			else if (tempOBJ is Heartbeat)
+			if (tempOBJ is Heartbeat)
 			{
 				RefreshHeartbeat(client);
 			}
-			else
-			{
-				Console.WriteLine("Unidentified data");
-			}
-			*/
 		}
 		catch (Exception e)
 		{
@@ -147,7 +131,7 @@ public class LocalHostServer : MonoBehaviour
 
 	private void RefreshHeartbeat(MyClient pClient)
 	{
-		pClient.heartbeat = 100;
+		pClient.heartbeat = timeOutTime;
 	}
 
 	private void SendMessageToAllUsers(Packet outPacket)
@@ -171,7 +155,8 @@ public class LocalHostServer : MonoBehaviour
 
 		for (int i = 0; i < connectedClients.Count; i++)
 		{
-			connectedClients[i].heartbeat -= 1;
+			connectedClients[i].heartbeat -= Time.deltaTime;
+			Debug.Log(connectedClients[i].heartbeat);
 			if (connectedClients[i].heartbeat <= 0)
 			{
 				connectedClientsToRemove.Add(connectedClients[i]);
@@ -180,16 +165,19 @@ public class LocalHostServer : MonoBehaviour
 
 		foreach (MyClient client in connectedClientsToRemove)
 		{
+			//to do
+			//disconnect message to disconnected user
+
+
+
 			Console.WriteLine("removing client");
 			client.TcpClient.Close();
 			connectedClients.Remove(client);
 
-			//RemoveClientMessage removeMessage = new RemoveClientMessage();
-			//removeMessage.playerID = client.playerID;
-			//Packet outPacket = new Packet();
-			//outPacket.Write(removeMessage);
-
-			//SendMessageToAllUsers(outPacket);
+			Packet outPacket = new Packet();
+			UpdatePlayerCountMessage playerCountMessage = new UpdatePlayerCountMessage(connectedClients.Count);
+			outPacket.Write(playerCountMessage);
+			SendMessageToAllUsers(outPacket);
 		}
 	}
 

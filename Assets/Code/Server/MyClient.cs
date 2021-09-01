@@ -7,14 +7,14 @@ using System.Net.Sockets;
 
     public class MyClient
     {
-        public int heartbeat;
+        public float heartbeat;
         public TcpClient TcpClient;
         public int playerID;
 
 
-        public MyClient(TcpClient _TcpClient, int _playerID)
+        public MyClient(TcpClient _TcpClient, int _playerID, float _heartbeat)
         {
-            heartbeat = 100;
+            heartbeat = _heartbeat;
             TcpClient = _TcpClient;
             playerID = _playerID;
         }
