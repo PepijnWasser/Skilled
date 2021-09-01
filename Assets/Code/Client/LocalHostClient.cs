@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
@@ -8,12 +9,9 @@ public class LocalHostClient : MonoBehaviour
 {
     float secondCounter = 0;
 
-    [SerializeField] private string _server = "localhost";
-    [SerializeField] private int _port = 55555;
-
     [HideInInspector] public TcpClient client;
 
-    public bool ConnectToServer()
+    public bool ConnectToServer(string _server, int _port)
     {
         try
         {
@@ -24,7 +22,6 @@ public class LocalHostClient : MonoBehaviour
         }
         catch (Exception e)
         {
-            Debug.Log("Could not connect to server:");
             Debug.Log(e.Message);
             return false;
         }
@@ -58,11 +55,11 @@ public class LocalHostClient : MonoBehaviour
 
     }
 
-    private void SendObject(ISerializable pOutObject)
+    public void SendObject(ISerializable pOutObject)
     {
         try
         {
-            Debug.Log("sending packet" + pOutObject);
+            //Debug.Log("sending packet" + pOutObject);
             Packet outPacket = new Packet();
             outPacket.Write(pOutObject);
 
