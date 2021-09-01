@@ -10,17 +10,36 @@ public class LocalHostServer : MonoBehaviour
 {
 	public float timeOutTime = 5f;
 
+	private string owner;
+	private int port;
+
 	List<MyClient> connectedClients = new List<MyClient>();
-	int newPlayerID = 0;
 	private TcpListener _listener;
 
 
-    public void Initialize()
+    public void Initialize(int _port, string _owner)
     {
-		Debug.Log("Server started on port 55555");
+		owner = _owner;
 
-		_listener = new TcpListener(IPAddress.Any, 55555);
-		_listener.Start();
+		bool finishedInitialization = false;
+		int i = 0;
+
+        while (finishedInitialization == false && i < 20)
+        {
+			try
+			{
+				_listener = new TcpListener(IPAddress.Any, _port + i);
+				_listener.Start();
+				port = _port + i;
+				finishedInitialization = true;
+				Debug.Log("Server started on port: "+ (_port + i));
+			}
+			catch (Exception e)
+			{
+				i++;
+			}
+		}
+
 	}
 
     private void Update()
@@ -39,15 +58,21 @@ public class LocalHostServer : MonoBehaviour
 		{
 			try
 			{
-				MyClient newClient = new MyClient(_listener.AcceptTcpClient(), newPlayerID, timeOutTime);
+				MyClient newClient = new MyClient(_listener.AcceptTcpClient(), timeOutTime, MyClient.colors.blue);
 				connectedClients.Add(newClient);
-				newPlayerID++;
 
+				//update player count for everyone
 				Packet outPacket = new Packet();
 				UpdatePlayerCountMessage playerCountMessage = new UpdatePlayerCountMessage(connectedClients.Count);
 				outPacket.Write(playerCountMessage);
 				SendMessageToAllUsers(outPacket);
 
+				//send server name to new user
+				Packet outPacket2 = new Packet();
+				UpdateServerNameMessage serverNameMessage = new UpdateServerNameMessage(owner);
+				outPacket2.Write(serverNameMessage);
+				SendMessageToTargetUsers(outPacket2, newClient);
+				
 				Debug.Log("Accepted new client.");
 			}
 			catch (Exception e)
@@ -80,6 +105,11 @@ public class LocalHostServer : MonoBehaviour
 			{
 				RefreshHeartbeat(client);
 			}
+			else if (tempOBJ is UpdateColorMessage)
+            {
+				UpdateColorMessage message = tempOBJ as UpdateColorMessage;
+				HandleUpdateColorMessage(client, message);
+            }
 		}
 		catch (Exception e)
 		{
@@ -87,51 +117,20 @@ public class LocalHostServer : MonoBehaviour
 		}
 	}
 
-	/*
-	private void HandleChat(ChatMessage message, MyClient client)
-	{
-		try
-		{
-			Console.WriteLine("Received a chatmessage");
-			Packet outPacket = new Packet();
-			ChatMessage outMessage = new ChatMessage(message.text, client.playerID);
-			outPacket.Write(outMessage);
-
-			SendMessageToAllUsers(outPacket);
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine("Error: " + e.Message);
-		}
-	}
-
-	private void HandleMoving(AgentMovingMessage message, MyClient client)
-	{
-		try
-		{
-			Console.WriteLine("Received new position");
-			client.avatarModel.posX = message.posX;
-			client.avatarModel.posY = message.posY;
-			client.avatarModel.posZ = message.posZ;
-			client.avatarModel.posW = message.posW;
-
-			Packet outPacket = new Packet();
-			MoveAgentMessage outMessage = new MoveAgentMessage(client.avatarModel, client.playerID);
-
-			outPacket.Write(outMessage);
-
-			SendMessageToAllUsers(outPacket);
-		}
-		catch (Exception e)
-		{
-			Console.WriteLine("Error: " + e.Message);
-		}
-	}
-	*/
-
 	private void RefreshHeartbeat(MyClient pClient)
 	{
 		pClient.heartbeat = timeOutTime;
+	}
+
+
+	void HandleUpdateColorMessage(MyClient client, UpdateColorMessage message) 
+	{
+		client.playerColor = Extensions.Next(client.playerColor);
+
+		Packet outPacket = new Packet();
+		UpdateColorMessage updateColorMessage = new UpdateColorMessage(client.playerColor);
+		outPacket.Write(updateColorMessage);
+		SendMessageToAllUsers(outPacket);
 	}
 
 	private void SendMessageToAllUsers(Packet outPacket)
@@ -156,7 +155,6 @@ public class LocalHostServer : MonoBehaviour
 		for (int i = 0; i < connectedClients.Count; i++)
 		{
 			connectedClients[i].heartbeat -= Time.deltaTime;
-			Debug.Log(connectedClients[i].heartbeat);
 			if (connectedClients[i].heartbeat <= 0)
 			{
 				connectedClientsToRemove.Add(connectedClients[i]);
@@ -181,6 +179,11 @@ public class LocalHostServer : MonoBehaviour
 		}
 	}
 
+	public int GetServerPort()
+    {
+		return port;
+    }
+
 
 	private void SendMessageToTargetUsers(Packet outPacket, MyClient client)
 	{
@@ -203,5 +206,18 @@ public class LocalHostServer : MonoBehaviour
 				}
 			}
 		}
+	}
+}
+
+public static class Extensions
+{
+
+	public static T Next<T>(this T src) where T : struct
+	{
+		if (!typeof(T).IsEnum) throw new ArgumentException(String.Format("Argument {0} is not an Enum", typeof(T).FullName));
+
+		T[] Arr = (T[])Enum.GetValues(src.GetType());
+		int j = Array.IndexOf<T>(Arr, src) + 1;
+		return (Arr.Length == j) ? Arr[0] : Arr[j];
 	}
 }

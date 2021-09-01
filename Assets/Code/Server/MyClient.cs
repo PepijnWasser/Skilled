@@ -7,16 +7,23 @@ using System.Net.Sockets;
 
     public class MyClient
     {
-        public float heartbeat;
-        public TcpClient TcpClient;
-        public int playerID;
+    public float heartbeat;
+    public TcpClient TcpClient;
+    public enum colors
+    {
+        red,
+        blue,
+        green,
+        yellow
+    }
+
+    public colors playerColor;
 
 
-        public MyClient(TcpClient _TcpClient, int _playerID, float _heartbeat)
-        {
-            heartbeat = _heartbeat;
-            TcpClient = _TcpClient;
-            playerID = _playerID;
-        }
-    
+    public MyClient(TcpClient _TcpClient, float _heartbeat, colors _playerColor)
+    {
+        heartbeat = _heartbeat;
+        TcpClient = _TcpClient;
+        playerColor = _playerColor;
+    }
 }
