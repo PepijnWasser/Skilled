@@ -13,8 +13,10 @@ public class LocalHostServer : MonoBehaviour
 	private string owner;
 	private int port;
 
-	List<MyClient> connectedClients = new List<MyClient>();
+	private List<MyClient> connectedClients = new List<MyClient>();
 	private TcpListener _listener;
+
+	private int newPlayerID = 0;
 
 
     public void Initialize(int _port, string _owner)
@@ -58,7 +60,10 @@ public class LocalHostServer : MonoBehaviour
 		{
 			try
 			{
-				MyClient newClient = new MyClient(_listener.AcceptTcpClient(), timeOutTime, MyClient.colors.blue);
+				string newPlayerName = "Player " + newPlayerID;
+				MyClient newClient = new MyClient(_listener.AcceptTcpClient(), timeOutTime, MyClient.colors.blue, newPlayerID, newPlayerName);
+				newPlayerID += 1;
+
 				connectedClients.Add(newClient);
 
 				//update player count for everyone
@@ -71,8 +76,33 @@ public class LocalHostServer : MonoBehaviour
 				Packet outPacket2 = new Packet();
 				UpdateServerNameMessage serverNameMessage = new UpdateServerNameMessage(owner);
 				outPacket2.Write(serverNameMessage);
-				SendMessageToTargetUsers(outPacket2, newClient);
+				SendMessageToTargetUser(outPacket2, newClient);
+
+				//send new player to all users except the new one
+				Packet outpacket3 = new Packet();
+				MakeNewPlayerBarMessage playerBarMessage = new MakeNewPlayerBarMessage(newClient.playerID, newClient.playerColor, newClient.playerName, false);
+				outpacket3.Write(playerBarMessage);
+				SendMessageToAllUsersExcept(outpacket3, newClient);
 				
+				//send new player to all users except the new one
+				Packet outpacket4 = new Packet();
+				MakeNewPlayerBarMessage playerBarMessage2 = new MakeNewPlayerBarMessage(newClient.playerID, newClient.playerColor, newClient.playerName, true);
+				outpacket4.Write(playerBarMessage2);
+				SendMessageToTargetUser(outpacket4, newClient);
+				
+				//send all existing users to new client
+				foreach (MyClient client in connectedClients)
+                {
+					if(client != newClient)
+                    {
+						Debug.Log("sending existing client");
+						Packet outpacket5 = new Packet();
+						MakeNewPlayerBarMessage playerBarMessage3 = new MakeNewPlayerBarMessage(client.playerID, client.playerColor, client.playerName, false);
+						outpacket5.Write(playerBarMessage3);
+						SendMessageToTargetUser(outpacket5, newClient);
+					}
+                }
+
 				Debug.Log("Accepted new client.");
 			}
 			catch (Exception e)
@@ -128,7 +158,7 @@ public class LocalHostServer : MonoBehaviour
 		client.playerColor = Extensions.Next(client.playerColor);
 
 		Packet outPacket = new Packet();
-		UpdateColorMessage updateColorMessage = new UpdateColorMessage(client.playerColor);
+		UpdateColorMessage updateColorMessage = new UpdateColorMessage(client.playerColor, client.playerID);
 		outPacket.Write(updateColorMessage);
 		SendMessageToAllUsers(outPacket);
 	}
@@ -163,19 +193,20 @@ public class LocalHostServer : MonoBehaviour
 
 		foreach (MyClient client in connectedClientsToRemove)
 		{
-			//to do
-			//disconnect message to disconnected user
-
-
-
 			Console.WriteLine("removing client");
 			client.TcpClient.Close();
 			connectedClients.Remove(client);
 
 			Packet outPacket = new Packet();
-			UpdatePlayerCountMessage playerCountMessage = new UpdatePlayerCountMessage(connectedClients.Count);
-			outPacket.Write(playerCountMessage);
+			RemovePlayerBarMessage removePlayerBarMessage = new RemovePlayerBarMessage(client.playerID);
+			outPacket.Write(removePlayerBarMessage);
 			SendMessageToAllUsers(outPacket);
+
+
+			Packet outPacket2 = new Packet();
+			UpdatePlayerCountMessage playerCountMessage = new UpdatePlayerCountMessage(connectedClients.Count);
+			outPacket2.Write(playerCountMessage);
+			SendMessageToAllUsers(outPacket2);
 		}
 	}
 
@@ -185,7 +216,7 @@ public class LocalHostServer : MonoBehaviour
     }
 
 
-	private void SendMessageToTargetUsers(Packet outPacket, MyClient client)
+	private void SendMessageToTargetUser(Packet outPacket, MyClient client)
 	{
 		StreamUtil.Write(client.TcpClient.GetStream(), outPacket.GetBytes());
 	}

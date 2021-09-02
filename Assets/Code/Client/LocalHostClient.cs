@@ -59,7 +59,6 @@ public class LocalHostClient : MonoBehaviour
     {
         try
         {
-            //Debug.Log("sending packet" + pOutObject);
             Packet outPacket = new Packet();
             outPacket.Write(pOutObject);
 
