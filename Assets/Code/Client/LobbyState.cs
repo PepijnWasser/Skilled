@@ -12,12 +12,19 @@ public class LobbyState : MonoBehaviour
 
     public Text playerCountUIElement;
     public Text serverNameUIElement;
-    public Image playerColorUIElement;
+
+    public Button backButtonUIElement;
 
     private void Awake()
     {
         clientnetwork = GameObject.FindObjectOfType<LocalHostClient>().GetComponent<LocalHostClient>();
         lobbyView = GetComponent<LobbyView>();
+        backButtonUIElement.onClick.AddListener(SendLeaveServerMessage);
+    }
+
+    private void OnDestroy()
+    {
+        backButtonUIElement.onClick.RemoveListener(SendLeaveServerMessage);
     }
 
     private void Update()
@@ -100,6 +107,12 @@ public class LobbyState : MonoBehaviour
     public void UpdatePlayerColorRequest(int sideToChangeTo)
     {
         RequestColorChangeMessage message = new RequestColorChangeMessage(sideToChangeTo);
+        clientnetwork.SendObject(message);
+    }
+
+    void SendLeaveServerMessage()
+    {
+        LeaveServermessage message = new LeaveServermessage();
         clientnetwork.SendObject(message);
     }
 }

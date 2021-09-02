@@ -225,7 +225,7 @@ GameObject:
   - component: {fileID: 2010122153948146142}
   - component: {fileID: 5331056953394944416}
   m_Layer: 5
-  m_Name: player background
+  m_Name: playerBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -140,6 +140,11 @@ public class LocalHostServer : MonoBehaviour
 				RequestColorChangeMessage message = tempOBJ as RequestColorChangeMessage;
 				HandleUpdateColorMessage(client, message);
             }
+			else if(tempOBJ is LeaveServermessage)
+            {
+				LeaveServermessage message = tempOBJ as LeaveServermessage;
+				HandleLeaveServerMessage(client, message);
+            }
 		}
 		catch (Exception e)
 		{
@@ -169,6 +174,11 @@ public class LocalHostServer : MonoBehaviour
 		UpdateColorMessage updateColorMessage = new UpdateColorMessage(client.playerColor, client.playerID);
 		outPacket.Write(updateColorMessage);
 		SendMessageToAllUsers(outPacket);
+	}
+
+	void HandleLeaveServerMessage(MyClient client, LeaveServermessage message)
+    {
+		RemovePlayer(client);
 	}
 
 	private void SendMessageToAllUsers(Packet outPacket)
@@ -201,20 +211,7 @@ public class LocalHostServer : MonoBehaviour
 
 		foreach (MyClient client in connectedClientsToRemove)
 		{
-			Console.WriteLine("removing client");
-			client.TcpClient.Close();
-			connectedClients.Remove(client);
-
-			Packet outPacket = new Packet();
-			RemovePlayerBarMessage removePlayerBarMessage = new RemovePlayerBarMessage(client.playerID);
-			outPacket.Write(removePlayerBarMessage);
-			SendMessageToAllUsers(outPacket);
-
-
-			Packet outPacket2 = new Packet();
-			UpdatePlayerCountMessage playerCountMessage = new UpdatePlayerCountMessage(connectedClients.Count);
-			outPacket2.Write(playerCountMessage);
-			SendMessageToAllUsers(outPacket2);
+			RemovePlayer(client);
 		}
 	}
 
@@ -223,6 +220,23 @@ public class LocalHostServer : MonoBehaviour
 		return port;
     }
 
+	private void RemovePlayer(MyClient clientToRemove)
+    {
+		Console.WriteLine("removing client");
+		clientToRemove.TcpClient.Close();
+		connectedClients.Remove(clientToRemove);
+
+		Packet outPacket = new Packet();
+		RemovePlayerBarMessage removePlayerBarMessage = new RemovePlayerBarMessage(clientToRemove.playerID);
+		outPacket.Write(removePlayerBarMessage);
+		SendMessageToAllUsers(outPacket);
+
+
+		Packet outPacket2 = new Packet();
+		UpdatePlayerCountMessage playerCountMessage = new UpdatePlayerCountMessage(connectedClients.Count);
+		outPacket2.Write(playerCountMessage);
+		SendMessageToAllUsers(outPacket2);
+	}
 
 	private void SendMessageToTargetUser(Packet outPacket, MyClient client)
 	{
@@ -257,7 +271,6 @@ public static class Extensions
 
 		T[] Arr = (T[])Enum.GetValues(src.GetType());
 		int j = Array.IndexOf<T>(Arr, src) + 1;
-		Debug.Log(j);
 		if(Arr.Length == j)
         {
 			return Arr[0];
