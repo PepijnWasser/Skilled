@@ -97,9 +97,9 @@ public class LobbyState : MonoBehaviour
         lobbyView.UpdatePlayerColor(message.playerID, message.color);
     }
 
-    public void UpdatePlayerColorRequest()
+    public void UpdatePlayerColorRequest(int sideToChangeTo)
     {
-        UpdateColorMessage message = new UpdateColorMessage();
+        RequestColorChangeMessage message = new RequestColorChangeMessage(sideToChangeTo);
         clientnetwork.SendObject(message);
     }
 }

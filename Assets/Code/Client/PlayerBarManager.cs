@@ -9,15 +9,16 @@ public class PlayerBarManager : MonoBehaviour
     public Image backgroundColor;
     public Text nameField;
     public Button nextColorButton;
+    public Button previousColorButton;
 
     public void SelectNextColor()
     {
-        GameObject.FindObjectOfType<LobbyState>().GetComponent<LobbyState>().UpdatePlayerColorRequest();
+        GameObject.FindObjectOfType<LobbyState>().GetComponent<LobbyState>().UpdatePlayerColorRequest(1);
     }
 
-    void SelectPreviousColor()
+    public void SelectPreviousColor()
     {
-
+        GameObject.FindObjectOfType<LobbyState>().GetComponent<LobbyState>().UpdatePlayerColorRequest(-1);
     }
 
     public void SwitchColor(Color newColor)
@@ -33,5 +34,6 @@ public class PlayerBarManager : MonoBehaviour
     public void SetOwnership(bool isPlayer)
     {
         nextColorButton.gameObject.SetActive(isPlayer);
+        previousColorButton.gameObject.SetActive(isPlayer);
     }
 }

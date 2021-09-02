@@ -135,9 +135,9 @@ public class LocalHostServer : MonoBehaviour
 			{
 				RefreshHeartbeat(client);
 			}
-			else if (tempOBJ is UpdateColorMessage)
+			else if (tempOBJ is RequestColorChangeMessage)
             {
-				UpdateColorMessage message = tempOBJ as UpdateColorMessage;
+				RequestColorChangeMessage message = tempOBJ as RequestColorChangeMessage;
 				HandleUpdateColorMessage(client, message);
             }
 		}
@@ -153,9 +153,17 @@ public class LocalHostServer : MonoBehaviour
 	}
 
 
-	void HandleUpdateColorMessage(MyClient client, UpdateColorMessage message) 
+	void HandleUpdateColorMessage(MyClient client, RequestColorChangeMessage message) 
 	{
-		client.playerColor = Extensions.Next(client.playerColor);
+		if(message.sideToChangeTo > 0)
+        {
+			client.playerColor = Extensions.Next(client.playerColor);
+		}
+		else if(message.sideToChangeTo < 0)
+        {
+			client.playerColor = Extensions.Previous(client.playerColor);
+		}
+
 
 		Packet outPacket = new Packet();
 		UpdateColorMessage updateColorMessage = new UpdateColorMessage(client.playerColor, client.playerID);
@@ -249,6 +257,32 @@ public static class Extensions
 
 		T[] Arr = (T[])Enum.GetValues(src.GetType());
 		int j = Array.IndexOf<T>(Arr, src) + 1;
-		return (Arr.Length == j) ? Arr[0] : Arr[j];
+		Debug.Log(j);
+		if(Arr.Length == j)
+        {
+			return Arr[0];
+        }
+        else
+        {
+			return Arr[j];
+        }
+	}
+
+	public static T Previous<T>(this T src) where T : struct
+	{
+		//if its not an enum throw an error
+		if (!typeof(T).IsEnum) throw new ArgumentException(String.Format("Argument {0} is not an Enum", typeof(T).FullName));
+
+		//get an array of all keys in enum
+		T[] Arr = (T[])Enum.GetValues(src.GetType());
+		int j = Array.IndexOf<T>(Arr, src) - 1;
+		if(j < 0)
+        {
+			return Arr[Arr.Length - 1];
+        }
+        else
+        {
+			return Arr[j];
+        }
 	}
 }
