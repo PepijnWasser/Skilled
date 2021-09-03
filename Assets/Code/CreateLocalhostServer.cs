@@ -12,7 +12,6 @@ public class CreateLocalhostServer : MonoBehaviour
     public LocalHostServer localHostServerPrefab;
     public GameObject lobbyPrefab;
 
-    [SerializeField] private string serverOwner = "peppi";
 
     private void Start()
     {
@@ -22,11 +21,13 @@ public class CreateLocalhostServer : MonoBehaviour
     public void CreateLocalHostServer()
     {
         LocalHostServer server = Instantiate(localHostServerPrefab);
+        string serverOwner = GameObject.FindObjectOfType<LocalHostClient>().playerName;
         server.Initialize(basePort, serverOwner);
 
         if (localHostClient.ConnectToServer(_server, server.GetServerPort()))
         {
             Instantiate(lobbyPrefab);
+            localHostClient.SendPlayerNameRequest();
             Destroy(this.gameObject);
         }
         else

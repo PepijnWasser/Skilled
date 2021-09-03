@@ -145,6 +145,11 @@ public class LocalHostServer : MonoBehaviour
 				LeaveServermessage message = tempOBJ as LeaveServermessage;
 				HandleLeaveServerMessage(client, message);
             }
+			else if(tempOBJ is UpdatePlayerNameRequest)
+            {
+				UpdatePlayerNameRequest message = tempOBJ as UpdatePlayerNameRequest;
+				HandleUpdateNameRequest(client, message);
+            }
 		}
 		catch (Exception e)
 		{
@@ -157,6 +162,15 @@ public class LocalHostServer : MonoBehaviour
 		pClient.heartbeat = timeOutTime;
 	}
 
+	void HandleUpdateNameRequest(MyClient client, UpdatePlayerNameRequest message)
+    {
+		client.playerName = message.playerName;
+
+		Packet outPacket = new Packet();
+		UpdatePlayerNameRespons updateNameRespons = new UpdatePlayerNameRespons(client.playerName, client.playerID);
+		outPacket.Write(updateNameRespons);
+		SendMessageToAllUsers(outPacket);
+	}
 
 	void HandleUpdateColorMessage(MyClient client, RequestColorChangeMessage message) 
 	{

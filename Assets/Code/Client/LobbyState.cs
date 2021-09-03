@@ -66,6 +66,11 @@ public class LobbyState : MonoBehaviour
                     RemovePlayerBarMessage message = tempOBJ as RemovePlayerBarMessage;
                     HandleRemovePlayerMessage(message);
                 }
+                else if (tempOBJ is UpdatePlayerNameRespons)
+                {
+                    UpdatePlayerNameRespons message = tempOBJ as UpdatePlayerNameRespons;
+                    HandleUpdatePlayerNameRespons(message);
+                }
             }
 
         }
@@ -102,6 +107,11 @@ public class LobbyState : MonoBehaviour
     void HandleUpdateColorMessage(UpdateColorMessage message)
     {
         lobbyView.UpdatePlayerColor(message.playerID, message.color);
+    }
+
+    void HandleUpdatePlayerNameRespons(UpdatePlayerNameRespons message)
+    {
+        lobbyView.UpdateName(message.playerID, message.playerName);
     }
 
     public void UpdatePlayerColorRequest(int sideToChangeTo)

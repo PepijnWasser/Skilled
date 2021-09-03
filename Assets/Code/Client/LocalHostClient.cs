@@ -9,6 +9,7 @@ public class LocalHostClient : MonoBehaviour
 {
     float secondCounter = 0;
 
+    [HideInInspector] public string playerName;
     [HideInInspector] public TcpClient client;
 
     public bool ConnectToServer(string _server, int _port)
@@ -52,7 +53,12 @@ public class LocalHostClient : MonoBehaviour
             }
             
         }
+    }
 
+    public void SendPlayerNameRequest()
+    {
+        UpdatePlayerNameRequest playerJoinRequest = new UpdatePlayerNameRequest(playerName);
+        SendObject(playerJoinRequest);
     }
 
     public void SendObject(ISerializable pOutObject)
