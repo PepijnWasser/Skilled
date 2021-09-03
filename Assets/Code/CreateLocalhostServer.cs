@@ -21,8 +21,7 @@ public class CreateLocalhostServer : MonoBehaviour
     public void CreateLocalHostServer()
     {
         LocalHostServer server = Instantiate(localHostServerPrefab);
-        string serverOwner = GameObject.FindObjectOfType<LocalHostClient>().playerName;
-        server.Initialize(basePort, serverOwner);
+        server.Initialize(basePort);
 
         if (localHostClient.ConnectToServer(_server, server.GetServerPort()))
         {

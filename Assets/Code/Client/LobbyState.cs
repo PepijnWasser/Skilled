@@ -38,9 +38,6 @@ public class LobbyState : MonoBehaviour
 
                 var tempOBJ = inPacket.ReadObject();
 
-                Debug.Log("Received Message of type: " + tempOBJ.GetType());
-
-
                 if (tempOBJ is UpdatePlayerCountMessage)
                 {
                     UpdatePlayerCountMessage message = tempOBJ as UpdatePlayerCountMessage;
