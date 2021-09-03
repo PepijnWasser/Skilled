@@ -29,6 +29,11 @@ public class LobbyRoom : Room
 			UpdatePlayerNameRequest message = tempOBJ as UpdatePlayerNameRequest;
 			HandleUpdateNameRequest(client, message);
 		}
+		else if(tempOBJ is ChatMessage)
+        {
+			ChatMessage message = tempOBJ as ChatMessage;
+			HandleChatMessage(client, message);
+        }
 	}
 
     public override void AddMember(MyClient newClient)
@@ -76,8 +81,6 @@ public class LobbyRoom : Room
 				SendMessageToTargetUser(outpacket5, newClient);
 			}
 		}
-
-		Debug.Log("Accepted new client.");
 		
 	}
 
@@ -177,7 +180,17 @@ public class LobbyRoom : Room
 		removeAndCloseMember(client);
 	}
 
-	
+	void HandleChatMessage(MyClient client, ChatMessage message)
+    {
+		string receivedMessage = message.chatMessage;
+		string messageToSend = "[ " + DateTime.Now + " ]" + client.playerName + ": " + receivedMessage;
+
+		DateTime time = DateTime.Now;
+		Packet outPacket = new Packet();
+		ChatMessage chatMessage = new ChatMessage(message.chatMessage, client.playerName, time.Hour, time.Minute, time.Second);
+		outPacket.Write(chatMessage);
+		SendMessageToAllUsers(outPacket);
+    }
 
 	bool CheckNameAvailible(string name)
 	{

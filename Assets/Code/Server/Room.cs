@@ -55,7 +55,7 @@ public abstract class Room
 
 		foreach (MyClient client in clientsInRoomToRemove)
 		{
-			Debug.Log("timeout");
+			Debug.Log("timeout" + client.playerName);
 			removeAndCloseMember(client);
 		}
 	}

@@ -68,6 +68,11 @@ public class LobbyState : MonoBehaviour
                     UpdatePlayerNameRespons message = tempOBJ as UpdatePlayerNameRespons;
                     HandleUpdatePlayerNameRespons(message);
                 }
+                else if(tempOBJ is ChatMessage)
+                {
+                    ChatMessage message = tempOBJ as ChatMessage;
+                    HandleChatMessage(message);
+                }
             }
 
         }
@@ -111,10 +116,21 @@ public class LobbyState : MonoBehaviour
         lobbyView.UpdateName(message.playerID, message.playerName);
     }
 
+    void HandleChatMessage(ChatMessage message)
+    {
+        GameObject.FindObjectOfType<ChatManager>().DisplayMessage(message);
+    }
+
     public void UpdatePlayerColorRequest(int sideToChangeTo)
     {
         RequestColorChangeMessage message = new RequestColorChangeMessage(sideToChangeTo);
         clientnetwork.SendObject(message);
+    }
+
+    public void SendChatMessage(string _chatMessage)
+    {
+        ChatMessage chatMessage = new ChatMessage(_chatMessage);
+        clientnetwork.SendObject(chatMessage);
     }
 
     void SendLeaveServerMessage()
