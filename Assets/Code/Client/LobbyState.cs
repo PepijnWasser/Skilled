@@ -24,7 +24,7 @@ public class LobbyState : MonoBehaviour
 
     private void Start()
     {
-        SendPlayerNameRequest(clientnetwork.playerName);
+        SendUpdateNameRequest(clientnetwork.playerName);
     }
 
     private void OnDestroy()
@@ -53,9 +53,9 @@ public class LobbyState : MonoBehaviour
                     UpdateServerNameMessage message = tempOBJ as UpdateServerNameMessage;
                     HandleServerNameMessage(message);
                 }
-                else if (tempOBJ is UpdateColorMessage)
+                else if (tempOBJ is UpdateColorRespons)
                 {
-                    UpdateColorMessage message = tempOBJ as UpdateColorMessage;
+                    UpdateColorRespons message = tempOBJ as UpdateColorRespons;
                     HandleUpdateColorMessage(message);
                 }
                 else if (tempOBJ is MakeNewPlayerBarMessage)
@@ -73,13 +73,17 @@ public class LobbyState : MonoBehaviour
                     UpdatePlayerNameRespons message = tempOBJ as UpdatePlayerNameRespons;
                     HandleUpdatePlayerNameRespons(message);
                 }
-                else if(tempOBJ is ChatMessage)
+                else if(tempOBJ is ChatRespons)
                 {
-                    ChatMessage message = tempOBJ as ChatMessage;
+                    ChatRespons message = tempOBJ as ChatRespons;
                     HandleChatMessage(message);
                 }
+                else if(tempOBJ is HelpRespons)
+                {
+                    HelpRespons message = tempOBJ as HelpRespons;
+                    HandleHelpRespons(message);
+                }
             }
-
         }
         catch (Exception e)
         {
@@ -91,6 +95,9 @@ public class LobbyState : MonoBehaviour
         }
     }
 
+    //
+    //Handling messages from the server
+    //
     void HandlePlayerCountMessage(UpdatePlayerCountMessage message)
     {
         playerCountUIElement.text = message.playerCount.ToString();
@@ -111,7 +118,7 @@ public class LobbyState : MonoBehaviour
         lobbyView.RemovePlayer(message.playerID);
     }
 
-    void HandleUpdateColorMessage(UpdateColorMessage message)
+    void HandleUpdateColorMessage(UpdateColorRespons message)
     {
         lobbyView.UpdatePlayerColor(message.playerID, message.color);
     }
@@ -121,33 +128,41 @@ public class LobbyState : MonoBehaviour
         lobbyView.UpdateName(message.playerID, message.playerName);
     }
 
-    void HandleChatMessage(ChatMessage message)
+    void HandleChatMessage(ChatRespons message)
     {
-        GameObject.FindObjectOfType<ChatManager>().DisplayMessage(message);
+        GameObject.FindObjectOfType<ChatManager>().DisplayMessage(message.sender, message.chatMessage, message.hourSend, message.minuteSend, message.secondSend);
     }
 
-    public void SendPlayerNameRequest(string newName)
+    void HandleHelpRespons(HelpRespons message)
     {
-        UpdatePlayerNameRequest playerJoinRequest = new UpdatePlayerNameRequest(newName);
-        clientnetwork.SendObject(playerJoinRequest);
+        GameObject.FindObjectOfType<ChatManager>().DisplayMessage(message.sender, message.message, message.hourSend, message.minuteSend, message.secondSend);
     }
 
-    public void SendUpdatePlayerColorRequest(int sideToChangeTo)
+    //
+    //Sending Messages to the server
+    //
+    public void SendUpdateNameRequest(string newName)
     {
-        RequestColorChangeMessage message = new RequestColorChangeMessage(sideToChangeTo);
-        clientnetwork.SendObject(message);
+        UpdatePlayerNameRequest request = new UpdatePlayerNameRequest(newName);
+        clientnetwork.SendObject(request);
     }
 
-    public void SendChatMessage(string _chatMessage)
+    public void SendUpdateColorRequest(int sideToChangeTo)
     {
-        ChatMessage chatMessage = new ChatMessage(_chatMessage);
-        clientnetwork.SendObject(chatMessage);
+        UpdateColorRequest request = new UpdateColorRequest(sideToChangeTo);
+        clientnetwork.SendObject(request);
+    }
+
+    public void SendChatRequest(string _chatMessage)
+    {
+        ChatRequest request = new ChatRequest(_chatMessage);
+        clientnetwork.SendObject(request);
     }
 
     public void SendHelpRequest()
     {
-        RequestHelpMessage helpRequest = new RequestHelpMessage();
-        clientnetwork.SendObject(helpRequest);
+        HelpRequest request = new HelpRequest();
+        clientnetwork.SendObject(request);
     }
 
     void SendLeaveServerMessage()

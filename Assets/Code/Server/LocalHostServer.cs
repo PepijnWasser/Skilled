@@ -61,8 +61,7 @@ public class LocalHostServer : MonoBehaviour
 		{
 			try
 			{
-				string newPlayerName = "Player " + newPlayerID;
-				MyClient newClient = new MyClient(_listener.AcceptTcpClient(), timeOutTime, MyClient.colors.blue, newPlayerID, newPlayerName);
+				MyClient newClient = new MyClient(_listener.AcceptTcpClient(), timeOutTime, MyClient.colors.blue, newPlayerID, "");
 				newPlayerID += 1;
 				lobbyRoom.AddMember(newClient);
 				connectedClients.Add(newClient);
@@ -76,7 +75,6 @@ public class LocalHostServer : MonoBehaviour
 
 	private void ProcessExistingClients()
 	{
-		Debug.Log("processing");
 		for (int i = 0; i < connectedClients.Count; i++)
 		{
 			if (connectedClients[i].TcpClient.Available == 0) continue;

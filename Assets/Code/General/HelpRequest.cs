@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RequestHelpMessage : ISerializable
+public class HelpRequest : ISerializable
 {
     public void Deserialize(Packet pPacket)
     {
@@ -14,7 +14,7 @@ public class RequestHelpMessage : ISerializable
         
     }
 
-    public RequestHelpMessage()
+    public HelpRequest()
     {
 
     }

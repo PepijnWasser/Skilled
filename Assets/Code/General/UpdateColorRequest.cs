@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RequestColorChangeMessage : ISerializable
+public class UpdateColorRequest : ISerializable
 {
     public int sideToChangeTo;
 
@@ -16,12 +16,12 @@ public class RequestColorChangeMessage : ISerializable
         pPacket.Write(sideToChangeTo);
     }
 
-    public RequestColorChangeMessage()
+    public UpdateColorRequest()
     {
 
     }
 
-    public RequestColorChangeMessage(int _sideToChangeTo)
+    public UpdateColorRequest(int _sideToChangeTo)
     {
         sideToChangeTo = _sideToChangeTo;
     }

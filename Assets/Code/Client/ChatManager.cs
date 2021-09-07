@@ -35,7 +35,7 @@ public class ChatManager : MonoBehaviour
 
         if (inputText[0].ToString() != "/")
         {
-            lobbyState.SendChatMessage(inputText);
+            lobbyState.SendChatRequest(inputText);
         }
         else
         {
@@ -46,7 +46,7 @@ public class ChatManager : MonoBehaviour
                 {
                     if (partsOfString[1] != "")
                     {
-                        lobbyState.SendPlayerNameRequest(partsOfString[1]);
+                        lobbyState.SendUpdateNameRequest(partsOfString[1]);
                     }
                     else
                     {
@@ -67,14 +67,6 @@ public class ChatManager : MonoBehaviour
         chatInputField.text = "";
     }
 
-    public void DisplayMessage(ChatMessage message)
-    {
-        GameObject chatMessage = Instantiate(chatMessagePrefab, chatDisplayContent.transform);
-
-        string timeToDisplay = "[" + message.hourSend + ":" + message.minuteSend + ":" + message.secondSend;
-        chatMessage.GetComponent<ChatPrefabManager>().Setmessage(message.sender, timeToDisplay, message.chatMessage);
-    }
-
     void DisplayMessage(string message)
     {
         {
@@ -83,5 +75,13 @@ public class ChatManager : MonoBehaviour
             string timeToDisplay = "[" + DateTime.Now.Hour + ":" + DateTime.Now.Minute + ":" + DateTime.Now.Second;
             chatMessage.GetComponent<ChatPrefabManager>().Setmessage("server", timeToDisplay, message);
         }
+    }
+
+    public void DisplayMessage(string sender, string message, int hourSend, int minuteSend, int secondSend)
+    {
+        GameObject chatMessage = Instantiate(chatMessagePrefab, chatDisplayContent.transform);
+
+        string timeToDisplay = "[" + secondSend + ":" + minuteSend + ":" + secondSend;
+        chatMessage.GetComponent<ChatPrefabManager>().Setmessage(sender, timeToDisplay, message);
     }
 }

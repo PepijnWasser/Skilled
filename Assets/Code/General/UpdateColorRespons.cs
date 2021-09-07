@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpdateColorMessage : ISerializable
+public class UpdateColorRespons : ISerializable
 {
     public string color = "red";
     public int playerID;
@@ -19,12 +19,12 @@ public class UpdateColorMessage : ISerializable
         playerID = packet.ReadInt();
     }
 
-    public UpdateColorMessage()
+    public UpdateColorRespons()
     {
 
     }
 
-    public UpdateColorMessage(MyClient.colors _color, int _playerID)
+    public UpdateColorRespons(MyClient.colors _color, int _playerID)
     {
         color = _color.ToString();
         playerID = _playerID;

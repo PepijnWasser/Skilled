@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChatMessage : ISerializable
+public class HelpRespons : ISerializable
 {
-    public string chatMessage;
+    public string message;
     public string sender = "";
     public int hourSend = 0;
     public int minuteSend = 0;
@@ -12,7 +12,7 @@ public class ChatMessage : ISerializable
 
     public void Deserialize(Packet pPacket)
     {
-        chatMessage = pPacket.ReadString();
+        message = pPacket.ReadString();
         sender = pPacket.ReadString();
         hourSend = pPacket.ReadInt();
         minuteSend = pPacket.ReadInt();
@@ -21,31 +21,24 @@ public class ChatMessage : ISerializable
 
     public void Serialize(Packet pPacket)
     {
-        pPacket.Write(chatMessage);
+        pPacket.Write(message);
         pPacket.Write(sender);
         pPacket.Write(hourSend);
         pPacket.Write(minuteSend);
         pPacket.Write(secondSend);
-
     }
 
-    public ChatMessage()
+    public HelpRespons()
     {
 
     }
 
-    public ChatMessage(string _chatMessage)
+    public HelpRespons(string _chatMessage, string _sender, int _hourSend, int _minuteSend, int _secondSend)
     {
-        chatMessage = _chatMessage;
-    }
-
-    public ChatMessage(string _chatMessage, string _sender, int _hourSend, int _minuteSend, int _secondSend)
-    {
-        chatMessage = _chatMessage;
+        message = _chatMessage;
         sender = _sender;
         hourSend = _hourSend;
         minuteSend = _minuteSend;
         secondSend = _secondSend;
-
     }
 }

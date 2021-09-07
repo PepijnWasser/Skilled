@@ -8,39 +8,6 @@ using System;
 
 public class LobbyRoom : Room
 {
-	public override void handleNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
-	{
-		if (tempOBJ is Heartbeat)
-		{
-			RefreshHeartbeat(client);
-		}
-		else if (tempOBJ is RequestColorChangeMessage)
-		{
-			RequestColorChangeMessage message = tempOBJ as RequestColorChangeMessage;
-			HandleUpdateColorMessage(client, message);
-		}
-		else if (tempOBJ is LeaveServermessage)
-		{
-			LeaveServermessage message = tempOBJ as LeaveServermessage;
-			HandleLeaveServerMessage(client, message);
-		}
-		else if (tempOBJ is UpdatePlayerNameRequest)
-		{
-			UpdatePlayerNameRequest message = tempOBJ as UpdatePlayerNameRequest;
-			HandleUpdateNameRequest(client, message);
-		}
-		else if(tempOBJ is ChatMessage)
-        {
-			ChatMessage message = tempOBJ as ChatMessage;
-			HandleChatMessage(client, message);
-        }
-		else if(tempOBJ is RequestHelpMessage)
-        {
-			RequestHelpMessage message = tempOBJ as RequestHelpMessage;
-			HandleHelpRequest(client);
-        }
-	}
-
     public override void AddMember(MyClient newClient)
     {
 		base.AddMember(newClient);
@@ -64,14 +31,14 @@ public class LobbyRoom : Room
 
 		//send new player to all users except the new one
 		Packet outpacket3 = new Packet();
-		MakeNewPlayerBarMessage playerBarMessage = new MakeNewPlayerBarMessage(newClient.playerID, newClient.playerColor, newClient.playerName, false);
-		outpacket3.Write(playerBarMessage);
+		MakeNewPlayerBarMessage makePlayerBarMessage = new MakeNewPlayerBarMessage(newClient.playerID, newClient.playerColor, newClient.playerName, false);
+		outpacket3.Write(makePlayerBarMessage);
 		SendMessageToAllUsersExcept(outpacket3, newClient);
 
 		//send new player to all users except the new one
 		Packet outpacket4 = new Packet();
-		MakeNewPlayerBarMessage playerBarMessage2 = new MakeNewPlayerBarMessage(newClient.playerID, newClient.playerColor, newClient.playerName, true);
-		outpacket4.Write(playerBarMessage2);
+		MakeNewPlayerBarMessage makePlayerBarMessage2 = new MakeNewPlayerBarMessage(newClient.playerID, newClient.playerColor, newClient.playerName, true);
+		outpacket4.Write(makePlayerBarMessage2);
 		SendMessageToTargetUser(outpacket4, newClient);
 
 		//send all existing users to new client
@@ -81,12 +48,11 @@ public class LobbyRoom : Room
 			{
 				Debug.Log("sending existing client");
 				Packet outpacket5 = new Packet();
-				MakeNewPlayerBarMessage playerBarMessage3 = new MakeNewPlayerBarMessage(client.playerID, client.playerColor, client.playerName, false);
-				outpacket5.Write(playerBarMessage3);
+				MakeNewPlayerBarMessage makePlayerBarMessage3 = new MakeNewPlayerBarMessage(client.playerID, client.playerColor, client.playerName, false);
+				outpacket5.Write(makePlayerBarMessage3);
 				SendMessageToTargetUser(outpacket5, newClient);
 			}
 		}
-		
 	}
 
     public override void RemoveMember(MyClient clientToRemove)
@@ -99,12 +65,44 @@ public class LobbyRoom : Room
 
 
 		Packet outPacket2 = new Packet();
-		UpdatePlayerCountMessage playerCountMessage = new UpdatePlayerCountMessage(clientsInRoom.Count);
-		outPacket2.Write(playerCountMessage);
+		UpdatePlayerCountMessage updatePlayerCountMessage = new UpdatePlayerCountMessage(clientsInRoom.Count);
+		outPacket2.Write(updatePlayerCountMessage);
 		SendMessageToAllUsers(outPacket2);
 	}
 
-    private void RefreshHeartbeat(MyClient pClient)
+	public override void handleNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
+	{
+		if (tempOBJ is HeartbeatRequest)
+		{
+			RefreshHeartbeat(client);
+		}
+		else if (tempOBJ is UpdateColorRequest)
+		{
+			UpdateColorRequest message = tempOBJ as UpdateColorRequest;
+			HandleUpdateColorMessage(client, message);
+		}
+		else if (tempOBJ is LeaveServermessage)
+		{
+			LeaveServermessage message = tempOBJ as LeaveServermessage;
+			HandleLeaveServerMessage(client, message);
+		}
+		else if (tempOBJ is UpdatePlayerNameRequest)
+		{
+			UpdatePlayerNameRequest message = tempOBJ as UpdatePlayerNameRequest;
+			HandleUpdateNameRequest(client, message);
+		}
+		else if (tempOBJ is ChatRequest)
+		{
+			ChatRequest message = tempOBJ as ChatRequest;
+			HandleChatMessage(client, message);
+		}
+		else if (tempOBJ is HelpRequest)
+		{
+			HandleHelpRequest(client);
+		}
+	}
+
+	private void RefreshHeartbeat(MyClient pClient)
 	{
 		pClient.heartbeat = server.timeOutTime;
 	}
@@ -112,53 +110,52 @@ public class LobbyRoom : Room
 	void HandleUpdateNameRequest(MyClient client, UpdatePlayerNameRequest message)
 	{
 		string requestedName = message.playerName;
-		string availibleName = requestedName;
-		int i = 0;
-		bool needToCheck = true;
-		while (needToCheck == true)
-		{
-			if (i == 0)
+		if(requestedName != client.playerName)
+        {
+			string newName = requestedName;
+			int i = 0;
+			bool needToCheck = true;
+			while (needToCheck == true)
 			{
-				if (CheckNameAvailible(requestedName))
+				if (i == 0)
 				{
-					needToCheck = false;
-					availibleName = requestedName;
+					if (CheckNameAvailible(requestedName))
+					{
+						needToCheck = false;
+						newName = requestedName;
+					}
+					else
+					{
+						i += 1;
+					}
 				}
 				else
 				{
-					i += 1;
+					if (CheckNameAvailible(requestedName + "(" + i + ")"))
+					{
+						needToCheck = false;
+						newName = requestedName + "(" + i + ")";
+					}
+					else
+					{
+						i += 1;
+					}
 				}
 			}
-			else
+
+			if(client.playerName != "")
+            {
+				SendNameChangeChatMessages(client.playerName, newName);
+			}
+
+			UpdatePlayerName(client, newName);
+
+			//if the request was from the owner change server name
+			if (client == server.owner)
 			{
-				if (CheckNameAvailible(requestedName + "(" + i + ")"))
-				{
-					needToCheck = false;
-					availibleName = requestedName + "(" + i + ")";
-				}
-				else
-				{
-					i += 1;
-				}
+				UpdateServerName();
 			}
-		}
-
-		client.playerName = availibleName;
-
-		Packet outPacket = new Packet();
-		UpdatePlayerNameRespons updateNameRespons = new UpdatePlayerNameRespons(client.playerName, client.playerID);
-		outPacket.Write(updateNameRespons);
-		SendMessageToAllUsers(outPacket);
-
-
-		//if the request was from the owner change server name
-		if (client == server.owner)
-		{
-			Packet outPacket2 = new Packet();
-			UpdateServerNameMessage serverNameMessage = new UpdateServerNameMessage(server.owner.playerName);
-			outPacket2.Write(serverNameMessage);
-			SendMessageToAllUsers(outPacket2);
-		}
+		}		
 	}
 
 	void HandleHelpRequest(MyClient client)
@@ -167,12 +164,12 @@ public class LobbyRoom : Room
 
 		DateTime time = DateTime.Now;
 		Packet outPacket = new Packet();
-		ChatMessage chatMessage = new ChatMessage(messageToSend, client.playerName, time.Hour, time.Minute, time.Second);
-		outPacket.Write(chatMessage);
+		HelpRespons helpRespons = new HelpRespons(messageToSend,"Server", time.Hour, time.Minute, time.Second);
+		outPacket.Write(helpRespons);
 		SendMessageToTargetUser(outPacket, client);
 	}
 
-	void HandleUpdateColorMessage(MyClient client, RequestColorChangeMessage message)
+	void HandleUpdateColorMessage(MyClient client, UpdateColorRequest message)
 	{
 		if (message.sideToChangeTo > 0)
 		{
@@ -185,8 +182,8 @@ public class LobbyRoom : Room
 
 
 		Packet outPacket = new Packet();
-		UpdateColorMessage updateColorMessage = new UpdateColorMessage(client.playerColor, client.playerID);
-		outPacket.Write(updateColorMessage);
+		UpdateColorRespons updateColorRespons = new UpdateColorRespons(client.playerColor, client.playerID);
+		outPacket.Write(updateColorRespons);
 		SendMessageToAllUsers(outPacket);
 	}
 
@@ -195,17 +192,44 @@ public class LobbyRoom : Room
 		removeAndCloseMember(client);
 	}
 
-	void HandleChatMessage(MyClient client, ChatMessage message)
+	void HandleChatMessage(MyClient client, ChatRequest message)
     {
-		string receivedMessage = message.chatMessage;
-		string messageToSend = "[ " + DateTime.Now + " ]" + client.playerName + ": " + receivedMessage;
-
 		DateTime time = DateTime.Now;
+
 		Packet outPacket = new Packet();
-		ChatMessage chatMessage = new ChatMessage(message.chatMessage, client.playerName, time.Hour, time.Minute, time.Second);
+		ChatRespons chatMessage = new ChatRespons(message.chatMessage, client.playerName, time.Hour, time.Minute, time.Second);
 		outPacket.Write(chatMessage);
 		SendMessageToAllUsers(outPacket);
     }
+
+	void SendNameChangeChatMessages(string oldName, string newName)
+    {
+		DateTime time = DateTime.Now;
+		string messageToSend = oldName + " is now known as " + newName;
+
+		Packet outPacket = new Packet();
+		ChatRespons chatMessage = new ChatRespons(messageToSend, "Server", time.Hour, time.Minute, time.Second);
+		outPacket.Write(chatMessage);
+		SendMessageToAllUsers(outPacket);
+	}
+
+	void UpdatePlayerName(MyClient client, string newName)
+    {
+		client.playerName = newName;
+
+		Packet outPacket = new Packet();
+		UpdatePlayerNameRespons updateNameRespons = new UpdatePlayerNameRespons(client.playerName, client.playerID);
+		outPacket.Write(updateNameRespons);
+		SendMessageToAllUsers(outPacket);
+	}
+
+	void UpdateServerName()
+    {
+		Packet outPacket = new Packet();
+		UpdateServerNameMessage updateserverNameMessage = new UpdateServerNameMessage(server.owner.playerName);
+		outPacket.Write(updateserverNameMessage);
+		SendMessageToAllUsers(outPacket);
+	}
 
 	bool CheckNameAvailible(string name)
 	{

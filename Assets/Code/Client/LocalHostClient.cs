@@ -40,14 +40,13 @@ public class LocalHostClient : MonoBehaviour
                 {
                     secondCounter = 0;
 
-                    Heartbeat heartbeat = new Heartbeat();
-                    SendObject(heartbeat);
+                    HeartbeatRequest request = new HeartbeatRequest();
+                    SendObject(request);
                 }
             }
 
             catch (Exception e)
             {
-                //for quicker testing, we reconnect if something goes wrong.
                 Debug.Log(e.Message);
                 client.Close();
             }
