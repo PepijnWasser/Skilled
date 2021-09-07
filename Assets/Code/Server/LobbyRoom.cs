@@ -102,7 +102,28 @@ public class LobbyRoom : Room
 		}
 	}
 
-	private void RefreshHeartbeat(MyClient pClient)
+    protected override void CheckHeartbeat()
+    {
+		List<MyClient> clientsInRoomToRemove = new List<MyClient>();
+
+		for (int i = 0; i < clientsInRoom.Count; i++)
+		{
+			clientsInRoom[i].heartbeat -= Time.deltaTime;
+			if (clientsInRoom[i].heartbeat <= 0)
+			{
+				clientsInRoomToRemove.Add(clientsInRoom[i]);
+			}
+		}
+
+		foreach (MyClient client in clientsInRoomToRemove)
+		{
+			Debug.Log("timeout" + client.playerName);
+			SendPlayerDisconnectMessages(client.playerName);
+			removeAndCloseMember(client);
+		}
+	}
+
+    private void RefreshHeartbeat(MyClient pClient)
 	{
 		pClient.heartbeat = server.timeOutTime;
 	}
@@ -146,7 +167,11 @@ public class LobbyRoom : Room
 			if(client.playerName != "")
             {
 				SendNameChangeChatMessages(client.playerName, newName);
-			}
+            }
+            else
+            {
+				SendPlayerJoinedMessages(newName);
+            }
 
 			UpdatePlayerName(client, newName);
 
@@ -160,7 +185,8 @@ public class LobbyRoom : Room
 
 	void HandleHelpRequest(MyClient client)
     {
-		string messageToSend = "/help, /setname";
+		string messageToSend =	"/help\n"+
+								"/setname";
 
 		DateTime time = DateTime.Now;
 		Packet outPacket = new Packet();
@@ -189,6 +215,7 @@ public class LobbyRoom : Room
 
 	void HandleLeaveServerMessage(MyClient client, LeaveServermessage message)
 	{
+		SendPlayerLeftMessages(client.playerName);
 		removeAndCloseMember(client);
 	}
 
@@ -202,6 +229,39 @@ public class LobbyRoom : Room
 		SendMessageToAllUsers(outPacket);
     }
 
+	void SendPlayerLeftMessages(string playerWhoLeft)
+    {
+		DateTime time = DateTime.Now;
+		string messageToSend = playerWhoLeft + " left the room";
+
+		Packet outPacket = new Packet();
+		ChatRespons chatMessage = new ChatRespons(messageToSend, "Server", time.Hour, time.Minute, time.Second);
+		outPacket.Write(chatMessage);
+		SendMessageToAllUsers(outPacket);
+	}
+
+	void SendPlayerJoinedMessages(string playerWhoJoined)
+    {
+		DateTime time = DateTime.Now;
+		string messageToSend = playerWhoJoined + " joined the room";
+
+		Packet outPacket = new Packet();
+		ChatRespons chatMessage = new ChatRespons(messageToSend, "Server", time.Hour, time.Minute, time.Second);
+		outPacket.Write(chatMessage);
+		SendMessageToAllUsers(outPacket);
+	}
+
+	void SendPlayerDisconnectMessages(string playerWhoDisconnected)
+    {
+		DateTime time = DateTime.Now;
+		string messageToSend = playerWhoDisconnected + " timed out";
+
+		Packet outPacket = new Packet();
+		ChatRespons chatMessage = new ChatRespons(messageToSend, "Server", time.Hour, time.Minute, time.Second);
+		outPacket.Write(chatMessage);
+		SendMessageToAllUsers(outPacket);
+	}
+		
 	void SendNameChangeChatMessages(string oldName, string newName)
     {
 		DateTime time = DateTime.Now;

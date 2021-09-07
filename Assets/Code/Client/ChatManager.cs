@@ -81,7 +81,7 @@ public class ChatManager : MonoBehaviour
     {
         GameObject chatMessage = Instantiate(chatMessagePrefab, chatDisplayContent.transform);
 
-        string timeToDisplay = "[" + secondSend + ":" + minuteSend + ":" + secondSend + "]";
+        string timeToDisplay = "[" + hourSend + ":" + minuteSend + ":" + secondSend + "]";
         chatMessage.GetComponent<ChatPrefabManager>().Setmessage(sender, timeToDisplay, message);
     }
 }
