@@ -11,8 +11,11 @@ public class ChatPrefabManager : MonoBehaviour
 
     public void Setmessage(string name, string time, string message)
     {
-        nameField.text = name;
+        nameField.text = name + ":";
         timeField.text = time;
         messageField.text = message;
+
+        RectTransform rect = this.GetComponent<RectTransform>();
+        rect.sizeDelta = new Vector2(rect.sizeDelta.x, messageField.preferredHeight + 40);
     }
 }
