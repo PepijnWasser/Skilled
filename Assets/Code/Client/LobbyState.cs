@@ -15,6 +15,9 @@ public class LobbyState : MonoBehaviour
 
     public Button backButtonUIElement;
 
+    public float timeOutTime = 5f;
+    public float lastHeartbeat = 5f;
+
     private void Awake()
     {
         clientnetwork = GameObject.FindObjectOfType<LocalHostClient>().GetComponent<LocalHostClient>();
@@ -47,6 +50,10 @@ public class LobbyState : MonoBehaviour
                 {
                     UpdatePlayerCountMessage message = tempOBJ as UpdatePlayerCountMessage;
                     HandlePlayerCountMessage(message);
+                }
+                else if (tempOBJ is HeartBeat)
+                {
+                    HandleHeartbeat();
                 }
                 else if (tempOBJ is UpdateServerNameMessage)
                 {
@@ -84,6 +91,7 @@ public class LobbyState : MonoBehaviour
                     HandleHelpRespons(message);
                 }
             }
+            CheckHeartbeat();
         }
         catch (Exception e)
         {
@@ -106,6 +114,11 @@ public class LobbyState : MonoBehaviour
     void HandleServerNameMessage(UpdateServerNameMessage message)
     {
         serverNameUIElement.text = message.serverName + "'s server";
+    }
+
+    void HandleHeartbeat()
+    {
+        lastHeartbeat = timeOutTime;
     }
 
     void HandleMakeNewPlayerMessage(MakeNewPlayerBarMessage message)
@@ -169,5 +182,15 @@ public class LobbyState : MonoBehaviour
     {
         LeaveServermessage message = new LeaveServermessage();
         clientnetwork.SendObject(message);
+    }
+
+    void CheckHeartbeat()
+    {
+        lastHeartbeat -= Time.deltaTime;
+        if(lastHeartbeat < 0)
+        {
+            SendLeaveServerMessage();
+            GetComponent<CreateCJScreen>().CreateCJScreenItem();
+        }
     }
 }

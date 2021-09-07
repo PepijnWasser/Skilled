@@ -46,7 +46,7 @@ public class LobbyRoom : Room
 		{
 			if (client != newClient)
 			{
-				Debug.Log("sending existing client");
+				Debug.Log("sending existing clients");
 				Packet outpacket5 = new Packet();
 				MakeNewPlayerBarMessage makePlayerBarMessage3 = new MakeNewPlayerBarMessage(client.playerID, client.playerColor, client.playerName, false);
 				outpacket5.Write(makePlayerBarMessage3);
@@ -72,7 +72,7 @@ public class LobbyRoom : Room
 
 	public override void handleNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
 	{
-		if (tempOBJ is HeartbeatRequest)
+		if (tempOBJ is HeartBeat)
 		{
 			RefreshHeartbeat(client);
 		}

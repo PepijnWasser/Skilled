@@ -40,7 +40,7 @@ public class LocalHostClient : MonoBehaviour
                 {
                     secondCounter = 0;
 
-                    HeartbeatRequest request = new HeartbeatRequest();
+                    HeartBeat request = new HeartBeat();
                     SendObject(request);
                 }
             }
