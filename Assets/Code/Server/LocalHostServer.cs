@@ -93,7 +93,7 @@ public class LocalHostServer : MonoBehaviour
 			Packet inPacket = new Packet(inBytes);
 
 			var tempOBJ = inPacket.ReadObject();
-			Debug.Log("data icoming: " + tempOBJ.GetType());
+			Debug.Log("data icoming on server: " + tempOBJ.GetType());
 
 			activeRoom.handleNetworkMessageFromUser(tempOBJ, client);
 		}
