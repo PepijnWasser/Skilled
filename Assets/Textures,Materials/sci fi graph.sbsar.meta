@@ -18,8 +18,9 @@ ScriptedImporter:
     generateMipMaps: 1
     preset: " <sbspreset pkgurl=\"pkg://Substance_graph\" label=\"\" >\n  <presetinput
       identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"10,10\" />\n 
-      <presetinput identifier=\"Main_color_\" uid=\"2352111398\" type=\"3\" value=\"0.819884,0.820755,0.816109,1\"
-      />\n </sbspreset>\n"
+      <presetinput identifier=\"edge_width\" uid=\"2352090913\" type=\"0\" value=\"3.04\"
+      />\n  <presetinput identifier=\"Main_color_\" uid=\"2352111398\" type=\"3\"
+      value=\"0.486365,0.83712,0.867925,1\" />\n </sbspreset>\n"
     shaderName: Standard
     materialProperties:
       shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
@@ -47,11 +48,11 @@ ScriptedImporter:
         offset: {x: 0, y: 0}
       - name: _EmissionMap
         texture: {instanceID: 0}
-        scale: {x: 10, y: 10}
+        scale: {x: 20, y: 20}
         offset: {x: 0, y: 0}
       - name: _MainTex
         texture: {fileID: 814193769655529742, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
-        scale: {x: 10, y: 10}
+        scale: {x: 20, y: 20}
         offset: {x: 0, y: 0}
       - name: _MetallicGlossMap
         texture: {fileID: -2034204982276346014, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
