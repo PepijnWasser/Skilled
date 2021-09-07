@@ -34,6 +34,11 @@ public class LobbyRoom : Room
 			ChatMessage message = tempOBJ as ChatMessage;
 			HandleChatMessage(client, message);
         }
+		else if(tempOBJ is RequestHelpMessage)
+        {
+			RequestHelpMessage message = tempOBJ as RequestHelpMessage;
+			HandleHelpRequest(client);
+        }
 	}
 
     public override void AddMember(MyClient newClient)
@@ -154,7 +159,17 @@ public class LobbyRoom : Room
 			outPacket2.Write(serverNameMessage);
 			SendMessageToAllUsers(outPacket2);
 		}
+	}
 
+	void HandleHelpRequest(MyClient client)
+    {
+		string messageToSend = "/help, /setname";
+
+		DateTime time = DateTime.Now;
+		Packet outPacket = new Packet();
+		ChatMessage chatMessage = new ChatMessage(messageToSend, client.playerName, time.Hour, time.Minute, time.Second);
+		outPacket.Write(chatMessage);
+		SendMessageToTargetUser(outPacket, client);
 	}
 
 	void HandleUpdateColorMessage(MyClient client, RequestColorChangeMessage message)

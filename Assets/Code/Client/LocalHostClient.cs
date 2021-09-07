@@ -55,12 +55,6 @@ public class LocalHostClient : MonoBehaviour
         }
     }
 
-    public void SendPlayerNameRequest()
-    {
-        UpdatePlayerNameRequest playerJoinRequest = new UpdatePlayerNameRequest(playerName);
-        SendObject(playerJoinRequest);
-    }
-
     public void SendObject(ISerializable pOutObject)
     {
         try

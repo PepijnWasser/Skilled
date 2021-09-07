@@ -13,12 +13,12 @@ public class PlayerBarManager : MonoBehaviour
 
     public void SelectNextColor()
     {
-        GameObject.FindObjectOfType<LobbyState>().GetComponent<LobbyState>().UpdatePlayerColorRequest(1);
+        GameObject.FindObjectOfType<LobbyState>().GetComponent<LobbyState>().SendUpdatePlayerColorRequest(1);
     }
 
     public void SelectPreviousColor()
     {
-        GameObject.FindObjectOfType<LobbyState>().GetComponent<LobbyState>().UpdatePlayerColorRequest(-1);
+        GameObject.FindObjectOfType<LobbyState>().GetComponent<LobbyState>().SendUpdatePlayerColorRequest(-1);
     }
 
     public void SwitchColor(Color newColor)

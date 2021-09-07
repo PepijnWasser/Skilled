@@ -22,6 +22,11 @@ public class LobbyState : MonoBehaviour
         backButtonUIElement.onClick.AddListener(SendLeaveServerMessage);
     }
 
+    private void Start()
+    {
+        SendPlayerNameRequest(clientnetwork.playerName);
+    }
+
     private void OnDestroy()
     {
         backButtonUIElement.onClick.RemoveListener(SendLeaveServerMessage);
@@ -121,7 +126,13 @@ public class LobbyState : MonoBehaviour
         GameObject.FindObjectOfType<ChatManager>().DisplayMessage(message);
     }
 
-    public void UpdatePlayerColorRequest(int sideToChangeTo)
+    public void SendPlayerNameRequest(string newName)
+    {
+        UpdatePlayerNameRequest playerJoinRequest = new UpdatePlayerNameRequest(newName);
+        clientnetwork.SendObject(playerJoinRequest);
+    }
+
+    public void SendUpdatePlayerColorRequest(int sideToChangeTo)
     {
         RequestColorChangeMessage message = new RequestColorChangeMessage(sideToChangeTo);
         clientnetwork.SendObject(message);
@@ -131,6 +142,12 @@ public class LobbyState : MonoBehaviour
     {
         ChatMessage chatMessage = new ChatMessage(_chatMessage);
         clientnetwork.SendObject(chatMessage);
+    }
+
+    public void SendHelpRequest()
+    {
+        RequestHelpMessage helpRequest = new RequestHelpMessage();
+        clientnetwork.SendObject(helpRequest);
     }
 
     void SendLeaveServerMessage()

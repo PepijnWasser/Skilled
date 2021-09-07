@@ -21,7 +21,6 @@ public class JoinLocalHostServer : MonoBehaviour
         if (localHostClient.ConnectToServer(_server, port))
         {
             Destroy(this.gameObject);
-            localHostClient.SendPlayerNameRequest();
             Instantiate(lobbyPrefab);
         }
     }
