@@ -5,11 +5,9 @@ using System.Net;
 
 public class CreateLocalhostServer : MonoBehaviour
 {
-    [SerializeField] private string _serverString = "localhost";
-    [SerializeField] private string _serverIPString = "86.86.80.67";
+    [SerializeField] private string _serverIPString = "192.168.2.10";
     private IPAddress _serverIP;
-    private IPEndPoint _serverEndPoint;
-    [SerializeField] private int basePort = 55555;
+    [SerializeField] private int basePort = 20017;
 
     private LocalHostClient localHostClient;
 
@@ -28,9 +26,8 @@ public class CreateLocalhostServer : MonoBehaviour
         server.Initialize(basePort);
 
         _serverIP = IPAddress.Parse(_serverIPString);
-        _serverEndPoint = new IPEndPoint(_serverIP, server.GetServerPort());
         
-        if (localHostClient.ConnectToServer(_serverString, server.GetServerPort()))
+        if (localHostClient.ConnectToServer(_serverIP, server.GetServerPort()))
         {
             Instantiate(lobbyPrefab);
            Destroy(this.gameObject);
@@ -38,7 +35,6 @@ public class CreateLocalhostServer : MonoBehaviour
         else
         {
             Destroy(server.gameObject);
-        }
-        
+        }  
     }
 }

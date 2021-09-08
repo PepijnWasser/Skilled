@@ -12,21 +12,6 @@ public class LocalHostClient : MonoBehaviour
     [HideInInspector] public string playerName;
     [HideInInspector] public TcpClient client;
 
-    public bool ConnectToServer(string _server, int _port)
-    {
-        try
-        {
-            client = new TcpClient();
-            client.Connect(_server, _port);
-            Debug.Log("Connected to server.");
-            return true;
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e.Message);
-            return false;
-        }
-    }
 
     public bool ConnectToServer(System.Net.IPAddress address, int _port)
     {
@@ -34,7 +19,7 @@ public class LocalHostClient : MonoBehaviour
         {
             client = new TcpClient();
             client.Connect(address, _port);
-            Debug.Log("Connected to server.");
+            Debug.Log("Connected to server on port " + _port);
             return true;
         }
         catch (Exception e)
@@ -44,13 +29,13 @@ public class LocalHostClient : MonoBehaviour
         }
     }
 
-    public bool ConnectToServer(System.Net.IPEndPoint _ipEndPoint)
+    public bool ConnectToServer(string address, int _port)
     {
         try
         {
             client = new TcpClient();
-            client.Connect(_ipEndPoint);
-            Debug.Log("Connected to server.");
+            client.Connect(address, _port);
+            Debug.Log("Connected to server on port " + _port);
             return true;
         }
         catch (Exception e)

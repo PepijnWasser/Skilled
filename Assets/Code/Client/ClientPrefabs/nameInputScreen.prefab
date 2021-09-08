@@ -87,8 +87,6 @@ GameObject:
   - component: {fileID: 361153672018491465}
   - component: {fileID: 361153672018491464}
   - component: {fileID: 361153672018491467}
-  - component: {fileID: 3966056884132580788}
-  - component: {fileID: 5402902155843764975}
   m_Layer: 5
   m_Name: nameInputScreen
   m_TagString: Untagged
@@ -179,35 +177,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &3966056884132580788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 361153672018491466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ad35cccafb651e4481739a1e902f197, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _server: localhost
-  basePort: 55555
-  localHostServerPrefab: {fileID: 1762931389194518095, guid: 5a7ddb2d496811149877258a47360caf, type: 3}
-  lobbyPrefab: {fileID: 5919268785238396665, guid: ec570f46a30c0fa46abffba18e76e56f, type: 3}
---- !u!114 &5402902155843764975
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 361153672018491466}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c4311ec67935494e985600e4c9f1657, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lobbyListViewPrefab: {fileID: 3026914877065497835, guid: c388bf997c5a79e429426c082cf12c1f, type: 3}
 --- !u!1 &3800764170072717290
 GameObject:
   m_ObjectHideFlags: 0

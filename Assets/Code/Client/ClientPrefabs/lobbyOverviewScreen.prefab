@@ -192,9 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40c50a85f83d27488cb5d24f528f43e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _serverString: localhost
   _serverIPString: 192.168.2.10
-  basePort: 55555
+  basePort: 20021
   lobbyPrefab: {fileID: 5919268785238396665, guid: ec570f46a30c0fa46abffba18e76e56f, type: 3}
 --- !u!1 &3026914877201754696
 GameObject:

@@ -26,7 +26,7 @@ public class CheckPlayerName : MonoBehaviour
         {
             Instantiate(CJScreenPrefab);
             GameObject.FindObjectOfType<LocalHostClient>().playerName = nameField.text;
-            Destroy(this.gameObject);
+            Destroy(this.transform.parent.gameObject);
         }
         else
         {

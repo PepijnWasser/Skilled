@@ -5,9 +5,8 @@ using System.Net;
 
 public class JoinLocalHostServer : MonoBehaviour
 {
-    [SerializeField] private string _serverString = "localhost";
-    [SerializeField] private string _serverIPString = "86.86.80.67";
-    [SerializeField] private int basePort = 55555;
+    [SerializeField] private string _serverIPString = "192.168.2.10";
+    [SerializeField] private int basePort = 20017;
     private IPAddress _serverIP;
 
     private LocalHostClient localHostClient;
@@ -21,7 +20,6 @@ public class JoinLocalHostServer : MonoBehaviour
 
     public void TryConnectingClient()
     {
-
         _serverIP = IPAddress.Parse(_serverIPString);
 
         if (localHostClient.ConnectToServer(_serverIP, basePort))

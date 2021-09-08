@@ -22,11 +22,6 @@ public class LocalHostServer : MonoBehaviour
 	Room activeRoom;
 	LobbyRoom lobbyRoom;
 
-    private void Start()
-    {
-		//Initialize(55555);
-    }
-
     public void Initialize(int _port)
 	{
 		bool finishedInitialization = false;
