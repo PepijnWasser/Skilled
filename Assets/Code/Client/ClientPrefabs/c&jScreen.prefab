@@ -410,11 +410,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad35cccafb651e4481739a1e902f197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _server: localhost
+  _serverString: localhost
+  _serverIPString: 86.86.80.67
   basePort: 55555
   localHostServerPrefab: {fileID: 1762931389194518095, guid: 5a7ddb2d496811149877258a47360caf, type: 3}
   lobbyPrefab: {fileID: 5919268785238396665, guid: ec570f46a30c0fa46abffba18e76e56f, type: 3}
-  serverOwner: peppi
 --- !u!114 &4865220144718808316
 MonoBehaviour:
   m_ObjectHideFlags: 0

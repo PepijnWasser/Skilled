@@ -192,7 +192,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c40c50a85f83d27488cb5d24f528f43e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _server: localhost
+  _serverString: localhost
+  _serverIPString: 192.168.2.10
   basePort: 55555
   lobbyPrefab: {fileID: 5919268785238396665, guid: ec570f46a30c0fa46abffba18e76e56f, type: 3}
 --- !u!1 &3026914877201754696
@@ -475,7 +476,7 @@ MonoBehaviour:
       - m_Target: {fileID: 5409286594430846884}
         m_TargetAssemblyTypeName: JoinLocalHostServer, Assembly-CSharp
         m_MethodName: TryConnectingClient
-        m_Mode: 3
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
