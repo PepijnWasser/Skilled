@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 0a5b3792205bdbd43846c1ee81a5c708
+guid: 0b1a1f6df34b8754084cfaeeb2a13597
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Inside_Wall
-    second: {fileID: 3446888796575484674, guid: bc7b92282c333414abb1cc47148c78e5, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0

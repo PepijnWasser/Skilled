@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ca42805cdbd6f10428491a3dc8961d11
+guid: 436350d8b9767de47a4e8ef6822a0278
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -11,27 +11,29 @@ ScriptedImporter:
   version: 29
   projectContext: 0
   mGraphInstanceData:
-  - graphLabel: Substance_graph
-    prototypeName: Substance_graph
+  - graphLabel: metal_test
+    prototypeName: metal_test
     graphDescIndex: 0
     generateAllOutputs: 0
     generateMipMaps: 1
-    preset: " <sbspreset pkgurl=\"pkg://Substance_graph\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"10,10\" />\n 
-      <presetinput identifier=\"edge_width\" uid=\"2352090913\" type=\"0\" value=\"3.04\"
-      />\n  <presetinput identifier=\"Main_color_\" uid=\"2352111398\" type=\"3\"
-      value=\"0.486365,0.83712,0.867925,1\" />\n </sbspreset>\n"
+    preset: " <sbspreset pkgurl=\"pkg://metal_test\" label=\"\" >\n  <presetinput
+      identifier=\"$outputsize\" uid=\"894408403\" type=\"8\" value=\"9,9\" />\n 
+      <presetinput identifier=\"$randomseed\" uid=\"1648197761\" type=\"4\" value=\"4828\"
+      />\n  <presetinput identifier=\"rust_amount\" uid=\"1552878009\" type=\"0\"
+      value=\"0.563\" />\n  <presetinput identifier=\"color_of_metal\" uid=\"1555076201\"
+      type=\"3\" value=\"0.623496,0.779456,0.792453,1\" />\n </sbspreset>\n"
     shaderName: Standard
     materialProperties:
       shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-      shaderKeywords: _BUMPMAP _MAINTEX _METALLICGLOSSMAP _NORMALMAP
+      shaderKeywords: _BUMPMAP _MAINTEX _METALLICGLOSSMAP _NORMALMAP _OCCLUSIONMAP
+        _PARALLAXMAP
       lightmapFlags: 4
       enableInstancingVariants: 0
       doubleSidedGI: 0
       customRenderQueue: -1
       texEnvs:
       - name: _BumpMap
-        texture: {fileID: -5043331062787847178, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
+        texture: {fileID: -4023074592046128193, guid: 436350d8b9767de47a4e8ef6822a0278, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _DetailAlbedoMap
@@ -48,22 +50,22 @@ ScriptedImporter:
         offset: {x: 0, y: 0}
       - name: _EmissionMap
         texture: {instanceID: 0}
-        scale: {x: 10, y: 10}
+        scale: {x: 6, y: 6}
         offset: {x: 0, y: 0}
       - name: _MainTex
-        texture: {fileID: 814193769655529742, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
-        scale: {x: 10, y: 10}
+        texture: {fileID: 5147058851396932039, guid: 436350d8b9767de47a4e8ef6822a0278, type: 3}
+        scale: {x: 6, y: 6}
         offset: {x: 0, y: 0}
       - name: _MetallicGlossMap
-        texture: {fileID: -2034204982276346014, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
+        texture: {fileID: -2890639343645695516, guid: 436350d8b9767de47a4e8ef6822a0278, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _OcclusionMap
-        texture: {instanceID: 0}
+        texture: {fileID: 8308899302923071161, guid: 436350d8b9767de47a4e8ef6822a0278, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _ParallaxMap
-        texture: {instanceID: 0}
+        texture: {fileID: 5190827697389232563, guid: 436350d8b9767de47a4e8ef6822a0278, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       floats:
@@ -105,26 +107,26 @@ ScriptedImporter:
       - name: _EmissionColor
         color: {r: 0, g: 0, b: 0, a: 1}
     outputDescList:
-    - outputName: normal
-      identifier: Normal_output
-      usageName: normal
-      channelStr: normal
-      label: Normal_output
-      usage: 7
-      bImage: 1
-      bNumerical: 0
-      bLinear: 1
     - outputName: baseColor
-      identifier: Color_Output
+      identifier: basecolor
       usageName: baseColor
       channelStr: baseColor
-      label: Color_Output
+      label: Base Color
       usage: 1
       bImage: 1
       bNumerical: 0
       bLinear: 0
+    - outputName: normal
+      identifier: normal
+      usageName: normal
+      channelStr: normal
+      label: Normal
+      usage: 7
+      bImage: 1
+      bNumerical: 0
+      bLinear: 1
     - outputName: roughness
-      identifier: Roughness
+      identifier: roughness
       usageName: roughness
       channelStr: roughness
       label: Roughness
@@ -133,23 +135,41 @@ ScriptedImporter:
       bNumerical: 0
       bLinear: 1
     - outputName: metallic
-      identifier: Metallic_Output
+      identifier: metallic
       usageName: metallic
       channelStr: metallic
-      label: Metallic_Output
+      label: Metallic
       usage: 34
       bImage: 1
       bNumerical: 0
       bLinear: 1
+    - outputName: height
+      identifier: height
+      usageName: height
+      channelStr: height
+      label: Height
+      usage: 9
+      bImage: 1
+      bNumerical: 0
+      bLinear: 1
+    - outputName: ambientOcclusion
+      identifier: ambientocclusion
+      usageName: ambientOcclusion
+      channelStr: ambientOcclusion
+      label: Ambient Occlusion
+      usage: 5
+      bImage: 1
+      bNumerical: 0
+      bLinear: 1
     texturePackingList:
-    - targetName: normal
-      components:
-      - sourceName: normal
-        from: 0
-        to: 3
     - targetName: baseColor
       components:
       - sourceName: baseColor
+        from: 0
+        to: 3
+    - targetName: normal
+      components:
+      - sourceName: normal
         from: 0
         to: 3
     - targetName: roughness
@@ -162,20 +182,38 @@ ScriptedImporter:
       - sourceName: smoothness
         from: 0
         to: 3
+    - targetName: height
+      components:
+      - sourceName: height
+        from: 0
+        to: 3
+    - targetName: ambientOcclusion
+      components:
+      - sourceName: ambientOcclusion
+        from: 0
+        to: 3
     textureParameters:
-    - textureName: Substance_graph - normal
+    - textureName: metal_test - baseColor
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Substance_graph - baseColor
+    - textureName: metal_test - normal
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Substance_graph - roughness
+    - textureName: metal_test - roughness
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Substance_graph - metallic
+    - textureName: metal_test - metallic
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: metal_test - height
+      wrapMode: 0
+      filterMode: 1
+      aniso: 1
+    - textureName: metal_test - ambientOcclusion
       wrapMode: 0
       filterMode: 1
       aniso: 1
@@ -185,13 +223,15 @@ ScriptedImporter:
     - label: Default
       bOverride: 0
       bLockRatio: 1
-      textureWidth: 1024
-      textureHeight: 1024
+      textureWidth: 512
+      textureHeight: 512
       textureFormatMode: 0
       normalCompressed: 0
       bGenerateOnLoad: 1
-    material: {fileID: 3446888796575484674, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
+    material: {fileID: -3348483869960786098, guid: 436350d8b9767de47a4e8ef6822a0278, type: 3}
     generatedTextures:
-    - {fileID: -5043331062787847178, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
-    - {fileID: 814193769655529742, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
-    - {fileID: -2034204982276346014, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
+    - {fileID: 5147058851396932039, guid: 436350d8b9767de47a4e8ef6822a0278, type: 3}
+    - {fileID: -4023074592046128193, guid: 436350d8b9767de47a4e8ef6822a0278, type: 3}
+    - {fileID: -2890639343645695516, guid: 436350d8b9767de47a4e8ef6822a0278, type: 3}
+    - {fileID: 5190827697389232563, guid: 436350d8b9767de47a4e8ef6822a0278, type: 3}
+    - {fileID: 8308899302923071161, guid: 436350d8b9767de47a4e8ef6822a0278, type: 3}

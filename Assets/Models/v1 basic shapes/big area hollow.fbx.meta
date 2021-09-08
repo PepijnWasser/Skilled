@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Inside_Wall
-    second: {fileID: 3446888796575484674, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
+    second: {fileID: 3446888796575484674, guid: bc7b92282c333414abb1cc47148c78e5, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

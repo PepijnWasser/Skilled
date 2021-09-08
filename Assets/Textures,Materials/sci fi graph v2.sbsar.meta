@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ca42805cdbd6f10428491a3dc8961d11
+guid: bc7b92282c333414abb1cc47148c78e5
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -17,10 +17,19 @@ ScriptedImporter:
     generateAllOutputs: 0
     generateMipMaps: 1
     preset: " <sbspreset pkgurl=\"pkg://Substance_graph\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"10,10\" />\n 
-      <presetinput identifier=\"edge_width\" uid=\"2352090913\" type=\"0\" value=\"3.04\"
-      />\n  <presetinput identifier=\"Main_color_\" uid=\"2352111398\" type=\"3\"
-      value=\"0.486365,0.83712,0.867925,1\" />\n </sbspreset>\n"
+      identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"11,11\" />\n 
+      <presetinput identifier=\"$randomseed\" uid=\"3041239426\" type=\"4\" value=\"7133\"
+      />\n  <presetinput identifier=\"edge_width\" uid=\"2352090913\" type=\"0\"
+      value=\"1\" />\n  <presetinput identifier=\"edge_roundness\" uid=\"2352090959\"
+      type=\"0\" value=\"1.01\" />\n  <presetinput identifier=\"Size_of_light_gray_square\"
+      uid=\"2352101083\" type=\"0\" value=\"0.536\" />\n  <presetinput identifier=\"Ring_width\"
+      uid=\"2352101185\" type=\"0\" value=\"25\" />\n  <presetinput identifier=\"Main_color_\"
+      uid=\"2352111398\" type=\"3\" value=\"0.867925,0.822072,0.822072,1\" />\n 
+      <presetinput identifier=\"Bolts_=_0,_no_Bolts_=_1\" uid=\"2352103589\" type=\"0\"
+      value=\"1\" />\n  <presetinput identifier=\"levelinlow\" uid=\"2352103749\"
+      type=\"0\" value=\"1\" />\n  <presetinput identifier=\"Size\" uid=\"2352109625\"
+      type=\"0\" value=\"0.33\" />\n  <presetinput identifier=\"outputcolor\" uid=\"2352108787\"
+      type=\"3\" value=\"0.438733,0.981132,0.970043,1\" />\n </sbspreset>\n"
     shaderName: Standard
     materialProperties:
       shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
@@ -31,7 +40,7 @@ ScriptedImporter:
       customRenderQueue: -1
       texEnvs:
       - name: _BumpMap
-        texture: {fileID: -5043331062787847178, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
+        texture: {fileID: -5043331062787847178, guid: bc7b92282c333414abb1cc47148c78e5, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _DetailAlbedoMap
@@ -48,14 +57,14 @@ ScriptedImporter:
         offset: {x: 0, y: 0}
       - name: _EmissionMap
         texture: {instanceID: 0}
-        scale: {x: 10, y: 10}
+        scale: {x: 3, y: 3}
         offset: {x: 0, y: 0}
       - name: _MainTex
-        texture: {fileID: 814193769655529742, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
-        scale: {x: 10, y: 10}
+        texture: {fileID: 814193769655529742, guid: bc7b92282c333414abb1cc47148c78e5, type: 3}
+        scale: {x: 3, y: 3}
         offset: {x: 0, y: 0}
       - name: _MetallicGlossMap
-        texture: {fileID: -2034204982276346014, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
+        texture: {fileID: -2034204982276346014, guid: bc7b92282c333414abb1cc47148c78e5, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _OcclusionMap
@@ -185,13 +194,13 @@ ScriptedImporter:
     - label: Default
       bOverride: 0
       bLockRatio: 1
-      textureWidth: 1024
-      textureHeight: 1024
+      textureWidth: 2048
+      textureHeight: 2048
       textureFormatMode: 0
       normalCompressed: 0
       bGenerateOnLoad: 1
-    material: {fileID: 3446888796575484674, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
+    material: {fileID: 3446888796575484674, guid: bc7b92282c333414abb1cc47148c78e5, type: 3}
     generatedTextures:
-    - {fileID: -5043331062787847178, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
-    - {fileID: 814193769655529742, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
-    - {fileID: -2034204982276346014, guid: ca42805cdbd6f10428491a3dc8961d11, type: 3}
+    - {fileID: -5043331062787847178, guid: bc7b92282c333414abb1cc47148c78e5, type: 3}
+    - {fileID: 814193769655529742, guid: bc7b92282c333414abb1cc47148c78e5, type: 3}
+    - {fileID: -2034204982276346014, guid: bc7b92282c333414abb1cc47148c78e5, type: 3}
