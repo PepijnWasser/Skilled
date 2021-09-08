@@ -40,7 +40,7 @@ public abstract class Room
 		CheckHeartbeat();
     }
 
-	void CheckHeartbeat()
+	protected virtual void CheckHeartbeat()
 	{
 		List<MyClient> clientsInRoomToRemove = new List<MyClient>();
 

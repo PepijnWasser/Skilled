@@ -9,6 +9,7 @@ using System;
 public class LocalHostServer : MonoBehaviour
 {
 	public float timeOutTime = 5f;
+	float secondCounter = 0;
 
 	public MyClient owner;
 	private int port;
@@ -21,8 +22,12 @@ public class LocalHostServer : MonoBehaviour
 	Room activeRoom;
 	LobbyRoom lobbyRoom;
 
+    private void Start()
+    {
+		//Initialize(55555);
+    }
 
-	public void Initialize(int _port)
+    public void Initialize(int _port)
 	{
 		bool finishedInitialization = false;
 		int i = 0;
@@ -53,6 +58,7 @@ public class LocalHostServer : MonoBehaviour
 		ProcessNewClients();
 		ProcessExistingClients();
 		activeRoom.UpdateRoom();
+		SendServerHeartbeats();
 	}
 
 	private void ProcessNewClients()
@@ -91,7 +97,7 @@ public class LocalHostServer : MonoBehaviour
 			Packet inPacket = new Packet(inBytes);
 
 			var tempOBJ = inPacket.ReadObject();
-			Debug.Log("data icoming: " + tempOBJ.GetType());
+			Debug.Log("data icoming on server: " + tempOBJ.GetType());
 
 			activeRoom.handleNetworkMessageFromUser(tempOBJ, client);
 		}
@@ -99,6 +105,21 @@ public class LocalHostServer : MonoBehaviour
 		{
 			Console.WriteLine("Error in Handling Incoming Data: " + e.Message);
 		}
+	}
+
+	void SendServerHeartbeats()
+    {
+		secondCounter += Time.deltaTime;
+		if(secondCounter > 2)
+        {
+			Packet outPacket = new Packet();
+			HeartBeat request = new HeartBeat();
+			outPacket.Write(request);
+			SendMessageToAllUsers(outPacket);
+
+			secondCounter = 0;
+		}
+
 	}
 
 	public void SetOwner(MyClient client)
@@ -116,5 +137,20 @@ public class LocalHostServer : MonoBehaviour
 		Console.WriteLine("removing client from: " + this.GetType());
 		clientToRemove.TcpClient.Close();
 		connectedClients.Remove(clientToRemove);
+	}
+
+	void SendMessageToAllUsers(Packet outPacket)
+	{
+		foreach (MyClient client in activeRoom.GetMembers())
+		{
+			try
+			{
+				StreamUtil.Write(client.TcpClient.GetStream(), outPacket.GetBytes());
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Error sending message to target users: " + e.Message);
+			}
+		}
 	}
 }

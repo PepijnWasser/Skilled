@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Net;
 
 public class JoinLocalHostServer : MonoBehaviour
 {
-    [SerializeField] private string _server = "localhost";
+    [SerializeField] private string _serverString = "localhost";
+    [SerializeField] private string _serverIPString = "86.86.80.67";
     [SerializeField] private int basePort = 55555;
+    private IPAddress _serverIP;
 
     private LocalHostClient localHostClient;
 
@@ -16,9 +19,12 @@ public class JoinLocalHostServer : MonoBehaviour
         localHostClient = GameObject.FindObjectOfType<LocalHostClient>();
     }
 
-    public void TryConnectingClient(int port)
+    public void TryConnectingClient()
     {
-        if (localHostClient.ConnectToServer(_server, port))
+
+        _serverIP = IPAddress.Parse(_serverIPString);
+
+        if (localHostClient.ConnectToServer(_serverIP, basePort))
         {
             Destroy(this.gameObject);
             Instantiate(lobbyPrefab);

@@ -5,9 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Drawing;
 
-public class LobbyState : MonoBehaviour
+public class LobbyState : State
 {
-    private LocalHostClient clientnetwork;
+    //private LocalHostClient clientnetwork;
     private LobbyView lobbyView;
 
     public Text playerCountUIElement;
@@ -15,9 +15,12 @@ public class LobbyState : MonoBehaviour
 
     public Button backButtonUIElement;
 
-    private void Awake()
+   // public float timeOutTime = 5f;
+    //public float lastHeartbeat = 5f;
+
+    protected override void Awake()
     {
-        clientnetwork = GameObject.FindObjectOfType<LocalHostClient>().GetComponent<LocalHostClient>();
+        base.Awake();
         lobbyView = GetComponent<LobbyView>();
         backButtonUIElement.onClick.AddListener(SendLeaveServerMessage);
     }
@@ -32,7 +35,7 @@ public class LobbyState : MonoBehaviour
         backButtonUIElement.onClick.RemoveListener(SendLeaveServerMessage);
     }
 
-    private void Update()
+    protected override void Update()
     {
         try
         {
@@ -47,6 +50,10 @@ public class LobbyState : MonoBehaviour
                 {
                     UpdatePlayerCountMessage message = tempOBJ as UpdatePlayerCountMessage;
                     HandlePlayerCountMessage(message);
+                }
+                else if (tempOBJ is HeartBeat)
+                {
+                    HandleHeartbeat();
                 }
                 else if (tempOBJ is UpdateServerNameMessage)
                 {
@@ -73,17 +80,18 @@ public class LobbyState : MonoBehaviour
                     UpdatePlayerNameRespons message = tempOBJ as UpdatePlayerNameRespons;
                     HandleUpdatePlayerNameRespons(message);
                 }
-                else if(tempOBJ is ChatRespons)
+                else if (tempOBJ is ChatRespons)
                 {
                     ChatRespons message = tempOBJ as ChatRespons;
                     HandleChatMessage(message);
                 }
-                else if(tempOBJ is HelpRespons)
+                else if (tempOBJ is HelpRespons)
                 {
                     HelpRespons message = tempOBJ as HelpRespons;
                     HandleHelpRespons(message);
                 }
             }
+            HandleHeartbeatStatus();
         }
         catch (Exception e)
         {
@@ -169,5 +177,14 @@ public class LobbyState : MonoBehaviour
     {
         LeaveServermessage message = new LeaveServermessage();
         clientnetwork.SendObject(message);
+    }
+
+    void HandleHeartbeatStatus()
+    {
+        if(CheckHeartbeat() == false)
+        {
+            SendLeaveServerMessage();
+            GetComponent<CreateCJScreen>().CreateCJScreenItem();
+        }
     }
 }

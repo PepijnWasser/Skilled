@@ -28,7 +28,39 @@ public class LocalHostClient : MonoBehaviour
         }
     }
 
-    
+    public bool ConnectToServer(System.Net.IPAddress address, int _port)
+    {
+        try
+        {
+            client = new TcpClient();
+            client.Connect(address, _port);
+            Debug.Log("Connected to server.");
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            return false;
+        }
+    }
+
+    public bool ConnectToServer(System.Net.IPEndPoint _ipEndPoint)
+    {
+        try
+        {
+            client = new TcpClient();
+            client.Connect(_ipEndPoint);
+            Debug.Log("Connected to server.");
+            return true;
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            return false;
+        }
+    }
+
+
     private void Update()
     {
         if(client != null && client.Connected)
@@ -40,7 +72,7 @@ public class LocalHostClient : MonoBehaviour
                 {
                     secondCounter = 0;
 
-                    HeartbeatRequest request = new HeartbeatRequest();
+                    HeartBeat request = new HeartBeat();
                     SendObject(request);
                 }
             }

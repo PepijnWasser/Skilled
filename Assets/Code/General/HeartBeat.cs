@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeartbeatRequest : ISerializable
+public class HeartBeat : ISerializable
 {
     public void Serialize(Packet packet)
     {
@@ -14,7 +14,7 @@ public class HeartbeatRequest : ISerializable
 
     }
 
-    public HeartbeatRequest()
+    public HeartBeat()
     {
 
     }
