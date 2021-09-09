@@ -7,16 +7,12 @@ using System.Drawing;
 
 public class LobbyState : State
 {
-    //private LocalHostClient clientnetwork;
     private LobbyView lobbyView;
 
     public Text playerCountUIElement;
     public Text serverNameUIElement;
 
     public Button backButtonUIElement;
-
-   // public float timeOutTime = 5f;
-    //public float lastHeartbeat = 5f;
 
     protected override void Awake()
     {
@@ -90,6 +86,16 @@ public class LobbyState : State
                     HelpRespons message = tempOBJ as HelpRespons;
                     HandleHelpRespons(message);
                 }
+                else if(tempOBJ is ServerOwnerMessage)
+                {
+                    ServerOwnerMessage message = tempOBJ as ServerOwnerMessage;
+                    HandleServerOwnerMessage(message);
+                }
+                else if(tempOBJ is JoinRoomMessage)
+                {
+                    JoinRoomMessage message = tempOBJ as JoinRoomMessage;
+                    HandleJoinRoomMessage(message);
+                }
             }
             HandleHeartbeatStatus();
         }
@@ -128,7 +134,7 @@ public class LobbyState : State
 
     void HandleUpdateColorMessage(UpdateColorRespons message)
     {
-        lobbyView.UpdatePlayerColor(message.playerID, message.color);
+        lobbyView.UpdatePlayerColor(message.playerID, message.color.ToString());
     }
 
     void HandleUpdatePlayerNameRespons(UpdatePlayerNameRespons message)
@@ -144,6 +150,23 @@ public class LobbyState : State
     void HandleHelpRespons(HelpRespons message)
     {
         GameObject.FindObjectOfType<ChatManager>().DisplayMessage(message.sender, message.message, message.hourSend, message.minuteSend, message.secondSend);
+    }
+
+    void HandleServerOwnerMessage(ServerOwnerMessage message)
+    {
+        lobbyView.SetServerOwner(message.isOwner);
+    }
+
+    void HandleJoinRoomMessage(JoinRoomMessage message)
+    {
+        if(message.roomToJoin == JoinRoomMessage.rooms.game)
+        {
+            GameObject.FindObjectOfType<MySceneManager>().LoadScene("GameScene");
+        }
+        else
+        {
+            Debug.Log("request to join room failed");
+        }
     }
 
     //
@@ -173,6 +196,12 @@ public class LobbyState : State
         clientnetwork.SendObject(request);
     }
 
+    public void SendStartRoomRequest()
+    {
+        StartRoomRequest request = new StartRoomRequest();
+        clientnetwork.SendObject(request);
+    }
+
     void SendLeaveServerMessage()
     {
         LeaveServermessage message = new LeaveServermessage();
@@ -185,6 +214,7 @@ public class LobbyState : State
         {
             SendLeaveServerMessage();
             GetComponent<CreateCJScreen>().CreateCJScreenItem();
+            Destroy(this.gameObject);
         }
     }
 }

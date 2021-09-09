@@ -11,6 +11,11 @@ public abstract class Room
 	public LocalHostServer server;
 	protected List<MyClient> clientsInRoom = new List<MyClient>();
 
+	public virtual void Initialize(LocalHostServer _server)
+    {
+		server = _server;
+    }
+
 	public virtual void AddMember(MyClient clientToAdd)
 	{
 		Debug.Log("accepted new member to: " + this.GetType());
@@ -25,9 +30,14 @@ public abstract class Room
 
 	public List<MyClient> GetMembers()
 	{
-		List<MyClient> memberList = new List<MyClient>(clientsInRoom);
+		List<MyClient> memberList = clientsInRoom;
 		return memberList;
 	}
+
+	public virtual void ClearMembers()
+    {
+		clientsInRoom.Clear();
+    }
 
 	protected void removeAndCloseMember(MyClient pMember)
 	{

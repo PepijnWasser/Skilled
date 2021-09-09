@@ -12,24 +12,27 @@ public class LocalHostClient : MonoBehaviour
     [HideInInspector] public string playerName;
     [HideInInspector] public TcpClient client;
 
+    private static LocalHostClient _instance;
 
-    public bool ConnectToServer(System.Net.IPAddress address, int _port)
+    public static LocalHostClient Instance
     {
-        try
+        get
         {
-            client = new TcpClient();
-            client.Connect(address, _port);
-            Debug.Log("Connected to server on port " + _port);
-            return true;
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e.Message);
-            return false;
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<LocalHostClient>();
+            }
+
+            return _instance;
         }
     }
 
-    public bool ConnectToServer(string address, int _port)
+    void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public bool ConnectToServer(System.Net.IPAddress address, int _port)
     {
         try
         {

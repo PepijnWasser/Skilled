@@ -53,6 +53,22 @@ public class LobbyRoom : Room
 				SendMessageToTargetUser(outpacket5, newClient);
 			}
 		}
+
+		if(newClient == server.owner)
+        {
+			Packet outpacket6 = new Packet();
+			ServerOwnerMessage serverOwnerMessage = new ServerOwnerMessage(true);
+			outpacket6.Write(serverOwnerMessage);
+			SendMessageToTargetUser(outpacket6, newClient);
+        }
+        else
+        {
+			Packet outpacket6 = new Packet();
+			ServerOwnerMessage serverOwnerMessage = new ServerOwnerMessage(false);
+			outpacket6.Write(serverOwnerMessage);
+			SendMessageToTargetUser(outpacket6, newClient);
+		}
+
 	}
 
     public override void RemoveMember(MyClient clientToRemove)
@@ -100,6 +116,10 @@ public class LobbyRoom : Room
 		{
 			HandleHelpRequest(client);
 		}
+		else if(tempOBJ is StartRoomRequest)
+        {
+			HandleStartRoomRequest();
+        }
 	}
 
     protected override void CheckHeartbeat()
@@ -227,6 +247,15 @@ public class LobbyRoom : Room
 		ChatRespons chatMessage = new ChatRespons(message.chatMessage, client.playerName, time.Hour, time.Minute, time.Second);
 		outPacket.Write(chatMessage);
 		SendMessageToAllUsers(outPacket);
+    }
+
+	void HandleStartRoomRequest()
+    {
+		Packet outPacket = new Packet();
+		JoinRoomMessage startRoomMessage = new JoinRoomMessage(JoinRoomMessage.rooms.game);
+		outPacket.Write(startRoomMessage);
+		SendMessageToAllUsers(outPacket);
+		server.MovePlayersToDifferentRoom(this, server.gameRoom);
     }
 
 	void SendPlayerLeftMessages(string playerWhoLeft)

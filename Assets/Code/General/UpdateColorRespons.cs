@@ -1,21 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class UpdateColorRespons : ISerializable
 {
-    public string color = "red";
+    string colorS;
     public int playerID;
+    public MyClient.colors color;
 
     public void Serialize(Packet packet)
     {
-        packet.Write(color);
+        packet.Write(colorS);
         packet.Write(playerID);
     }
 
     public void Deserialize(Packet packet)
     {
-        color = packet.ReadString();
+        colorS = packet.ReadString();
+        color = (MyClient.colors)Enum.Parse(typeof(MyClient.colors), colorS);
         playerID = packet.ReadInt();
     }
 
@@ -26,7 +29,7 @@ public class UpdateColorRespons : ISerializable
 
     public UpdateColorRespons(MyClient.colors _color, int _playerID)
     {
-        color = _color.ToString();
+        colorS = _color.ToString();
         playerID = _playerID;
     }
 }

@@ -30,7 +30,7 @@ public class CreateLocalhostServer : MonoBehaviour
         if (localHostClient.ConnectToServer(_serverIP, server.GetServerPort()))
         {
             Instantiate(lobbyPrefab);
-           Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
         else
         {

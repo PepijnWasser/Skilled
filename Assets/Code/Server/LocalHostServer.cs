@@ -20,9 +20,30 @@ public class LocalHostServer : MonoBehaviour
 	private int newPlayerID = 0;
 
 	Room activeRoom;
-	LobbyRoom lobbyRoom;
+	public LobbyRoom lobbyRoom;
+	public GameRoom gameRoom;
 
-    public void Initialize(int _port)
+	private static LocalHostServer _instance;
+
+	public static LocalHostServer Instance
+	{
+		get
+		{
+			if (_instance == null)
+			{
+				_instance = GameObject.FindObjectOfType<LocalHostServer>();
+			}
+
+			return _instance;
+		}
+	}
+
+	void Awake()
+	{
+		DontDestroyOnLoad(gameObject);
+	}
+
+	public void Initialize(int _port)
 	{
 		bool finishedInitialization = false;
 		int i = 0;
@@ -44,6 +65,10 @@ public class LocalHostServer : MonoBehaviour
 			}
 		}
 		lobbyRoom = new LobbyRoom();
+		lobbyRoom.Initialize(this);
+		gameRoom = new GameRoom();
+		gameRoom.Initialize(this);
+
 		lobbyRoom.server = this;
 		activeRoom = lobbyRoom;
 	}
@@ -114,7 +139,6 @@ public class LocalHostServer : MonoBehaviour
 
 			secondCounter = 0;
 		}
-
 	}
 
 	public void SetOwner(MyClient client)
@@ -128,11 +152,26 @@ public class LocalHostServer : MonoBehaviour
 	}
 
 	public void RemovePlayer(MyClient clientToRemove)
-	{
+	{	
 		Console.WriteLine("removing client from: " + this.GetType());
 		clientToRemove.TcpClient.Close();
-		connectedClients.Remove(clientToRemove);
+		connectedClients.Remove(clientToRemove);		
 	}
+
+	public void MovePlayersToDifferentRoom(Room originalRoom, Room newRoom)
+    {
+		foreach(MyClient client in originalRoom.GetMembers())
+		{ 
+			newRoom.AddMember(client);
+        }
+		SetActiveRoom(newRoom);
+		originalRoom.ClearMembers();
+	}
+
+	void SetActiveRoom(Room newActiveRoom)
+    {
+		activeRoom = newActiveRoom;
+    }
 
 	void SendMessageToAllUsers(Packet outPacket)
 	{

@@ -454,7 +454,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5919268785199162364}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5919268785238396646}
+        m_TargetAssemblyTypeName: LobbyState, Assembly-CSharp
+        m_MethodName: SendStartRoomRequest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5919268785214798737
 GameObject:
   m_ObjectHideFlags: 0
@@ -673,6 +685,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerBarPrefab: {fileID: 2010122153948146136, guid: 1101e6a5def7cc84a91a921b256c4d42, type: 3}
   verticalLayoutGroupPlayers: {fileID: 5919268785929919290}
+  startRoomButton: {fileID: 5919268785199162353}
 --- !u!114 &3750858999479022768
 MonoBehaviour:
   m_ObjectHideFlags: 0

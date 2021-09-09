@@ -6,6 +6,7 @@ public class LobbyView : MonoBehaviour
 {
     public GameObject playerBarPrefab;
     public GameObject verticalLayoutGroupPlayers;
+    public GameObject startRoomButton;
 
     Dictionary<int, PlayerData> lobbyPlayers = new Dictionary<int, PlayerData>();
 
@@ -20,7 +21,7 @@ public class LobbyView : MonoBehaviour
 
         UpdatePlayerColor(playerID, playerColor);
         UpdateName(playerID, playerName);
-        SetOwnership(playerID, isPlayer);
+        SetBarOwnership(playerID, isPlayer);
 
     }
 
@@ -44,8 +45,13 @@ public class LobbyView : MonoBehaviour
         lobbyPlayers[playerID].playerBar.GetComponent<PlayerBarManager>().SetName(name);
     }
 
-    public void SetOwnership(int playerID, bool isPlayer)
+    public void SetBarOwnership(int playerID, bool isPlayer)
     {
         lobbyPlayers[playerID].playerBar.GetComponent<PlayerBarManager>().SetOwnership(isPlayer);
+    }
+
+    public void SetServerOwner(bool isOwner)
+    {
+        startRoomButton.gameObject.SetActive(isOwner);
     }
 }

@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _serverIPString: 192.168.2.10
-  basePort: 20021
+  basePort: 55555
   localHostServerPrefab: {fileID: 1762931389194518095, guid: 5a7ddb2d496811149877258a47360caf, type: 3}
   lobbyPrefab: {fileID: 5919268785238396665, guid: ec570f46a30c0fa46abffba18e76e56f, type: 3}
 --- !u!114 &4865220144718808316
