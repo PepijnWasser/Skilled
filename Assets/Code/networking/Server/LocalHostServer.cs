@@ -61,6 +61,7 @@ public class LocalHostServer : MonoBehaviour
 			}
 			catch (Exception e)
 			{
+				e.ToString();
 				i++;
 			}
 		}
