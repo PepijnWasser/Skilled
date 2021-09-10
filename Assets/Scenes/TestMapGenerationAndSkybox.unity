@@ -238,6 +238,7 @@ MonoBehaviour:
   consoleRoomPrefab: {fileID: 2332820850463949621, guid: 3a513b8f2886b274eb69b03e2a398395, type: 3}
   sectionGeneratorPrefab: {fileID: 1940732853011553374, guid: 51d7fceeccae04c429bb3c832ae03c4c, type: 3}
   amountOfSectors: 2
+  availableDoorways: []
 --- !u!4 &435866888
 Transform:
   m_ObjectHideFlags: 0

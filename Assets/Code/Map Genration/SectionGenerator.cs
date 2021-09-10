@@ -10,44 +10,27 @@ using Random = UnityEngine.Random;
 
 public class SectionGenerator : MonoBehaviour
 {
-	[SerializeField] private bool spawnStartRoom = true;
-	[SerializeField] private ConsoleRoom consoleRoomPrefab;
-
 	public List<BuildingRoom> roomPrefabs = new List<BuildingRoom>();
 
 	public Vector2 minMaxRooms = new Vector2(3, 10);
 	public List<Doorway> allDoorways = new List<Doorway>();
 	public List<Doorway> availableDoorways = new List<Doorway>();
 
-	ConsoleRoom consoleRoom;
-	private Doorway startdoor;
-
-
-	List<BuildingRoom> placedRooms = new List<BuildingRoom>();
+	public Doorway startdoor;
 
 	LayerMask roomLayerMask;
 	Color roomColor;
 
-	BuildingRoom newestRoom;
-
 	public void Initialize(LayerMask mask)
 	{
 		roomLayerMask = mask;
-		StartCoroutine("GenerateLevel");
 	}
 
 	public void GenerateLevel()
 	{
 		roomColor = Random.ColorHSV();
-		if (spawnStartRoom)
-		{
-			// Place start room
-			PlaceConsoleRoom();
-		}
-		else
-		{
-			AddDoorwayToLists(startdoor);
-		}
+		AddDoorwayToLists(startdoor);
+
 
 		//spawn between the min and max amount of rooms
 		int iterations = Random.Range((int)minMaxRooms.x, (int)minMaxRooms.y);
@@ -59,20 +42,6 @@ public class SectionGenerator : MonoBehaviour
 		}
 	}
 
-	void PlaceConsoleRoom()
-	{
-		// Instantiate room
-		consoleRoom = Instantiate(consoleRoomPrefab);
-		consoleRoom.transform.parent = this.transform;
-
-		// Get doorways from current room and add them to the list of available doorways
-		AddDoorwaysToLists(consoleRoom);
-
-		// Position room
-		consoleRoom.transform.position = Vector3.zero;
-		consoleRoom.transform.rotation = Quaternion.identity;
-	}
-
 	void SpawnRoom()
     {
 		bool roomSpawned = false;
@@ -80,7 +49,7 @@ public class SectionGenerator : MonoBehaviour
 		List<Doorway> existingDoorways = availableDoorways;
 		List<Doorway> existingDoorwaysChecked = new List<Doorway>();
 		Doorway existingDoorwayToCheck = Extensions.RandomListItem(existingDoorways);
-
+		
 		while (existingDoorwaysChecked.Count < existingDoorways.Count)
         {
 			existingDoorwayToCheck = Extensions.Next(existingDoorways, existingDoorwayToCheck);
@@ -95,9 +64,8 @@ public class SectionGenerator : MonoBehaviour
             {
 				availableDoorways.Remove(existingDoorwayToCheck);
 				existingDoorwayToCheck.GetComponent<MeshRenderer>().material.color = Color.yellow;
-            }
-			
-        }
+            }			
+        }		
         if (!roomSpawned)
         {
 			Debug.Log("failed to spawn room");
@@ -200,7 +168,7 @@ public class SectionGenerator : MonoBehaviour
 			bounds[i].center = room.transform.position;
 			bounds[i].Expand(-0.1f);
 		}
-		Debug.Log(bounds[0].size);
+
 		for (int i = 0; i < bounds.Count(); i++)
 		{
 			Collider[] colliders = Physics.OverlapBox(bounds[i].center, bounds[i].size / 2, room.transform.rotation, roomLayerMask);
@@ -246,113 +214,6 @@ public class SectionGenerator : MonoBehaviour
 			}
 		}
 	}
-
-	/*
-	void ResetLevelGenerator()
-	{
-		Debug.Log("Reset level generator");
-
-		StopCoroutine("GenerateLevel");
-
-		// Delete all rooms
-		if (consoleRoom)
-		{
-			DestroyImmediate(consoleRoom.gameObject);
-		}
-
-		foreach (BuildingRoom room in placedRooms)
-		{
-			if (room != null)
-			{
-				DestroyImmediate(room.gameObject);
-			}
-		}
-
-		// Clear lists
-		placedRooms.Clear();
-		availableDoorways.Clear();
-		removedDoorDoorDictionary.Clear();
-
-		// Restart coroutine
-		//------->>>>>EditorCoroutineUtility.StartCoroutineOwnerless(GenerateLevel());
-	}
-	*/
-	/*
-	void TestRoomRemoval()
-	{
-		Dictionary<Doorway, Doorway> removedDoorDoorCopy = new Dictionary<Doorway, Doorway>(removedDoorDoorDictionary);
-		foreach (KeyValuePair<Doorway, Doorway> keyValue in removedDoorDoorCopy)
-		{
-			Doorway doorKey = null;
-			Doorway doorValue = null;
-
-			if (keyValue.Key != null)
-			{
-				doorKey = keyValue.Key;
-			}
-
-			if (keyValue.Value != null)
-			{
-				doorValue = keyValue.Value;
-			}
-
-			if (doorValue == null || doorKey == null)
-			{
-				if (doorValue == null)
-				{
-					Debug.Log("doorValue was nul");
-					doorKey.gameObject.SetActive(true);
-					availableDoorways.Add(doorKey);
-				}
-				else
-				{
-					Debug.Log("doorKey was nul");
-					doorValue.gameObject.SetActive(true);
-					availableDoorways.Add(doorValue);
-				}
-				removedDoorDoorDictionary.Remove(doorKey);
-			}
-		}
-		List<Doorway> doorwaysToRemove = new List<Doorway>();
-		foreach (Doorway doorway in availableDoorways)
-		{
-			if (doorway == null)
-			{
-				doorwaysToRemove.Add(doorway);
-			}
-		}
-		foreach (Doorway doorway in doorwaysToRemove)
-		{
-			availableDoorways.Remove(doorway);
-		}
-		doorwaysToRemove.Clear();
-	}
-	*/
-	/*
-	public void GenerateNewLevel()
-	{
-		roomLayerMask = LayerMask.GetMask("Room");
-		ResetLevelGenerator();
-	}
-	*/
-	
-	private void Update()
-	{
-		//TestRoomRemoval();
-		if (Input.GetKeyDown(KeyCode.E))
-		{
-			SpawnRoom();
-			RemoveDoorsInSameSpace();
-		}
-		if (Input.GetKeyDown(KeyCode.Z))
-		{
-			if (newestRoom != null)
-			{
-				Destroy(newestRoom.gameObject);
-			}
-		}
-	}
-	
 
 	void AddDoorwaysToLists(BuildingRoom room)
 	{

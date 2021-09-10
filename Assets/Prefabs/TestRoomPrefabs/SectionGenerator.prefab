@@ -47,7 +47,7 @@ MonoBehaviour:
   - {fileID: 890802555905688414, guid: 22243ddf93dd040449e2680cc16c2e37, type: 3}
   - {fileID: 441923706810573749, guid: b29ab3ba5d1a0234aabbe2831a4d04db, type: 3}
   - {fileID: 191361756, guid: f588ba28ce2229b4ea68bb70668ef521, type: 3}
-  minMaxRoomsPerSector: {x: 5, y: 5}
-  amountOfSectors: 0
+  minMaxRooms: {x: 4, y: 4}
+  allDoorways: []
   availableDoorways: []
   startdoor: {fileID: 0}

@@ -39,13 +39,12 @@ public class MapGenerator : MonoBehaviour
             sectionGenerator.transform.position = startDoor.transform.position;
 
             sectionGenerator.Initialize(LayerMask.GetMask("Room"));
+            sectionGenerator.startdoor = startDoor;
             sectionGenerator.GenerateLevel();
 
-            sectionGenerators.Add(sectionGenerator);
+            //sectionGenerators.Add(sectionGenerator);
 
-            UpdateAvailibleDoorList();
-            RemoveDoorsInSameSpace();
-
+            //UpdateAvailibleDoorList();
 
         }
         StopCoroutine("GenerateLevel");
@@ -53,57 +52,6 @@ public class MapGenerator : MonoBehaviour
 
     void UpdateAvailibleDoorList()
     {
-        availableDoorways.Clear();
-        GetAllDoors();
-        foreach(Doorway doorway in doorsUsedAsStartPoint)
-        {
-            availableDoorways.Remove(doorway);
-        }
+        availableDoorways.Clear();;
     }
-
-    List<Doorway> GetAllDoors()
-    {
-        List<Doorway> allDoorways = new List<Doorway>();
-        foreach (SectionGenerator sectionGenerator in sectionGenerators)
-        {
-            foreach (Doorway doorway in sectionGenerator.availableDoorways)
-            {
-                allDoorways.Add(doorway);
-            }
-            foreach (Doorway doorway in sectionGenerator.as)
-            {
-                allDoorways.Add(doorway);
-            }
-        }
-        foreach (Doorway doorway in startDoorways)
-        {
-            availableDoorways.Add(doorway);
-        }
-
-        return allDoorways;
-    }
-
-    void RemoveDoorsInSameSpace()
-    {
-        List<Doorway> allAvailableDoorways = GetAllDoors();
-
-        foreach (Doorway doorway in allAvailableDoorways)
-        {
-            foreach (Doorway doorway2 in allAvailableDoorways)
-            {
-                //remove doorways if position is the same
-                if ((doorway.transform.position - doorway2.transform.position).magnitude < 0.001 && doorway != doorway2)
-                {
-                    //doorway.gameObject.SetActive(false);
-                    doorway.gameObject.GetComponent<MeshRenderer>().material.color = Color.cyan;
-                    availableDoorways.Remove(doorway);
-
-                    //doorway2.gameObject.SetActive(false);
-                    doorway2.gameObject.GetComponent<MeshRenderer>().material.color = Color.cyan;
-                    availableDoorways.Remove(doorway2);
-                }
-            }
-        }
-    }
-    */
 }
