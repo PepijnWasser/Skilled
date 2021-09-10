@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: LeverMedbay
+  m_Name: HandleMedbayMat 1
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
   m_LightmapFlags: 4
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 7395175f0c6f56a49b92e4b72fbfd570, type: 3}
+        m_Texture: {fileID: 2800000, guid: ea1d6dccd26c4df41b39ea7076d21421, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,19 +40,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 38d8b562fc502084fbb73fd1ae8c629f, type: 3}
+        m_Texture: {fileID: 2800000, guid: e9222237d8bdb29429a507d955a926a8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 83c15ad3c2bd62e4eae4f5ec511e5713, type: 3}
+        m_Texture: {fileID: 2800000, guid: 46df8b9f3bd6f9c478cc9a4d53bd23be, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 5f97732ef506e2d4dad631a384473228, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3c7850f8830ac264f9ed799942a13fd6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 3cf78d9aefe4b65429c37643df08ff31, type: 3}
+        m_Texture: {fileID: 2800000, guid: a689a7f37783e1143ab55532e32585c3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
