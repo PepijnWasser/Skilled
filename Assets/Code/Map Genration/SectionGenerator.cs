@@ -21,35 +21,67 @@ public class SectionGenerator : MonoBehaviour
 	LayerMask roomLayerMask;
 	Color roomColor;
 
-	public void Initialize(LayerMask mask)
+	public delegate void Completed(bool succeeded);
+	public static event Completed OnCompletion;
+
+
+	private void Start()
+    {
+		//Initialize(LayerMask.GetMask("Room"));
+		//StartCoroutine("GenerateLevel");
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+			Debug.Log("spawning room");
+			SpawnRoom();
+        }
+    }
+
+    public void Initialize(LayerMask mask)
 	{
 		roomLayerMask = mask;
-	}
-
-	public void GenerateLevel()
-	{
 		roomColor = Random.ColorHSV();
 		AddDoorwayToLists(startdoor);
+	}
 
+	public void StartGeneration()
+    {
+		StartCoroutine("GenerateLevel");
+	}
+
+	IEnumerator GenerateLevel()
+	{
+		bool succesfullLevelGenerated = true;
 
 		//spawn between the min and max amount of rooms
 		int iterations = Random.Range((int)minMaxRooms.x, (int)minMaxRooms.y);
 
+
 		for (int i = 0; i < iterations; i++)
 		{
-			SpawnRoom();
+			yield return new WaitForFixedUpdate();
+			yield return 200;
+			if(SpawnRoom() == false)
+            {
+				succesfullLevelGenerated = false;
+
+				break;
+            }
 			RemoveDoorsInSameSpace();
 		}
+		OnCompletion?.Invoke(succesfullLevelGenerated);
+		StopCoroutine("GenerateLevel");
 	}
 
-	void SpawnRoom()
+	bool SpawnRoom()
     {
-		bool roomSpawned = false;
-
 		List<Doorway> existingDoorways = availableDoorways;
 		List<Doorway> existingDoorwaysChecked = new List<Doorway>();
 		Doorway existingDoorwayToCheck = Extensions.RandomListItem(existingDoorways);
-		
+
 		while (existingDoorwaysChecked.Count < existingDoorways.Count)
         {
 			existingDoorwayToCheck = Extensions.Next(existingDoorways, existingDoorwayToCheck);
@@ -57,19 +89,17 @@ public class SectionGenerator : MonoBehaviour
 			
             if (TestRooms(existingDoorwayToCheck))
             {
-				roomSpawned = true;
-				break;
+				RemoveDoorsInSameSpace();
+				return true;
             }
+			//no room can fit on the door
             else
             {
 				availableDoorways.Remove(existingDoorwayToCheck);
 				existingDoorwayToCheck.GetComponent<MeshRenderer>().material.color = Color.yellow;
             }			
-        }		
-        if (!roomSpawned)
-        {
-			Debug.Log("failed to spawn room");
         }
+		return false;
     }
 
 	bool TestRooms(Doorway doorwayToFitOn)
@@ -80,18 +110,18 @@ public class SectionGenerator : MonoBehaviour
 
 		while (roomsChecked.Count < roomsToCheck.Count)
         {
-			roomToCheck = Instantiate(Extensions.Next(roomsToCheck, roomToCheck),this.transform);
+			roomToCheck = Instantiate(Extensions.Next(roomsToCheck, roomToCheck), this.transform);
 			roomsChecked.Add(roomToCheck);
 			
 			if(TestDoors(doorwayToFitOn, roomToCheck))
             {
 				AddDoorwaysToLists(roomToCheck);
-				roomToCheck.canSpawn = true;
+				roomToCheck.GetComponentInChildren<Renderer>().material.color = roomColor;
+				roomToCheck.GetComponent<BuildingRoom>().generatedFrom = doorwayToFitOn;
 				return true;
             }
             else
             {
-				roomToCheck.canSpawn = false;
 				Destroy(roomToCheck.gameObject);
             }
 			
@@ -122,7 +152,6 @@ public class SectionGenerator : MonoBehaviour
 		PositionRoomAtDoorway(room, doorwayToTest, doorwayToFitOn);
 		if (!CheckRoomOverlap(room))
 		{
-			room.GetComponentInChildren<Renderer>().material.color = roomColor;
 			return true;
 		}
 		else
@@ -166,7 +195,7 @@ public class SectionGenerator : MonoBehaviour
 		for (int i = 0; i < bounds.Count(); i++)
 		{
 			bounds[i].center = room.transform.position;
-			bounds[i].Expand(-0.1f);
+			bounds[i].Expand(-0.01f);
 		}
 
 		for (int i = 0; i < bounds.Count(); i++)
@@ -203,11 +232,9 @@ public class SectionGenerator : MonoBehaviour
 				//remove doorways if position is the same
 				if ((doorway.transform.position - doorway2.transform.position).magnitude < 0.001 && doorway != doorway2)
 				{
-					//doorway.gameObject.SetActive(false);
 					doorway.gameObject.GetComponent<MeshRenderer>().material.color = Color.cyan;
 					availableDoorways.Remove(doorway);
 
-					//doorway2.gameObject.SetActive(false);
 					doorway2.gameObject.GetComponent<MeshRenderer>().material.color = Color.cyan;
 					availableDoorways.Remove(doorway2);
 				}
@@ -230,4 +257,24 @@ public class SectionGenerator : MonoBehaviour
 		allDoorways.Add(doorway);
 	}
 
+	public void RemoveAvailibleDoorway(Doorway d)
+    {
+        if (availableDoorways.Contains(d))
+        {
+			availableDoorways.Remove(d);
+        }
+    }
+
+	public List<Doorway> GetAllDoorWaysExceptStart()
+    {
+		List<Doorway> _allDoorways = allDoorways;
+		_allDoorways.Remove(startdoor);
+		return _allDoorways;
+    }
+
+	public List<Doorway> GetAllOpenDoorways()
+    {
+		List<Doorway> _allOpenDoorways = availableDoorways;
+		return _allOpenDoorways;
+	}
 }

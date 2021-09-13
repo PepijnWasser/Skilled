@@ -9,49 +9,176 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private SectionGenerator sectionGeneratorPrefab;
 
     public int amountOfSectors;
+    int amountOfSectorsSpawned = 0;
 
-    public List<Doorway> availableDoorways = new List<Doorway>();
+    public List<Doorway> posibleStartingDoors = new List<Doorway>();
+
+    List<Doorway> doorwaysFromThis = new List<Doorway>();
+    public List<Doorway> availableDoorwaysFromThis = new List<Doorway>();
 
     List<SectionGenerator> sectionGenerators = new List<SectionGenerator>();
 
+    SectionGenerator lastSectionGenerated;
+    Doorway lastDoorUsed;
+
+    List<Doorway> doorsWaysRemoved = new List<Doorway>();
+
+    bool generating;
 
     void Start()
     {
-        StartCoroutine("GenerateLevel");
+        Initizlize();
+        SectionGenerator.OnCompletion += FinishGeneration;
     }
 
-    IEnumerator GenerateLevel()
+    private void OnDestroy()
     {
-        WaitForFixedUpdate interval = new WaitForFixedUpdate();
-        yield return interval;
+        SectionGenerator.OnCompletion -= FinishGeneration;
+    }
 
+    void Initizlize()
+    {
         ConsoleRoom consoleRoom = Instantiate(consoleRoomPrefab, this.transform);
-        foreach(Doorway doorway in consoleRoom.doorways)
+        foreach (Doorway doorway in consoleRoom.doorways)
         {
-            availableDoorways.Add(doorway);
+            doorwaysFromThis.Add(doorway);
+            availableDoorwaysFromThis.Add(doorway);
         }
+    }
 
-        for(int i = 0; i < amountOfSectors; i++)
+    void GenerateLevel()
+    {
+        if(amountOfSectorsSpawned < amountOfSectors)
         {
-            SectionGenerator sectionGenerator = Instantiate(sectionGeneratorPrefab, this.transform);
-            Doorway startDoor = Extensions.RandomListItem(availableDoorways);
-
-            sectionGenerator.transform.position = startDoor.transform.position;
-
-            sectionGenerator.Initialize(LayerMask.GetMask("Room"));
-            sectionGenerator.startdoor = startDoor;
-            sectionGenerator.GenerateLevel();
-
-            //sectionGenerators.Add(sectionGenerator);
-
-            //UpdateAvailibleDoorList();
-
+            if (!generating)
+            {
+                generating = true;
+                GenerateSection();
+            }
         }
-        StopCoroutine("GenerateLevel");
+    }
+
+    void GenerateSection()
+    {
+        UpdateAvailibleDoorList();
+        SectionGenerator sectionGenerator = Instantiate(sectionGeneratorPrefab, this.transform);
+        Doorway startDoor = Extensions.RandomListItem(posibleStartingDoors);
+
+        sectionGenerator.transform.position = startDoor.transform.position;
+
+        sectionGenerator.startdoor = startDoor;
+        sectionGenerator.Initialize(LayerMask.GetMask("Room"));
+
+        sectionGenerator.StartGeneration();
+        lastSectionGenerated = sectionGenerator;
     }
 
     void UpdateAvailibleDoorList()
     {
-        availableDoorways.Clear();;
+        posibleStartingDoors.Clear();
+        if(sectionGenerators.Count > 0)
+        {
+            foreach (SectionGenerator generator in sectionGenerators)
+            {
+                foreach (Doorway d in generator.GetAllOpenDoorways())
+                {
+                    posibleStartingDoors.Add(d);
+                }
+            }
+        }
+
+        if(availableDoorwaysFromThis.Count > 0)
+        {
+            foreach (Doorway d in availableDoorwaysFromThis)
+            {
+                posibleStartingDoors.Add(d);
+            }
+        }
+
+        foreach(Doorway d in doorsWaysRemoved)
+        {
+            posibleStartingDoors.Remove(d);
+        }
+    }
+
+    List<Doorway> GetAllDoorsList()
+    {
+        List<Doorway> doorways = new List<Doorway>();
+        foreach (SectionGenerator g in sectionGenerators)
+        {
+            foreach(Doorway d in g.allDoorways)
+            {
+                doorways.Add(d);
+            }
+        }
+        foreach(Doorway d in doorwaysFromThis)
+        {
+            doorways.Add(d);
+        }
+
+        return doorways;
+    }
+
+    void RemoveDoorsInSameSpace()
+    {
+        List<Doorway> allDoorways = GetAllDoorsList();
+
+        Debug.Log(allDoorways.Count);
+
+        foreach (Doorway doorway in allDoorways)
+        {
+            foreach (Doorway doorway2 in allDoorways)
+            {
+                //remove doorways if position is the same
+                if ((doorway.transform.position - doorway2.transform.position).magnitude < 0.001 && doorway != doorway2)
+                {
+                    Debug.Log("hi");
+                    doorway.gameObject.SetActive(false);
+                    //doorway.gameObject.GetComponent<MeshRenderer>().material.color = Color.cyan;
+                    doorsWaysRemoved.Add(doorway);
+
+                    doorway2.gameObject.SetActive(false);
+                    //doorway2.gameObject.GetComponent<MeshRenderer>().material.color = Color.cyan;
+                    doorsWaysRemoved.Add(doorway2);
+                }
+            }
+        }
+    }
+
+    void FinishGeneration(bool finished)
+    {
+        if (finished)
+        {
+            amountOfSectorsSpawned += 1;
+
+            if (availableDoorwaysFromThis.Count > 0 && availableDoorwaysFromThis.Contains(lastDoorUsed))
+            {
+                availableDoorwaysFromThis.Remove(lastDoorUsed);
+            }
+            sectionGenerators.Add(lastSectionGenerated);
+
+            RemoveDoorsInSameSpace();
+            UpdateAvailibleDoorList();
+        }
+        else
+        {
+            Destroy(lastSectionGenerated.gameObject);
+        }
+        generating = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            GenerateSection();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            Destroy(lastSectionGenerated.gameObject);
+        }
+
+        GenerateLevel();
     }
 }

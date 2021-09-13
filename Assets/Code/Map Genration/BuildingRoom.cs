@@ -6,7 +6,7 @@ public class BuildingRoom : MonoBehaviour
 {
     public List<Doorway> doorways;
     public MeshCollider[] meshColliders;
-    public bool canSpawn;
+    public Doorway generatedFrom;
 
     public Bounds[] RoomBounds
     {
