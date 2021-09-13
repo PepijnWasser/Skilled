@@ -147,4 +147,35 @@ public static class Extensions
 			return Arr[j];
 		}
 	}
+
+	public static T Next<T>(this IList<T> list, T item)
+	{
+		var nextIndex = list.IndexOf(item) + 1;
+
+		if (nextIndex == list.Count)
+		{
+			return list[0];
+		}
+
+		return list[nextIndex];
+	}
+
+	public static T Previous<T>(this IList<T> list, T item)
+	{
+		var previousIndex = list.IndexOf(item) - 1;
+
+		if (previousIndex == -1)
+		{
+			return list[list.Count - 1];
+		}
+
+		return list[previousIndex];
+	}
+
+	public static T RandomListItem<T>(this IList<T> list)
+	{
+		int index = UnityEngine.Random.Range(0, list.Count);
+
+		return list[index];
+	}
 }
