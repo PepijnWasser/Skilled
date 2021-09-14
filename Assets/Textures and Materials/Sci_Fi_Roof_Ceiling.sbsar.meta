@@ -18,7 +18,7 @@ ScriptedImporter:
     generateMipMaps: 1
     preset: " <sbspreset pkgurl=\"pkg://Sci_Fi_Roof_Ceiling\" label=\"\" >\n  <presetinput
       identifier=\"$outputsize\" uid=\"3755929393\" type=\"8\" value=\"11,11\" />\n 
-      <presetinput identifier=\"levelinlow\" uid=\"2983407718\" type=\"0\" value=\"1\"
+      <presetinput identifier=\"levelinlow_1\" uid=\"2983407700\" type=\"0\" value=\"1\"
       />\n  <presetinput identifier=\"outputcolor\" uid=\"2983407990\" type=\"3\"
       value=\"0.192157,0.933333,1,1\" />\n  <presetinput identifier=\"outputcolor_1\"
       uid=\"2983407971\" type=\"3\" value=\"0.537255,0.537255,0.537255,1\" />\n </sbspreset>\n"

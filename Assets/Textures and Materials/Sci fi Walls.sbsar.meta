@@ -17,12 +17,10 @@ ScriptedImporter:
     generateAllOutputs: 0
     generateMipMaps: 1
     preset: " <sbspreset pkgurl=\"pkg://Substance_graph\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"11,11\" />\n 
-      <presetinput identifier=\"outputcolor\" uid=\"2352640081\" type=\"3\" value=\"0.537736,0.537736,0.537736,1\"
-      />\n  <presetinput identifier=\"levelinlow_1\" uid=\"2352650704\" type=\"0\"
-      value=\"1\" />\n  <presetinput identifier=\"levelinlow_2\" uid=\"2352664648\"
-      type=\"0\" value=\"1\" />\n  <presetinput identifier=\"outputcolor_1\" uid=\"2352679929\"
-      type=\"3\" value=\"0.192157,0.93478,1,1\" />\n </sbspreset>\n"
+      identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"9,9\" />\n 
+      <presetinput identifier=\"outputcolor\" uid=\"2352640081\" type=\"3\" value=\"1,1,1,1\"
+      />\n  <presetinput identifier=\"outputcolor_1\" uid=\"2352679929\" type=\"3\"
+      value=\"0,1,0.450159,1\" />\n </sbspreset>\n"
     shaderName: Standard
     materialProperties:
       shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
@@ -224,8 +222,8 @@ ScriptedImporter:
     - label: Default
       bOverride: 0
       bLockRatio: 1
-      textureWidth: 2048
-      textureHeight: 2048
+      textureWidth: 512
+      textureHeight: 512
       textureFormatMode: 0
       normalCompressed: 0
       bGenerateOnLoad: 1

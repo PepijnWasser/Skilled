@@ -45,6 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   roomPrefabs:
   - {fileID: 890802555905688414, guid: 22243ddf93dd040449e2680cc16c2e37, type: 3}
+  - {fileID: 3318207692924126821, guid: f18c7ed4633a81e42a63e4f81d479c13, type: 3}
   minMaxRooms: {x: 40, y: 40}
   allDoorways: []
   availableDoorways: []
