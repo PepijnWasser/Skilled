@@ -132,7 +132,6 @@ public class MapGenerator : MonoBehaviour
                 //remove doorways if position is the same
                 if ((doorway.transform.position - doorway2.transform.position).magnitude < 0.001 && doorway != doorway2)
                 {
-                    Debug.Log("hi");
                     doorway.gameObject.SetActive(false);
                     //doorway.gameObject.GetComponent<MeshRenderer>().material.color = Color.cyan;
                     doorsWaysRemoved.Add(doorway);
