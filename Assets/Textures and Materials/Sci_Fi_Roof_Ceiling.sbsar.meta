@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cad58d09898ce4949998c8d579408c85
+guid: 858e1d0ed277eb443af31239ee79a617
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -11,16 +11,17 @@ ScriptedImporter:
   version: 29
   projectContext: 0
   mGraphInstanceData:
-  - graphLabel: Substance_graph
-    prototypeName: Substance_graph
+  - graphLabel: Sci_Fi_Roof_Ceiling
+    prototypeName: Sci_Fi_Roof_Ceiling
     graphDescIndex: 0
     generateAllOutputs: 0
     generateMipMaps: 1
-    preset: " <sbspreset pkgurl=\"pkg://Substance_graph\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"9,9\" />\n 
-      <presetinput identifier=\"outputcolor\" uid=\"2352640081\" type=\"3\" value=\"1,1,1,1\"
-      />\n  <presetinput identifier=\"outputcolor_1\" uid=\"2352679929\" type=\"3\"
-      value=\"0,1,0.450159,1\" />\n </sbspreset>\n"
+    preset: " <sbspreset pkgurl=\"pkg://Sci_Fi_Roof_Ceiling\" label=\"\" >\n  <presetinput
+      identifier=\"$outputsize\" uid=\"3755929393\" type=\"8\" value=\"11,11\" />\n 
+      <presetinput identifier=\"levelinlow_1\" uid=\"2983407700\" type=\"0\" value=\"1\"
+      />\n  <presetinput identifier=\"outputcolor\" uid=\"2983407990\" type=\"3\"
+      value=\"0.192157,0.933333,1,1\" />\n  <presetinput identifier=\"outputcolor_1\"
+      uid=\"2983407971\" type=\"3\" value=\"0.537255,0.537255,0.537255,1\" />\n </sbspreset>\n"
     shaderName: Standard
     materialProperties:
       shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
@@ -32,7 +33,7 @@ ScriptedImporter:
       customRenderQueue: -1
       texEnvs:
       - name: _BumpMap
-        texture: {fileID: -5043331062787847178, guid: cad58d09898ce4949998c8d579408c85, type: 3}
+        texture: {fileID: -1201687970819950347, guid: 858e1d0ed277eb443af31239ee79a617, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _DetailAlbedoMap
@@ -49,22 +50,22 @@ ScriptedImporter:
         offset: {x: 0, y: 0}
       - name: _EmissionMap
         texture: {instanceID: 0}
-        scale: {x: 3, y: 3}
+        scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _MainTex
-        texture: {fileID: 814193769655529742, guid: cad58d09898ce4949998c8d579408c85, type: 3}
-        scale: {x: 3, y: 3}
+        texture: {fileID: -3047797087795834996, guid: 858e1d0ed277eb443af31239ee79a617, type: 3}
+        scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _MetallicGlossMap
-        texture: {fileID: -2034204982276346014, guid: cad58d09898ce4949998c8d579408c85, type: 3}
+        texture: {fileID: -8439179473545617556, guid: 858e1d0ed277eb443af31239ee79a617, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _OcclusionMap
-        texture: {fileID: -4109880389683011060, guid: cad58d09898ce4949998c8d579408c85, type: 3}
+        texture: {fileID: -8308894402889667496, guid: 858e1d0ed277eb443af31239ee79a617, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _ParallaxMap
-        texture: {fileID: 6273460934612976735, guid: cad58d09898ce4949998c8d579408c85, type: 3}
+        texture: {fileID: 8445106578319333929, guid: 858e1d0ed277eb443af31239ee79a617, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       floats:
@@ -192,27 +193,27 @@ ScriptedImporter:
         from: 0
         to: 3
     textureParameters:
-    - textureName: Substance_graph - baseColor
+    - textureName: Sci_Fi_Roof_Ceiling - baseColor
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Substance_graph - normal
+    - textureName: Sci_Fi_Roof_Ceiling - normal
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Substance_graph - roughness
+    - textureName: Sci_Fi_Roof_Ceiling - roughness
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Substance_graph - metallic
+    - textureName: Sci_Fi_Roof_Ceiling - metallic
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Substance_graph - height
+    - textureName: Sci_Fi_Roof_Ceiling - height
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Substance_graph - ambientOcclusion
+    - textureName: Sci_Fi_Roof_Ceiling - ambientOcclusion
       wrapMode: 0
       filterMode: 1
       aniso: 1
@@ -222,15 +223,15 @@ ScriptedImporter:
     - label: Default
       bOverride: 0
       bLockRatio: 1
-      textureWidth: 512
-      textureHeight: 512
+      textureWidth: 2048
+      textureHeight: 2048
       textureFormatMode: 0
       normalCompressed: 0
       bGenerateOnLoad: 1
-    material: {fileID: 3446888796575484674, guid: cad58d09898ce4949998c8d579408c85, type: 3}
+    material: {fileID: -3923719579521889243, guid: 858e1d0ed277eb443af31239ee79a617, type: 3}
     generatedTextures:
-    - {fileID: 814193769655529742, guid: cad58d09898ce4949998c8d579408c85, type: 3}
-    - {fileID: -5043331062787847178, guid: cad58d09898ce4949998c8d579408c85, type: 3}
-    - {fileID: -2034204982276346014, guid: cad58d09898ce4949998c8d579408c85, type: 3}
-    - {fileID: 6273460934612976735, guid: cad58d09898ce4949998c8d579408c85, type: 3}
-    - {fileID: -4109880389683011060, guid: cad58d09898ce4949998c8d579408c85, type: 3}
+    - {fileID: -3047797087795834996, guid: 858e1d0ed277eb443af31239ee79a617, type: 3}
+    - {fileID: -1201687970819950347, guid: 858e1d0ed277eb443af31239ee79a617, type: 3}
+    - {fileID: -8439179473545617556, guid: 858e1d0ed277eb443af31239ee79a617, type: 3}
+    - {fileID: 8445106578319333929, guid: 858e1d0ed277eb443af31239ee79a617, type: 3}
+    - {fileID: -8308894402889667496, guid: 858e1d0ed277eb443af31239ee79a617, type: 3}
