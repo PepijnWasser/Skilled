@@ -24,13 +24,6 @@ public class SectionGenerator : MonoBehaviour
 	public delegate void Completed(bool succeeded);
 	public static event Completed OnCompletion;
 
-
-	private void Start()
-    {
-		//Initialize(LayerMask.GetMask("Room"));
-		//StartCoroutine("GenerateLevel");
-    }
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))

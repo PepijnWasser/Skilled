@@ -25,6 +25,9 @@ public class MapGenerator : MonoBehaviour
 
     bool generating;
 
+    public delegate void Completed();
+    public static event Completed OnCompletion;
+
     void Start()
     {
         Initizlize();
@@ -158,6 +161,11 @@ public class MapGenerator : MonoBehaviour
 
             RemoveDoorsInSameSpace();
             UpdateAvailibleDoorList();
+
+            if(amountOfSectorsSpawned >= amountOfSectors)
+            {
+                OnCompletion?.Invoke();
+            }
         }
         else
         {
