@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1935888, g: 0.09756746, b: 0.23608026, a: 1}
+  m_IndirectSpecularColor: {r: 0.29571208, g: 0.150058, b: 0.3602642, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   consoleRoomPrefab: {fileID: 2332820850463949621, guid: 3a513b8f2886b274eb69b03e2a398395, type: 3}
-  sectionGeneratorPrefab: {fileID: 1940732853011553374, guid: 51d7fceeccae04c429bb3c832ae03c4c, type: 3}
+  sectionGeneratorPrefab: {fileID: 1940732853011553374, guid: 1cc04b0e0ac9e1f4fbf254799d2c34ff, type: 3}
   amountOfSectors: 4
   posibleStartingDoors: []
   availableDoorwaysFromThis: []
