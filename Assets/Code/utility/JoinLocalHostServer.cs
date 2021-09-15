@@ -1,17 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System.Net;
 
 public class JoinLocalHostServer : MonoBehaviour
 {
-    [SerializeField] private string _serverIPString = "192.168.2.10";
-    [SerializeField] private int basePort = 20017;
-    private IPAddress _serverIP;
-
     private LocalHostClient localHostClient;
-
     public GameObject lobbyPrefab;
+
+    public InputField IPField;
+    public InputField PortField;
 
     private void Start()
     {
@@ -20,9 +19,11 @@ public class JoinLocalHostServer : MonoBehaviour
 
     public void TryConnectingClient()
     {
-        _serverIP = IPAddress.Parse(_serverIPString);
+        IPAddress _serverIP = IPAddress.Parse(IPField.text);
+        int _port;
+        int.TryParse(PortField.text, out _port);
 
-        if (localHostClient.ConnectToServer(_serverIP, basePort))
+        if (localHostClient.ConnectToServer(_serverIP, _port))
         {
             Destroy(this.gameObject);
             Instantiate(lobbyPrefab);
