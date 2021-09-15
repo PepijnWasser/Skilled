@@ -187,10 +187,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3367152483504462257, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90d532e2d4a418c4dabc064e447960c7, type: 2}
+    - target: {fileID: -467412808329328684, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90d532e2d4a418c4dabc064e447960c7, type: 2}
+    - target: {fileID: -467412808329328684, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b359b98e1e4cb3a42a568baaaa1f6358, type: 2}
     - target: {fileID: 919132149155446097, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
       propertyPath: m_Name
       value: VaultDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 1540840328172520386, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90d532e2d4a418c4dabc064e447960c7, type: 2}
+    - target: {fileID: 2956712457892568226, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90d532e2d4a418c4dabc064e447960c7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
 --- !u!4 &4162965226059058700 stripped
