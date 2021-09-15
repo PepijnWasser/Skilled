@@ -27,7 +27,6 @@ public class MySceneManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        Debug.Log("starting room");
         SceneManager.LoadScene(sceneName);
     }
 }

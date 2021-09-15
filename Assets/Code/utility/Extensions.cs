@@ -5,6 +5,13 @@ using System;
 
 public static class Extensions
 {
+	public static int seed = 10;
+
+	public static void SetSeed(int _seed)
+    {
+		seed = _seed;
+		UnityEngine.Random.InitState(seed);
+	}
 
 	public static T Next<T>(this T src) where T : struct
 	{
@@ -63,6 +70,7 @@ public static class Extensions
 
 		return list[previousIndex];
 	}
+
 
 	public static T RandomListItem<T>(this IList<T> list)
 	{
