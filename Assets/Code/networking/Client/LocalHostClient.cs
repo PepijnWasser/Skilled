@@ -37,9 +37,17 @@ public class LocalHostClient : MonoBehaviour
         try
         {
             client = new TcpClient();
-            client.Connect(address, _port);
-            Debug.Log("Connected to server on port " + _port);
-            return true;
+            bool result = client.ConnectAsync(address, _port).Wait(1000);
+            if (result)
+            {
+                Debug.Log("Connected to server on port " + _port);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
         catch (Exception e)
         {
