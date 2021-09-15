@@ -37,7 +37,7 @@ public class LocalHostClient : MonoBehaviour
         try
         {
             client = new TcpClient();
-            bool result = client.ConnectAsync(address, _port).Wait(1000);
+            var result = client.ConnectAsync(address, _port).Wait(1000);
             if (result)
             {
                 Debug.Log("Connected to server on port " + _port);
@@ -45,6 +45,7 @@ public class LocalHostClient : MonoBehaviour
             }
             else
             {
+                Debug.Log("failed to connect");
                 return false;
             }
 
