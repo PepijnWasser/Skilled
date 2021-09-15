@@ -8,7 +8,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private ConsoleRoom consoleRoomPrefab;
     [SerializeField] private SectionGenerator sectionGeneratorPrefab;
 
-    public int amountOfSectors;
+    [HideInInspector] public int amountOfSectors = 0;
     int amountOfSectorsSpawned = 0;
 
     public List<Doorway> posibleStartingDoors = new List<Doorway>();
@@ -41,18 +41,21 @@ public class MapGenerator : MonoBehaviour
 
     void Initizlize()
     {
+        amountOfSectors = 0;
         ConsoleRoom consoleRoom = Instantiate(consoleRoomPrefab, this.transform);
         foreach (Doorway doorway in consoleRoom.doorways)
         {
             doorwaysFromThis.Add(doorway);
             availableDoorwaysFromThis.Add(doorway);
         }
+        Extensions.SetSeed(2);
     }
 
     void GenerateLevel()
     {
         if(amountOfSectorsSpawned < amountOfSectors)
         {
+            Debug.Log(amountOfSectors);
             if (!generating)
             {
                 generating = true;
@@ -125,8 +128,6 @@ public class MapGenerator : MonoBehaviour
     void RemoveDoorsInSameSpace()
     {
         List<Doorway> allDoorways = GetAllDoorsList();
-
-        Debug.Log(allDoorways.Count);
 
         foreach (Doorway doorway in allDoorways)
         {
