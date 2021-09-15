@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: VaultDoorMat
+  m_Name: MedbayDoorMat
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
   m_LightmapFlags: 4
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 25838f8114a234f4a81ce726707511c5, type: 3}
+        m_Texture: {fileID: 2800000, guid: e5e963ccc92e53846b01874a986a59ff, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,19 +40,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4f585eac97fafbf42848e203299dc4e6, type: 3}
+        m_Texture: {fileID: 2800000, guid: fc1b19e784fca5c4f857b1854aa4b2c5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 3feca326203023748834e3f9744e1765, type: 3}
+        m_Texture: {fileID: 2800000, guid: 42917e06d03d7e543ac76fedd5981d1d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: e2449aa023a7d034a9d89552758fcc14, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0dc62c1e18b738e4d8df5707af5d9d31, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 6b6c972ecc482d742ac491c6a85a490e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 381cc55dba084ec418ed6d0969807c86, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
