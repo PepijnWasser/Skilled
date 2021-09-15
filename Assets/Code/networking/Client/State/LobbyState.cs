@@ -96,6 +96,11 @@ public class LobbyState : State
                     JoinRoomMessage message = tempOBJ as JoinRoomMessage;
                     HandleJoinRoomMessage(message);
                 }
+                else if(tempOBJ is UpdateServerIPMessage)
+                {
+                    UpdateServerIPMessage message = tempOBJ as UpdateServerIPMessage;
+                    HandleServerIPMessage(message);
+                }
             }
             HandleHeartbeatStatus();
         }
@@ -155,6 +160,12 @@ public class LobbyState : State
     void HandleServerOwnerMessage(ServerOwnerMessage message)
     {
         lobbyView.SetServerOwner(message.isOwner);
+    }
+
+    void HandleServerIPMessage(UpdateServerIPMessage message)
+    {
+        lobbyView.SetServerIP(message.IP);
+        lobbyView.SetServerPort(message.port);
     }
 
     void HandleJoinRoomMessage(JoinRoomMessage message)

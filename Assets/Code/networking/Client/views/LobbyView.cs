@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LobbyView : MonoBehaviour
 {
     public GameObject playerBarPrefab;
     public GameObject verticalLayoutGroupPlayers;
     public GameObject startRoomButton;
+    public Text serverIP;
+    public Text serverPort;
+
 
     Dictionary<int, PlayerData> lobbyPlayers = new Dictionary<int, PlayerData>();
 
@@ -53,5 +57,15 @@ public class LobbyView : MonoBehaviour
     public void SetServerOwner(bool isOwner)
     {
         startRoomButton.gameObject.SetActive(isOwner);
+    }
+
+    public void SetServerIP(string ip)
+    {
+        serverIP.text = "IP: " + ip;
+    }
+
+    public void SetServerPort(int port)
+    {
+        serverPort.text = "Port: " + port.ToString();
     }
 }

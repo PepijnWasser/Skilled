@@ -22,7 +22,15 @@ public class LobbyRoom : Room
 			server.SetOwner(newClient);
 			Debug.Log("setting server owner");
 		}
-		
+
+		Packet updateIPPacket = new Packet();
+		string ownerIP = ((IPEndPoint)server.owner.TcpClient.Client.RemoteEndPoint).Address.ToString();
+		int ownerPort = server.GetServerPort();
+		UpdateServerIPMessage IPmessage = new UpdateServerIPMessage(ownerIP, ownerPort);
+		updateIPPacket.Write(IPmessage);
+		SendMessageToTargetUser(updateIPPacket, newClient);
+
+
 		//send server name to new user
 		Packet outPacket2 = new Packet();
 		UpdateServerNameMessage serverNameMessage = new UpdateServerNameMessage(server.owner.playerName);
