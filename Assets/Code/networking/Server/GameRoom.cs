@@ -12,7 +12,8 @@ public class GameRoom : Room
     int worldSeed = 20;
     int amountOfSectors = 3;
 
-    public override void handleNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
+
+    public override void handleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
     {
         if (tempOBJ is HeartBeat)
         {
@@ -20,8 +21,12 @@ public class GameRoom : Room
         }
         else if (tempOBJ is GameLoadedMessage)
         {
-            Debug.Log("game loaded");
             HandleGameLoadedMessage(client);
+        }
+        else if(tempOBJ is UpdatePlayerPositionMessage)
+        {
+            UpdatePlayerPositionMessage message = tempOBJ as UpdatePlayerPositionMessage;
+            HandleUpdatePlayerPositionMessage(message, client);
         }
     }
 
@@ -40,7 +45,7 @@ public class GameRoom : Room
 
         foreach (MyClient client in clientsInRoomToRemove)
         {
-            Debug.Log("timeout" + client.playerName);
+            Debug.Log("timeout " + client.playerName);
             SendPlayerDisconnectMessages(client.playerName);
             removeAndCloseMember(client);
         }
@@ -54,7 +59,7 @@ public class GameRoom : Room
         Packet outPacket = new Packet();
         ChatRespons chatMessage = new ChatRespons(messageToSend, "Server", time.Hour, time.Minute, time.Second);
         outPacket.Write(chatMessage);
-        SendMessageToAllUsers(outPacket);
+        SendTCPMessageToAllUsers(outPacket);
     }
 
     private void RefreshHeartbeat(MyClient pClient)
@@ -74,11 +79,29 @@ public class GameRoom : Room
         Packet outPacket = new Packet();
         MakeGameMapMessage makeGameMapMessage = new MakeGameMapMessage(worldSeed, amountOfSectors);
         outPacket.Write(makeGameMapMessage);
-        SendMessageToTargetUser(outPacket, client);
+        SendTCPMessageToTargetUser(outPacket, client);
 
         if (gameLoadedMessages == clientsInRoom.Count)
         {
 
         }
+        
+        Packet outpacket = new Packet();
+        MakenewPlayerCharacterMessage makePlayerCharacterMessage = new MakenewPlayerCharacterMessage(true, Vector3.zero, client.playerID, client.playerName);
+        outpacket.Write(makePlayerCharacterMessage);
+        SendTCPMessageToTargetUser(outpacket, client);
+            
+        Packet outpacket2 = new Packet();
+        MakenewPlayerCharacterMessage makePlayerCharacterMessage2 = new MakenewPlayerCharacterMessage(false, Vector3.zero, client.playerID, client.playerName);
+        outpacket2.Write(makePlayerCharacterMessage2);
+        SendTCPMessageToAllUsersExcept(outpacket2, client);
+    }
+
+    void HandleUpdatePlayerPositionMessage(UpdatePlayerPositionMessage message, MyClient client)
+    {
+        Packet outPacket = new Packet();
+        UpdatePlayerPositionMessage outMessage = new UpdatePlayerPositionMessage(message.playerPosition, client.playerID);
+        outPacket.Write(outMessage);
+        SendTCPMessageToAllUsersExcept(outPacket, client);
     }
 }

@@ -118,9 +118,8 @@ public class LocalHostServer : MonoBehaviour
 			Packet inPacket = new Packet(inBytes);
 
 			var tempOBJ = inPacket.ReadObject();
-			Debug.Log("data icoming on server: " + tempOBJ.GetType());
 
-			activeRoom.handleNetworkMessageFromUser(tempOBJ, client);
+			activeRoom.handleTCPNetworkMessageFromUser(tempOBJ, client);
 		}
 		catch (Exception e)
 		{
@@ -136,7 +135,7 @@ public class LocalHostServer : MonoBehaviour
 			Packet outPacket = new Packet();
 			HeartBeat request = new HeartBeat();
 			outPacket.Write(request);
-			SendMessageToAllUsers(outPacket);
+			SendTCPMessageToAllUsers(outPacket);
 
 			secondCounter = 0;
 		}
@@ -174,7 +173,7 @@ public class LocalHostServer : MonoBehaviour
 		activeRoom = newActiveRoom;
     }
 
-	void SendMessageToAllUsers(Packet outPacket)
+	void SendTCPMessageToAllUsers(Packet outPacket)
 	{
 		foreach (MyClient client in activeRoom.GetMembers())
 		{

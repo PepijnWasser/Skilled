@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using System.IO;
 
 /**
@@ -38,6 +39,7 @@ public class Packet
 	public void Write(string pString) { writer.Write(pString); }
 	public void Write(bool pBool) { writer.Write(pBool); }
 	public void Write(float pFloat) { writer.Write(pFloat); }
+	public void Write(Vector3 pVector) { writer.Write(pVector.x); writer.Write(pVector.y); writer.Write(pVector.z); }
 
 	public void Write(ISerializable pSerializable)
 	{
@@ -50,6 +52,8 @@ public class Packet
 	public int ReadInt() { return reader.ReadInt32(); }
 	public string ReadString() { return reader.ReadString(); }
 	public bool ReadBool() { return reader.ReadBoolean(); }
+	public float ReadFloat() { return reader.ReadSingle(); }
+	public Vector3 ReadVector3() { return new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle()); }
 
 
 	public ISerializable ReadObject()

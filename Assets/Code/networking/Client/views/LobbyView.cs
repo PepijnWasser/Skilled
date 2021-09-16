@@ -12,12 +12,12 @@ public class LobbyView : MonoBehaviour
     public Text serverPort;
 
 
-    Dictionary<int, PlayerData> lobbyPlayers = new Dictionary<int, PlayerData>();
+    Dictionary<int, PlayerDataMenu> lobbyPlayers = new Dictionary<int, PlayerDataMenu>();
 
 
     public void AddPlayer(int playerID, string playerColor, string playerName, bool isPlayer)
     {
-        PlayerData newPlayerData = new PlayerData(playerColor, playerName);
+        PlayerDataMenu newPlayerData = new PlayerDataMenu(playerColor, playerName);
         lobbyPlayers.Add(playerID, newPlayerData);
         
         GameObject newPlayerBar = Instantiate(playerBarPrefab, verticalLayoutGroupPlayers.transform);
