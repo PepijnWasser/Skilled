@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
+using UnityEngine;
 
 public class MyClient
 {
@@ -11,6 +12,7 @@ public class MyClient
     public TcpClient TcpClient;
     public int playerID;
     public string playerName;
+    public Vector3 playerPosition;
 
 
     public enum colors

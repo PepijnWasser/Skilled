@@ -9,6 +9,10 @@ public class PlayerMovement : MonoBehaviour
     Transform playerTransform;
     Rigidbody rb;
 
+    public float gravity = 9.81f;
+    float velocityY = 0;
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -17,11 +21,23 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        if(Physics.Raycast(transform.position, -transform.up, 2))
+        {
+            velocityY = 0;
+        }
+        else
+        {
+            velocityY -= gravity * Time.deltaTime;
+        }
+
         Vector3 moveDir = Vector3.zero;
         moveDir += Input.GetAxisRaw("Vertical") * playerTransform.forward;
         moveDir += Input.GetAxisRaw("Horizontal") * playerTransform.right;
 
+
         moveDir.Normalize();
+        moveDir.y = velocityY;
+
         rb.velocity = moveDir * speed;
     }
 }

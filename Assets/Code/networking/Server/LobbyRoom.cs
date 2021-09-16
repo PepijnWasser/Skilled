@@ -15,7 +15,7 @@ public class LobbyRoom : Room
 		Packet outPacket = new Packet();
 		UpdatePlayerCountMessage playerCountMessage = new UpdatePlayerCountMessage(clientsInRoom.Count);
 		outPacket.Write(playerCountMessage);
-		SendMessageToAllUsers(outPacket);
+		SendTCPMessageToAllUsers(outPacket);
 
 		if (clientsInRoom.Count == 1)
 		{
@@ -28,26 +28,25 @@ public class LobbyRoom : Room
 		int ownerPort = server.GetServerPort();
 		UpdateServerIPMessage IPmessage = new UpdateServerIPMessage(ownerIP, ownerPort);
 		updateIPPacket.Write(IPmessage);
-		SendMessageToTargetUser(updateIPPacket, newClient);
+		SendTCPMessageToTargetUser(updateIPPacket, newClient);
 
 
 		//send server name to new user
 		Packet outPacket2 = new Packet();
 		UpdateServerNameMessage serverNameMessage = new UpdateServerNameMessage(server.owner.playerName);
 		outPacket2.Write(serverNameMessage);
-		SendMessageToTargetUser(outPacket2, newClient);
+		SendTCPMessageToTargetUser(outPacket2, newClient);
 
-		//send new player to all users except the new one
+		//send new player to all users
 		Packet outpacket3 = new Packet();
 		MakeNewPlayerBarMessage makePlayerBarMessage = new MakeNewPlayerBarMessage(newClient.playerID, newClient.playerColor, newClient.playerName, false);
 		outpacket3.Write(makePlayerBarMessage);
-		SendMessageToAllUsersExcept(outpacket3, newClient);
+		SendTCPMessageToAllUsersExcept(outpacket3, newClient);
 
-		//send new player to all users except the new one
 		Packet outpacket4 = new Packet();
 		MakeNewPlayerBarMessage makePlayerBarMessage2 = new MakeNewPlayerBarMessage(newClient.playerID, newClient.playerColor, newClient.playerName, true);
 		outpacket4.Write(makePlayerBarMessage2);
-		SendMessageToTargetUser(outpacket4, newClient);
+		SendTCPMessageToTargetUser(outpacket4, newClient);
 
 		//send all existing users to new client
 		foreach (MyClient client in clientsInRoom)
@@ -58,7 +57,7 @@ public class LobbyRoom : Room
 				Packet outpacket5 = new Packet();
 				MakeNewPlayerBarMessage makePlayerBarMessage3 = new MakeNewPlayerBarMessage(client.playerID, client.playerColor, client.playerName, false);
 				outpacket5.Write(makePlayerBarMessage3);
-				SendMessageToTargetUser(outpacket5, newClient);
+				SendTCPMessageToTargetUser(outpacket5, newClient);
 			}
 		}
 
@@ -67,14 +66,14 @@ public class LobbyRoom : Room
 			Packet outpacket6 = new Packet();
 			ServerOwnerMessage serverOwnerMessage = new ServerOwnerMessage(true);
 			outpacket6.Write(serverOwnerMessage);
-			SendMessageToTargetUser(outpacket6, newClient);
+			SendTCPMessageToTargetUser(outpacket6, newClient);
         }
         else
         {
 			Packet outpacket6 = new Packet();
 			ServerOwnerMessage serverOwnerMessage = new ServerOwnerMessage(false);
 			outpacket6.Write(serverOwnerMessage);
-			SendMessageToTargetUser(outpacket6, newClient);
+			SendTCPMessageToTargetUser(outpacket6, newClient);
 		}
 
 	}
@@ -85,16 +84,16 @@ public class LobbyRoom : Room
 		Packet outPacket = new Packet();
 		RemovePlayerBarMessage removePlayerBarMessage = new RemovePlayerBarMessage(clientToRemove.playerID);
 		outPacket.Write(removePlayerBarMessage);
-		SendMessageToAllUsers(outPacket);
+		SendTCPMessageToAllUsers(outPacket);
 
 
 		Packet outPacket2 = new Packet();
 		UpdatePlayerCountMessage updatePlayerCountMessage = new UpdatePlayerCountMessage(clientsInRoom.Count);
 		outPacket2.Write(updatePlayerCountMessage);
-		SendMessageToAllUsers(outPacket2);
+		SendTCPMessageToAllUsers(outPacket2);
 	}
 
-	public override void handleNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
+	public override void handleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
 	{
 		if (tempOBJ is HeartBeat)
 		{
@@ -220,7 +219,7 @@ public class LobbyRoom : Room
 		Packet outPacket = new Packet();
 		HelpRespons helpRespons = new HelpRespons(messageToSend,"Server", time.Hour, time.Minute, time.Second);
 		outPacket.Write(helpRespons);
-		SendMessageToTargetUser(outPacket, client);
+		SendTCPMessageToTargetUser(outPacket, client);
 	}
 
 	void HandleUpdateColorMessage(MyClient client, UpdateColorRequest message)
@@ -238,7 +237,7 @@ public class LobbyRoom : Room
 		Packet outPacket = new Packet();
 		UpdateColorRespons updateColorRespons = new UpdateColorRespons(client.playerColor, client.playerID);
 		outPacket.Write(updateColorRespons);
-		SendMessageToAllUsers(outPacket);
+		SendTCPMessageToAllUsers(outPacket);
 	}
 
 	void HandleLeaveServerMessage(MyClient client, LeaveServermessage message)
@@ -254,7 +253,7 @@ public class LobbyRoom : Room
 		Packet outPacket = new Packet();
 		ChatRespons chatMessage = new ChatRespons(message.chatMessage, client.playerName, time.Hour, time.Minute, time.Second);
 		outPacket.Write(chatMessage);
-		SendMessageToAllUsers(outPacket);
+		SendTCPMessageToAllUsers(outPacket);
     }
 
 	void HandleStartRoomRequest()
@@ -262,7 +261,7 @@ public class LobbyRoom : Room
 		Packet outPacket = new Packet();
 		JoinRoomMessage startRoomMessage = new JoinRoomMessage(JoinRoomMessage.rooms.game);
 		outPacket.Write(startRoomMessage);
-		SendMessageToAllUsers(outPacket);
+		SendTCPMessageToAllUsers(outPacket);
 		server.MovePlayersToDifferentRoom(this, server.gameRoom);
     }
 
@@ -274,7 +273,7 @@ public class LobbyRoom : Room
 		Packet outPacket = new Packet();
 		ChatRespons chatMessage = new ChatRespons(messageToSend, "Server", time.Hour, time.Minute, time.Second);
 		outPacket.Write(chatMessage);
-		SendMessageToAllUsers(outPacket);
+		SendTCPMessageToAllUsers(outPacket);
 	}
 
 	void SendPlayerJoinedMessages(string playerWhoJoined)
@@ -285,7 +284,7 @@ public class LobbyRoom : Room
 		Packet outPacket = new Packet();
 		ChatRespons chatMessage = new ChatRespons(messageToSend, "Server", time.Hour, time.Minute, time.Second);
 		outPacket.Write(chatMessage);
-		SendMessageToAllUsers(outPacket);
+		SendTCPMessageToAllUsers(outPacket);
 	}
 
 	void SendPlayerDisconnectMessages(string playerWhoDisconnected)
@@ -296,7 +295,7 @@ public class LobbyRoom : Room
 		Packet outPacket = new Packet();
 		ChatRespons chatMessage = new ChatRespons(messageToSend, "Server", time.Hour, time.Minute, time.Second);
 		outPacket.Write(chatMessage);
-		SendMessageToAllUsers(outPacket);
+		SendTCPMessageToAllUsers(outPacket);
 	}
 		
 	void SendNameChangeChatMessages(string oldName, string newName)
@@ -307,7 +306,7 @@ public class LobbyRoom : Room
 		Packet outPacket = new Packet();
 		ChatRespons chatMessage = new ChatRespons(messageToSend, "Server", time.Hour, time.Minute, time.Second);
 		outPacket.Write(chatMessage);
-		SendMessageToAllUsers(outPacket);
+		SendTCPMessageToAllUsers(outPacket);
 	}
 
 	void UpdatePlayerName(MyClient client, string newName)
@@ -317,7 +316,7 @@ public class LobbyRoom : Room
 		Packet outPacket = new Packet();
 		UpdatePlayerNameRespons updateNameRespons = new UpdatePlayerNameRespons(client.playerName, client.playerID);
 		outPacket.Write(updateNameRespons);
-		SendMessageToAllUsers(outPacket);
+		SendTCPMessageToAllUsers(outPacket);
 	}
 
 	void UpdateServerName()
@@ -325,7 +324,7 @@ public class LobbyRoom : Room
 		Packet outPacket = new Packet();
 		UpdateServerNameMessage updateserverNameMessage = new UpdateServerNameMessage(server.owner.playerName);
 		outPacket.Write(updateserverNameMessage);
-		SendMessageToAllUsers(outPacket);
+		SendTCPMessageToAllUsers(outPacket);
 	}
 
 	bool CheckNameAvailible(string name)

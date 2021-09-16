@@ -70,14 +70,14 @@ public abstract class Room
 		}
 	}
 
-	abstract public void handleNetworkMessageFromUser(ISerializable pMessage, MyClient pSender);
+	abstract public void handleTCPNetworkMessageFromUser(ISerializable pMessage, MyClient pSender);
 
-	protected void SendMessageToTargetUser(Packet outPacket, MyClient client)
+	protected void SendTCPMessageToTargetUser(Packet outPacket, MyClient client)
 	{
 		StreamUtil.Write(client.TcpClient.GetStream(), outPacket.GetBytes());
 	}
 
-	protected void SendMessageToAllUsersExcept(Packet outPacket, MyClient clientToAvoid)
+	protected void SendTCPMessageToAllUsersExcept(Packet outPacket, MyClient clientToAvoid)
 	{
 		foreach (MyClient client in clientsInRoom)
 		{
@@ -95,7 +95,7 @@ public abstract class Room
 		}
 	}
 
-	protected void SendMessageToAllUsers(Packet outPacket)
+	protected void SendTCPMessageToAllUsers(Packet outPacket)
 	{
 		foreach (MyClient client in clientsInRoom)
 		{
