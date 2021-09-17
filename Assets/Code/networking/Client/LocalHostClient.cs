@@ -10,7 +10,8 @@ public class LocalHostClient : MonoBehaviour
     float secondCounter = 0;
 
     [HideInInspector] public string playerName;
-    [HideInInspector] public TcpClient client;
+    [HideInInspector] public TcpClient tcpClient;
+    [HideInInspector] public UdpClient udpClient;
 
     private static LocalHostClient _instance;
 
@@ -36,8 +37,12 @@ public class LocalHostClient : MonoBehaviour
     {
         try
         {
-            client = new TcpClient();
-            var result = client.ConnectAsync(address, _port).Wait(1000);
+            tcpClient = new TcpClient();
+
+            IPEndPoint ipEndPoint = new IPEndPoint(address, _port);
+            udpClient = new UdpClient(ipEndPoint);
+
+            bool result = tcpClient.ConnectAsync(address, _port).Wait(1000);
             if (result)
             {
                 Debug.Log("Connected to server on port " + _port);
@@ -60,7 +65,7 @@ public class LocalHostClient : MonoBehaviour
 
     private void Update()
     {
-        if(client != null && client.Connected)
+        if(tcpClient != null && tcpClient.Connected)
         {
             try
             {
@@ -70,32 +75,48 @@ public class LocalHostClient : MonoBehaviour
                     secondCounter = 0;
 
                     HeartBeat request = new HeartBeat();
-                    SendObject(request);
+                    SendObjectThroughTCP(request);
                 }
             }
 
             catch (Exception e)
             {
                 Debug.Log(e.Message);
-                client.Close();
+                tcpClient.Close();
             }
             
         }
     }
 
-    public void SendObject(ISerializable pOutObject)
+    public void SendObjectThroughTCP(ISerializable pOutObject)
     {
         try
         {
-            Packet outPacket = new Packet();
+            TCPPacket outPacket = new TCPPacket();
             outPacket.Write(pOutObject);
 
-            StreamUtil.Write(client.GetStream(), outPacket.GetBytes());
+            NetworkUtils.Write(tcpClient.GetStream(), outPacket.GetBytes());
         }
         catch (Exception e)
         {
             Debug.Log(e.Message);
-            client.Close();
+            tcpClient.Close();
+        }
+    }
+
+    public void SendObjectThroughUDP(USerializable pOutObject)
+    {
+        try
+        {
+            UDPPacket outPacket = new UDPPacket();
+            outPacket.Write(pOutObject);
+
+            udpClient.Send(outPacket.GetBytes(), outPacket.GetBytes().Length);
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+            udpClient.Close();
         }
     }
 }

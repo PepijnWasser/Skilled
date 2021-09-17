@@ -23,10 +23,10 @@ public abstract class State : MonoBehaviour
     {      
         try
         {
-            if (clientnetwork != null && clientnetwork.client.Connected && clientnetwork.client.Available > 0)
+            if (clientnetwork != null && clientnetwork.tcpClient.Connected && clientnetwork.tcpClient.Available > 0)
             {
-                byte[] inBytes = StreamUtil.Read(clientnetwork.client.GetStream());
-                Packet inPacket = new Packet(inBytes);
+                byte[] inBytes = NetworkUtils.Read(clientnetwork.tcpClient.GetStream());
+                TCPPacket inPacket = new TCPPacket(inBytes);
 
                 var tempOBJ = inPacket.ReadObject();
                 if(tempOBJ is HeartBeat)
@@ -38,9 +38,9 @@ public abstract class State : MonoBehaviour
         catch (Exception e)
         {
             Debug.Log(e.Message);
-            if (clientnetwork.client.Connected)
+            if (clientnetwork.tcpClient.Connected)
             {
-                clientnetwork.client.Close();
+                clientnetwork.tcpClient.Close();
             }
         }     
     }

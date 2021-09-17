@@ -8,11 +8,11 @@ public interface ISerializable
     /**
      * Write all the data for 'this' object into the Packet
      */
-    void Serialize(Packet pPacket);
+    void Serialize(TCPPacket pPacket);
 
     /**
      * Read all the data for 'this' object from the Packet
      */
-    void Deserialize(Packet pPacket);
+    void Deserialize(TCPPacket pPacket);
 }
 
