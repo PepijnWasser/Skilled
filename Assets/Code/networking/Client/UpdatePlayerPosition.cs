@@ -16,7 +16,7 @@ public class UpdatePlayerPosition : MonoBehaviour
         secondCounter += Time.deltaTime;
         if(secondCounter >= 1 / updateFrequency)
         {
-            if(player.transform.position != oldPos && player.transform.rotation.eulerAngles != oldRot)
+            if(player.transform.position != oldPos || player.transform.rotation.eulerAngles != oldRot)
             {
                 secondCounter = 0;
                 gameState.SendPlayerPosition(player.transform.position, player.transform.rotation.eulerAngles);
