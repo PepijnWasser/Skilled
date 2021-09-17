@@ -68,7 +68,7 @@ public class GameState : State
 
     void HandleupdatePlayerPosition(UpdatePlayerPositionMessage message)
     {
-        gameManager.MovePlayer(message.playerID, message.playerPosition);
+        gameManager.MovePlayer(message.playerID, message.playerPosition, message.playerRotation);
     }
 
     //sending
@@ -78,10 +78,11 @@ public class GameState : State
         clientnetwork.SendObject(message);
     }
 
-    public void SendPlayerPosition(Vector3 position)
+    public void SendPlayerPosition(Vector3 position, Vector3 rotation)
     {
         UpdatePlayerPositionMessage message = new UpdatePlayerPositionMessage();
         message.playerPosition = position;
+        message.playerRotation = rotation;
         clientnetwork.SendObject(message);
     }
 }
