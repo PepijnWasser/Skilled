@@ -5,13 +5,12 @@ using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
 
-public class LocalHostClient : MonoBehaviour
+public class MyUPDClient : MonoBehaviour
 {
-    float secondCounter = 0;
+    float secondCounter;
 
-    [HideInInspector] public string playerName;
-    [HideInInspector] public TcpClient tcpClient;
     [HideInInspector] public UdpClient udpClient;
+    IPEndPoint ipEndPoint;
 
     private static LocalHostClient _instance;
 
@@ -27,45 +26,30 @@ public class LocalHostClient : MonoBehaviour
             return _instance;
         }
     }
-
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        ConnectToServer(IPAddress.Parse("192.168.2.15"), 55555);
     }
 
-    public bool ConnectToServer(System.Net.IPAddress address, int _port)
+
+    public void ConnectToServer(System.Net.IPAddress address, int _port)
     {
         try
         {
-            tcpClient = new TcpClient();
-
-            IPEndPoint ipEndPoint = new IPEndPoint(address, _port);
+            ipEndPoint = new IPEndPoint(address, _port);
             udpClient = new UdpClient(ipEndPoint);
-
-            bool result = tcpClient.ConnectAsync(address, _port).Wait(1000);
-            if (result)
-            {
-                Debug.Log("Connected to server on port " + _port);
-                return true;
-            }
-            else
-            {
-                Debug.Log("failed to connect");
-                return false;
-            }
-
         }
         catch (Exception e)
         {
             Debug.Log(e.Message);
-            return false;
+
         }
     }
 
-
     private void Update()
     {
-        if(tcpClient != null && tcpClient.Connected)
+        if (udpClient != null)
         {
             try
             {
@@ -74,33 +58,16 @@ public class LocalHostClient : MonoBehaviour
                 {
                     secondCounter = 0;
 
-                    HeartBeat request = new HeartBeat();
-                    SendObjectThroughTCP(request);
+                    UDPMessage request = new UDPMessage("hello");
+                    SendObjectThroughUDP(request);
                 }
             }
 
             catch (Exception e)
             {
                 Debug.Log(e.Message);
-                tcpClient.Close();
             }
-            
-        }
-    }
 
-    public void SendObjectThroughTCP(ISerializable pOutObject)
-    {
-        try
-        {
-            TCPPacket outPacket = new TCPPacket();
-            outPacket.Write(pOutObject);
-
-            NetworkUtils.Write(tcpClient.GetStream(), outPacket.GetBytes());
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e.Message);
-            tcpClient.Close();
         }
     }
 
@@ -111,7 +78,8 @@ public class LocalHostClient : MonoBehaviour
             UDPPacket outPacket = new UDPPacket();
             outPacket.Write(pOutObject);
 
-            udpClient.Send(outPacket.GetBytes(), outPacket.GetBytes().Length);
+            byte[] bytes = outPacket.GetBytes();
+            udpClient.Send(bytes, bytes.Length, ipEndPoint);
         }
         catch (Exception e)
         {

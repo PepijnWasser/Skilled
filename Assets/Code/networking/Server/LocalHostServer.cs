@@ -114,8 +114,8 @@ public class LocalHostServer : MonoBehaviour
 	{
 		try
 		{
-			byte[] inBytes = StreamUtil.Read(client.TcpClient.GetStream());
-			Packet inPacket = new Packet(inBytes);
+			byte[] inBytes = NetworkUtils.Read(client.TcpClient.GetStream());
+			TCPPacket inPacket = new TCPPacket(inBytes);
 
 			var tempOBJ = inPacket.ReadObject();
 
@@ -132,7 +132,7 @@ public class LocalHostServer : MonoBehaviour
 		secondCounter += Time.deltaTime;
 		if(secondCounter > 2)
         {
-			Packet outPacket = new Packet();
+			TCPPacket outPacket = new TCPPacket();
 			HeartBeat request = new HeartBeat();
 			outPacket.Write(request);
 			SendTCPMessageToAllUsers(outPacket);
@@ -173,13 +173,13 @@ public class LocalHostServer : MonoBehaviour
 		activeRoom = newActiveRoom;
     }
 
-	void SendTCPMessageToAllUsers(Packet outPacket)
+	void SendTCPMessageToAllUsers(TCPPacket outPacket)
 	{
 		foreach (MyClient client in activeRoom.GetMembers())
 		{
 			try
 			{
-				StreamUtil.Write(client.TcpClient.GetStream(), outPacket.GetBytes());
+				NetworkUtils.Write(client.TcpClient.GetStream(), outPacket.GetBytes());
 			}
 			catch (Exception e)
 			{

@@ -56,7 +56,7 @@ public class GameRoom : Room
         DateTime time = DateTime.Now;
         string messageToSend = playerWhoDisconnected + " timed out";
 
-        Packet outPacket = new Packet();
+        TCPPacket outPacket = new TCPPacket();
         ChatRespons chatMessage = new ChatRespons(messageToSend, "Server", time.Hour, time.Minute, time.Second);
         outPacket.Write(chatMessage);
         SendTCPMessageToAllUsers(outPacket);
@@ -76,7 +76,7 @@ public class GameRoom : Room
     {
         gameLoadedMessages += 1;
 
-        Packet outPacket = new Packet();
+        TCPPacket outPacket = new TCPPacket();
         MakeGameMapMessage makeGameMapMessage = new MakeGameMapMessage(worldSeed, amountOfSectors);
         outPacket.Write(makeGameMapMessage);
         SendTCPMessageToTargetUser(outPacket, client);
@@ -86,12 +86,12 @@ public class GameRoom : Room
 
         }
         
-        Packet outpacket = new Packet();
+        TCPPacket outpacket = new TCPPacket();
         MakenewPlayerCharacterMessage makePlayerCharacterMessage = new MakenewPlayerCharacterMessage(true, Vector3.zero, client.playerID, client.playerName);
         outpacket.Write(makePlayerCharacterMessage);
         SendTCPMessageToTargetUser(outpacket, client);
             
-        Packet outpacket2 = new Packet();
+        TCPPacket outpacket2 = new TCPPacket();
         MakenewPlayerCharacterMessage makePlayerCharacterMessage2 = new MakenewPlayerCharacterMessage(false, Vector3.zero, client.playerID, client.playerName);
         outpacket2.Write(makePlayerCharacterMessage2);
         SendTCPMessageToAllUsersExcept(outpacket2, client);
@@ -99,7 +99,7 @@ public class GameRoom : Room
 
     void HandleUpdatePlayerPositionMessage(UpdatePlayerPositionMessage message, MyClient client)
     {
-        Packet outPacket = new Packet();
+        TCPPacket outPacket = new TCPPacket();
         UpdatePlayerPositionMessage outMessage = new UpdatePlayerPositionMessage(message.playerPosition, message.playerRotation, client.playerID);
         outPacket.Write(outMessage);
         SendTCPMessageToAllUsersExcept(outPacket, client);
