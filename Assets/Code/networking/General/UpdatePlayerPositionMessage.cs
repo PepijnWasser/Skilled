@@ -10,11 +10,13 @@ public class UpdatePlayerPositionMessage : ISerializable
     public void Deserialize(Packet pPacket)
     {
         playerPosition = pPacket.ReadVector3();
+        playerID = pPacket.ReadInt();
     }
 
     public void Serialize(Packet pPacket)
     {
         pPacket.Write(playerPosition);
+        pPacket.Write(playerID);
     }
 
     public UpdatePlayerPositionMessage()

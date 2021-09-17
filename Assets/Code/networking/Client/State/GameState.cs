@@ -40,7 +40,7 @@ public class GameState : State
                 else if(tempOBJ is UpdatePlayerPositionMessage)
                 {
                     UpdatePlayerPositionMessage message = tempOBJ as UpdatePlayerPositionMessage;
-
+                    HandleupdatePlayerPosition(message);
                 }
             }
         }
@@ -62,12 +62,13 @@ public class GameState : State
 
     void HandleMakePlayerCharacterMessage(MakenewPlayerCharacterMessage message)
     {
-        gameManager.MakePlayerCharacter(message.isPlayer, message.characterPosition, message.playerName);
+
+        gameManager.MakePlayerCharacter(message.isPlayer, message.characterPosition, message.playerName, message.playerID);
     }
 
     void HandleupdatePlayerPosition(UpdatePlayerPositionMessage message)
     {
-
+        gameManager.MovePlayer(message.playerID, message.playerPosition);
     }
 
     //sending
