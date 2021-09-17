@@ -27,9 +27,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void MovePlayer(int playerID, Vector3 position)
+    public void MovePlayer(int playerID, Vector3 position, Vector3 rotation)
     {
         Debug.Log(playerID + characterDictionary[playerID].transform.name);
         characterDictionary[playerID].transform.position = position;
+        characterDictionary[playerID].transform.rotation = Quaternion.Euler(rotation);
     }
 }

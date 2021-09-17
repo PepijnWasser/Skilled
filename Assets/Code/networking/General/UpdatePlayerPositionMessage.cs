@@ -5,17 +5,20 @@ using UnityEngine;
 public class UpdatePlayerPositionMessage : ISerializable
 {
     public Vector3 playerPosition;
+    public Vector3 playerRotation;
     public int playerID;
 
     public void Deserialize(Packet pPacket)
     {
         playerPosition = pPacket.ReadVector3();
+        playerRotation = pPacket.ReadVector3();
         playerID = pPacket.ReadInt();
     }
 
     public void Serialize(Packet pPacket)
     {
         pPacket.Write(playerPosition);
+        pPacket.Write(playerRotation);
         pPacket.Write(playerID);
     }
 
@@ -28,9 +31,10 @@ public class UpdatePlayerPositionMessage : ISerializable
     {
         playerPosition = _playerPosition;
     }
-    public UpdatePlayerPositionMessage(Vector3 _playerPosition, int _playerID)
+    public UpdatePlayerPositionMessage(Vector3 _playerPosition, Vector3 _playerRotation, int _playerID)
     {
         playerPosition = _playerPosition;
+        playerRotation = _playerRotation;
         playerID = _playerID;
     }
 

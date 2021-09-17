@@ -13,6 +13,7 @@ public class MyClient
     public int playerID;
     public string playerName;
     public Vector3 playerPosition;
+    public Vector3 playerRotation;
 
 
     public enum colors

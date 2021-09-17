@@ -100,7 +100,7 @@ public class GameRoom : Room
     void HandleUpdatePlayerPositionMessage(UpdatePlayerPositionMessage message, MyClient client)
     {
         Packet outPacket = new Packet();
-        UpdatePlayerPositionMessage outMessage = new UpdatePlayerPositionMessage(message.playerPosition, client.playerID);
+        UpdatePlayerPositionMessage outMessage = new UpdatePlayerPositionMessage(message.playerPosition, message.playerRotation, client.playerID);
         outPacket.Write(outMessage);
         SendTCPMessageToAllUsersExcept(outPacket, client);
     }
