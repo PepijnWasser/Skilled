@@ -7,84 +7,29 @@ using UnityEngine;
 
 public class MyUPDClient : MonoBehaviour
 {
-    float secondCounter;
+    float secondCOunter = 0;
+    UdpClient client = new UdpClient();
 
-    [HideInInspector] public UdpClient udpClient;
-    IPEndPoint ipEndPoint;
-
-    private static LocalHostClient _instance;
-
-    public static LocalHostClient Instance
+    // Update is called once per frame
+    void Update()
     {
-        get
+        byte[] sendBytes = Encoding.ASCII.GetBytes("Is anybody there?");
+
+        secondCOunter += Time.deltaTime;
+        if (secondCOunter > 2)
         {
-            if (_instance == null)
-            {
-                _instance = GameObject.FindObjectOfType<LocalHostClient>();
-            }
-
-            return _instance;
-        }
-    }
-    void Awake()
-    {
-        DontDestroyOnLoad(gameObject);
-        ConnectToServer(IPAddress.Parse("192.168.2.15"), 55555);
-    }
+            secondCOunter = 0;
+            UDPPacket packet = new UDPPacket();
+            UDPMessage message = new UDPMessage("hi");
+            packet.Write(message);
+            sendBytes = packet.GetBytes();
 
 
-    public void ConnectToServer(System.Net.IPAddress address, int _port)
-    {
-        try
-        {
-            ipEndPoint = new IPEndPoint(address, _port);
-            udpClient = new UdpClient(ipEndPoint);
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e.Message);
+            //sendBytes = Encoding.ASCII.GetBytes("Is anybody there?");
 
-        }
-    }
-
-    private void Update()
-    {
-        if (udpClient != null)
-        {
-            try
-            {
-                secondCounter += Time.deltaTime;
-                if (secondCounter > 2)
-                {
-                    secondCounter = 0;
-
-                    UDPMessage request = new UDPMessage("hello");
-                    SendObjectThroughUDP(request);
-                }
-            }
-
-            catch (Exception e)
-            {
-                Debug.Log(e.Message);
-            }
-
-        }
-    }
-
-    public void SendObjectThroughUDP(USerializable pOutObject)
-    {
-        try
-        {
-            UDPPacket outPacket = new UDPPacket();
-            outPacket.Write(pOutObject);
-
-            byte[] bytes = outPacket.GetBytes();
-            udpClient.Send(bytes, bytes.Length, ipEndPoint);
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e.Message);
-            udpClient.Close();
+            IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Parse("192.168.2.15"), 33332);
+            client.Send(sendBytes, sendBytes.Length, ipEndPoint);
+            Debug.Log("sending");
         }
     }
 }
