@@ -17,7 +17,7 @@ public class LocalHostServer : MonoBehaviour
 	private List<MyClient> connectedClients = new List<MyClient>();
 	private TcpListener _listener;
 
-	private int newPlayerID = 0;
+	private int newPlayerID = 1;
 
 	Room activeRoom;
 	public LobbyRoom lobbyRoom;

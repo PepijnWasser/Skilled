@@ -7,14 +7,20 @@ public class UpdatePlayerPosition : MonoBehaviour
     float secondCounter = 0;
     public int updateFrequency;
     public GameState gameState;
-    public GameObject player;
+    [HideInInspector] public GameObject player;
+    Vector3 oldPos;
 
     void Update()
     {
         secondCounter += Time.deltaTime;
         if(secondCounter >= 1 / updateFrequency)
         {
-            gameState.SendPlayerPosition(player.transform.position);
+            if(player.transform.position != oldPos)
+            {
+                secondCounter = 0;
+                gameState.SendPlayerPosition(player.transform.position);
+                oldPos = player.transform.position;
+            }
         }
     }
 }
