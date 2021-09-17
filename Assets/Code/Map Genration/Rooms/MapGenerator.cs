@@ -41,7 +41,7 @@ public class MapGenerator : MonoBehaviour
 
     void Initizlize()
     {
-        amountOfSectors = 0;
+        amountOfSectors = 4;
         ConsoleRoom consoleRoom = Instantiate(consoleRoomPrefab, this.transform);
         foreach (Doorway doorway in consoleRoom.doorways)
         {
