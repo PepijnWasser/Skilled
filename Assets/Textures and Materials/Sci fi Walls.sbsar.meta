@@ -20,7 +20,8 @@ ScriptedImporter:
       identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"9,9\" />\n 
       <presetinput identifier=\"outputcolor\" uid=\"2352640081\" type=\"3\" value=\"1,1,1,1\"
       />\n  <presetinput identifier=\"outputcolor_1\" uid=\"2352679929\" type=\"3\"
-      value=\"0,1,0.450159,1\" />\n </sbspreset>\n"
+      value=\"0.474524,0.296226,1,1\" />\n  <presetinput identifier=\"intensity\"
+      uid=\"2352694624\" type=\"0\" value=\"13.16\" />\n </sbspreset>\n"
     shaderName: Standard
     materialProperties:
       shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
