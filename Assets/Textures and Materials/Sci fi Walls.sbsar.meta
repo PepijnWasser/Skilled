@@ -18,9 +18,9 @@ ScriptedImporter:
     generateMipMaps: 1
     preset: " <sbspreset pkgurl=\"pkg://Substance_graph\" label=\"\" >\n  <presetinput
       identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"9,9\" />\n 
-      <presetinput identifier=\"outputcolor\" uid=\"2352640081\" type=\"3\" value=\"1,1,1,1\"
+      <presetinput identifier=\"outputcolor\" uid=\"2352640081\" type=\"3\" value=\"0.501961,0.552941,0.584314,1\"
       />\n  <presetinput identifier=\"outputcolor_1\" uid=\"2352679929\" type=\"3\"
-      value=\"0.474524,0.296226,1,1\" />\n  <presetinput identifier=\"intensity\"
+      value=\"0.176471,0.403922,0.74902,1\" />\n  <presetinput identifier=\"intensity\"
       uid=\"2352694624\" type=\"0\" value=\"13.16\" />\n </sbspreset>\n"
     shaderName: Standard
     materialProperties:
