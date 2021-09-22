@@ -20,7 +20,8 @@ public class GameRoom : Room
             RefreshHeartbeat(client);
         }
         else if (tempOBJ is UpdatePlayerPositionMessage)
-        { 
+        {
+            Debug.Log("receiving pos");
             UpdatePlayerPositionMessage message = tempOBJ as UpdatePlayerPositionMessage;
             HandleUpdatePlayerPositionMessage(message, client);
         }
@@ -107,14 +108,7 @@ public class GameRoom : Room
 
     void HandleUpdatePlayerPositionMessage(UpdatePlayerPositionMessage message, MyClient client)
     {
-        Debug.Log("message is update position");
-        /*
-        UDPPacket outPacket = new UDPPacket();
-        UpdatePlayerPositionMessage outMessage = new UpdatePlayerPositionMessage(message.playerPosition, message.playerRotation, client.playerID);
-        outPacket.Write(outMessage);
-        //SendUDPMessageToAllUsersExcept(outPacket, client);
-        SendUDPMessageToAllUsers(outPacket);
-        */
+        Debug.Log(client.playerID);
 
         TCPPacket outpacket = new TCPPacket();
         UpdatePlayerPositionTCP messagre = new UpdatePlayerPositionTCP(message.playerPosition, message.playerRotation, client.playerID);

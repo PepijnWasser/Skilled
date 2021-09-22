@@ -216,8 +216,7 @@ public class LocalHostServer : MonoBehaviour
         {
 			if (((IPEndPoint)client.TcpClient.Client.RemoteEndPoint).Address.ToString() == RemoteEndPoint.Address.ToString())
             {
-				Debug.Log("receiving message");
-				activeRoom.handleUDPNetworkMessageFromUser(tempOBJ, connectedClients[0]);
+				activeRoom.handleUDPNetworkMessageFromUser(tempOBJ, client);
 				break;
 			}
         }

@@ -59,7 +59,6 @@ public class GameState : State
                 }
                 else if(tempOBJ is UpdatePlayerPositionTCP)
                 {
-                    Debug.Log("received player position");
                     UpdatePlayerPositionTCP message = tempOBJ as UpdatePlayerPositionTCP;
                     HandleupdatePlayerPosition(message);
                 }
@@ -89,7 +88,6 @@ public class GameState : State
 
     void HandleupdatePlayerPosition(UpdatePlayerPositionTCP message)
     {
-        Debug.Log("updating position");
         gameManager.MovePlayer(message.playerID, message.playerPosition, message.playerRotation);
     }
 

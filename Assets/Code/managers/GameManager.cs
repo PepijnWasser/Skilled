@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
         characterDictionary.Add(playerID, player);
 
-        player.name = _name;
+        player.name = _name + " " +  playerID;
         if (!playerControlled)
         {
             player.GetComponent<PlayerPrefabManager>().DestroyCameras();

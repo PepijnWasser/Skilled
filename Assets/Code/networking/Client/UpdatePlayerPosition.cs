@@ -21,6 +21,7 @@ public class UpdatePlayerPosition : MonoBehaviour
             {
                 if (player.transform.position != oldPos || player.transform.rotation.eulerAngles != oldRot)
                 {
+                    Debug.Log("sending pos");
                     gameState.SendPlayerPosition(player.transform.position, player.transform.rotation.eulerAngles);
                     oldPos = player.transform.position;
                     oldRot = player.transform.rotation.eulerAngles;
