@@ -100,16 +100,17 @@ public class GameState : State
 
     public void SendPlayerPosition(Vector3 position, Vector3 rotation)
     {
-        /*
+        
         UpdatePlayerPositionMessage message = new UpdatePlayerPositionMessage();
         message.playerPosition = position;
         message.playerRotation = rotation;
         udpClientnetwork.SendObjectThroughUDP(message);
-        */
-
+        
+        /*
         UpdatePlayerPositionTCP message = new UpdatePlayerPositionTCP();
         message.playerPosition = position;
         message.playerRotation = rotation;
         tcpClientnetwork.SendObjectThroughTCP(message);
+        */
     }
 }

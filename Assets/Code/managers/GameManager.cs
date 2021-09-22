@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            player.name += " controlled";
             playerPositionUpdater.player = player;
         }
     }

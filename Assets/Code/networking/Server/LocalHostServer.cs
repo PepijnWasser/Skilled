@@ -26,7 +26,7 @@ public class LocalHostServer : MonoBehaviour
 
 	private static LocalHostServer _instance;
 
-	static UdpClient udpReceiver = new UdpClient(33337);
+	UdpClient udpReceiver = new UdpClient(33337);
 
 	public static LocalHostServer Instance
 	{
@@ -204,6 +204,7 @@ public class LocalHostServer : MonoBehaviour
 		}
 	}
 
+	
 	void Recv(IAsyncResult res)
 	{
 		IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Any, 33337);
@@ -222,4 +223,5 @@ public class LocalHostServer : MonoBehaviour
         }
 		udpReceiver.BeginReceive(new AsyncCallback(Recv), null);
 	}
+	
 }

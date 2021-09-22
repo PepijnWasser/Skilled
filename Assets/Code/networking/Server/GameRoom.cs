@@ -118,7 +118,7 @@ public class GameRoom : Room
         TCPPacket outpacket = new TCPPacket();
         UpdatePlayerPositionTCP messagre = new UpdatePlayerPositionTCP(message.playerPosition, message.playerRotation, client.playerID);
         outpacket.Write(messagre);
-        SendTCPMessageToAllUsers(outpacket);
+        SendTCPMessageToAllUsersExcept(outpacket, client);
     }
 
     void HandleUpdatePlayerPositionMessage(UpdatePlayerPositionTCP message, MyClient client)
@@ -128,6 +128,6 @@ public class GameRoom : Room
         TCPPacket outpacket = new TCPPacket();
         UpdatePlayerPositionTCP messagre = new UpdatePlayerPositionTCP(message.playerPosition, message.playerRotation, client.playerID);
         outpacket.Write(messagre);
-        SendTCPMessageToAllUsers(outpacket);
+        SendTCPMessageToAllUsersExcept(outpacket, client);
     }
 }
