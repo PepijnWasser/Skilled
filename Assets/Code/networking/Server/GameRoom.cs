@@ -37,6 +37,11 @@ public class GameRoom : Room
         {
             HandleGameLoadedMessage(client);
         }
+        else if(tempOBJ is UpdatePlayerPositionTCP)
+        {
+            UpdatePlayerPositionTCP message = tempOBJ as UpdatePlayerPositionTCP;
+            HandleUpdatePlayerPositionMessage(message, client);
+        }
     }
 
     protected override void CheckHeartbeat()
@@ -107,6 +112,16 @@ public class GameRoom : Room
     }
 
     void HandleUpdatePlayerPositionMessage(UpdatePlayerPositionMessage message, MyClient client)
+    {
+        Debug.Log(client.playerID);
+
+        TCPPacket outpacket = new TCPPacket();
+        UpdatePlayerPositionTCP messagre = new UpdatePlayerPositionTCP(message.playerPosition, message.playerRotation, client.playerID);
+        outpacket.Write(messagre);
+        SendTCPMessageToAllUsers(outpacket);
+    }
+
+    void HandleUpdatePlayerPositionMessage(UpdatePlayerPositionTCP message, MyClient client)
     {
         Debug.Log(client.playerID);
 
