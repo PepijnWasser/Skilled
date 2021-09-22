@@ -6,7 +6,7 @@ using System.Net;
 
 public class JoinLocalHostServer : MonoBehaviour
 {
-    private LocalHostClient localHostClient;
+    private LocalHostClientTCP localHostClient;
     public GameObject lobbyPrefab;
 
     public InputField IPField;
@@ -14,7 +14,7 @@ public class JoinLocalHostServer : MonoBehaviour
 
     private void Start()
     {
-        localHostClient = GameObject.FindObjectOfType<LocalHostClient>();
+        localHostClient = GameObject.FindObjectOfType<LocalHostClientTCP>();
     }
 
     public void TryConnectingClient()

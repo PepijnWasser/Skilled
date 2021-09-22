@@ -483,6 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameField: {fileID: 3800764170072717284}
   CJScreenPrefab: {fileID: 899979175462829657, guid: 82b70aefbcaaca046a57b51b8f65a5f0, type: 3}
+  nameInput: {fileID: 361153672018491466}
 --- !u!1 &3800764171300468369
 GameObject:
   m_ObjectHideFlags: 0

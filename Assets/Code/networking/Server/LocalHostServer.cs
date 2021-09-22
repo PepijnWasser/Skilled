@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Threading;
 using System;
+using System.Text;
 
 public class LocalHostServer : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class LocalHostServer : MonoBehaviour
 
 	private static LocalHostServer _instance;
 
+	static UdpClient client = new UdpClient(33337);
+
 	public static LocalHostServer Instance
 	{
 		get
@@ -37,6 +40,19 @@ public class LocalHostServer : MonoBehaviour
 			return _instance;
 		}
 	}
+
+	void Start()
+	{
+		try
+		{
+			client.BeginReceive(new AsyncCallback(Recv), null);
+		}
+		catch (Exception e)
+		{
+			Debug.Log(e.Message);
+		}
+	}
+
 
 	void Awake()
 	{
@@ -186,5 +202,24 @@ public class LocalHostServer : MonoBehaviour
 				Console.WriteLine("Error sending message to target users: " + e.Message);
 			}
 		}
+	}
+
+	void Recv(IAsyncResult res)
+	{
+		IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Any, 33337);
+		byte[] received = NetworkUtils.Read(client.EndReceive(res, ref RemoteEndPoint));
+
+		UDPPacket inPacket = new UDPPacket(received);
+		var tempOBJ = inPacket.ReadObject();
+
+		foreach(MyClient client in connectedClients)
+        {
+			if (((IPEndPoint)client.TcpClient.Client.RemoteEndPoint).Address.ToString() == RemoteEndPoint.Address.ToString())
+            {
+				activeRoom.handleUDPNetworkMessageFromUser(tempOBJ, connectedClients[0]);
+				break;
+			}
+        }
+		client.BeginReceive(new AsyncCallback(Recv), null);
 	}
 }

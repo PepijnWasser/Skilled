@@ -20,9 +20,9 @@ public class GameState : State
     {
         try
         {
-            if (clientnetwork != null && clientnetwork.tcpClient.Connected && clientnetwork.tcpClient.Available > 0)
+            if (tcpClientnetwork != null && tcpClientnetwork.tcpClient.Connected && tcpClientnetwork.tcpClient.Available > 0)
             {
-                byte[] inBytes = NetworkUtils.Read(clientnetwork.tcpClient.GetStream());
+                byte[] inBytes = NetworkUtils.Read(tcpClientnetwork.tcpClient.GetStream());
                 TCPPacket inPacket = new TCPPacket(inBytes);
 
                 var tempOBJ = inPacket.ReadObject();
@@ -39,6 +39,7 @@ public class GameState : State
                 }
                 else if(tempOBJ is UpdatePlayerPositionMessage)
                 {
+                    Debug.Log("received player position");
                     UpdatePlayerPositionMessage message = tempOBJ as UpdatePlayerPositionMessage;
                     HandleupdatePlayerPosition(message);
                 }
@@ -47,9 +48,9 @@ public class GameState : State
         catch (Exception e)
         {
             Debug.Log(e.Message);
-            if (clientnetwork.tcpClient.Connected)
+            if (tcpClientnetwork.tcpClient.Connected)
             {
-                clientnetwork.tcpClient.Close();
+                tcpClientnetwork.tcpClient.Close();
             }
         }
     }
@@ -75,7 +76,7 @@ public class GameState : State
     void SendGameLoadedMessage()
     {
         GameLoadedMessage message = new GameLoadedMessage();
-        clientnetwork.SendObjectThroughTCP(message);
+        tcpClientnetwork.SendObjectThroughTCP(message);
     }
 
     public void SendPlayerPosition(Vector3 position, Vector3 rotation)
@@ -83,6 +84,6 @@ public class GameState : State
         UpdatePlayerPositionMessage message = new UpdatePlayerPositionMessage();
         message.playerPosition = position;
         message.playerRotation = rotation;
-        clientnetwork.SendObjectThroughTCP(message);
+        udpClientnetwork.SendObjectThroughUDP(message);
     }
 }

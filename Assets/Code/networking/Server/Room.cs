@@ -69,8 +69,12 @@ public abstract class Room
 			removeAndCloseMember(client);
 		}
 	}
-
+	//handling messages
 	abstract public void handleTCPNetworkMessageFromUser(ISerializable pMessage, MyClient pSender);
+
+	abstract public void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender);
+
+	//sending messages
 
 	protected void SendTCPMessageToTargetUser(TCPPacket outPacket, MyClient client)
 	{
@@ -107,6 +111,51 @@ public abstract class Room
 			{
 				Console.WriteLine("Error sending message to target users: " + e.Message);
 			}
+		}
+	}
+
+	protected void SendUDPMessageToTargetUser(UDPPacket outPacket, MyClient client)
+	{
+		UdpClient udpClient = new UdpClient(client.endPoint.Port);
+		byte[] sendBytes = outPacket.GetBytes();
+		udpClient.Send(sendBytes, sendBytes.Length, client.endPoint);
+	}
+
+	protected void SendUDPMessageToAllUsersExcept(UDPPacket outPacket, MyClient clientToAvoid)
+    {
+		foreach (MyClient client in clientsInRoom)
+		{
+			if (client != clientToAvoid)
+			{
+				UdpClient udpClient = new UdpClient(client.endPoint.Port);
+				try
+				{
+					byte[] sendBytes = outPacket.GetBytes();
+					udpClient.Send(sendBytes, sendBytes.Length, client.endPoint);
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine("Error sending message to all users: " + e.Message);
+				}
+			}
+		}
+	}
+
+	protected void SendUDPMessageToAllUsers(UDPPacket outPacket)
+	{
+		foreach (MyClient client in clientsInRoom)
+		{
+			UdpClient udpClient = new UdpClient(client.endPoint.Port);
+			try
+			{
+				byte[] sendBytes = outPacket.GetBytes();
+				udpClient.Send(sendBytes, sendBytes.Length, client.endPoint);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Error sending message to all users: " + e.Message);
+			}
+
 		}
 	}
 }

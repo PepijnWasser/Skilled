@@ -8,7 +8,8 @@ using System;
 
 public abstract class State : MonoBehaviour
 {
-    protected LocalHostClient clientnetwork;
+    protected LocalHostClientTCP tcpClientnetwork;
+    protected LocalHostClientUDP udpClientnetwork;
 
     protected float timeOutTime = 5f;
     protected float lastHeartbeat = 5f;
@@ -16,16 +17,17 @@ public abstract class State : MonoBehaviour
     
     protected virtual void Awake()
     {
-        clientnetwork = GameObject.FindObjectOfType<LocalHostClient>().GetComponent<LocalHostClient>();
+        tcpClientnetwork = GameObject.FindObjectOfType<LocalHostClientTCP>().GetComponent<LocalHostClientTCP>();
+        udpClientnetwork = GameObject.FindObjectOfType<LocalHostClientUDP>().GetComponent<LocalHostClientUDP>();
     }
     
     protected virtual void Update()
     {      
         try
         {
-            if (clientnetwork != null && clientnetwork.tcpClient.Connected && clientnetwork.tcpClient.Available > 0)
+            if (tcpClientnetwork != null && tcpClientnetwork.tcpClient.Connected && tcpClientnetwork.tcpClient.Available > 0)
             {
-                byte[] inBytes = NetworkUtils.Read(clientnetwork.tcpClient.GetStream());
+                byte[] inBytes = NetworkUtils.Read(tcpClientnetwork.tcpClient.GetStream());
                 TCPPacket inPacket = new TCPPacket(inBytes);
 
                 var tempOBJ = inPacket.ReadObject();
@@ -38,9 +40,9 @@ public abstract class State : MonoBehaviour
         catch (Exception e)
         {
             Debug.Log(e.Message);
-            if (clientnetwork.tcpClient.Connected)
+            if (tcpClientnetwork.tcpClient.Connected)
             {
-                clientnetwork.tcpClient.Close();
+                tcpClientnetwork.tcpClient.Close();
             }
         }     
     }

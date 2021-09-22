@@ -58,7 +58,6 @@ public static class NetworkUtils
 		//get the message size first
 		//int byteCountToRead = BitConverter.ToInt32(Read(pStream, 4), 0);
 		//then read that amount of bytes
-		Debug.Log("???");
 		return incomingBytes;
 	}
 

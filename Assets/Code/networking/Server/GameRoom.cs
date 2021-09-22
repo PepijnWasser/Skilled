@@ -13,6 +13,19 @@ public class GameRoom : Room
     int amountOfSectors = 3;
 
 
+    public override void handleUDPNetworkMessageFromUser(USerializable tempOBJ, MyClient client)
+    {
+        if (tempOBJ is HeartBeat)
+        {
+            RefreshHeartbeat(client);
+        }
+        else if (tempOBJ is UpdatePlayerPositionMessage)
+        {
+            UpdatePlayerPositionMessage message = tempOBJ as UpdatePlayerPositionMessage;
+            HandleUpdatePlayerPositionMessage(message, client);
+        }
+    }
+
     public override void handleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
     {
         if (tempOBJ is HeartBeat)
@@ -22,11 +35,6 @@ public class GameRoom : Room
         else if (tempOBJ is GameLoadedMessage)
         {
             HandleGameLoadedMessage(client);
-        }
-        else if(tempOBJ is UpdatePlayerPositionMessage)
-        {
-            UpdatePlayerPositionMessage message = tempOBJ as UpdatePlayerPositionMessage;
-            HandleUpdatePlayerPositionMessage(message, client);
         }
     }
 
@@ -99,9 +107,9 @@ public class GameRoom : Room
 
     void HandleUpdatePlayerPositionMessage(UpdatePlayerPositionMessage message, MyClient client)
     {
-        TCPPacket outPacket = new TCPPacket();
+        UDPPacket outPacket = new UDPPacket();
         UpdatePlayerPositionMessage outMessage = new UpdatePlayerPositionMessage(message.playerPosition, message.playerRotation, client.playerID);
         outPacket.Write(outMessage);
-        SendTCPMessageToAllUsersExcept(outPacket, client);
+        SendUDPMessageToAllUsersExcept(outPacket, client);
     }
 }

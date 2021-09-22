@@ -93,6 +93,10 @@ public class LobbyRoom : Room
 		SendTCPMessageToAllUsers(outPacket2);
 	}
 
+	public override void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
+	{
+
+	}
 	public override void handleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
 	{
 		if (tempOBJ is HeartBeat)

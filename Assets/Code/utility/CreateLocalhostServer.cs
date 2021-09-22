@@ -8,7 +8,7 @@ public class CreateLocalhostServer : MonoBehaviour
 {
     [SerializeField] private int basePort = 55555;
 
-    private LocalHostClient localHostClient;
+    private LocalHostClientTCP localHostClient;
 
     public LocalHostServer localHostServerPrefab;
     public GameObject lobbyPrefab;
@@ -16,7 +16,7 @@ public class CreateLocalhostServer : MonoBehaviour
 
     private void Start()
     {
-        localHostClient = GameObject.FindObjectOfType<LocalHostClient>();
+        localHostClient = GameObject.FindObjectOfType<LocalHostClientTCP>();
     }
 
     public void CreateLocalHostServer()

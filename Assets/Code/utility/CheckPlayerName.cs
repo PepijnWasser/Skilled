@@ -7,6 +7,7 @@ public class CheckPlayerName : MonoBehaviour
 {
     public Text nameField;
     public GameObject CJScreenPrefab;
+    public GameObject nameInput;
 
     public bool CheckValidName()
     {
@@ -25,8 +26,8 @@ public class CheckPlayerName : MonoBehaviour
         if (CheckValidName())
         {
             Instantiate(CJScreenPrefab);
-            GameObject.FindObjectOfType<LocalHostClient>().playerName = nameField.text;
-            Destroy(this.transform.parent.gameObject);
+            GameObject.FindObjectOfType<LocalHostClientTCP>().playerName = nameField.text;
+            Destroy(nameInput);
         }
         else
         {

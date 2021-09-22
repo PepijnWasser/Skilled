@@ -5,23 +5,22 @@ using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
 
-public class LocalHostClient : MonoBehaviour
+public class LocalHostClientTCP : MonoBehaviour
 {
     float secondCounter = 0;
 
     [HideInInspector] public string playerName;
     [HideInInspector] public TcpClient tcpClient;
-    [HideInInspector] public UdpClient udpClient;
 
-    private static LocalHostClient _instance;
+    private static LocalHostClientTCP _instance;
 
-    public static LocalHostClient Instance
+    public static LocalHostClientTCP Instance
     {
         get
         {
             if (_instance == null)
             {
-                _instance = GameObject.FindObjectOfType<LocalHostClient>();
+                _instance = GameObject.FindObjectOfType<LocalHostClientTCP>();
             }
 
             return _instance;
@@ -39,8 +38,8 @@ public class LocalHostClient : MonoBehaviour
         {
             tcpClient = new TcpClient();
 
-            IPEndPoint ipEndPoint = new IPEndPoint(address, _port);
-            udpClient = new UdpClient(ipEndPoint);
+            //IPEndPoint ipEndPoint = new IPEndPoint(address, _port);
+            //udpClient = new UdpClient(ipEndPoint);
 
             bool result = tcpClient.ConnectAsync(address, _port).Wait(1000);
             if (result)
@@ -101,22 +100,6 @@ public class LocalHostClient : MonoBehaviour
         {
             Debug.Log(e.Message);
             tcpClient.Close();
-        }
-    }
-
-    public void SendObjectThroughUDP(USerializable pOutObject)
-    {
-        try
-        {
-            UDPPacket outPacket = new UDPPacket();
-            outPacket.Write(pOutObject);
-
-            udpClient.Send(outPacket.GetBytes(), outPacket.GetBytes().Length);
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e.Message);
-            udpClient.Close();
         }
     }
 }

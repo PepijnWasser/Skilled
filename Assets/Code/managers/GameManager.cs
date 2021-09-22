@@ -14,7 +14,6 @@ public class GameManager : MonoBehaviour
         GameObject player = Instantiate(playerPrefab, position, Quaternion.identity);
 
         characterDictionary.Add(playerID, player);
-        Debug.Log(playerID);
 
         player.name = _name;
         if (!playerControlled)
@@ -29,7 +28,6 @@ public class GameManager : MonoBehaviour
 
     public void MovePlayer(int playerID, Vector3 position, Vector3 rotation)
     {
-        Debug.Log(playerID + characterDictionary[playerID].transform.name);
         characterDictionary[playerID].transform.position = position;
         characterDictionary[playerID].transform.rotation = Quaternion.Euler(rotation);
     }

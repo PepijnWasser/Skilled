@@ -14,14 +14,17 @@ public class UpdatePlayerPosition : MonoBehaviour
     void Update()
     {
         secondCounter += Time.deltaTime;
-        if(secondCounter >= 1 / updateFrequency)
+        if(secondCounter >= (float)1 / (float)updateFrequency)
         {
-            if(player.transform.position != oldPos || player.transform.rotation.eulerAngles != oldRot)
+            secondCounter = 0;
+            if(player != null)
             {
-                secondCounter = 0;
-                gameState.SendPlayerPosition(player.transform.position, player.transform.rotation.eulerAngles);
-                oldPos = player.transform.position;
-                oldRot = player.transform.rotation.eulerAngles;
+                if (player.transform.position != oldPos || player.transform.rotation.eulerAngles != oldRot)
+                {
+                    gameState.SendPlayerPosition(player.transform.position, player.transform.rotation.eulerAngles);
+                    oldPos = player.transform.position;
+                    oldRot = player.transform.rotation.eulerAngles;
+                }
             }
         }
     }
