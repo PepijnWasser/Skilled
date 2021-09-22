@@ -15,7 +15,7 @@ public abstract class State : MonoBehaviour
     protected float lastHeartbeat = 5f;
 
 
-    protected UdpClient client = new UdpClient();
+    protected UdpClient receiver = new UdpClient();
 
 
     protected virtual void Awake()
@@ -28,7 +28,7 @@ public abstract class State : MonoBehaviour
     {
         try
         {
-            client.BeginReceive(new AsyncCallback(Recv), null);
+            receiver.BeginReceive(new AsyncCallback(Recv), null);
         }
         catch (Exception e)
         {
@@ -64,14 +64,14 @@ public abstract class State : MonoBehaviour
 
     protected virtual void Recv(IAsyncResult res)
     {
-        IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Any, 33332);
-        byte[] received = NetworkUtils.Read(client.EndReceive(res, ref RemoteEndPoint));
+        IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Any, 44455);
+        byte[] received = NetworkUtils.Read(receiver.EndReceive(res, ref RemoteEndPoint));
         Debug.Log("data received");
 
         UDPPacket inPacket = new UDPPacket(received);
         var tempOBJ = inPacket.ReadObject();
 
-        client.BeginReceive(new AsyncCallback(Recv), null);
+        receiver.BeginReceive(new AsyncCallback(Recv), null);
     }
 
     protected virtual void HandleHeartbeat()

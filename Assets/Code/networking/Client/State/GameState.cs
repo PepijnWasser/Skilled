@@ -21,7 +21,7 @@ public class GameState : State
     protected override void Recv(IAsyncResult res)
     {
         IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Any, 44455);
-        byte[] received = NetworkUtils.Read(client.EndReceive(res, ref RemoteEndPoint));
+        byte[] received = NetworkUtils.Read(receiver.EndReceive(res, ref RemoteEndPoint));
         Debug.Log("data received");
 
         UDPPacket inPacket = new UDPPacket(received);
@@ -33,7 +33,7 @@ public class GameState : State
             Debug.Log(message.playerPosition);
         }
 
-        client.BeginReceive(new AsyncCallback(Recv), null);
+        receiver.BeginReceive(new AsyncCallback(Recv), null);
     }
 
     protected override void Update()

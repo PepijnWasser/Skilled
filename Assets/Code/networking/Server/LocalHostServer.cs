@@ -26,7 +26,7 @@ public class LocalHostServer : MonoBehaviour
 
 	private static LocalHostServer _instance;
 
-	static UdpClient client = new UdpClient(33337);
+	static UdpClient udpReceiver = new UdpClient(33337);
 
 	public static LocalHostServer Instance
 	{
@@ -45,7 +45,7 @@ public class LocalHostServer : MonoBehaviour
 	{
 		try
 		{
-			client.BeginReceive(new AsyncCallback(Recv), null);
+			udpReceiver.BeginReceive(new AsyncCallback(Recv), null);
 		}
 		catch (Exception e)
 		{
@@ -207,7 +207,7 @@ public class LocalHostServer : MonoBehaviour
 	void Recv(IAsyncResult res)
 	{
 		IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Any, 33337);
-		byte[] received = NetworkUtils.Read(client.EndReceive(res, ref RemoteEndPoint));
+		byte[] received = NetworkUtils.Read(udpReceiver.EndReceive(res, ref RemoteEndPoint));
 
 		UDPPacket inPacket = new UDPPacket(received);
 		var tempOBJ = inPacket.ReadObject();
@@ -221,6 +221,6 @@ public class LocalHostServer : MonoBehaviour
 				break;
 			}
         }
-		client.BeginReceive(new AsyncCallback(Recv), null);
+		udpReceiver.BeginReceive(new AsyncCallback(Recv), null);
 	}
 }

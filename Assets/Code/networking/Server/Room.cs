@@ -145,11 +145,12 @@ public abstract class Room
 	{
 		foreach (MyClient client in clientsInRoom)
 		{
-			UdpClient udpClient = new UdpClient(client.endPoint.Port);
+			UdpClient udpClient = new UdpClient(44455);
 			try
 			{
 				byte[] sendBytes = outPacket.GetBytes();
-				udpClient.Send(sendBytes, sendBytes.Length, client.endPoint);
+				IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Parse("192.168.2.15"), 44455);
+				udpClient.Send(sendBytes, sendBytes.Length, remoteEndPoint);
 			}
 			catch (Exception e)
 			{
