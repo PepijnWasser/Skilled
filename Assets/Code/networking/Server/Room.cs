@@ -11,6 +11,8 @@ public abstract class Room
 	public LocalHostServer server;
 	protected List<MyClient> clientsInRoom = new List<MyClient>();
 
+	UdpClient udpClient = new UdpClient();
+
 	public virtual void Initialize(LocalHostServer _server)
     {
 		server = _server;
@@ -127,7 +129,6 @@ public abstract class Room
 		{
 			if (client != clientToAvoid)
 			{
-				UdpClient udpClient = new UdpClient(client.endPoint.Port);
 				try
 				{
 					byte[] sendBytes = outPacket.GetBytes();
@@ -145,7 +146,6 @@ public abstract class Room
 	{
 		foreach (MyClient client in clientsInRoom)
 		{
-			UdpClient udpClient = new UdpClient(44455);
 			try
 			{
 				byte[] sendBytes = outPacket.GetBytes();
