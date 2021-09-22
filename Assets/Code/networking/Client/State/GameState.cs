@@ -4,17 +4,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Drawing;
+using System.Net;
+using System.Net.Sockets;
 
 public class GameState : State
 {
     public MapGenerator mapGenerator;
     public GameManager gameManager;
 
+
     private void Start()
     {
         SendGameLoadedMessage();
     }
 
+    protected override void Recv(IAsyncResult res)
+    {
+        IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Any, 44455);
+        byte[] received = NetworkUtils.Read(client.EndReceive(res, ref RemoteEndPoint));
+        Debug.Log("data received");
+
+        UDPPacket inPacket = new UDPPacket(received);
+        var tempOBJ = inPacket.ReadObject();
+
+        if (tempOBJ is UpdatePlayerPositionMessage)
+        {
+            UpdatePlayerPositionMessage message = tempOBJ as UpdatePlayerPositionMessage;
+            Debug.Log(message.playerPosition);
+        }
+
+        client.BeginReceive(new AsyncCallback(Recv), null);
+    }
 
     protected override void Update()
     {

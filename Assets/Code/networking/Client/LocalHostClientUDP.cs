@@ -9,7 +9,7 @@ public class LocalHostClientUDP : MonoBehaviour
 {
 
     private static LocalHostClientUDP _instance;
-    UdpClient client = new UdpClient();
+    UdpClient sender = new UdpClient();
 
     public static LocalHostClientUDP Instance
     {
@@ -39,12 +39,12 @@ public class LocalHostClientUDP : MonoBehaviour
             UDPPacket outPacket = new UDPPacket();
             outPacket.Write(pOutObject);
 
-            client.Send(outPacket.GetBytes(), outPacket.GetBytes().Length, ipEndPoint);
+            sender.Send(outPacket.GetBytes(), outPacket.GetBytes().Length, ipEndPoint);
         }
         catch (Exception e)
         {
             Debug.Log(e.Message);
-            client.Close();
+            sender.Close();
         }        
     }
 }
