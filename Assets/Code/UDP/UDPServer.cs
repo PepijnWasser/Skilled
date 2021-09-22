@@ -9,7 +9,7 @@ using UnityEngine;
 
 public class UDPServer : MonoBehaviour
 {
-    static UdpClient client = new UdpClient(33332);
+    static UdpClient client = new UdpClient(33339);
     string data = "";
 
     void Start()
@@ -26,7 +26,7 @@ public class UDPServer : MonoBehaviour
 
     void Recv(IAsyncResult res)
     {
-        IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Any, 33332);
+        IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Parse("192.168.2.15"), 33339);
         byte[] received = NetworkUtils.Read(client.EndReceive(res, ref RemoteEndPoint));
         Debug.Log("data received");
 

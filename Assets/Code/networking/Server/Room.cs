@@ -149,7 +149,7 @@ public abstract class Room
 			try
 			{
 				byte[] sendBytes = outPacket.GetBytes();
-				IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Parse("192.168.2.15"), 44455);
+				IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Parse("192.168.2.8"), 44455);
 				udpClient.Send(sendBytes, sendBytes.Length, remoteEndPoint);
 			}
 			catch (Exception e)

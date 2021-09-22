@@ -108,11 +108,17 @@ public class GameRoom : Room
     void HandleUpdatePlayerPositionMessage(UpdatePlayerPositionMessage message, MyClient client)
     {
         Debug.Log("message is update position");
-
+        /*
         UDPPacket outPacket = new UDPPacket();
         UpdatePlayerPositionMessage outMessage = new UpdatePlayerPositionMessage(message.playerPosition, message.playerRotation, client.playerID);
         outPacket.Write(outMessage);
         //SendUDPMessageToAllUsersExcept(outPacket, client);
         SendUDPMessageToAllUsers(outPacket);
+        */
+
+        TCPPacket outpacket = new TCPPacket();
+        UpdatePlayerPositionTCP messagre = new UpdatePlayerPositionTCP(message.playerPosition, message.playerRotation, client.playerID);
+        outpacket.Write(messagre);
+        SendTCPMessageToAllUsers(outpacket);
     }
 }

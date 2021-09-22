@@ -57,10 +57,10 @@ public class GameState : State
                     MakenewPlayerCharacterMessage message = tempOBJ as MakenewPlayerCharacterMessage;
                     HandleMakePlayerCharacterMessage(message);
                 }
-                else if(tempOBJ is UpdatePlayerPositionMessage)
+                else if(tempOBJ is UpdatePlayerPositionTCP)
                 {
                     Debug.Log("received player position");
-                    UpdatePlayerPositionMessage message = tempOBJ as UpdatePlayerPositionMessage;
+                    UpdatePlayerPositionTCP message = tempOBJ as UpdatePlayerPositionTCP;
                     HandleupdatePlayerPosition(message);
                 }
             }
@@ -87,8 +87,9 @@ public class GameState : State
         gameManager.MakePlayerCharacter(message.isPlayer, message.characterPosition, message.playerName, message.playerID);
     }
 
-    void HandleupdatePlayerPosition(UpdatePlayerPositionMessage message)
+    void HandleupdatePlayerPosition(UpdatePlayerPositionTCP message)
     {
+        Debug.Log("updating position");
         gameManager.MovePlayer(message.playerID, message.playerPosition, message.playerRotation);
     }
 

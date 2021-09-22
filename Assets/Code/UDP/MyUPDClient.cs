@@ -27,7 +27,7 @@ public class MyUPDClient : MonoBehaviour
 
             //sendBytes = Encoding.ASCII.GetBytes("Is anybody there?");
 
-            IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Parse("192.168.2.15"), 33337);
+            IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Parse("192.168.2.15"), 33339);
             client.Send(sendBytes, sendBytes.Length, ipEndPoint);
             Debug.Log("sending");
         }
