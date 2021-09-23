@@ -24,6 +24,8 @@ public class LocalHostServer : MonoBehaviour
 	public LobbyRoom lobbyRoom;
 	public GameRoom gameRoom;
 
+	UdpClient client = new UdpClient();
+
 	private static LocalHostServer _instance;
 
 	public static LocalHostServer Instance
@@ -45,7 +47,21 @@ public class LocalHostServer : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
-	public void Initialize(int _port)
+    private void Start()
+    {
+		client = new UdpClient(35450);
+
+		try
+		{
+			client.BeginReceive(new AsyncCallback(recv), null);
+		}
+		catch (Exception e)
+		{
+			Debug.Log(e.Message);
+		}
+	}
+
+    public void Initialize(int _port)
 	{
 		bool finishedInitialization = false;
 		int i = 0;
@@ -106,7 +122,7 @@ public class LocalHostServer : MonoBehaviour
 	{
 		for (int i = 0; i < connectedClients.Count; i++)
 		{
-			if (connectedClients[i].TcpClient.Available == 0) continue;
+			if (connectedClients[i].tcpClient.Available == 0) continue;
 
 			HandleIncomingMessage(connectedClients[i]);
 		}
@@ -116,7 +132,7 @@ public class LocalHostServer : MonoBehaviour
 	{
 		try
 		{
-			byte[] inBytes = NetworkUtils.Read(client.TcpClient.GetStream());
+			byte[] inBytes = NetworkUtils.Read(client.tcpClient.GetStream());
 			TCPPacket inPacket = new TCPPacket(inBytes);
 
 			var tempOBJ = inPacket.ReadObject();
@@ -127,6 +143,28 @@ public class LocalHostServer : MonoBehaviour
 		{
 			Console.WriteLine("Error in Handling Incoming Data: " + e.Message);
 		}
+	}
+
+	void recv(IAsyncResult res)
+	{
+		IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Any, 60240);
+		byte[] received = client.EndReceive(res, ref RemoteIP);
+
+		UDPPacket packet = new UDPPacket(received);
+		var TempOBJ = packet.ReadObject();
+
+
+		Debug.Log("receiving data on server");
+		foreach(MyClient connectedClient in connectedClients)
+        {
+			if(((IPEndPoint)connectedClient.tcpClient.Client.RemoteEndPoint).Address == RemoteIP.Address)
+            {
+				activeRoom.handleUDPNetworkMessageFromUser(TempOBJ, connectedClient);
+				break;
+            }
+        }
+
+		client.BeginReceive(new AsyncCallback(recv), null);
 	}
 
 	void SendServerHeartbeats()
@@ -156,7 +194,7 @@ public class LocalHostServer : MonoBehaviour
 	public void RemovePlayer(MyClient clientToRemove)
 	{	
 		Console.WriteLine("removing client from: " + this.GetType());
-		clientToRemove.TcpClient.Close();
+		clientToRemove.tcpClient.Close();
 		connectedClients.Remove(clientToRemove);		
 	}
 
@@ -181,7 +219,7 @@ public class LocalHostServer : MonoBehaviour
 		{
 			try
 			{
-				NetworkUtils.Write(client.TcpClient.GetStream(), outPacket.GetBytes());
+				NetworkUtils.Write(client.tcpClient.GetStream(), outPacket.GetBytes());
 			}
 			catch (Exception e)
 			{

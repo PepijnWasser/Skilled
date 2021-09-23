@@ -1,24 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Text;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System;
 
-public class MyUDPServer : MonoBehaviour
+public class UDPSender : MonoBehaviour
 {
+    float secondCounter = 0;
     UdpClient client = new UdpClient();
 
-    void Start()
+    private void Start()
     {
-        client = new UdpClient(20230);
-
+        client = new UdpClient(33200);
         try
         {
             client.BeginReceive(new AsyncCallback(recv), null);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Debug.Log(e.Message);
         }
@@ -36,7 +36,6 @@ public class MyUDPServer : MonoBehaviour
         {
             UDPMessage message = TempOBJ as UDPMessage;
             Debug.Log(message.message);
-            SendResponse();
         }
         else
         {
@@ -46,16 +45,25 @@ public class MyUDPServer : MonoBehaviour
         client.BeginReceive(new AsyncCallback(recv), null);
     }
 
-    void SendResponse()
+    private void Update()
     {
-        IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Loopback, 33200);
+        secondCounter += Time.deltaTime;
+        if(secondCounter > 1)
+        {
+            secondCounter = 0;
 
-        UDPPacket packet = new UDPPacket();
-        UDPMessage message = new UDPMessage("indeed");
-        packet.Write(message);
 
-        byte[] sendBytes = packet.GetBytes();
+            IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Loopback, 20230);
 
-        client.Send(sendBytes, sendBytes.Length, RemoteIP);
+            UDPPacket packet = new UDPPacket();
+            UDPMessage message = new UDPMessage("are you there mate?");
+            packet.Write(message);
+
+            byte[] sendBytes = packet.GetBytes();
+
+            client.Send(sendBytes, sendBytes.Length, RemoteIP);
+
+
+        }
     }
 }

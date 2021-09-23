@@ -22,9 +22,9 @@ public class GameState : State
     {
         try
         {
-            if (tcpClientnetwork != null && tcpClientnetwork.tcpClient.Connected && tcpClientnetwork.tcpClient.Available > 0)
+            if (tcpClientNetwork != null && tcpClientNetwork.tcpClient.Connected && tcpClientNetwork.tcpClient.Available > 0)
             {
-                byte[] inBytes = NetworkUtils.Read(tcpClientnetwork.tcpClient.GetStream());
+                byte[] inBytes = NetworkUtils.Read(tcpClientNetwork.tcpClient.GetStream());
                 TCPPacket inPacket = new TCPPacket(inBytes);
 
                 var tempOBJ = inPacket.ReadObject();
@@ -49,9 +49,9 @@ public class GameState : State
         catch (Exception e)
         {
             Debug.Log(e.Message);
-            if (tcpClientnetwork.tcpClient.Connected)
+            if (tcpClientNetwork.tcpClient.Connected)
             {
-                tcpClientnetwork.tcpClient.Close();
+                tcpClientNetwork.tcpClient.Close();
             }
         }
     }
@@ -77,23 +77,15 @@ public class GameState : State
     void SendGameLoadedMessage()
     {
         GameLoadedMessage message = new GameLoadedMessage();
-        tcpClientnetwork.SendObjectThroughTCP(message);
+        tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
     public void SendPlayerPosition(Vector3 position, Vector3 rotation)
     {
         
-        //UpdatePlayerPositionMessage message = new UpdatePlayerPositionMessage();
-       // message.playerPosition = position;
-       //// message.playerRotation = rotation;
-        //udpClientnetwork.SendObjectThroughUDP(message);
-       // Debug.Log("data send");
-        
-        /*
-        UpdatePlayerPositionTCP message = new UpdatePlayerPositionTCP();
+        UpdatePlayerPositionUDP message = new UpdatePlayerPositionUDP();
         message.playerPosition = position;
         message.playerRotation = rotation;
-        tcpClientnetwork.SendObjectThroughTCP(message);
-        */
+        udpClientNetwork.SendObjectThroughUDP(message);       
     }
 }

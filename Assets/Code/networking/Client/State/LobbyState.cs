@@ -23,7 +23,7 @@ public class LobbyState : State
 
     private void Start()
     {
-        SendUpdateNameRequest(tcpClientnetwork.playerName);
+        SendUpdateNameRequest(tcpClientNetwork.playerName);
     }
 
     private void OnDestroy()
@@ -35,9 +35,9 @@ public class LobbyState : State
     {
         try
         {
-            if (tcpClientnetwork != null && tcpClientnetwork.tcpClient.Connected && tcpClientnetwork.tcpClient.Available > 0)
+            if (tcpClientNetwork != null && tcpClientNetwork.tcpClient.Connected && tcpClientNetwork.tcpClient.Available > 0)
             {
-                byte[] inBytes = NetworkUtils.Read(tcpClientnetwork.tcpClient.GetStream());
+                byte[] inBytes = NetworkUtils.Read(tcpClientNetwork.tcpClient.GetStream());
                 TCPPacket inPacket = new TCPPacket(inBytes);
 
                 var tempOBJ = inPacket.ReadObject();
@@ -107,9 +107,9 @@ public class LobbyState : State
         catch (Exception e)
         {
             Debug.Log(e.Message);
-            if (tcpClientnetwork.tcpClient.Connected)
+            if (tcpClientNetwork.tcpClient.Connected)
             {
-                tcpClientnetwork.tcpClient.Close();
+                tcpClientNetwork.tcpClient.Close();
             }
         }
     }
@@ -186,37 +186,37 @@ public class LobbyState : State
     public void SendUpdateNameRequest(string newName)
     {
         UpdatePlayerNameRequest request = new UpdatePlayerNameRequest(newName);
-        tcpClientnetwork.SendObjectThroughTCP(request);
+        tcpClientNetwork.SendObjectThroughTCP(request);
     }
 
     public void SendUpdateColorRequest(int sideToChangeTo)
     {
         UpdateColorRequest request = new UpdateColorRequest(sideToChangeTo);
-        tcpClientnetwork.SendObjectThroughTCP(request);
+        tcpClientNetwork.SendObjectThroughTCP(request);
     }
 
     public void SendChatRequest(string _chatMessage)
     {
         ChatRequest request = new ChatRequest(_chatMessage);
-        tcpClientnetwork.SendObjectThroughTCP(request);
+        tcpClientNetwork.SendObjectThroughTCP(request);
     }
 
     public void SendHelpRequest()
     {
         HelpRequest request = new HelpRequest();
-        tcpClientnetwork.SendObjectThroughTCP(request);
+        tcpClientNetwork.SendObjectThroughTCP(request);
     }
 
     public void SendStartRoomRequest()
     {
         StartRoomRequest request = new StartRoomRequest();
-        tcpClientnetwork.SendObjectThroughTCP(request);
+        tcpClientNetwork.SendObjectThroughTCP(request);
     }
 
     void SendLeaveServerMessage()
     {
         LeaveServermessage message = new LeaveServermessage();
-        tcpClientnetwork.SendObjectThroughTCP(message);
+        tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
     void HandleHeartbeatStatus()

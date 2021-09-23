@@ -24,7 +24,7 @@ public class LobbyRoom : Room
 		}
 
 		TCPPacket updateIPPacket = new TCPPacket();
-		string ownerIP = ((IPEndPoint)server.owner.TcpClient.Client.RemoteEndPoint).Address.ToString();
+		string ownerIP = ((IPEndPoint)server.owner.tcpClient.Client.RemoteEndPoint).Address.ToString();
 		int ownerPort = server.GetServerPort();
 		UpdateServerIPMessage IPmessage = new UpdateServerIPMessage(ownerIP, ownerPort);
 		updateIPPacket.Write(IPmessage);
@@ -91,6 +91,11 @@ public class LobbyRoom : Room
 		UpdatePlayerCountMessage updatePlayerCountMessage = new UpdatePlayerCountMessage(clientsInRoom.Count);
 		outPacket2.Write(updatePlayerCountMessage);
 		SendTCPMessageToAllUsers(outPacket2);
+	}
+
+	public override void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
+	{
+		
 	}
 
 	public override void handleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)

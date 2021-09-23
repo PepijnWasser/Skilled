@@ -12,6 +12,20 @@ public class GameRoom : Room
     int worldSeed = 20;
     int amountOfSectors = 3;
 
+    public override void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
+    {
+        if(pMessage is UDPMessage)
+        {
+            UDPMessage message = pMessage as UDPMessage;
+            Debug.Log(message.message);
+        }
+        else if(pMessage is UpdatePlayerPositionUDP)
+        {
+            UpdatePlayerPositionUDP message = pMessage as UpdatePlayerPositionUDP;
+            Debug.Log(message.playerRotation);
+        }
+    }
+
     public override void handleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
     {
         if (tempOBJ is HeartBeat)

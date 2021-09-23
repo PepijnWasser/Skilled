@@ -10,7 +10,7 @@ using System.Net;
 public class MyClient
 {
     public float heartbeat;
-    public TcpClient TcpClient;
+    public TcpClient tcpClient;
     public int playerID;
     public string playerName;
     public Vector3 playerPosition;
@@ -32,7 +32,7 @@ public class MyClient
     public MyClient(TcpClient _TcpClient, float _heartbeat, colors _playerColor, int _playerID, string _playerName)
     {
         heartbeat = _heartbeat;
-        TcpClient = _TcpClient;
+        tcpClient = _TcpClient;
         playerColor = _playerColor;
         playerID = _playerID;
         playerName = _playerName;

@@ -72,12 +72,13 @@ public abstract class Room
 	//handling messages
 	abstract public void handleTCPNetworkMessageFromUser(ISerializable pMessage, MyClient pSender);
 
+	abstract public void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender);
 
 	//sending messages
 
 	protected void SendTCPMessageToTargetUser(TCPPacket outPacket, MyClient client)
 	{
-		NetworkUtils.Write(client.TcpClient.GetStream(), outPacket.GetBytes());
+		NetworkUtils.Write(client.tcpClient.GetStream(), outPacket.GetBytes());
 	}
 
 	protected void SendTCPMessageToAllUsersExcept(TCPPacket outPacket, MyClient clientToAvoid)
@@ -88,7 +89,7 @@ public abstract class Room
 			{
 				try
 				{
-					NetworkUtils.Write(client.TcpClient.GetStream(), outPacket.GetBytes());
+					NetworkUtils.Write(client.tcpClient.GetStream(), outPacket.GetBytes());
 				}
 				catch (Exception e)
 				{
@@ -104,7 +105,7 @@ public abstract class Room
 		{
 			try
 			{
-				NetworkUtils.Write(client.TcpClient.GetStream(), outPacket.GetBytes());
+				NetworkUtils.Write(client.tcpClient.GetStream(), outPacket.GetBytes());
 			}
 			catch (Exception e)
 			{
