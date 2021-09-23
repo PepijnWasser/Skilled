@@ -11,8 +11,6 @@ public abstract class Room
 	public LocalHostServer server;
 	protected List<MyClient> clientsInRoom = new List<MyClient>();
 
-	//UdpClient udpClient = new UdpClient();
-
 	public virtual void Initialize(LocalHostServer _server)
     {
 		server = _server;
@@ -74,7 +72,6 @@ public abstract class Room
 	//handling messages
 	abstract public void handleTCPNetworkMessageFromUser(ISerializable pMessage, MyClient pSender);
 
-	abstract public void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender);
 
 	//sending messages
 
@@ -115,51 +112,5 @@ public abstract class Room
 			}
 		}
 	}
-
-	/*
-	protected void SendUDPMessageToTargetUser(UDPPacket outPacket, MyClient client)
-	{
-		UdpClient udpClient = new UdpClient(client.endPoint.Port);
-		byte[] sendBytes = outPacket.GetBytes();
-		udpClient.Send(sendBytes, sendBytes.Length, client.endPoint);
-	}
-
-	protected void SendUDPMessageToAllUsersExcept(UDPPacket outPacket, MyClient clientToAvoid)
-    {
-		foreach (MyClient client in clientsInRoom)
-		{
-			if (client != clientToAvoid)
-			{
-				try
-				{
-					byte[] sendBytes = outPacket.GetBytes();
-					udpClient.Send(sendBytes, sendBytes.Length, client.endPoint);
-				}
-				catch (Exception e)
-				{
-					Console.WriteLine("Error sending message to all users: " + e.Message);
-				}
-			}
-		}
-	}
-
-	protected void SendUDPMessageToAllUsers(UDPPacket outPacket)
-	{
-		foreach (MyClient client in clientsInRoom)
-		{
-			try
-			{
-				byte[] sendBytes = outPacket.GetBytes();
-				IPEndPoint remoteEndPoint = new IPEndPoint(IPAddress.Parse("192.168.2.8"), 44455);
-				udpClient.Send(sendBytes, sendBytes.Length, remoteEndPoint);
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine("Error sending message to all users: " + e.Message);
-			}
-
-		}
-	}
-	*/
 }
 

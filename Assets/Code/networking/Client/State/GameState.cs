@@ -18,24 +18,6 @@ public class GameState : State
         SendGameLoadedMessage();
     }
 
-    protected override void Recv(IAsyncResult res)
-    {
-        IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Any, 44455);
-        byte[] received = NetworkUtils.Read(receiver.EndReceive(res, ref RemoteEndPoint));
-        Debug.Log("data received");
-
-        UDPPacket inPacket = new UDPPacket(received);
-        var tempOBJ = inPacket.ReadObject();
-
-        if (tempOBJ is UpdatePlayerPositionMessage)
-        {
-            UpdatePlayerPositionMessage message = tempOBJ as UpdatePlayerPositionMessage;
-            Debug.Log(message.playerPosition);
-        }
-
-        receiver.BeginReceive(new AsyncCallback(Recv), null);
-    }
-
     protected override void Update()
     {
         try
@@ -101,11 +83,11 @@ public class GameState : State
     public void SendPlayerPosition(Vector3 position, Vector3 rotation)
     {
         
-        UpdatePlayerPositionMessage message = new UpdatePlayerPositionMessage();
-        message.playerPosition = position;
-        message.playerRotation = rotation;
+        //UpdatePlayerPositionMessage message = new UpdatePlayerPositionMessage();
+       // message.playerPosition = position;
+       //// message.playerRotation = rotation;
         //udpClientnetwork.SendObjectThroughUDP(message);
-        Debug.Log("data send");
+       // Debug.Log("data send");
         
         /*
         UpdatePlayerPositionTCP message = new UpdatePlayerPositionTCP();

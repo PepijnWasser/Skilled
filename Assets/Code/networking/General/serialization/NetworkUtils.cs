@@ -37,7 +37,7 @@ public static class NetworkUtils
 		//byte[] length = BitConverter.GetBytes(pMessage.Length);
 		//byte[] combined = length.Concat(pMessage).ToArray();
 
-		client.Send(pMessage, pMessage.Length);
+		//client.Send(pMessage, pMessage.Length);
 	}
 	/**
 	 * Reads the amount of bytes to receive from the stream and then the bytes themselves.

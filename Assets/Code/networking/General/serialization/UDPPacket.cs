@@ -8,12 +8,13 @@ using System.Text;
 
 public class UDPPacket 
 {
+	/*
 	private BinaryWriter writer;    //only used in write mode, to write bytes into a byte array
 	private BinaryReader reader;    //only used in read mode, to read bytes from a byte array
 
 	/**
 	 * Create a Packet for writing.
-	 */
+	 
 	public UDPPacket()
 	{
 		//BinaryWriter wraps a Stream, in this case a MemoryStream, which in turn wraps an array of bytes
@@ -22,7 +23,7 @@ public class UDPPacket
 
 	/**
 	 * Create a Packet from an existing byte array so we can read from it
-	 */
+	 
 	public UDPPacket(byte[] pSource)
 	{
 		//BinaryReader wraps a Stream, in this case a MemoryStream, which in turn wraps an array of bytes
@@ -73,4 +74,5 @@ public class UDPPacket
         //which is what we do here using ToArray()
         return ((MemoryStream)writer.BaseStream).ToArray();
     }
+	*/
 }

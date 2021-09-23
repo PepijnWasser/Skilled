@@ -9,31 +9,14 @@ using System;
 public abstract class State : MonoBehaviour
 {
     protected LocalHostClientTCP tcpClientnetwork;
-    protected LocalHostClientUDP udpClientnetwork;
 
     protected float timeOutTime = 5f;
     protected float lastHeartbeat = 5f;
 
 
-    protected UdpClient receiver = new UdpClient();
-
-
     protected virtual void Awake()
     {
         tcpClientnetwork = GameObject.FindObjectOfType<LocalHostClientTCP>().GetComponent<LocalHostClientTCP>();
-        udpClientnetwork = GameObject.FindObjectOfType<LocalHostClientUDP>().GetComponent<LocalHostClientUDP>();
-    }
-
-    void Start()
-    {
-        try
-        {
-            receiver.BeginReceive(new AsyncCallback(Recv), null);
-        }
-        catch (Exception e)
-        {
-            Debug.Log(e.Message);
-        }
     }
 
     protected virtual void Update()
@@ -60,18 +43,6 @@ public abstract class State : MonoBehaviour
                 tcpClientnetwork.tcpClient.Close();
             }
         }     
-    }
-
-    protected virtual void Recv(IAsyncResult res)
-    {
-        IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Any, 44455);
-        byte[] received = NetworkUtils.Read(receiver.EndReceive(res, ref RemoteEndPoint));
-        Debug.Log("data received");
-
-        UDPPacket inPacket = new UDPPacket(received);
-        var tempOBJ = inPacket.ReadObject();
-
-        receiver.BeginReceive(new AsyncCallback(Recv), null);
     }
 
     protected virtual void HandleHeartbeat()
