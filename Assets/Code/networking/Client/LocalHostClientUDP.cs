@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class LocalHostClientUDP : MonoBehaviour
 {
-
+    /*
     private static LocalHostClientUDP _instance;
     UdpClient sender = new UdpClient();
 
@@ -33,7 +33,7 @@ public class LocalHostClientUDP : MonoBehaviour
 
     public void SendObjectThroughUDP(USerializable pOutObject)
     {
-        IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Parse("192.168.2.15"), 33337);
+        IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Parse("192.168.2.1"), 33337);
         try
         {
             UDPPacket outPacket = new UDPPacket();
@@ -47,4 +47,5 @@ public class LocalHostClientUDP : MonoBehaviour
             sender.Close();
         }        
     }
+    */
 }
