@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cad58d09898ce4949998c8d579408c85
+guid: 7deb86c6508e046428d29d9513b055df
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -11,17 +11,14 @@ ScriptedImporter:
   version: 29
   projectContext: 0
   mGraphInstanceData:
-  - graphLabel: Substance_graph
-    prototypeName: Substance_graph
+  - graphLabel: Warframe_Graph_02
+    prototypeName: Warframe_Graph_02
     graphDescIndex: 0
     generateAllOutputs: 0
     generateMipMaps: 1
-    preset: " <sbspreset pkgurl=\"pkg://Substance_graph\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"9,9\" />\n 
-      <presetinput identifier=\"outputcolor\" uid=\"2352640081\" type=\"3\" value=\"0.501961,0.552941,0.584314,1\"
-      />\n  <presetinput identifier=\"outputcolor_1\" uid=\"2352679929\" type=\"3\"
-      value=\"0.176471,0.403922,0.74902,1\" />\n  <presetinput identifier=\"intensity\"
-      uid=\"2352694624\" type=\"0\" value=\"13.16\" />\n </sbspreset>\n"
+    preset: " <sbspreset pkgurl=\"pkg://Warframe_Graph_02\" label=\"\" >\n  <presetinput
+      identifier=\"$outputsize\" uid=\"1181145696\" type=\"8\" value=\"11,11\" />\n
+      </sbspreset>\n"
     shaderName: Standard
     materialProperties:
       shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
@@ -33,7 +30,7 @@ ScriptedImporter:
       customRenderQueue: -1
       texEnvs:
       - name: _BumpMap
-        texture: {fileID: -5043331062787847178, guid: cad58d09898ce4949998c8d579408c85, type: 3}
+        texture: {fileID: -5313559027280974700, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _DetailAlbedoMap
@@ -53,19 +50,19 @@ ScriptedImporter:
         scale: {x: 3, y: 3}
         offset: {x: 0, y: 0}
       - name: _MainTex
-        texture: {fileID: 814193769655529742, guid: cad58d09898ce4949998c8d579408c85, type: 3}
+        texture: {fileID: 2831843762381158499, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
         scale: {x: 3, y: 3}
         offset: {x: 0, y: 0}
       - name: _MetallicGlossMap
-        texture: {fileID: -2034204982276346014, guid: cad58d09898ce4949998c8d579408c85, type: 3}
+        texture: {fileID: -1168012561528655122, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _OcclusionMap
-        texture: {fileID: -4109880389683011060, guid: cad58d09898ce4949998c8d579408c85, type: 3}
+        texture: {fileID: 6155634625860733770, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _ParallaxMap
-        texture: {fileID: 6273460934612976735, guid: cad58d09898ce4949998c8d579408c85, type: 3}
+        texture: {fileID: 9165964568070229696, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       floats:
@@ -193,27 +190,27 @@ ScriptedImporter:
         from: 0
         to: 3
     textureParameters:
-    - textureName: Substance_graph - baseColor
+    - textureName: Warframe_Graph_02 - baseColor
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Substance_graph - normal
+    - textureName: Warframe_Graph_02 - normal
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Substance_graph - roughness
+    - textureName: Warframe_Graph_02 - roughness
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Substance_graph - metallic
+    - textureName: Warframe_Graph_02 - metallic
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Substance_graph - height
+    - textureName: Warframe_Graph_02 - height
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Substance_graph - ambientOcclusion
+    - textureName: Warframe_Graph_02 - ambientOcclusion
       wrapMode: 0
       filterMode: 1
       aniso: 1
@@ -223,15 +220,15 @@ ScriptedImporter:
     - label: Default
       bOverride: 0
       bLockRatio: 1
-      textureWidth: 512
-      textureHeight: 512
+      textureWidth: 2048
+      textureHeight: 2048
       textureFormatMode: 0
       normalCompressed: 0
       bGenerateOnLoad: 1
-    material: {fileID: 3446888796575484674, guid: cad58d09898ce4949998c8d579408c85, type: 3}
+    material: {fileID: -243321966267982135, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
     generatedTextures:
-    - {fileID: 814193769655529742, guid: cad58d09898ce4949998c8d579408c85, type: 3}
-    - {fileID: -5043331062787847178, guid: cad58d09898ce4949998c8d579408c85, type: 3}
-    - {fileID: -2034204982276346014, guid: cad58d09898ce4949998c8d579408c85, type: 3}
-    - {fileID: 6273460934612976735, guid: cad58d09898ce4949998c8d579408c85, type: 3}
-    - {fileID: -4109880389683011060, guid: cad58d09898ce4949998c8d579408c85, type: 3}
+    - {fileID: 2831843762381158499, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
+    - {fileID: -5313559027280974700, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
+    - {fileID: -1168012561528655122, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
+    - {fileID: 9165964568070229696, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
+    - {fileID: 6155634625860733770, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
