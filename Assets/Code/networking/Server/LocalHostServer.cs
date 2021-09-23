@@ -26,7 +26,7 @@ public class LocalHostServer : MonoBehaviour
 
 	private static LocalHostServer _instance;
 
-	UdpClient udpReceiver = new UdpClient(33337);
+	//UdpClient udpReceiver = new UdpClient();
 
 	public static LocalHostServer Instance
 	{
@@ -45,7 +45,7 @@ public class LocalHostServer : MonoBehaviour
 	{
 		try
 		{
-			udpReceiver.BeginReceive(new AsyncCallback(Recv), null);
+			//udpReceiver.BeginReceive(new AsyncCallback(Recv), null);
 		}
 		catch (Exception e)
 		{
@@ -204,24 +204,33 @@ public class LocalHostServer : MonoBehaviour
 		}
 	}
 
-	
+	/*
 	void Recv(IAsyncResult res)
 	{
 		IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Any, 33337);
 		byte[] received = NetworkUtils.Read(udpReceiver.EndReceive(res, ref RemoteEndPoint));
+		Debug.Log("data from client received");
 
 		UDPPacket inPacket = new UDPPacket(received);
 		var tempOBJ = inPacket.ReadObject();
 
-		foreach(MyClient client in connectedClients)
-        {
-			if (((IPEndPoint)client.TcpClient.Client.RemoteEndPoint).Address.ToString() == RemoteEndPoint.Address.ToString())
-            {
-				activeRoom.handleUDPNetworkMessageFromUser(tempOBJ, client);
-				break;
-			}
-        }
+		if (tempOBJ is UDPMessage)
+		{
+			UDPMessage message = tempOBJ as UDPMessage;
+			Debug.Log(message.message);
+			//Debug.Log("address: " + RemoteEndPoint.Address + " port: " + RemoteEndPoint.Port);
+
+			byte[] sendBytes = Encoding.ASCII.GetBytes("Is anybody there?");
+			UDPPacket packet2 = new UDPPacket();
+			UDPMessage message2 = new UDPMessage("HELLO");
+			packet2.Write(message2);
+			sendBytes = packet2.GetBytes();
+
+			udpReceiver.Send(sendBytes, sendBytes.Length, RemoteEndPoint);
+		}
+
+
 		udpReceiver.BeginReceive(new AsyncCallback(Recv), null);
 	}
-	
+	*/
 }

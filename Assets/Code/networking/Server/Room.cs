@@ -11,7 +11,7 @@ public abstract class Room
 	public LocalHostServer server;
 	protected List<MyClient> clientsInRoom = new List<MyClient>();
 
-	UdpClient udpClient = new UdpClient();
+	//UdpClient udpClient = new UdpClient();
 
 	public virtual void Initialize(LocalHostServer _server)
     {
@@ -116,6 +116,7 @@ public abstract class Room
 		}
 	}
 
+	/*
 	protected void SendUDPMessageToTargetUser(UDPPacket outPacket, MyClient client)
 	{
 		UdpClient udpClient = new UdpClient(client.endPoint.Port);
@@ -159,5 +160,6 @@ public abstract class Room
 
 		}
 	}
+	*/
 }
 

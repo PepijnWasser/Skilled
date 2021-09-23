@@ -104,7 +104,8 @@ public class GameState : State
         UpdatePlayerPositionMessage message = new UpdatePlayerPositionMessage();
         message.playerPosition = position;
         message.playerRotation = rotation;
-        udpClientnetwork.SendObjectThroughUDP(message);
+        //udpClientnetwork.SendObjectThroughUDP(message);
+        Debug.Log("data send");
         
         /*
         UpdatePlayerPositionTCP message = new UpdatePlayerPositionTCP();

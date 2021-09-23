@@ -9,9 +9,9 @@ using UnityEngine;
 
 public class UDPServer : MonoBehaviour
 {
-    static UdpClient client = new UdpClient(33339);
+    private UdpClient client = new UdpClient(1111);
     string data = "";
-
+ 
     void Start()
     {
         try
@@ -26,10 +26,12 @@ public class UDPServer : MonoBehaviour
 
     void Recv(IAsyncResult res)
     {
-        IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Parse("192.168.2.15"), 33339);
-        byte[] received = NetworkUtils.Read(client.EndReceive(res, ref RemoteEndPoint));
-        Debug.Log("data received");
+        IPEndPoint RemoteEndPoint = new IPEndPoint(IPAddress.Any, 60240);
+        byte[] received = client.EndReceive(res, ref RemoteEndPoint); // NetworkUtils.Read(client.EndReceive(res, ref RemoteEndPoint));
 
+        data = Encoding.UTF8.GetString(received);
+        Debug.Log(data);
+        /*
         UDPPacket inPacket = new UDPPacket(received);
         var tempOBJ = inPacket.ReadObject();
 
@@ -37,9 +39,17 @@ public class UDPServer : MonoBehaviour
         {
             UDPMessage message = tempOBJ as UDPMessage;
             Debug.Log(message.message);
+            //Debug.Log("address: " + RemoteEndPoint.Address + " port: " + RemoteEndPoint.Port);
+            
+            byte[] sendBytes = Encoding.ASCII.GetBytes("Is anybody there?");
+            UDPPacket packet2 = new UDPPacket();
+            UDPMessage message2 = new UDPMessage("HELLO");
+            packet2.Write(message2);
+            sendBytes = packet2.GetBytes();
+
+            client.Send(sendBytes, sendBytes.Length, RemoteEndPoint);       
         }
-        //data = Encoding.UTF8.GetString(received);
-        //Debug.Log(data + " this message was send from " + RemoteEndPoint.Address + " on port " + RemoteEndPoint.Port);
+        */
 
         client.BeginReceive(new AsyncCallback(Recv), null);
     }
