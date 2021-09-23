@@ -12,10 +12,47 @@ public class GameState : State
     public MapGenerator mapGenerator;
     public GameManager gameManager;
 
+    int clientPort;
 
     private void Start()
     {
         SendGameLoadedMessage();
+
+        int i = 0;
+        bool finishedInitialization = false;
+
+        while (finishedInitialization == false && i < 20)
+        {
+            try
+            {
+                clientPort = 40004 + i;
+                client = new UdpClient(40004 + i);
+                finishedInitialization = true;
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+                i++;
+            }
+        }
+        client.BeginReceive(new AsyncCallback(recv), null);
+        SendPlayerInfo();
+    }
+
+    protected override void recv(IAsyncResult res)
+    {
+        IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Any, 60240);
+        byte[] received = client.EndReceive(res, ref RemoteIP);
+
+        UDPPacket packet = new UDPPacket(received);
+        var TempOBJ = packet.ReadObject();
+        if(TempOBJ is UpdatePlayerPositionUDP)
+        {
+            UpdatePlayerPositionUDP message = TempOBJ as UpdatePlayerPositionUDP;
+            HandleUpdatePlayerPosition(message);
+        }
+
+        client.BeginReceive(new AsyncCallback(recv), null);
     }
 
     protected override void Update()
@@ -70,13 +107,37 @@ public class GameState : State
 
     void HandleupdatePlayerPosition(UpdatePlayerPositionTCP message)
     {
+        Debug.Log("receiving server position info");
         gameManager.MovePlayer(message.playerID, message.playerPosition, message.playerRotation);
+    }
+
+    void HandleUpdatePlayerPosition(UpdatePlayerPositionUDP message)
+    {
+        Debug.Log("receiving server position info");
+        try
+        {
+            UnityMainThread.wkr.AddJob(() =>
+            {
+                // Will run on main thread, hence issue is solved
+                gameManager.MovePlayer(message.playerID, message.playerPosition, message.playerRotation);
+            });           
+        }
+        catch(Exception e)
+        {
+            Debug.Log(e.Message);
+        }
     }
 
     //sending
     void SendGameLoadedMessage()
     {
         GameLoadedMessage message = new GameLoadedMessage();
+        tcpClientNetwork.SendObjectThroughTCP(message);
+    }
+
+    void SendPlayerInfo()
+    {
+        UpdateClientInfoMessage message = new UpdateClientInfoMessage(Extensions.GetLocalIPAddress(), clientPort);
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 

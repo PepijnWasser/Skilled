@@ -22,24 +22,29 @@ public class GameRoom : Room
         else if(pMessage is UpdatePlayerPositionUDP)
         {
             UpdatePlayerPositionUDP message = pMessage as UpdatePlayerPositionUDP;
-            Debug.Log(message.playerRotation);
+            HandleUpdatePlayerPositionMessageUDP(message, pSender);
         }
     }
 
-    public override void handleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
+    public override void handleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient myClient)
     {
         if (tempOBJ is HeartBeat)
         {
-            RefreshHeartbeat(client);
+            RefreshHeartbeat(myClient);
         }
         else if (tempOBJ is GameLoadedMessage)
         {
-            HandleGameLoadedMessage(client);
+            HandleGameLoadedMessage(myClient);
         }
         else if(tempOBJ is UpdatePlayerPositionTCP)
         {
             UpdatePlayerPositionTCP message = tempOBJ as UpdatePlayerPositionTCP;
-            HandleUpdatePlayerPositionMessage(message, client);
+            HandleUpdatePlayerPositionMessageTCP(message, myClient);
+        }
+        else if(tempOBJ is UpdateClientInfoMessage)
+        {
+            UpdateClientInfoMessage message = tempOBJ as UpdateClientInfoMessage;
+            HandleUpdateClientInfo(message, myClient);
         }
     }
 
@@ -110,7 +115,7 @@ public class GameRoom : Room
         SendTCPMessageToAllUsersExcept(outpacket2, client);
     }
 
-    void HandleUpdatePlayerPositionMessage(UpdatePlayerPositionTCP message, MyClient client)
+    void HandleUpdatePlayerPositionMessageTCP(UpdatePlayerPositionTCP message, MyClient client)
     {
         Debug.Log(client.playerID);
 
@@ -118,5 +123,27 @@ public class GameRoom : Room
         UpdatePlayerPositionTCP messagre = new UpdatePlayerPositionTCP(message.playerPosition, message.playerRotation, client.playerID);
         outpacket.Write(messagre);
         SendTCPMessageToAllUsersExcept(outpacket, client);
+    }
+
+    void HandleUpdatePlayerPositionMessageUDP(UpdatePlayerPositionUDP _message, MyClient client)
+    {  
+        UDPPacket outpacket = new UDPPacket();
+        UpdatePlayerPositionUDP messagre = new UpdatePlayerPositionUDP(_message.playerPosition, _message.playerRotation, client.playerID);
+        outpacket.Write(messagre);
+        SendUDPMessageToAllUsers(outpacket);
+        Debug.Log("server sending position");
+        
+        /*
+        TCPPacket outpacket = new TCPPacket();
+        UpdatePlayerPositionTCP messagre = new UpdatePlayerPositionTCP(_message.playerPosition, _message.playerRotation, client.playerID);
+        outpacket.Write(messagre);
+        SendTCPMessageToAllUsers(outpacket);
+        Debug.Log("server sending position");
+        */
+    }
+
+    void HandleUpdateClientInfo(UpdateClientInfoMessage message, MyClient client)
+    {
+        client.endPoint = new IPEndPoint(message.ip, message.port);
     }
 }

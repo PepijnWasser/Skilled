@@ -34,14 +34,29 @@ public class LocalHostClientUDP : MonoBehaviour
 
     private void Start()
     {
-        client = new UdpClient(20702);
+        int i = 0;
+        bool finishedInitialization = false;
+
+        while (finishedInitialization == false && i < 20)
+        {
+            try
+            {
+                client = new UdpClient(20702 + i);
+                finishedInitialization = true;
+            }
+            catch (Exception e)
+            {
+                e.ToString();
+                i++;
+            }
+        }
     }
 
     public void SendObjectThroughUDP(USerializable pOutObject)
     {
         try
         {
-            IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Loopback, 35450);
+            IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Parse("192.168.2.1"), 35450);
             UDPPacket packet = new UDPPacket();
             packet.Write(pOutObject);
 

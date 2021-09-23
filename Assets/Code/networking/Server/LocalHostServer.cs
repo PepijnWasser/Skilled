@@ -47,19 +47,27 @@ public class LocalHostServer : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
-    private void Start()
-    {
-		client = new UdpClient(35450);
+	private void Start()
+	{
+		int i = 0;
+		bool finishedInitialization = false;
 
-		try
+		while (finishedInitialization == false && i < 20)
 		{
-			client.BeginReceive(new AsyncCallback(recv), null);
-		}
-		catch (Exception e)
-		{
-			Debug.Log(e.Message);
+			try
+			{
+				client = new UdpClient(35450 + i);
+				finishedInitialization = true;
+				client.BeginReceive(new AsyncCallback(recv), null);
+			}
+			catch (Exception e)
+			{
+				e.ToString();
+				i++;
+			}
 		}
 	}
+
 
     public void Initialize(int _port)
 	{
@@ -150,14 +158,14 @@ public class LocalHostServer : MonoBehaviour
 		IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Any, 60240);
 		byte[] received = client.EndReceive(res, ref RemoteIP);
 
+		Debug.Log("message received on server");
+
 		UDPPacket packet = new UDPPacket(received);
 		var TempOBJ = packet.ReadObject();
 
-
-		Debug.Log("receiving data on server");
 		foreach(MyClient connectedClient in connectedClients)
         {
-			if(((IPEndPoint)connectedClient.tcpClient.Client.RemoteEndPoint).Address == RemoteIP.Address)
+			if (((IPEndPoint)connectedClient.tcpClient.Client.RemoteEndPoint).Address.ToString() == RemoteIP.Address.ToString())
             {
 				activeRoom.handleUDPNetworkMessageFromUser(TempOBJ, connectedClient);
 				break;

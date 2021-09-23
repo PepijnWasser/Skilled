@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.IO;
+using System.Net;
 
 /**
  * The Packet class provides a simple wrapper around an array of bytes (in the form of a MemoryStream), 
@@ -39,6 +40,8 @@ public class TCPPacket
 	public void Write(string pString) { writer.Write(pString); }
 	public void Write(bool pBool) { writer.Write(pBool); }
 	public void Write(float pFloat) { writer.Write(pFloat); }
+
+	public void Write(IPAddress pIP) { string ips = pIP.ToString(); writer.Write(ips); }
 	public void Write(Vector3 pVector) { writer.Write(pVector.x); writer.Write(pVector.y); writer.Write(pVector.z); }
 
 	public void Write(ISerializable pSerializable)
@@ -53,6 +56,8 @@ public class TCPPacket
 	public string ReadString() { return reader.ReadString(); }
 	public bool ReadBool() { return reader.ReadBoolean(); }
 	public float ReadFloat() { return reader.ReadSingle(); }
+
+	public IPAddress ReadIP() { return IPAddress.Parse(reader.ReadString()); }
 	public Vector3 ReadVector3() { return new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle()); }
 
 

@@ -11,10 +11,28 @@ public abstract class Room
 	public LocalHostServer server;
 	protected List<MyClient> clientsInRoom = new List<MyClient>();
 
+	UdpClient client = new UdpClient();
+
 	public virtual void Initialize(LocalHostServer _server)
-    {
+	{
 		server = _server;
-    }
+		int i = 0;
+		bool finishedInitialization = false;
+
+		while (finishedInitialization == false && i < 20)
+		{
+			try
+			{
+				client = new UdpClient(45645 + i);
+				finishedInitialization = true;
+			}
+			catch (Exception e)
+			{
+				e.ToString();
+				i++;
+			}
+		}
+	}
 
 	public virtual void AddMember(MyClient clientToAdd)
 	{
@@ -111,6 +129,57 @@ public abstract class Room
 			{
 				Console.WriteLine("Error sending message to target users: " + e.Message);
 			}
+		}
+	}
+
+	protected void SendUDPMessageToTargetUser(UDPPacket outPacket, MyClient myClient)
+	{
+		IPEndPoint RemoteIP = new IPEndPoint(myClient.endPoint.Address, myClient.endPoint.Port);
+
+		byte[] sendBytes = outPacket.GetBytes();
+
+		client.Send(sendBytes, sendBytes.Length, RemoteIP);
+	}
+
+	protected void SendUDPMessageToAllUsersExcept(UDPPacket outPacket, MyClient clientToAvoid)
+	{
+		foreach (MyClient myClient in clientsInRoom)
+		{
+			if (myClient != clientToAvoid)
+			{
+				try
+				{
+					IPEndPoint RemoteIP = new IPEndPoint(myClient.endPoint.Address, myClient.endPoint.Port);
+
+					byte[] sendBytes = outPacket.GetBytes();
+
+					client.Send(sendBytes, sendBytes.Length, RemoteIP);
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine("Error sending message to all users: " + e.Message);
+				}
+			}
+		}
+	}
+
+	protected void SendUDPMessageToAllUsers(UDPPacket outPacket)
+	{
+		foreach (MyClient myClient in clientsInRoom)
+		{
+			try
+			{
+				IPEndPoint RemoteIP = new IPEndPoint(myClient.endPoint.Address, myClient.endPoint.Port);
+
+				byte[] sendBytes = outPacket.GetBytes();
+
+				client.Send(sendBytes, sendBytes.Length, RemoteIP);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Error sending message to all users: " + e.Message);
+			}
+
 		}
 	}
 }

@@ -48,7 +48,7 @@ public class MyUDPServer : MonoBehaviour
 
     void SendResponse()
     {
-        IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Loopback, 33200);
+        IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Parse("192.168.2.1"), 33200);
 
         UDPPacket packet = new UDPPacket();
         UDPMessage message = new UDPMessage("indeed");

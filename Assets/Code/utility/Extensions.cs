@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Net;
+using System.Net.Sockets;
 
 public static class Extensions
 {
@@ -77,5 +79,19 @@ public static class Extensions
 		int index = UnityEngine.Random.Range(0, list.Count);
 
 		return list[index];
+	}
+
+	public static IPAddress GetLocalIPAddress()
+	{
+		var host = Dns.GetHostEntry(Dns.GetHostName());
+		foreach (var ip in host.AddressList)
+		{
+			if (ip.AddressFamily == AddressFamily.InterNetwork)
+			{
+				string ips = ip.ToString();
+				return IPAddress.Parse(ips);
+			}
+		}
+		throw new Exception("No network adapters with an IPv4 address in the system!");
 	}
 }
