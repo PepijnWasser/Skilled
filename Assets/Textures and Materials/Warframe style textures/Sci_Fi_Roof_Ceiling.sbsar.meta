@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4b60af6bf7280b842a62b4d3a2bf6194
+guid: a0e2b26f25620354fb45e563dd0cef85
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -11,21 +11,19 @@ ScriptedImporter:
   version: 29
   projectContext: 0
   mGraphInstanceData:
-  - graphLabel: Warframe_Graph_01
-    prototypeName: Warframe_Graph_01
+  - graphLabel: Sci_Fi_Roof_Ceiling
+    prototypeName: Sci_Fi_Roof_Ceiling
     graphDescIndex: 0
     generateAllOutputs: 0
     generateMipMaps: 1
-    preset: " <sbspreset pkgurl=\"pkg://Warframe_Graph_01\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"3748629466\" type=\"8\" value=\"11,11\" />\n 
-      <presetinput identifier=\"$randomseed\" uid=\"2283642248\" type=\"4\" value=\"7106\"
-      />\n  <presetinput identifier=\"outputcolor\" uid=\"2975769999\" type=\"3\"
-      value=\"0.176471,0.403922,0.74902,1\" />\n  <presetinput identifier=\"outputcolor_1\"
-      uid=\"2975771257\" type=\"3\" value=\"0.172549,0.313726,0.329412,1\" />\n 
-      <presetinput identifier=\"outputcolor_2\" uid=\"2975771240\" type=\"3\" value=\"0.501961,0.552941,0.584314,1\"
-      />\n  <presetinput identifier=\"outputcolor_3\" uid=\"2975771289\" type=\"3\"
-      value=\"0.780392,0.909804,0.87451,1\" />\n  <presetinput identifier=\"edge_width\"
-      uid=\"2975772197\" type=\"0\" value=\"1\" />\n </sbspreset>\n"
+    preset: " <sbspreset pkgurl=\"pkg://Sci_Fi_Roof_Ceiling\" label=\"\" >\n  <presetinput
+      identifier=\"$outputsize\" uid=\"3755929393\" type=\"8\" value=\"11,11\" />\n 
+      <presetinput identifier=\"outputcolor\" uid=\"2983407990\" type=\"3\" value=\"0.501961,0.552941,0.584314,1\"
+      />\n  <presetinput identifier=\"outputcolor_1\" uid=\"2985181188\" type=\"3\"
+      value=\"0.172549,0.313726,0.329412,1\" />\n  <presetinput identifier=\"outputcolor_2\"
+      uid=\"2985181668\" type=\"3\" value=\"0.780392,0.909804,0.87451,1\" />\n  <presetinput
+      identifier=\"leveloutlow_1\" uid=\"2985184655\" type=\"0\" value=\"1\" />\n
+      </sbspreset>\n"
     shaderName: Standard
     materialProperties:
       shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
@@ -37,7 +35,7 @@ ScriptedImporter:
       customRenderQueue: -1
       texEnvs:
       - name: _BumpMap
-        texture: {fileID: 7560454334704886436, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
+        texture: {fileID: -1201687970819950347, guid: a0e2b26f25620354fb45e563dd0cef85, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _DetailAlbedoMap
@@ -54,22 +52,22 @@ ScriptedImporter:
         offset: {x: 0, y: 0}
       - name: _EmissionMap
         texture: {instanceID: 0}
-        scale: {x: 3, y: 3}
+        scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _MainTex
-        texture: {fileID: -4195550997324814631, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
-        scale: {x: 3, y: 3}
+        texture: {fileID: -3047797087795834996, guid: a0e2b26f25620354fb45e563dd0cef85, type: 3}
+        scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _MetallicGlossMap
-        texture: {fileID: 5534033484704894062, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
+        texture: {fileID: -8439179473545617556, guid: a0e2b26f25620354fb45e563dd0cef85, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _OcclusionMap
-        texture: {fileID: 8401446867178463524, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
+        texture: {fileID: -8308894402889667496, guid: a0e2b26f25620354fb45e563dd0cef85, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _ParallaxMap
-        texture: {fileID: 854346497037461077, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
+        texture: {fileID: 8445106578319333929, guid: a0e2b26f25620354fb45e563dd0cef85, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       floats:
@@ -197,27 +195,27 @@ ScriptedImporter:
         from: 0
         to: 3
     textureParameters:
-    - textureName: Warframe_Graph_01 - baseColor
+    - textureName: Sci_Fi_Roof_Ceiling - baseColor
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_01 - normal
+    - textureName: Sci_Fi_Roof_Ceiling - normal
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_01 - roughness
+    - textureName: Sci_Fi_Roof_Ceiling - roughness
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_01 - metallic
+    - textureName: Sci_Fi_Roof_Ceiling - metallic
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_01 - height
+    - textureName: Sci_Fi_Roof_Ceiling - height
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_01 - ambientOcclusion
+    - textureName: Sci_Fi_Roof_Ceiling - ambientOcclusion
       wrapMode: 0
       filterMode: 1
       aniso: 1
@@ -232,10 +230,10 @@ ScriptedImporter:
       textureFormatMode: 0
       normalCompressed: 0
       bGenerateOnLoad: 1
-    material: {fileID: -7327167365519719354, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
+    material: {fileID: -3923719579521889243, guid: a0e2b26f25620354fb45e563dd0cef85, type: 3}
     generatedTextures:
-    - {fileID: -4195550997324814631, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
-    - {fileID: 7560454334704886436, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
-    - {fileID: 5534033484704894062, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
-    - {fileID: 854346497037461077, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
-    - {fileID: 8401446867178463524, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
+    - {fileID: -3047797087795834996, guid: a0e2b26f25620354fb45e563dd0cef85, type: 3}
+    - {fileID: -1201687970819950347, guid: a0e2b26f25620354fb45e563dd0cef85, type: 3}
+    - {fileID: -8439179473545617556, guid: a0e2b26f25620354fb45e563dd0cef85, type: 3}
+    - {fileID: 8445106578319333929, guid: a0e2b26f25620354fb45e563dd0cef85, type: 3}
+    - {fileID: -8308894402889667496, guid: a0e2b26f25620354fb45e563dd0cef85, type: 3}
