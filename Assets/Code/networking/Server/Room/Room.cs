@@ -43,7 +43,7 @@ public abstract class Room
 	public virtual void RemoveMember(MyClient clientToRemove)
 	{
 		clientsInRoom.Remove(clientToRemove);
-		Debug.Log("removing member from: " + this.GetType());
+		Debug.Log("removing " + clientToRemove.playerName + " from: " + this.GetType());
 	}
 
 	public List<MyClient> GetMembers()

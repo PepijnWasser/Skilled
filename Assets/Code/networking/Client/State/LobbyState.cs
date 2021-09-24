@@ -23,7 +23,7 @@ public class LobbyState : State
 
     private void Start()
     {
-        SendUpdateNameRequest(tcpClientNetwork.playerName);
+        SendUpdateNameRequest(playerInfo.playerName);
     }
 
     private void OnDestroy()

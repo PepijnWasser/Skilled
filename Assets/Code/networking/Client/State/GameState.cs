@@ -27,6 +27,10 @@ public class GameState : State
             {
                 clientPort = 40004 + i;
                 client = new UdpClient(40004 + i);
+
+                PlayerInfo playerInfo = GameObject.FindObjectOfType<PlayerInfo>();
+                playerInfo.udpPort = 40004 + i;
+
                 finishedInitialization = true;
             }
             catch (Exception e)
@@ -101,7 +105,7 @@ public class GameState : State
 
     void HandleMakePlayerCharacterMessage(MakenewPlayerCharacterMessage message)
     {
-
+        Debug.Log(message.isPlayer);
         gameManager.MakePlayerCharacter(message.isPlayer, message.characterPosition, message.playerName, message.playerID);
     }
 
@@ -119,7 +123,6 @@ public class GameState : State
             UnityMainThread.wkr.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
-                Debug.Log("hi");
                 gameManager.MovePlayer(message.playerID, message.playerPosition, message.playerRotation);
             });           
         }

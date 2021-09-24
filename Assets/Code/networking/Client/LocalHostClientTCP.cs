@@ -9,7 +9,6 @@ public class LocalHostClientTCP : MonoBehaviour
 {
     float secondCounter = 0;
 
-    [HideInInspector] public string playerName;
     [HideInInspector] public TcpClient tcpClient;
 
     private static LocalHostClientTCP _instance;

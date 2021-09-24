@@ -24,7 +24,7 @@ public class CreateLocalhostServer : MonoBehaviour
         LocalHostServer server = Instantiate(localHostServerPrefab);
         server.Initialize(basePort);
 
-        IPAddress _serverIP = IPAddress.Parse(GetIPAddress());
+        IPAddress _serverIP = Extensions.GetLocalIPAddress();
         if (localHostClient.ConnectToServer(_serverIP, server.GetServerTCPPort()))
         {
             Instantiate(lobbyPrefab);
@@ -34,21 +34,5 @@ public class CreateLocalhostServer : MonoBehaviour
         {
             Destroy(server.gameObject);
         }              
-    }
-
-    string GetIPAddress()
-    {
-        IPHostEntry host;
-        string localIP = "0.0.0.0";
-        host = Dns.GetHostEntry(Dns.GetHostName());
-        foreach (IPAddress ip in host.AddressList)
-        {
-            if (ip.AddressFamily == AddressFamily.InterNetwork)
-            {
-                localIP = ip.ToString();
-                break;
-            }
-        }
-        return localIP;
     }
 }

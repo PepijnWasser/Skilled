@@ -10,6 +10,8 @@ public abstract class State : MonoBehaviour
 {
     protected LocalHostClientTCP tcpClientNetwork;
     protected LocalHostClientUDP udpClientNetwork;
+    protected PlayerInfo playerInfo;
+    protected ServerConnectionData serverInfo;
 
     protected float timeOutTime = 5f;
     protected float lastHeartbeat = 5f;
@@ -19,8 +21,10 @@ public abstract class State : MonoBehaviour
 
     protected virtual void Awake()
     {
-        tcpClientNetwork = GameObject.FindObjectOfType<LocalHostClientTCP>().GetComponent<LocalHostClientTCP>();
-        udpClientNetwork = GameObject.FindObjectOfType<LocalHostClientUDP>().GetComponent<LocalHostClientUDP>();
+        tcpClientNetwork = GameObject.FindObjectOfType<LocalHostClientTCP>();
+        udpClientNetwork = GameObject.FindObjectOfType<LocalHostClientUDP>();
+        playerInfo = GameObject.FindObjectOfType<PlayerInfo>();
+        serverInfo = GameObject.FindObjectOfType<ServerConnectionData>();
     }
 
 

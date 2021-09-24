@@ -10,7 +10,7 @@ public class PlayerPrefabManager : MonoBehaviour
     public PlayerMovement playerMovementScript;
     public PlayerRotation playerRotationScript;
 
-    public void DestroyCameras()
+    public void DisablePlayerActivity()
     {
         playerMovementScript.enabled = false;
         playerRotationScript.enabled = false;

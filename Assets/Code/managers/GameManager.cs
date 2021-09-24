@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
         player.name = _name + " " +  playerID;
         if (!playerControlled)
         {
-            player.GetComponent<PlayerPrefabManager>().DestroyCameras();
+            player.GetComponent<PlayerPrefabManager>().DisablePlayerActivity();
+            Debug.Log("disabling player controlls");
         }
         else
         {
