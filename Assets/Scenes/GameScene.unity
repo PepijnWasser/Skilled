@@ -492,6 +492,7 @@ MonoBehaviour:
   updateFrequency: 60
   gameState: {fileID: 906473609}
   player: {fileID: 0}
+  playerNose: {fileID: 0}
 --- !u!114 &906473609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,7 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a5d6d68c92b9d41828d80ee334dd71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 8064685349107792684, guid: 1af5c6d885df858419d9ef4585475b40, type: 3}
+  playerPrefab: {fileID: 3455783383903958090, guid: 1af5c6d885df858419d9ef4585475b40, type: 3}
   playerPositionUpdater: {fileID: 906473608}
 --- !u!4 &1388254687
 Transform:

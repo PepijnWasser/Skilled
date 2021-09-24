@@ -8,6 +8,7 @@ public class PlayerPositionUpdater : MonoBehaviour
     public int updateFrequency;
     public GameState gameState;
     public GameObject player;
+    public GameObject playerNose;
     Vector3 oldPos;
     Vector3 oldRot;
 
@@ -21,7 +22,7 @@ public class PlayerPositionUpdater : MonoBehaviour
             {
                 if (player.transform.position != oldPos || player.transform.rotation.eulerAngles != oldRot)
                 {
-                    gameState.SendPlayerPosition(player.transform.position, player.transform.rotation.eulerAngles);
+                    gameState.SendPlayerPosition(player.transform.position, player.transform.rotation.eulerAngles, playerNose.transform.rotation.eulerAngles);
                     oldPos = player.transform.position;
                     oldRot = player.transform.rotation.eulerAngles;
                 }

@@ -122,7 +122,7 @@ public class GameRoom : Room
     void HandleUpdatePlayerPositionMessageUDP(UpdatePlayerPositionUDP _message, MyClient client)
     {  
         UDPPacket outpacket = new UDPPacket();
-        UpdatePlayerPositionUDP messagre = new UpdatePlayerPositionUDP(_message.playerPosition, _message.playerRotation, client.playerID);
+        UpdatePlayerPositionUDP messagre = new UpdatePlayerPositionUDP(_message.playerPosition, _message.playerRotation, _message.playerNoseRotation, client.playerID);
         outpacket.Write(messagre);
 
         foreach(MyClient c in clientsInRoom)

@@ -6,9 +6,12 @@ public class PlayerPrefabManager : MonoBehaviour
 {
     public Camera camera;
     public Camera skyboxCamera;
+    public GameObject nose;
 
     public PlayerMovement playerMovementScript;
     public PlayerRotation playerRotationScript;
+
+
 
     public void DisablePlayerActivity()
     {
@@ -17,5 +20,10 @@ public class PlayerPrefabManager : MonoBehaviour
 
         Destroy(camera.gameObject);
         Destroy(skyboxCamera.gameObject);
+    }
+
+    public void setNoseRotation(Vector3 degrees)
+    {
+        nose.transform.rotation = Quaternion.Euler(degrees);
     }
 }

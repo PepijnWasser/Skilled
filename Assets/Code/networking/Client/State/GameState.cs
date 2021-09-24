@@ -108,7 +108,7 @@ public class GameState : State
             UnityMainThread.wkr.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
-                gameManager.MovePlayer(message.playerID, message.playerPosition, message.playerRotation);
+                gameManager.MovePlayer(message.playerID, message.playerPosition, message.playerRotation, message.playerNoseRotation);
             });           
         }
         catch(Exception e)
@@ -130,12 +130,10 @@ public class GameState : State
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
-    public void SendPlayerPosition(Vector3 position, Vector3 rotation)
+    public void SendPlayerPosition(Vector3 position, Vector3 rotation, Vector3 noseRotation)
     {
         
-        UpdatePlayerPositionUDP message = new UpdatePlayerPositionUDP();
-        message.playerPosition = position;
-        message.playerRotation = rotation;
+        UpdatePlayerPositionUDP message = new UpdatePlayerPositionUDP(position, rotation, noseRotation);
         udpClientNetwork.SendObjectThroughUDP(message);       
     }
 }
