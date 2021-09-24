@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpdatePlayerPosition : MonoBehaviour
+public class PlayerPositionUpdater : MonoBehaviour
 {
     float secondCounter = 0;
     public int updateFrequency;

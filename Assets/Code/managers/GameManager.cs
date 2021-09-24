@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject playerPrefab;
 
-    public UpdatePlayerPosition playerPositionUpdater;
+    public PlayerPositionUpdater playerPositionUpdater;
     Dictionary<int, GameObject> characterDictionary = new Dictionary<int, GameObject>();
 
     public void MakePlayerCharacter(bool playerControlled, Vector3 position, string _name, int playerID)
