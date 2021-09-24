@@ -24,6 +24,7 @@ public class GameState : State
             try
             {
                 client = new UdpClient(40004 + i);
+                Debug.Log("listening on " + Extensions.GetLocalIPAddress() + " port " + 40004 + i);
 
                 PlayerInfo playerInfo = GameObject.FindObjectOfType<PlayerInfo>();
                 playerInfo.udpReceivePort = 40004 + i;
@@ -77,11 +78,6 @@ public class GameState : State
                     MakenewPlayerCharacterMessage message = tempOBJ as MakenewPlayerCharacterMessage;
                     HandleMakePlayerCharacterMessage(message);
                 }
-                else if(tempOBJ is UpdatePlayerPositionTCP)
-                {
-                    UpdatePlayerPositionTCP message = tempOBJ as UpdatePlayerPositionTCP;
-                    HandleupdatePlayerPosition(message);
-                }
             }
         }
         catch (Exception e)
@@ -105,15 +101,8 @@ public class GameState : State
         gameManager.MakePlayerCharacter(message.isPlayer, message.characterPosition, message.playerName, message.playerID);
     }
 
-    void HandleupdatePlayerPosition(UpdatePlayerPositionTCP message)
-    {
-        Debug.Log("receiving server position info");
-        gameManager.MovePlayer(message.playerID, message.playerPosition, message.playerRotation);
-    }
-
     void HandleUpdatePlayerPosition(UpdatePlayerPositionUDP message)
     {
-        Debug.Log("receiving server position info for " + message.playerID);
         try
         {
             UnityMainThread.wkr.AddJob(() =>

@@ -37,11 +37,6 @@ public class GameRoom : Room
         {
             HandleGameLoadedMessage(myClient);
         }
-        else if(tempOBJ is UpdatePlayerPositionTCP)
-        {
-            UpdatePlayerPositionTCP message = tempOBJ as UpdatePlayerPositionTCP;
-            HandleUpdatePlayerPositionMessageTCP(message, myClient);
-        }
         else if(tempOBJ is UpdateClientInfoMessage)
         {
             UpdateClientInfoMessage message = tempOBJ as UpdateClientInfoMessage;
@@ -124,21 +119,19 @@ public class GameRoom : Room
 
     }
 
-    void HandleUpdatePlayerPositionMessageTCP(UpdatePlayerPositionTCP message, MyClient client)
-    {
-        Debug.Log(client.playerID);
-
-        TCPPacket outpacket = new TCPPacket();
-        UpdatePlayerPositionTCP messagre = new UpdatePlayerPositionTCP(message.playerPosition, message.playerRotation, client.playerID);
-        outpacket.Write(messagre);
-        SendTCPMessageToAllUsersExcept(outpacket, client);
-    }
-
     void HandleUpdatePlayerPositionMessageUDP(UpdatePlayerPositionUDP _message, MyClient client)
     {  
         UDPPacket outpacket = new UDPPacket();
         UpdatePlayerPositionUDP messagre = new UpdatePlayerPositionUDP(_message.playerPosition, _message.playerRotation, client.playerID);
         outpacket.Write(messagre);
+
+        foreach(MyClient c in clientsInRoom)
+        {
+            if(c != client)
+            {
+                Debug.Log("sending to " + c.endPoint);
+            }
+        }
         SendUDPMessageToAllUsersExcept(outpacket, client);
     }
 

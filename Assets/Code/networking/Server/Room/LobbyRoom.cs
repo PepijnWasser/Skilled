@@ -40,7 +40,6 @@ public class LobbyRoom : Room
 		{
 			if (client != newClient)
 			{
-				Debug.Log("sending existing clients");
 				TCPPacket outpacket5 = new TCPPacket();
 				MakeNewPlayerBarMessage makePlayerBarMessage3 = new MakeNewPlayerBarMessage(client.playerID, client.playerColor, client.playerName, false);
 				outpacket5.Write(makePlayerBarMessage3);
