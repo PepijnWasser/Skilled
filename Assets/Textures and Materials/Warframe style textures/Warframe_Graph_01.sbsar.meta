@@ -20,7 +20,11 @@ ScriptedImporter:
       identifier=\"$outputsize\" uid=\"3748629466\" type=\"8\" value=\"11,11\" />\n 
       <presetinput identifier=\"$randomseed\" uid=\"2283642248\" type=\"4\" value=\"7106\"
       />\n  <presetinput identifier=\"outputcolor\" uid=\"2975769999\" type=\"3\"
-      value=\"0.296226,0.632817,1,1\" />\n  <presetinput identifier=\"edge_width\"
+      value=\"0.176471,0.403922,0.74902,1\" />\n  <presetinput identifier=\"outputcolor_1\"
+      uid=\"2975771257\" type=\"3\" value=\"0.172549,0.313726,0.329412,1\" />\n 
+      <presetinput identifier=\"outputcolor_2\" uid=\"2975771240\" type=\"3\" value=\"0.501961,0.552941,0.584314,1\"
+      />\n  <presetinput identifier=\"outputcolor_3\" uid=\"2975771289\" type=\"3\"
+      value=\"0.780392,0.909804,0.87451,1\" />\n  <presetinput identifier=\"edge_width\"
       uid=\"2975772197\" type=\"0\" value=\"1\" />\n </sbspreset>\n"
     shaderName: Standard
     materialProperties:

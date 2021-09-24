@@ -18,8 +18,12 @@ ScriptedImporter:
     generateMipMaps: 1
     preset: " <sbspreset pkgurl=\"pkg://Sci_Fi_Roof_Ceiling\" label=\"\" >\n  <presetinput
       identifier=\"$outputsize\" uid=\"3755929393\" type=\"8\" value=\"11,11\" />\n 
-      <presetinput identifier=\"leveloutlow_1\" uid=\"2985184655\" type=\"0\" value=\"1\"
-      />\n </sbspreset>\n"
+      <presetinput identifier=\"outputcolor\" uid=\"2983407990\" type=\"3\" value=\"0.501961,0.552941,0.584314,1\"
+      />\n  <presetinput identifier=\"outputcolor_1\" uid=\"2985181188\" type=\"3\"
+      value=\"0.172549,0.313726,0.329412,1\" />\n  <presetinput identifier=\"outputcolor_2\"
+      uid=\"2985181668\" type=\"3\" value=\"0.780392,0.909804,0.87451,1\" />\n  <presetinput
+      identifier=\"leveloutlow_1\" uid=\"2985184655\" type=\"0\" value=\"1\" />\n
+      </sbspreset>\n"
     shaderName: Standard
     materialProperties:
       shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
