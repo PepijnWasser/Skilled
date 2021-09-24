@@ -12,8 +12,6 @@ public class GameState : State
     public MapGenerator mapGenerator;
     public GameManager gameManager;
 
-    int clientPort;
-
     private void Start()
     {
         SendGameLoadedMessage();
@@ -25,11 +23,10 @@ public class GameState : State
         {
             try
             {
-                clientPort = 40004 + i;
                 client = new UdpClient(40004 + i);
 
                 PlayerInfo playerInfo = GameObject.FindObjectOfType<PlayerInfo>();
-                playerInfo.udpPort = 40004 + i;
+                playerInfo.udpReceivePort = 40004 + i;
 
                 finishedInitialization = true;
             }
@@ -105,7 +102,6 @@ public class GameState : State
 
     void HandleMakePlayerCharacterMessage(MakenewPlayerCharacterMessage message)
     {
-        Debug.Log(message.isPlayer);
         gameManager.MakePlayerCharacter(message.isPlayer, message.characterPosition, message.playerName, message.playerID);
     }
 
@@ -117,7 +113,7 @@ public class GameState : State
 
     void HandleUpdatePlayerPosition(UpdatePlayerPositionUDP message)
     {
-        Debug.Log("receiving server position info");
+        Debug.Log("receiving server position info for " + message.playerID);
         try
         {
             UnityMainThread.wkr.AddJob(() =>
@@ -141,7 +137,7 @@ public class GameState : State
 
     void SendPlayerInfo()
     {
-        UpdateClientInfoMessage message = new UpdateClientInfoMessage(Extensions.GetLocalIPAddress(), clientPort);
+        UpdateClientInfoMessage message = new UpdateClientInfoMessage(Extensions.GetLocalIPAddress(), playerInfo.udpSendPort, playerInfo.udpReceivePort);
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 

@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
         if (!playerControlled)
         {
             player.GetComponent<PlayerPrefabManager>().DisablePlayerActivity();
-            Debug.Log("disabling player controlls");
         }
         else
         {

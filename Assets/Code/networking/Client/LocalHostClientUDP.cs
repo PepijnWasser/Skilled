@@ -43,7 +43,8 @@ public class LocalHostClientUDP : MonoBehaviour
         {
             try
             {
-                client = new UdpClient(20702 + i);
+                client = new UdpClient(20700 + i);
+                GameObject.FindObjectOfType<PlayerInfo>().udpSendPort = 20700 + i;
                 finishedInitialization = true;
             }
             catch (Exception e)

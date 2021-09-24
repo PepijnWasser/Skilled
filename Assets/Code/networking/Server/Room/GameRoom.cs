@@ -6,6 +6,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System;
 
+using Random = UnityEngine.Random;
 public class GameRoom : Room
 {
     int gameLoadedMessages = 0;
@@ -105,14 +106,22 @@ public class GameRoom : Room
         }
         
         TCPPacket outpacket = new TCPPacket();
-        MakenewPlayerCharacterMessage makePlayerCharacterMessage = new MakenewPlayerCharacterMessage(true, Vector3.zero, client.playerID, client.playerName);
+        MakenewPlayerCharacterMessage makePlayerCharacterMessage = new MakenewPlayerCharacterMessage(true, client.playerPosition, client.playerID, client.playerName);
         outpacket.Write(makePlayerCharacterMessage);
         SendTCPMessageToTargetUser(outpacket, client);
             
-        TCPPacket outpacket2 = new TCPPacket();
-        MakenewPlayerCharacterMessage makePlayerCharacterMessage2 = new MakenewPlayerCharacterMessage(false, Vector3.zero, client.playerID, client.playerName);
-        outpacket2.Write(makePlayerCharacterMessage2);
-        SendTCPMessageToAllUsersExcept(outpacket2, client);
+
+        foreach(MyClient myClient in clientsInRoom)
+        {
+            if(myClient != client)
+            {
+                TCPPacket outpacket2 = new TCPPacket();
+                MakenewPlayerCharacterMessage makePlayerCharacterMessage2 = new MakenewPlayerCharacterMessage(false, client.playerPosition, client.playerID, client.playerName);
+                outpacket2.Write(makePlayerCharacterMessage2);
+                SendTCPMessageToAllUsersExcept(outpacket2, client);
+            }
+        }
+
     }
 
     void HandleUpdatePlayerPositionMessageTCP(UpdatePlayerPositionTCP message, MyClient client)
@@ -130,20 +139,12 @@ public class GameRoom : Room
         UDPPacket outpacket = new UDPPacket();
         UpdatePlayerPositionUDP messagre = new UpdatePlayerPositionUDP(_message.playerPosition, _message.playerRotation, client.playerID);
         outpacket.Write(messagre);
-        SendUDPMessageToAllUsers(outpacket);
-        Debug.Log("server sending position");
-        
-        /*
-        TCPPacket outpacket = new TCPPacket();
-        UpdatePlayerPositionTCP messagre = new UpdatePlayerPositionTCP(_message.playerPosition, _message.playerRotation, client.playerID);
-        outpacket.Write(messagre);
-        SendTCPMessageToAllUsers(outpacket);
-        Debug.Log("server sending position");
-        */
+        SendUDPMessageToAllUsersExcept(outpacket, client);
     }
 
     void HandleUpdateClientInfo(UpdateClientInfoMessage message, MyClient client)
     {
-        client.endPoint = new IPEndPoint(message.ip, message.port);
+        client.endPoint = new IPEndPoint(message.ip, message.receivePort);
+        client.sendPort = message.sendPort;
     }
 }

@@ -5,18 +5,21 @@ using System.Net;
 
 public class UpdateClientInfoMessage : ISerializable
 {
-    public int port;
+    public int receivePort;
+    public int sendPort;
     public IPAddress ip;
 
     public void Deserialize(TCPPacket pPacket)
     {
-        port = pPacket.ReadInt();
+        receivePort = pPacket.ReadInt();
+        sendPort = pPacket.ReadInt();
         ip = pPacket.ReadIP();
     }
 
     public void Serialize(TCPPacket pPacket)
     {
-        pPacket.Write(port);
+        pPacket.Write(receivePort);
+        pPacket.Write(sendPort);
         pPacket.Write(ip);
     }
 
@@ -25,9 +28,10 @@ public class UpdateClientInfoMessage : ISerializable
 
     }
 
-    public UpdateClientInfoMessage(IPAddress _ip, int _port)
+    public UpdateClientInfoMessage(IPAddress _ip, int _sendPort, int _receivePort)
     {
         ip = _ip;
-        port = _port;
+        sendPort = _sendPort;
+        receivePort = _receivePort;
     }
 }

@@ -7,7 +7,7 @@ public class UpdatePlayerPosition : MonoBehaviour
     float secondCounter = 0;
     public int updateFrequency;
     public GameState gameState;
-    [HideInInspector] public GameObject player;
+    public GameObject player;
     Vector3 oldPos;
     Vector3 oldRot;
 

@@ -37,9 +37,6 @@ public class LocalHostClientTCP : MonoBehaviour
         {
             tcpClient = new TcpClient();
 
-            //IPEndPoint ipEndPoint = new IPEndPoint(address, _port);
-            //udpClient = new UdpClient(ipEndPoint);
-
             bool result = tcpClient.ConnectAsync(address, _port).Wait(1000);
             if (result)
             {

@@ -7,15 +7,24 @@ using System.Net.Sockets;
 using UnityEngine;
 using System.Net;
 
+using Random = UnityEngine.Random;
+
+
 public class MyClient
 {
     public float heartbeat;
     public TcpClient tcpClient;
+
+    public IPEndPoint endPoint;
+    public int sendPort;
+
     public int playerID;
     public string playerName;
-    public Vector3 playerPosition;
+
+    public Vector3 playerPosition = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
     public Vector3 playerRotation;
-    public IPEndPoint endPoint;
+
+
 
 
     public enum colors

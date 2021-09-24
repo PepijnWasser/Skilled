@@ -158,16 +158,17 @@ public class LocalHostServer : MonoBehaviour
 		IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Any, 60240);
 		byte[] received = client.EndReceive(res, ref RemoteIP);
 
-		Debug.Log("message received on server");
 
 		UDPPacket packet = new UDPPacket(received);
 		var TempOBJ = packet.ReadObject();
 
 		foreach(MyClient connectedClient in connectedClients)
         {
-			if (((IPEndPoint)connectedClient.tcpClient.Client.RemoteEndPoint).Address.ToString() == RemoteIP.Address.ToString())
+			Debug.Log(connectedClient.sendPort + "       " + connectedClient.sendPort);
+			if (connectedClient.endPoint.Address.ToString() == RemoteIP.Address.ToString() && connectedClient.sendPort.ToString() == RemoteIP.Port.ToString())
             {
 				activeRoom.handleUDPNetworkMessageFromUser(TempOBJ, connectedClient);
+				Debug.Log(connectedClient.playerName);
 				break;
             }
         }

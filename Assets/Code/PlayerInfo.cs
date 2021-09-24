@@ -7,7 +7,8 @@ public class PlayerInfo : MonoBehaviour
 {
 	public int playerID;
 	public string playerName;
-	public int udpPort;
+	public int udpReceivePort;
+	public int udpSendPort;
 	public IPAddress ip;
 
 	private static PlayerInfo _instance;
