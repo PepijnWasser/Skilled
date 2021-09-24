@@ -24,12 +24,14 @@ public class GameManager : MonoBehaviour
         {
             player.name += " controlled";
             playerPositionUpdater.player = player;
+            playerPositionUpdater.playerNose = player.GetComponent<PlayerPrefabManager>().nose;
         }
     }
 
-    public void MovePlayer(int playerID, Vector3 position, Vector3 rotation)
+    public void MovePlayer(int playerID, Vector3 position, Vector3 rotation, Vector3 noseRotation)
     {
         characterDictionary[playerID].transform.position = position;
         characterDictionary[playerID].transform.rotation = Quaternion.Euler(rotation);
+        characterDictionary[playerID].GetComponent<PlayerPrefabManager>().nose.transform.rotation = Quaternion.Euler(noseRotation); 
     }
 }
