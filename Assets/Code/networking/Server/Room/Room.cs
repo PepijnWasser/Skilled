@@ -150,7 +150,7 @@ public abstract class Room
 				try
 				{
 					IPEndPoint RemoteIP = new IPEndPoint(myClient.endPoint.Address, myClient.endPoint.Port);
-					Debug.Log(myClient.playerName + "     " RemoteIP.Address + "    " + RemoteIP.Port);
+					Debug.Log(myClient.playerName + "     " + RemoteIP.Address + "    " + RemoteIP.Port);
 
 					byte[] sendBytes = outPacket.GetBytes();
 
