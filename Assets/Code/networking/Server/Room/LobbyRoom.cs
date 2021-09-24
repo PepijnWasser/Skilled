@@ -21,7 +21,6 @@ public class LobbyRoom : Room
 		if (clientsInRoom.Count == 1)
 		{
 			server.SetOwner(newClient);
-			Debug.Log("setting server owner");
 		}
 
 

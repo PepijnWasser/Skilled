@@ -164,7 +164,6 @@ public class LocalHostServer : MonoBehaviour
 
 		foreach(MyClient connectedClient in connectedClients)
         {
-			Debug.Log(connectedClient.sendPort + "       " + connectedClient.sendPort);
 			if (connectedClient.endPoint.Address.ToString() == RemoteIP.Address.ToString() && connectedClient.sendPort.ToString() == RemoteIP.Port.ToString())
             {
 				activeRoom.handleUDPNetworkMessageFromUser(TempOBJ, connectedClient);
