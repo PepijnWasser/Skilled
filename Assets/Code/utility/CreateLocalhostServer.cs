@@ -25,7 +25,7 @@ public class CreateLocalhostServer : MonoBehaviour
         server.Initialize(basePort);
 
         IPAddress _serverIP = IPAddress.Parse(GetIPAddress());
-        if (localHostClient.ConnectToServer(_serverIP, server.GetServerPort()))
+        if (localHostClient.ConnectToServer(_serverIP, server.GetServerTCPPort()))
         {
             Instantiate(lobbyPrefab);
             Destroy(this.gameObject);

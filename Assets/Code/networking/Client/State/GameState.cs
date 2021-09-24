@@ -119,6 +119,7 @@ public class GameState : State
             UnityMainThread.wkr.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
+                Debug.Log("hi");
                 gameManager.MovePlayer(message.playerID, message.playerPosition, message.playerRotation);
             });           
         }

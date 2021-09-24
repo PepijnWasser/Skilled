@@ -7,10 +7,11 @@ using System.Net.Sockets;
 
 public class LocalHostClientUDP : MonoBehaviour
 {
-    float secondCounter = 0;
-
-    [HideInInspector] public string playerName;
     [HideInInspector] public UdpClient client = new UdpClient();
+
+    PlayerInfo playerInfo;
+    ServerConnectionData serverInfo;
+
 
     private static LocalHostClientTCP _instance;
 
@@ -34,6 +35,9 @@ public class LocalHostClientUDP : MonoBehaviour
 
     private void Start()
     {
+        playerInfo = GameObject.FindObjectOfType<PlayerInfo>();
+        serverInfo = GameObject.FindObjectOfType<ServerConnectionData>();
+
         int i = 0;
         bool finishedInitialization = false;
 
@@ -42,6 +46,10 @@ public class LocalHostClientUDP : MonoBehaviour
             try
             {
                 client = new UdpClient(20702 + i);
+
+
+                playerInfo.udpPort = 20700 + i;
+
                 finishedInitialization = true;
             }
             catch (Exception e)
@@ -56,7 +64,7 @@ public class LocalHostClientUDP : MonoBehaviour
     {
         try
         {
-            IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Parse("192.168.2.1"), 35450);
+            IPEndPoint RemoteIP = new IPEndPoint(serverInfo.ip, serverInfo.udpPort);
             UDPPacket packet = new UDPPacket();
             packet.Write(pOutObject);
 

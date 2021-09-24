@@ -11,6 +11,7 @@ public class LobbyRoom : Room
     public override void AddMember(MyClient newClient)
     {
 		base.AddMember(newClient);
+
 		//update player count for everyone
 		TCPPacket outPacket = new TCPPacket();
 		UpdatePlayerCountMessage playerCountMessage = new UpdatePlayerCountMessage(clientsInRoom.Count);
@@ -23,19 +24,6 @@ public class LobbyRoom : Room
 			Debug.Log("setting server owner");
 		}
 
-		TCPPacket updateIPPacket = new TCPPacket();
-		string ownerIP = ((IPEndPoint)server.owner.tcpClient.Client.RemoteEndPoint).Address.ToString();
-		int ownerPort = server.GetServerPort();
-		UpdateServerIPMessage IPmessage = new UpdateServerIPMessage(ownerIP, ownerPort);
-		updateIPPacket.Write(IPmessage);
-		SendTCPMessageToTargetUser(updateIPPacket, newClient);
-
-
-		//send server name to new user
-		TCPPacket outPacket2 = new TCPPacket();
-		UpdateServerNameMessage serverNameMessage = new UpdateServerNameMessage(server.owner.playerName);
-		outPacket2.Write(serverNameMessage);
-		SendTCPMessageToTargetUser(outPacket2, newClient);
 
 		//send new player to all users
 		TCPPacket outpacket3 = new TCPPacket();
@@ -61,19 +49,24 @@ public class LobbyRoom : Room
 			}
 		}
 
-		if(newClient == server.owner)
+		if(newClient == server.serverInfo.serverOwner)
         {
-			TCPPacket outpacket6 = new TCPPacket();
-			ServerOwnerMessage serverOwnerMessage = new ServerOwnerMessage(true);
-			outpacket6.Write(serverOwnerMessage);
-			SendTCPMessageToTargetUser(outpacket6, newClient);
-        }
+			//send server info to new user
+			TCPPacket serverInfoPacket = new TCPPacket();
+			ServerInfo serverInfo = server.serverInfo;
+			UpdateServerInfo serverInfoMessage = new UpdateServerInfo(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, true);
+			serverInfoPacket.Write(serverInfoMessage);
+			SendTCPMessageToTargetUser(serverInfoPacket, newClient);
+		}
         else
         {
-			TCPPacket outpacket6 = new TCPPacket();
-			ServerOwnerMessage serverOwnerMessage = new ServerOwnerMessage(false);
-			outpacket6.Write(serverOwnerMessage);
-			SendTCPMessageToTargetUser(outpacket6, newClient);
+
+			//send server info to new user
+			TCPPacket serverInfoPacket = new TCPPacket();
+			ServerInfo serverInfo = server.serverInfo;
+			UpdateServerInfo serverInfoMessage = new UpdateServerInfo(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, false);
+			serverInfoPacket.Write(serverInfoMessage);
+			SendTCPMessageToTargetUser(serverInfoPacket, newClient);
 		}
 
 	}
@@ -208,9 +201,9 @@ public class LobbyRoom : Room
 			UpdatePlayerName(client, newName);
 
 			//if the request was from the owner change server name
-			if (client == server.owner)
+			if (client == server.serverInfo.serverOwner)
 			{
-				UpdateServerName();
+				UpdateServerName(client);
 			}
 		}		
 	}
@@ -324,12 +317,20 @@ public class LobbyRoom : Room
 		SendTCPMessageToAllUsers(outPacket);
 	}
 
-	void UpdateServerName()
+	void UpdateServerName(MyClient client)
     {
-		TCPPacket outPacket = new TCPPacket();
-		UpdateServerNameMessage updateserverNameMessage = new UpdateServerNameMessage(server.owner.playerName);
-		outPacket.Write(updateserverNameMessage);
-		SendTCPMessageToAllUsers(outPacket);
+		//send server info to new user
+		TCPPacket serverInfoPacket = new TCPPacket();
+		ServerInfo serverInfo = server.serverInfo;
+		UpdateServerInfo serverInfoMessage = new UpdateServerInfo(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, true);
+		serverInfoPacket.Write(serverInfoMessage);
+		SendTCPMessageToTargetUser(serverInfoPacket, client);
+
+		//send server info to new user
+		TCPPacket serverInfoPacket2 = new TCPPacket();
+		UpdateServerInfo serverInfoMessage2 = new UpdateServerInfo(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, false);
+		serverInfoPacket2.Write(serverInfoMessage2);
+		SendTCPMessageToAllUsersExcept(serverInfoPacket, client);
 	}
 
 	bool CheckNameAvailible(string name)

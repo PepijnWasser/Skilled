@@ -12,8 +12,7 @@ public class LocalHostServer : MonoBehaviour
 	public float timeOutTime = 5f;
 	float secondCounter = 0;
 
-	public MyClient owner;
-	private int port;
+	UdpClient client = new UdpClient();
 
 	private List<MyClient> connectedClients = new List<MyClient>();
 	private TcpListener _listener;
@@ -24,10 +23,9 @@ public class LocalHostServer : MonoBehaviour
 	public LobbyRoom lobbyRoom;
 	public GameRoom gameRoom;
 
-	UdpClient client = new UdpClient();
+	public ServerInfo serverInfo = new ServerInfo();
 
 	private static LocalHostServer _instance;
-
 	public static LocalHostServer Instance
 	{
 		get
@@ -59,6 +57,8 @@ public class LocalHostServer : MonoBehaviour
 				client = new UdpClient(35450 + i);
 				finishedInitialization = true;
 				client.BeginReceive(new AsyncCallback(recv), null);
+				serverInfo.udpPort = 35450 + i;
+				serverInfo.ip = Extensions.GetLocalIPAddress();
 			}
 			catch (Exception e)
 			{
@@ -69,7 +69,7 @@ public class LocalHostServer : MonoBehaviour
 	}
 
 
-    public void Initialize(int _port)
+    public void Initialize(int startPort)
 	{
 		bool finishedInitialization = false;
 		int i = 0;
@@ -79,11 +79,11 @@ public class LocalHostServer : MonoBehaviour
 		{
 			try
 			{
-				_listener = new TcpListener(IPAddress.Any, _port + i);
+				_listener = new TcpListener(IPAddress.Any, startPort + i);
 				_listener.Start();
-				port = _port + i;
 				finishedInitialization = true;
-				Debug.Log("Server started on port: " + (_port + i));
+				serverInfo.tcpPort = startPort + i;
+				Debug.Log("Server started on port: " + (startPort + i));
 			}
 			catch (Exception e)
 			{
@@ -191,12 +191,12 @@ public class LocalHostServer : MonoBehaviour
 
 	public void SetOwner(MyClient client)
     {
-		owner = client;
+		serverInfo.serverOwner = client;
     }
 
-	public int GetServerPort()
+	public int GetServerTCPPort()
 	{
-		return port;
+		return serverInfo.tcpPort;
 	}
 
 	public void RemovePlayer(MyClient clientToRemove)

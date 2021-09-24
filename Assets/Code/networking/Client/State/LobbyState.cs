@@ -51,11 +51,6 @@ public class LobbyState : State
                 {
                     HandleHeartbeat();
                 }
-                else if (tempOBJ is UpdateServerNameMessage)
-                {
-                    UpdateServerNameMessage message = tempOBJ as UpdateServerNameMessage;
-                    HandleServerNameMessage(message);
-                }
                 else if (tempOBJ is UpdateColorRespons)
                 {
                     UpdateColorRespons message = tempOBJ as UpdateColorRespons;
@@ -86,20 +81,15 @@ public class LobbyState : State
                     HelpRespons message = tempOBJ as HelpRespons;
                     HandleHelpRespons(message);
                 }
-                else if(tempOBJ is ServerOwnerMessage)
+                else if(tempOBJ is UpdateServerInfo)
                 {
-                    ServerOwnerMessage message = tempOBJ as ServerOwnerMessage;
-                    HandleServerOwnerMessage(message);
+                    UpdateServerInfo message = tempOBJ as UpdateServerInfo;
+                    HandleServerInfoMessage(message);
                 }
                 else if(tempOBJ is JoinRoomMessage)
                 {
                     JoinRoomMessage message = tempOBJ as JoinRoomMessage;
                     HandleJoinRoomMessage(message);
-                }
-                else if(tempOBJ is UpdateServerIPMessage)
-                {
-                    UpdateServerIPMessage message = tempOBJ as UpdateServerIPMessage;
-                    HandleServerIPMessage(message);
                 }
             }
             HandleHeartbeatStatus();
@@ -122,14 +112,31 @@ public class LobbyState : State
         playerCountUIElement.text = message.playerCount.ToString();
     }
 
-    void HandleServerNameMessage(UpdateServerNameMessage message)
+
+    void HandleServerInfoMessage(UpdateServerInfo message)
     {
-        serverNameUIElement.text = message.serverName + "'s server";
+        serverNameUIElement.text = message.owner + "'s server";
+        lobbyView.SetServerOwner(message.isOwner);
+        lobbyView.SetServerIP(message.ip.ToString());
+        lobbyView.SetServerPort(message.tcpPort);
+
+        ServerConnectionData serverData = GameObject.FindObjectOfType<ServerConnectionData>();
+        serverData.owner = message.owner;
+        serverData.isOwner = message.isOwner;
+        serverData.udpPort = message.udpPort;
+        serverData.tcpPort = message.tcpPort;
+        serverData.ip = message.ip;
+       
     }
 
     void HandleMakeNewPlayerMessage(MakeNewPlayerBarMessage message)
     {
         lobbyView.AddPlayer(message.playerID, message.playerColor, message.playerName, message.isPlayer);
+        if (message.isPlayer)
+        {
+            PlayerInfo playerInfo = GameObject.FindObjectOfType<PlayerInfo>();
+            playerInfo.playerID = message.playerID;
+        }
     }
 
     void HandleRemovePlayerMessage(RemovePlayerBarMessage message)
@@ -145,6 +152,12 @@ public class LobbyState : State
     void HandleUpdatePlayerNameRespons(UpdatePlayerNameRespons message)
     {
         lobbyView.UpdateName(message.playerID, message.playerName);
+
+        PlayerInfo playerInfo = GameObject.FindObjectOfType<PlayerInfo>();
+        if (message.playerID == playerInfo.playerID)
+        {
+            playerInfo.playerName = message.playerName;
+        }
     }
 
     void HandleChatMessage(ChatRespons message)
@@ -155,17 +168,6 @@ public class LobbyState : State
     void HandleHelpRespons(HelpRespons message)
     {
         GameObject.FindObjectOfType<ChatManager>().DisplayMessage(message.sender, message.message, message.hourSend, message.minuteSend, message.secondSend);
-    }
-
-    void HandleServerOwnerMessage(ServerOwnerMessage message)
-    {
-        lobbyView.SetServerOwner(message.isOwner);
-    }
-
-    void HandleServerIPMessage(UpdateServerIPMessage message)
-    {
-        lobbyView.SetServerIP(message.IP);
-        lobbyView.SetServerPort(message.port);
     }
 
     void HandleJoinRoomMessage(JoinRoomMessage message)
