@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     public PlayerPositionUpdater playerPositionUpdater;
     Dictionary<int, GameObject> characterDictionary = new Dictionary<int, GameObject>();
 
+    public delegate void PlayerMade(GameObject player);
+    public static event PlayerMade playerMade;
+
     public void MakePlayerCharacter(bool playerControlled, Vector3 position, string _name, int playerID)
     {
         GameObject player = Instantiate(playerPrefab, position, Quaternion.identity);
@@ -25,6 +28,8 @@ public class GameManager : MonoBehaviour
             player.name += " controlled";
             playerPositionUpdater.player = player;
             playerPositionUpdater.playerNose = player.GetComponent<PlayerPrefabManager>().nose;
+
+            playerMade?.Invoke(player);
         }
     }
 
