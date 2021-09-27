@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class TerminalTask : Task
 {
     public delegate void Damage(int amount);
     public static event Damage taskDealDamage;
+
 
     public override void InitializeTask()
     {

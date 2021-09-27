@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class RotateSkyboxCamera : MonoBehaviour
 {
-    public Camera mainCam;
+    public CinemachineVirtualCamera mainCam;
     public GameObject player;
 
     float counter = 0;

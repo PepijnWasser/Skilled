@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Cinemachine;
+
 
 public class KeypadTask : Task
 {
@@ -8,6 +11,11 @@ public class KeypadTask : Task
     public static event Damage taskDealDamage;
 
     public string code;
+    public bool isFocused;
+
+    public CinemachineVirtualCamera TaskCam;
+    public KeyPadCodeEnterer keypadCodeEnterer;
+
 
     public override void InitializeTask()
     {
@@ -29,11 +37,18 @@ public class KeypadTask : Task
 
     protected override void TestTask()
     {
-        if (Vector3.Distance(player.transform.position, this.transform.position) < playerRange)
+        if (Vector3.Distance(player.transform.position, this.transform.position) < playerRange && isFocused == false)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                CompleteTask();
+                Focus();
+            }
+        }
+        if (isFocused)
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                DeFocus();
             }
         }
     }
@@ -41,6 +56,7 @@ public class KeypadTask : Task
     protected override void CompleteTask()
     {
         base.CompleteTask();
+        DeFocus();
         Debug.Log("task completed");
     }
 
@@ -66,5 +82,34 @@ public class KeypadTask : Task
                 }
             }
         }
+    }
+
+    public void ValidateCode()
+    {
+        if(keypadCodeEnterer.message == code)
+        {
+            CompleteTask();
+        }
+        else
+        {
+            keypadCodeEnterer.DisplayErrorMessage();
+        }
+    }
+
+    void Focus()
+    {
+        isFocused = true;
+        player.gameObject.SetActive(false);
+        Cursor.lockState = CursorLockMode.Confined;
+        TaskCam.Priority = 12;
+    }
+
+    void DeFocus()
+    {
+        isFocused = false;
+        player.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        TaskCam.Priority = 10;
+        keypadCodeEnterer.DisplayWelcomeMessage();
     }
 }

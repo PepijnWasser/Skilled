@@ -146,6 +146,7 @@ MonoBehaviour:
   damageAmount: 1
   DamageRate: 1
   hasError: 0
+  player: {fileID: 0}
   code: 
 --- !u!1 &8646847672221354585
 GameObject:

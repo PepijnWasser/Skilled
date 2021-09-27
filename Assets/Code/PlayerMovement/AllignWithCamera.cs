@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class AllignWithCamera : MonoBehaviour
 {
-    public Camera cam;
+    public CinemachineVirtualCamera cam;
 
     private void Update()
     {

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TaskSpawner
   m_EditorClassIdentifier: 
   TerminalPrefab: {fileID: 5197328724489111433, guid: da30e53365388fc4f842b97e746b4316, type: 3}
-  KeypadPrefab: {fileID: 7542767930489952108, guid: 1aa4f492f4198b4488177a80a91ffb0c, type: 3}
+  KeypadPrefab: {fileID: 6880409806940071777, guid: 1199e53bb1f590d44a1b73af6b3b5dab, type: 3}
   amountOfTerminalsToSpawn: 2
   amountOfKeypadsToSpawn: 2
