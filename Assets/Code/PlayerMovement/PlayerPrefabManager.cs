@@ -21,6 +21,8 @@ public class PlayerPrefabManager : MonoBehaviour
 
         Destroy(camera.gameObject);
         Destroy(skyboxCamera.gameObject);
+
+        this.gameObject.tag = "MainPlayer";
     }
 
     public void setNoseRotation(Vector3 degrees)

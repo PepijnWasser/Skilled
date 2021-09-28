@@ -44,12 +44,15 @@ public class TaskManager : MonoBehaviour
         {
             if(tasksWithoutErrors.Count > 0)
             {
-                Task newTask = Extensions.RandomListItem(tasksWithoutErrors);
-                tasksWithErrors.Add(newTask);
-                tasksWithoutErrors.Remove(newTask);
-                newTask.InitializeTask();
+                if(tasksWithErrors.Count < maxErrors)
+                {
+                    Task newTask = Extensions.RandomListItem(tasksWithoutErrors);
+                    tasksWithErrors.Add(newTask);
+                    tasksWithoutErrors.Remove(newTask);
+                    newTask.InitializeTask();
 
-                secondCounter = 0;
+                    secondCounter = 0;
+                }
             }
         }
     }
