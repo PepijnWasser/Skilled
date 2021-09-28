@@ -7,8 +7,7 @@ public abstract class Task : MonoBehaviour
     public delegate void Completed(Task taskCompleted);
     public static event Completed taskCompleted;
 
-    [SerializeField]
-    protected float playerRange;
+    public float playerRange;
 
     [SerializeField]
     protected float timeTillDamage;

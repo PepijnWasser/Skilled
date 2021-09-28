@@ -2616,6 +2616,7 @@ GameObject:
   - component: {fileID: 6474188000379026396}
   - component: {fileID: 2374149348202884978}
   - component: {fileID: 2244118470192530155}
+  - component: {fileID: 8221619930512205408}
   m_Layer: 0
   m_Name: KeyPad
   m_TagString: Untagged
@@ -2677,6 +2678,19 @@ MonoBehaviour:
   task: {fileID: 2374149348202884978}
   display: {fileID: 7264265730888703373}
   message: 
+--- !u!114 &8221619930512205408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6880409806940071777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2793e1701c574734a8efaabb4a491179, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 5
 --- !u!1 &6884327370377382874
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,10 +32,11 @@ public class KeypadTask : Task
     {
         base.Update();
         TestDamage();
+        TestFocus();
     }
 
 
-    protected override void TestTask()
+    void TestFocus()
     {
         if (Vector3.Distance(player.transform.position, this.transform.position) < playerRange && isFocused == false)
         {
@@ -111,5 +112,10 @@ public class KeypadTask : Task
         Cursor.lockState = CursorLockMode.Locked;
         TaskCam.Priority = 10;
         keypadCodeEnterer.DisplayWelcomeMessage();
+    }
+
+    protected override void TestTask()
+    {
+
     }
 }
