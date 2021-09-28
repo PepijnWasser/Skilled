@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class KeypadInteractable : Interactable
 {
-     KeypadTask task;
+    Keypad keypad;
+    public GameObject body;
     float range;
+
+    public bool lookingAtTarget;
 
     protected override void Start()
     {
         base.Start();
-        task = GetComponent<KeypadTask>();
-        range = task.playerRange;
+        keypad = GetComponent<Keypad>();
+        range = keypad.playerRange;
     }
 
     protected override void Update()
     {
+        lookingAtTarget = false;
         RaycastHit hit;
 
-
-        if (Vector3.Distance(player.transform.position, this.transform.position) < range)
+        float dist = Vector3.Distance(player.transform.position, this.transform.position);
+        if (dist < range)
         {
             // Does the ray intersect any objects excluding the player layer
             if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
@@ -31,9 +35,13 @@ public class KeypadInteractable : Interactable
 
     protected override void OnHit(RaycastHit hit)
     {
-        if (task.isFocused == false)
+        if(hit.transform.gameObject == body)
         {
-            base.OnHit(hit);
+            if (keypad.isFocused == false)
+            {
+                base.OnHit(hit);
+                lookingAtTarget = true;
+            }
         }
     }
 }

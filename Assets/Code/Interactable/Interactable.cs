@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Interactable : MonoBehaviour
+public class Interactable : MonoBehaviour
 {
     protected GameObject player;
     MouseCursor mouseCursor;
     protected Camera playerCamera;
-
-    [SerializeField]
-    float range;
 
     protected virtual void Start()
     {
@@ -25,16 +22,7 @@ public abstract class Interactable : MonoBehaviour
 
     protected virtual void Update()
     {
-        RaycastHit hit;
 
-        if (Vector3.Distance(player.transform.position, this.transform.position) < range)
-        {
-            // Does the ray intersect any objects excluding the player layer
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
-            {
-                OnHit(hit);
-            }
-        }
     }
 
     protected virtual void OnHit(RaycastHit hit)

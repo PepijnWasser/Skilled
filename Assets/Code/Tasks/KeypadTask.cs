@@ -7,19 +7,21 @@ using Cinemachine;
 
 public class KeypadTask : Task
 {
+    Keypad keyPad;
+    KeyPadCodeEnterer keypadCodeEnterer;
+
     public delegate void Damage(int amount);
     public static event Damage taskDealDamage;
 
-    public string code;
-    public bool isFocused;
-
-    public CinemachineVirtualCamera TaskCam;
-    public KeyPadCodeEnterer keypadCodeEnterer;
+    public string code = "";
 
 
     public override void InitializeTask()
     {
         base.InitializeTask();
+
+        keyPad = GetComponent<Keypad>();
+        keypadCodeEnterer = GetComponent<KeyPadCodeEnterer>();
 
         int first = Random.Range(0,10);
         int second = Random.Range(0, 10);
@@ -32,32 +34,14 @@ public class KeypadTask : Task
     {
         base.Update();
         TestDamage();
-        TestFocus();
     }
 
 
-    void TestFocus()
-    {
-        if (Vector3.Distance(player.transform.position, this.transform.position) < playerRange && isFocused == false)
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Focus();
-            }
-        }
-        if (isFocused)
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                DeFocus();
-            }
-        }
-    }
 
     protected override void CompleteTask()
     {
         base.CompleteTask();
-        DeFocus();
+        keyPad.DeFocus();
         Debug.Log("task completed");
     }
 
@@ -87,9 +71,16 @@ public class KeypadTask : Task
 
     public void ValidateCode()
     {
-        if(keypadCodeEnterer.message == code)
+        if (hasError)
         {
-            CompleteTask();
+            if (keypadCodeEnterer.message == code)
+            {
+                CompleteTask();
+            }
+            else
+            {
+                keypadCodeEnterer.DisplayErrorMessage();
+            }
         }
         else
         {
@@ -97,22 +88,6 @@ public class KeypadTask : Task
         }
     }
 
-    void Focus()
-    {
-        isFocused = true;
-        player.GetComponent<MeshRenderer>().enabled = false;
-        Cursor.lockState = CursorLockMode.Confined;
-        TaskCam.Priority = 12;
-    }
-
-    void DeFocus()
-    {
-        isFocused = false;
-        player.GetComponent<MeshRenderer>().enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        TaskCam.Priority = 10;
-        keypadCodeEnterer.DisplayWelcomeMessage();
-    }
 
     protected override void TestTask()
     {
