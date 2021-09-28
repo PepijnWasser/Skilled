@@ -7,9 +7,11 @@ using System.Net.Sockets;
 
 public static class Extensions
 {
-	public static int seed = 10;
 
-	public static void SetSeed(int _seed)
+	public static int seed = 10;
+	
+
+public static void SetSeed(int _seed)
     {
 		seed = _seed;
 		UnityEngine.Random.InitState(seed);

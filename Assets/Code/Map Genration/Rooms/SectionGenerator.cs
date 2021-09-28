@@ -188,7 +188,7 @@ public class SectionGenerator : MonoBehaviour
 		for (int i = 0; i < bounds.Count(); i++)
 		{
 			bounds[i].center = room.transform.position;
-			bounds[i].Expand(-0.01f);
+			//bounds[i].Expand(-0.01f);
 		}
 
 		for (int i = 0; i < bounds.Count(); i++)
