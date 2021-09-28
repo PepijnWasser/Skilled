@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class RotateSkyboxCamera : MonoBehaviour
 {
-    public CinemachineVirtualCamera mainCam;
+    public Camera mainCam;
     public GameObject player;
 
     float counter = 0;

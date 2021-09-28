@@ -5,7 +5,7 @@ using Cinemachine;
 
 public class PlayerPrefabManager : MonoBehaviour
 {
-    public CinemachineVirtualCamera camera;
+    public Camera camera;
     public Camera skyboxCamera;
     public GameObject nose;
 

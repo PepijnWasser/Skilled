@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Camera Blends
   m_EditorClassIdentifier: 
   m_CustomBlends:
-  - m_From: MainCam
+  - m_From: VirtualCamPOV
     m_To: KeypadCam
     m_Blend:
       m_Style: 1
@@ -25,7 +25,7 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: KeypadCam
-    m_To: MainCam
+    m_To: VirtualCamPOV
     m_Blend:
       m_Style: 0
       m_Time: 2

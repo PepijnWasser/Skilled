@@ -99,7 +99,7 @@ public class KeypadTask : Task
     void Focus()
     {
         isFocused = true;
-        player.gameObject.SetActive(false);
+        player.GetComponent<MeshRenderer>().enabled = false;
         Cursor.lockState = CursorLockMode.Confined;
         TaskCam.Priority = 12;
     }
@@ -107,7 +107,7 @@ public class KeypadTask : Task
     void DeFocus()
     {
         isFocused = false;
-        player.gameObject.SetActive(true);
+        player.GetComponent<MeshRenderer>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         TaskCam.Priority = 10;
         keypadCodeEnterer.DisplayWelcomeMessage();
