@@ -13,7 +13,7 @@ public class KeypadTask : Task
     public delegate void Damage(int amount);
     public static event Damage taskDealDamage;
 
-    public string code;
+    public string code = "";
 
 
     public override void InitializeTask()
@@ -71,9 +71,16 @@ public class KeypadTask : Task
 
     public void ValidateCode()
     {
-        if(keypadCodeEnterer.message == code)
+        if (hasError)
         {
-            CompleteTask();
+            if (keypadCodeEnterer.message == code)
+            {
+                CompleteTask();
+            }
+            else
+            {
+                keypadCodeEnterer.DisplayErrorMessage();
+            }
         }
         else
         {

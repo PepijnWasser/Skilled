@@ -11,6 +11,7 @@ public class Keypad : MonoBehaviour
     public CinemachineVirtualCamera TaskCam;
 
     KeyPadCodeEnterer keypadCodeEnterer;
+    KeypadInteractable keypadInteractable;
 
     GameObject player;
 
@@ -20,6 +21,7 @@ public class Keypad : MonoBehaviour
         SetPlayer(GameObject.FindObjectOfType<PlayerMovement>().gameObject);
 
         keypadCodeEnterer = GetComponent<KeyPadCodeEnterer>();
+        keypadInteractable = GetComponent<KeypadInteractable>();
     }
 
     protected virtual void OnDestroy()
@@ -36,7 +38,7 @@ public class Keypad : MonoBehaviour
     {
         if (Vector3.Distance(player.transform.position, this.transform.position) < playerRange && isFocused == false)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E) && keypadInteractable.lookingAtTarget)
             {
                 Focus();
             }
@@ -56,6 +58,7 @@ public class Keypad : MonoBehaviour
         player.GetComponent<MeshRenderer>().enabled = false;
         Cursor.lockState = CursorLockMode.Confined;
         TaskCam.Priority = 12;
+        TaskCam.name = "dwdwdw";
     }
 
     public void DeFocus()

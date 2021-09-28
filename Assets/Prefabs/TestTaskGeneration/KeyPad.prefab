@@ -2105,6 +2105,7 @@ GameObject:
   - component: {fileID: 8916387803295146285}
   - component: {fileID: 5861962181486371260}
   - component: {fileID: 1361744506690484776}
+  - component: {fileID: 4587666554746617647}
   m_Layer: 0
   m_Name: numpad
   m_TagString: Untagged
@@ -2175,6 +2176,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4587666554746617647
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6381883160323338946}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6391597829060217764, guid: d8b1a4cb1c26ef24994e51c182b6b4b5, type: 3}
 --- !u!1 &6432518008653308811
 GameObject:
   m_ObjectHideFlags: 0
@@ -2654,16 +2669,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f921d455150b614790e9a1ed52b28ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRange: 2
   timeTillDamage: 2
   damageAmount: 1
   DamageRate: 1
   hasError: 0
-  player: {fileID: 0}
   code: 
-  isFocused: 0
-  TaskCam: {fileID: 2480904580605306654}
-  keypadCodeEnterer: {fileID: 2244118470192530155}
 --- !u!114 &2244118470192530155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2691,7 +2701,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2793e1701c574734a8efaabb4a491179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 5
+  keypad: {fileID: 0}
+  body: {fileID: 6381883160323338946}
+  lookingAtTarget: 0
 --- !u!114 &8660488373691940152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2704,6 +2716,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1186b950591b04fb93562b9f720b5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isFocused: 0
+  playerRange: 5
+  TaskCam: {fileID: 2480904580605306654}
+  keypadInteractable: {fileID: 0}
 --- !u!1 &6884327370377382874
 GameObject:
   m_ObjectHideFlags: 0
@@ -2765,7 +2781,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.73014355, y: 1}
+    m_SensorSize: {x: 0.7296651, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

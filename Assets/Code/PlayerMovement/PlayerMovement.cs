@@ -38,8 +38,6 @@ public class PlayerMovement : MonoBehaviour
         moveDir.Normalize();
         moveDir.y = velocityY;
 
-        Debug.Log(Input.GetAxisRaw("Vertical"));
-
         rb.velocity = moveDir * speed;
     }
 }
