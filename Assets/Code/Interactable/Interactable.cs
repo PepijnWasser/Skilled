@@ -7,6 +7,7 @@ public class Interactable : MonoBehaviour
     protected GameObject player;
     MouseCursor mouseCursor;
     protected Camera playerCamera;
+    protected float range;
 
     protected virtual void Start()
     {

@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeypadInteractable : Interactable
+public class TerminalInteractable : Interactable
 {
-    Keypad keypad;
-    public GameObject body;
-
     public bool lookingAtTarget;
+    Terminal terminal;
+
+    public List<GameObject> body;
 
     protected override void Start()
     {
         base.Start();
-        keypad = GetComponent<Keypad>();
-        range = keypad.playerRange;
+        terminal = GetComponent<Terminal>();
+        range = terminal.playerRange;
     }
 
     protected override void Update()
@@ -34,13 +34,10 @@ public class KeypadInteractable : Interactable
 
     protected override void OnHit(RaycastHit hit)
     {
-        if(hit.transform.gameObject == body)
+        if (body.Contains(hit.transform.gameObject))
         {
-            if (keypad.isFocused == false)
-            {
-                base.OnHit(hit);
-                lookingAtTarget = true;
-            }
+            base.OnHit(hit);
+            lookingAtTarget = true;
         }
     }
 }
