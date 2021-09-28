@@ -7,8 +7,6 @@ public abstract class Task : MonoBehaviour
     public delegate void Completed(Task taskCompleted);
     public static event Completed taskCompleted;
 
-    public float playerRange;
-
     [SerializeField]
     protected float timeTillDamage;
 
@@ -22,19 +20,6 @@ public abstract class Task : MonoBehaviour
     public bool hasError = false;
     protected bool dealingDamage = false;
 
-    [SerializeField]
-    protected GameObject player;
-
-    protected virtual void Start()
-    {
-        GameManager.playerMade += SetPlayer;
-        SetPlayer(GameObject.FindObjectOfType<PlayerMovement>().gameObject);
-    }
-
-    protected virtual void OnDestroy()
-    {
-        GameManager.playerMade -= SetPlayer;
-    }
 
     public virtual void InitializeTask()
     {
@@ -59,9 +44,4 @@ public abstract class Task : MonoBehaviour
 
     protected abstract void TestTask();
     
-
-    void SetPlayer(GameObject _player)
-    {
-        player = _player;
-    }
 }

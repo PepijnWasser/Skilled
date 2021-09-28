@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class KeypadInteractable : Interactable
 {
-     KeypadTask task;
-    float range;
+     Keypad keypad;
+     float range;
 
     protected override void Start()
     {
         base.Start();
-        task = GetComponent<KeypadTask>();
-        range = task.playerRange;
+        keypad = GetComponent<Keypad>();
+        range = keypad.playerRange;
     }
 
     protected override void Update()
@@ -31,7 +31,7 @@ public class KeypadInteractable : Interactable
 
     protected override void OnHit(RaycastHit hit)
     {
-        if (task.isFocused == false)
+        if (keypad.isFocused == false)
         {
             base.OnHit(hit);
         }

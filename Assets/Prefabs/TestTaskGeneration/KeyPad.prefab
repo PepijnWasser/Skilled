@@ -2617,6 +2617,7 @@ GameObject:
   - component: {fileID: 2374149348202884978}
   - component: {fileID: 2244118470192530155}
   - component: {fileID: 8221619930512205408}
+  - component: {fileID: 8660488373691940152}
   m_Layer: 0
   m_Name: KeyPad
   m_TagString: Untagged
@@ -2691,6 +2692,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 5
+--- !u!114 &8660488373691940152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6880409806940071777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1186b950591b04fb93562b9f720b5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6884327370377382874
 GameObject:
   m_ObjectHideFlags: 0
@@ -2752,7 +2765,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.8124402, y: 1}
+    m_SensorSize: {x: 0.73014355, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
