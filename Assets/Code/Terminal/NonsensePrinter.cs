@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NonsensePprinter : MonoBehaviour
+public class NonsensePrinter : MonoBehaviour
 {
     public Image textPrefab;
     public Image content;
 
-    public float speed = 0.05f;
+    public Vector2 speed;
+    public Vector2 speedDuration;
 
     public List<string> nonsenseList;
 
-    float secondCOunter = 0;
+    float secondCounter = 0;
+    float secondCounterSpeed = 0;
 
     List<Text> textList = new List<Text>();
+
+    float currentSpeedDuration;
+    float currentSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -34,10 +39,11 @@ public class NonsensePprinter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        secondCOunter += Time.deltaTime;
-        if(secondCOunter > 0.05)
+        secondCounter += Time.deltaTime;
+        secondCounterSpeed += Time.deltaTime;
+        if(secondCounter > currentSpeed)
         {
-            secondCOunter = 0;
+            secondCounter = 0;
             for(int i = 0; i < 16; i++)
             {
                 if(i == 15)
@@ -56,5 +62,14 @@ public class NonsensePprinter : MonoBehaviour
                 }
             }
         }
+
+        if(secondCounterSpeed > currentSpeedDuration)
+        {
+            currentSpeedDuration = Random.Range(speedDuration.x, speedDuration.y);
+            Debug.Log(currentSpeedDuration);
+            currentSpeed = Random.Range(speed.x, speed.y);
+            secondCounterSpeed = 0;
+        }
+
     }
 }

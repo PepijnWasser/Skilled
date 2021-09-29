@@ -414,7 +414,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textPrefab: {fileID: 6542114959123732781, guid: 210fcd6b52ddaf1498baecde85b4bdb3, type: 3}
   content: {fileID: 4172255239814328938}
-  speed: 0.001
+  speed: {x: 0.02, y: 0.1}
+  speedDuration: {x: 0.2, y: 1}
   nonsenseList:
   - x.x1> ERR.REGRESS 43234.54354:12242
   - x.x1> ERR.REGRESS 43234.54354:12042
