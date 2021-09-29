@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6193d95ead12764da6117958ce4cd16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  consoleRoomPrefab: {fileID: 6577256930071477638, guid: e3ba7a188fe965648aefcbcae2b69da7, type: 3}
+  consoleRoomPrefab: {fileID: 8319710874009013015, guid: efc8da3fca09b7d40b5dc1ed9003fe09, type: 3}
   sectionGeneratorPrefab: {fileID: 1940732853011553374, guid: 1cc04b0e0ac9e1f4fbf254799d2c34ff, type: 3}
   amountOfSectors: 4
   posibleStartingDoors: []
@@ -677,7 +677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e59bee3b03ae22f4f8bbcef2b70635da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 75048083}
+  cameraPos: {fileID: 75048081}
   sensitivity: 300
 --- !u!114 &1707867223
 MonoBehaviour:
