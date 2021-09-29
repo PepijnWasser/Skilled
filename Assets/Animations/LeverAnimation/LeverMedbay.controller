@@ -9,8 +9,8 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: Stance
-    m_EventTreshold: 1
+    m_ConditionEvent: position
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3294135638377370118}
   m_Solo: 0
@@ -62,8 +62,8 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: Stance
-    m_EventTreshold: 1
+    m_ConditionEvent: position
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -3294135638377370118}
   m_Solo: 0
@@ -87,8 +87,8 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: Stance
-    m_EventTreshold: 2
+    m_ConditionEvent: position
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2242375419385361528}
   m_Solo: 0
@@ -167,7 +167,7 @@ AnimatorController:
   m_Name: LeverMedbay
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: Stance
+  - m_Name: position
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -222,8 +222,8 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 6
-    m_ConditionEvent: Stance
-    m_EventTreshold: 2
+    m_ConditionEvent: position
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2242375419385361528}
   m_Solo: 0

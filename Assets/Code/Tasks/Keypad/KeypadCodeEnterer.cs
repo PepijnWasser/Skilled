@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class KeyPadCodeEnterer : MonoBehaviour
+public class KeypadCodeEnterer : MonoBehaviour
 {
     public KeypadTask task;
     public Text display;

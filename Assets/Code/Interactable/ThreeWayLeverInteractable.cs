@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TerminalInteractable : Interactable
+public class ThreeWayLeverInteractable : Interactable
 {
     public bool lookingAtTarget;
-    Terminal terminal;
+    ThreeWayLever lever;
 
     public List<GameObject> body;
 
     protected override void Start()
     {
         base.Start();
-        terminal = GetComponent<Terminal>();
-        range = terminal.playerRange;
+        lever = GetComponent<ThreeWayLever>();
+        range = lever.playerRange;
     }
 
     protected override void Update()
