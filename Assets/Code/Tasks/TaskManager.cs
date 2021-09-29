@@ -15,6 +15,9 @@ public class TaskManager : MonoBehaviour
     public List<Task> tasksWithoutErrors = new List<Task>();
     public List<Task> tasksWithErrors = new List<Task>();
 
+    public delegate void Spawning(Task taskSpawned);
+    public static event Spawning taskHasError;
+
     void Start()
     {
         MapGenerator.OnCompletion += SpawnTasks;
@@ -50,6 +53,8 @@ public class TaskManager : MonoBehaviour
                     tasksWithErrors.Add(newTask);
                     tasksWithoutErrors.Remove(newTask);
                     newTask.InitializeTask();
+
+                    taskHasError?.Invoke(newTask);
 
                     secondCounter = 0;
                 }

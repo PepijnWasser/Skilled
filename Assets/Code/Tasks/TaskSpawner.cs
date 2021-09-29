@@ -18,10 +18,10 @@ public class TaskSpawner : ScriptableObject
     List<ThreeWayLeverLocation> availibleThreeWayLeverLocations;
     List<KeypadLocation> availibleKeypadLocations;
 
+
     public List<Task> SpawnTasks(Transform parent)
     {
         List<Task> tasks = new List<Task>();
-
         GetAvailibleLocations();
 
         for (int i = 0; i < amountOfTwoWayLeversToSpawn; i++)
@@ -29,8 +29,10 @@ public class TaskSpawner : ScriptableObject
             TwoWayLeverLocation newlocation = Extensions.RandomListItem(availibleTwoWayLeverLocations);
             availibleTwoWayLeverLocations.Remove(newlocation);
 
-            Task newTask = Instantiate(TwoWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation * Quaternion.Euler(0, 180, 0), parent).GetComponent<Task>();
-            tasks.Add(newTask);
+            GameObject newObject = Instantiate(TwoWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation * Quaternion.Euler(0, 180, 0), parent);
+
+            Task task = newObject.GetComponent<Task>();
+            tasks.Add(task);
         }
 
         for (int i = 0; i < amountOfThreeLeverssToSpawn; i++)
@@ -38,8 +40,10 @@ public class TaskSpawner : ScriptableObject
             ThreeWayLeverLocation newlocation = Extensions.RandomListItem(availibleThreeWayLeverLocations);
             availibleThreeWayLeverLocations.Remove(newlocation);
 
-            Task newTask = Instantiate(ThreeWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation * Quaternion.Euler(0, 180, 0), parent).GetComponent<Task>();
-            tasks.Add(newTask);
+            GameObject newObject = Instantiate(ThreeWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation * Quaternion.Euler(0, 180, 0), parent);
+
+            Task task = newObject.GetComponent<Task>();
+            tasks.Add(task);
         }
 
         for (int i = 0; i < amountOfKeypadsToSpawn; i++)
@@ -47,8 +51,10 @@ public class TaskSpawner : ScriptableObject
             KeypadLocation newlocation = Extensions.RandomListItem(availibleKeypadLocations);
             availibleKeypadLocations.Remove(newlocation);
 
-            Task newTask = Instantiate(KeypadPrefab, newlocation.transform.position, newlocation.transform.rotation, parent).GetComponent<Task>();
-            tasks.Add(newTask);
+            GameObject newObject = Instantiate(KeypadPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
+
+            Task task = newObject.GetComponent<Task>();
+            tasks.Add(task);
         }
 
         return tasks;
