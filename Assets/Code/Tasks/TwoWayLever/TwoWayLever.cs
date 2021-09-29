@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Terminal : MonoBehaviour
+public class TwoWayLever : MonoBehaviour
 {
     public float playerRange;
 
-    TerminalInteractable terminalInteractable;
+    TwoWayLeverInteractable leverInteractable;
 
     GameObject player;
 
@@ -21,7 +21,9 @@ public class Terminal : MonoBehaviour
         SetPlayer(GameObject.FindObjectOfType<PlayerMovement>().gameObject);
 
         animator = GetComponent<Animator>();
-        terminalInteractable = GetComponent<TerminalInteractable>();
+        leverInteractable = GetComponent<TwoWayLeverInteractable>();
+
+        animator.SetInteger("position", currentPosition);
     }
 
     private void Update()
@@ -33,14 +35,14 @@ public class Terminal : MonoBehaviour
     {
         if (Vector3.Distance(player.transform.position, this.transform.position) < playerRange)
         {
-            if (Input.GetKeyDown(KeyCode.E) && terminalInteractable.lookingAtTarget)
+            if (Input.GetKeyDown(KeyCode.E) && leverInteractable.lookingAtTarget)
             {
                 currentPosition += 1;
-                if(currentPosition > 3)
+                if (currentPosition > 1)
                 {
-                    currentPosition = 1;
+                    currentPosition = 0;
                 }
-                animator.SetInteger("Stance", currentPosition);
+                animator.SetInteger("position", currentPosition);
                 Debug.Log(currentPosition);
             }
         }

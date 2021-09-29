@@ -8,13 +8,13 @@ public class StationHealth : MonoBehaviour
 
     private void Start()
     {
-        TerminalTask.taskDealDamage += TakeDamage;
+        ThreeWayLeverTask.taskDealDamage += TakeDamage;
         KeypadTask.taskDealDamage += TakeDamage;
     }
 
     private void OnDestroy()
     {
-        TerminalTask.taskDealDamage -= TakeDamage;
+        ThreeWayLeverTask.taskDealDamage -= TakeDamage;
         KeypadTask.taskDealDamage -= TakeDamage;
     }
 

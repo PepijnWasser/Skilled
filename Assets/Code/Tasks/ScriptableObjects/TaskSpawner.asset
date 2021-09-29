@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 884f4ed2df9c038459d48db98264740e, type: 3}
   m_Name: TaskSpawner
   m_EditorClassIdentifier: 
-  TerminalPrefab: {fileID: 5197328724489111433, guid: da30e53365388fc4f842b97e746b4316, type: 3}
+  LeverPrefab: {fileID: 0}
   KeypadPrefab: {fileID: 6880409806940071777, guid: 1199e53bb1f590d44a1b73af6b3b5dab, type: 3}
-  amountOfTerminalsToSpawn: 2
+  amountOfLeverssToSpawn: 0
   amountOfKeypadsToSpawn: 2

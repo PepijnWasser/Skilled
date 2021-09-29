@@ -36,12 +36,6 @@ public abstract class Task : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (hasError)
-        {
-            TestTask();
-        }
-    }
 
-    protected abstract void TestTask();
-    
+    }
 }
