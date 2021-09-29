@@ -29,7 +29,7 @@ public class TaskSpawner : ScriptableObject
             TwoWayLeverLocation newlocation = Extensions.RandomListItem(availibleTwoWayLeverLocations);
             availibleTwoWayLeverLocations.Remove(newlocation);
 
-            GameObject newObject = Instantiate(TwoWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation * Quaternion.Euler(0, 180, 0), parent);
+            GameObject newObject = Instantiate(TwoWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
 
             Task task = newObject.GetComponent<Task>();
             tasks.Add(task);
@@ -40,7 +40,7 @@ public class TaskSpawner : ScriptableObject
             ThreeWayLeverLocation newlocation = Extensions.RandomListItem(availibleThreeWayLeverLocations);
             availibleThreeWayLeverLocations.Remove(newlocation);
 
-            GameObject newObject = Instantiate(ThreeWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation * Quaternion.Euler(0, 180, 0), parent);
+            GameObject newObject = Instantiate(ThreeWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
 
             Task task = newObject.GetComponent<Task>();
             tasks.Add(task);
