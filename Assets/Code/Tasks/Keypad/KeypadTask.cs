@@ -7,7 +7,8 @@ using Cinemachine;
 
 public class KeypadTask : Task
 {
-    Keypad keyPad;
+    [HideInInspector]
+    public Keypad keyPad;
     KeypadCodeEnterer keypadCodeEnterer;
 
     public delegate void Damage(int amount);

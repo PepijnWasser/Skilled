@@ -18,10 +18,14 @@ public class TaskSpawner : ScriptableObject
     List<ThreeWayLeverLocation> availibleThreeWayLeverLocations;
     List<KeypadLocation> availibleKeypadLocations;
 
+    KeyPadNamer keypadNamer;
 
     public List<Task> SpawnTasks(Transform parent)
     {
         List<Task> tasks = new List<Task>();
+        keypadNamer = GameObject.FindObjectOfType<KeyPadNamer>();
+
+
         GetAvailibleLocations();
 
         for (int i = 0; i < amountOfTwoWayLeversToSpawn; i++)
@@ -31,7 +35,7 @@ public class TaskSpawner : ScriptableObject
 
             GameObject newObject = Instantiate(TwoWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
 
-            Task task = newObject.GetComponent<Task>();
+            TwoWayLeverTask task = newObject.GetComponent<TwoWayLeverTask>();
             tasks.Add(task);
         }
 
@@ -42,7 +46,7 @@ public class TaskSpawner : ScriptableObject
 
             GameObject newObject = Instantiate(ThreeWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
 
-            Task task = newObject.GetComponent<Task>();
+            ThreeWayLeverTask task = newObject.GetComponent<ThreeWayLeverTask>();
             tasks.Add(task);
         }
 
@@ -53,7 +57,11 @@ public class TaskSpawner : ScriptableObject
 
             GameObject newObject = Instantiate(KeypadPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
 
-            Task task = newObject.GetComponent<Task>();
+            Keypad keypad = newObject.GetComponent<Keypad>();
+            keypad.name = keypadNamer.GetName();
+
+            KeypadTask task = newObject.GetComponent<KeypadTask>();
+
             tasks.Add(task);
         }
 

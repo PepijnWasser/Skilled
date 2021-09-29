@@ -8,6 +8,8 @@ public class Keypad : MonoBehaviour
     public bool isFocused;
     public float playerRange;
 
+    public string name;
+
     public CinemachineVirtualCamera TaskCam;
 
     KeypadCodeEnterer keypadCodeEnterer;
