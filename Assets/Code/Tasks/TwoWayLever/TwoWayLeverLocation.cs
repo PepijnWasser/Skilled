@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class TwoWayLeverLocation : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private void OnDrawGizmos()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Ray ray = new Ray(transform.position, transform.rotation * Vector3.forward);
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(ray);
     }
 }

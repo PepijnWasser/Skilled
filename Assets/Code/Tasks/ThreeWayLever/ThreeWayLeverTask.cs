@@ -8,7 +8,7 @@ public class ThreeWayLeverTask : Task
     public delegate void Damage(int amount);
     public static event Damage taskDealDamage;
 
-    public int position = 0;
+    public int targetPosition = 0;
 
     public float validationTime;
     float secondCounterValidate = 0;
@@ -28,8 +28,8 @@ public class ThreeWayLeverTask : Task
 
         while (!doneChecking)
         {
-            position = Random.Range(1, 4);
-            if(position != lever.currentPosition)
+            targetPosition = Random.Range(1, 4);
+            if(targetPosition != lever.currentPosition)
             {
                 doneChecking = true;
             }
@@ -80,7 +80,7 @@ public class ThreeWayLeverTask : Task
 
     public void ValidatePosition()
     {
-        if(lever.currentPosition == position)
+        if(lever.currentPosition == targetPosition)
         {
             secondCounterValidate += Time.deltaTime;
             if(secondCounter > validationTime)
