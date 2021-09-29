@@ -6,13 +6,13 @@ using System.Linq;
 [CreateAssetMenu(menuName = "Tasks/TaskSpawner")]
 public class TaskSpawner : ScriptableObject
 {
-    public GameObject TerminalPrefab;
+    public GameObject LeverPrefab;
     public GameObject KeypadPrefab;
 
-    public int amountOfTerminalsToSpawn;
+    public int amountOfLeverssToSpawn;
     public int amountOfKeypadsToSpawn;
 
-    List<TerminalLocation> availibleTerminalLocations;
+    List<ThreeWayLeverLocation> availibleLeverLocations;
     List<KeypadLocation> availibleKeypadLocations;
 
 
@@ -21,12 +21,12 @@ public class TaskSpawner : ScriptableObject
         List<Task> tasks = new List<Task>();
 
         GetAvailibleLocations();
-        for(int i = 0; i < amountOfTerminalsToSpawn; i++)
+        for(int i = 0; i < amountOfLeverssToSpawn; i++)
         {
-            TerminalLocation newlocation = Extensions.RandomListItem(availibleTerminalLocations);
-            availibleTerminalLocations.Remove(newlocation);
+            ThreeWayLeverLocation newlocation = Extensions.RandomListItem(availibleLeverLocations);
+            availibleLeverLocations.Remove(newlocation);
 
-            Task newTask = Instantiate(TerminalPrefab, newlocation.transform.position, newlocation.transform.rotation, parent).GetComponent<Task>();
+            Task newTask = Instantiate(LeverPrefab, newlocation.transform.position, newlocation.transform.rotation * Quaternion.Euler(0, 180, 0), parent).GetComponent<Task>();
             tasks.Add(newTask);
         }
 
@@ -44,7 +44,7 @@ public class TaskSpawner : ScriptableObject
 
     void GetAvailibleLocations()
     {
-        availibleTerminalLocations = GameObject.FindObjectsOfType<TerminalLocation>().ToList();
+        availibleLeverLocations = GameObject.FindObjectsOfType<ThreeWayLeverLocation>().ToList();
         availibleKeypadLocations = GameObject.FindObjectsOfType<KeypadLocation>().ToList();
     }
 }

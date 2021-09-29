@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TerminalLocation : MonoBehaviour
+public class ThreeWayLeverLocation : MonoBehaviour
 {
     private void OnDrawGizmos()
     {

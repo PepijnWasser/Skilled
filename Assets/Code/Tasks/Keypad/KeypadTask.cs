@@ -8,7 +8,7 @@ using Cinemachine;
 public class KeypadTask : Task
 {
     Keypad keyPad;
-    KeyPadCodeEnterer keypadCodeEnterer;
+    KeypadCodeEnterer keypadCodeEnterer;
 
     public delegate void Damage(int amount);
     public static event Damage taskDealDamage;
@@ -21,7 +21,7 @@ public class KeypadTask : Task
         base.InitializeTask();
 
         keyPad = GetComponent<Keypad>();
-        keypadCodeEnterer = GetComponent<KeyPadCodeEnterer>();
+        keypadCodeEnterer = GetComponent<KeypadCodeEnterer>();
 
         int first = Random.Range(0,10);
         int second = Random.Range(0, 10);
@@ -86,11 +86,5 @@ public class KeypadTask : Task
         {
             keypadCodeEnterer.DisplayErrorMessage();
         }
-    }
-
-
-    protected override void TestTask()
-    {
-
     }
 }
