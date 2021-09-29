@@ -7,10 +7,10 @@ public class KeypadCodeDisplay : MonoBehaviour
 {
     public List<KeypadTask> tasksToDisplay = new List<KeypadTask>();
 
-    public Image content;
+    public List<Image> content;
     public Image itemPrefab;
 
-    public List<Image> imagesSpawned = new List<Image>();
+    List<Image> imagesSpawned = new List<Image>();
 
     bool NeedToUpdate = false;
 
@@ -38,7 +38,9 @@ public class KeypadCodeDisplay : MonoBehaviour
 
             foreach(KeypadTask task in tasksToDisplay)
             {
-                Image spawnedItem = Instantiate(itemPrefab, content.transform);
+                int display =  (int)((float)imagesSpawned.Count / (float)8);
+                Debug.Log(display);
+                Image spawnedItem = Instantiate(itemPrefab, content[display].transform);
                 imagesSpawned.Add(spawnedItem);
             }
             NeedToUpdate = false;

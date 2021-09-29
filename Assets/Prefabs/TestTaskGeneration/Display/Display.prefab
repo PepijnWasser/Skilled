@@ -170,7 +170,6 @@ GameObject:
   - component: {fileID: 2823069954236445507}
   - component: {fileID: 2823069954236445506}
   - component: {fileID: 2823069954236445517}
-  - component: {fileID: 1603368763}
   m_Layer: 5
   m_Name: Display
   m_TagString: Untagged
@@ -259,22 +258,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1603368763
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2823069954236445516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ad2dc47cf652344291e17736a02d9b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tasksToDisplay: []
-  content: {fileID: 2108531503734644779}
-  itemPrefab: {fileID: 1832455352435854479, guid: 609b7901e8bb6d941a8c92891524ce16, type: 3}
-  imagesSpawned: []
 --- !u!1 &4211681709966558664
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +431,7 @@ MonoBehaviour:
   m_ChildAlignment: 0
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
