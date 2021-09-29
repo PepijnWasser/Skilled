@@ -17,4 +17,4 @@ MonoBehaviour:
   KeypadPrefab: {fileID: 6880409806940071777, guid: 1199e53bb1f590d44a1b73af6b3b5dab, type: 3}
   amountOfTwoWayLeversToSpawn: 2
   amountOfThreeLeverssToSpawn: 2
-  amountOfKeypadsToSpawn: 2
+  amountOfKeypadsToSpawn: 24
