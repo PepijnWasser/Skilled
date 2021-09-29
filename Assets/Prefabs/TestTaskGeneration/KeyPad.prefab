@@ -474,7 +474,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1625582483453309919}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -492,7 +492,7 @@ Transform:
   - {fileID: 5607762902194362985}
   m_Father: {fileID: 6474188000379026396}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2295507981384783825
 GameObject:
   m_ObjectHideFlags: 0
@@ -2701,7 +2701,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2793e1701c574734a8efaabb4a491179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keypad: {fileID: 0}
   body: {fileID: 6381883160323338946}
   lookingAtTarget: 0
 --- !u!114 &8660488373691940152
@@ -2719,7 +2718,6 @@ MonoBehaviour:
   isFocused: 0
   playerRange: 5
   TaskCam: {fileID: 2480904580605306654}
-  keypadInteractable: {fileID: 0}
 --- !u!1 &6884327370377382874
 GameObject:
   m_ObjectHideFlags: 0
@@ -2781,7 +2779,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.7296651, y: 1}
+    m_SensorSize: {x: 0.6267943, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
