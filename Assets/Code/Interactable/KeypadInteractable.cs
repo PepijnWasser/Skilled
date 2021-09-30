@@ -18,16 +18,19 @@ public class KeypadInteractable : Interactable
 
     protected override void Update()
     {
-        lookingAtTarget = false;
-        RaycastHit hit;
-
-        float dist = Vector3.Distance(player.transform.position, this.transform.position);
-        if (dist < range)
+        if(player != null)
         {
-            // Does the ray intersect any objects excluding the player layer
-            if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
+            lookingAtTarget = false;
+            RaycastHit hit;
+
+            float dist = Vector3.Distance(player.transform.position, this.transform.position);
+            if (dist < range)
             {
-                OnHit(hit);
+                // Does the ray intersect any objects excluding the player layer
+                if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
+                {
+                    OnHit(hit);
+                }
             }
         }
     }

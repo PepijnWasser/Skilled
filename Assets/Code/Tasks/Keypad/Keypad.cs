@@ -20,7 +20,6 @@ public class Keypad : MonoBehaviour
     protected virtual void Start()
     {
         GameManager.playerMade += SetPlayer;
-        SetPlayer(GameObject.FindObjectOfType<PlayerMovement>().gameObject);
 
         keypadCodeEnterer = GetComponent<KeypadCodeEnterer>();
         keypadInteractable = GetComponent<KeypadInteractable>();
@@ -33,7 +32,10 @@ public class Keypad : MonoBehaviour
 
     private void Update()
     {
-        TestFocus();
+        if(player != null)
+        {
+            TestFocus();
+        }
     }
 
     void TestFocus()

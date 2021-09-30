@@ -18,7 +18,6 @@ public class ThreeWayLever : MonoBehaviour
     private void Start()
     {
         GameManager.playerMade += SetPlayer;
-        SetPlayer(GameObject.FindObjectOfType<PlayerMovement>().gameObject);
 
         animator = GetComponent<Animator>();
         leverInteractable = GetComponent<ThreeWayLeverInteractable>();
@@ -29,7 +28,10 @@ public class ThreeWayLever : MonoBehaviour
 
     private void Update()
     {
-        TestPull();
+        if(player != null)
+        {
+            TestPull();
+        }
     }
 
     void TestPull()

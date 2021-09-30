@@ -12,7 +12,6 @@ public class Interactable : MonoBehaviour
     protected virtual void Start()
     {
         GameManager.playerMade += SetCam;
-        SetCam(GameObject.FindObjectOfType<PlayerMovement>().gameObject);
         mouseCursor = GameObject.FindObjectOfType<MouseCursor>();
     }
 

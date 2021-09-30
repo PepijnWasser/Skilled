@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5190529441526039828
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5190529441526039830}
+  - component: {fileID: 5190529441526039824}
+  - component: {fileID: 5190529441526039827}
+  - component: {fileID: 5190529441526039825}
+  - component: {fileID: 5190529441526039826}
+  - component: {fileID: 5190529441526039831}
+  m_Layer: 0
+  m_Name: task manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5190529441526039830
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190529441526039828}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.3798428, y: 4.8535223, z: -0.8571109}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5190529441526039824
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190529441526039828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eef51bb6061401d47a6b9e43ac0cedf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  names:
+  - 'turbo '
+  - airco
+  - life support
+--- !u!114 &5190529441526039827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190529441526039828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd14db85ec03ac4ba303b0fb670edaf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  names:
+  - speed
+  - scan frequency
+  - intercom volume
+--- !u!114 &5190529441526039825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190529441526039828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60aefe9a3fb77d04bac2356fe56e37d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  names:
+  - adminAccount
+  - Space coordinates
+  - communication array channel
+  - backdoorAccess
+--- !u!114 &5190529441526039826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190529441526039828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 884f4ed2df9c038459d48db98264740e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TwoWayLeverPrefab: {fileID: 4499027364031894349, guid: 9bba4bf332aa50d48b4e9427a535dc0c, type: 3}
+  ThreeWayLeverPrefab: {fileID: 4249811457755183211, guid: 063c3322d1d9b6741a1808ba06d98b2c, type: 3}
+  KeypadPrefab: {fileID: 6880409806940071777, guid: 1199e53bb1f590d44a1b73af6b3b5dab, type: 3}
+  amountOfTwoWayLeversToSpawn: 3
+  amountOfThreeLeverssToSpawn: 3
+  amountOfKeypadsToSpawn: 4
+--- !u!114 &5190529441526039831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5190529441526039828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c67746dc66d82439f16f0162257de8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskSpawner: {fileID: 5190529441526039826}
+  maxErrors: 10
+  timeBetweenErrors: {x: 5, y: 5}
+  timeToNextError: 0

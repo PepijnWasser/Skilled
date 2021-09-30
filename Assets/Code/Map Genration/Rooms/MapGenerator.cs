@@ -31,31 +31,28 @@ public class MapGenerator : MonoBehaviour
     void Start()
     {
         Initizlize();
-        SectionGenerator.OnCompletion += FinishGeneration;
+        SectionGenerator.OnCompletion += FinishSectionGeneration;
     }
 
     private void OnDestroy()
     {
-        SectionGenerator.OnCompletion -= FinishGeneration;
+        SectionGenerator.OnCompletion -= FinishSectionGeneration;
     }
 
     void Initizlize()
     {
-        amountOfSectors = 4;
         ConsoleRoom consoleRoom = Instantiate(consoleRoomPrefab, this.transform);
         foreach (Doorway doorway in consoleRoom.doorways)
         {
             doorwaysFromThis.Add(doorway);
             availableDoorwaysFromThis.Add(doorway);
         }
-        Extensions.SetSeed(2);
     }
 
     void GenerateLevel()
     {
         if(amountOfSectorsSpawned < amountOfSectors)
         {
-            Debug.Log(amountOfSectors);
             if (!generating)
             {
                 generating = true;
@@ -148,7 +145,7 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    void FinishGeneration(bool finished)
+    void FinishSectionGeneration(bool finished)
     {
         if (finished)
         {
@@ -177,16 +174,6 @@ public class MapGenerator : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            GenerateSection();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Destroy(lastSectionGenerated.gameObject);
-        }
-
         GenerateLevel();
     }
 }
