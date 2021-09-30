@@ -13,7 +13,7 @@ public class ThreeWayLeverTask : Task
     public float validationTime;
     float secondCounterValidate = 0;
 
-    ThreeWayLever lever;
+    public ThreeWayLever lever;
 
     private void Start()
     {
@@ -83,14 +83,14 @@ public class ThreeWayLeverTask : Task
         if(lever.currentPosition == targetPosition)
         {
             secondCounterValidate += Time.deltaTime;
-            if(secondCounter > validationTime)
+            if(secondCounterValidate > validationTime)
             {
                 CompleteTask();
             }
         }
         else
         {
-            secondCounter = 0;
+            secondCounterValidate = 0;
         }
     }
 }

@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyPadNamer : MonoBehaviour
+public class TwoWayLeverNamer : MonoBehaviour
 {
     List<string> availableNames;
-    
+
     public List<string> names = new List<string>()
     {
-        "adminAccount",
-        "Space coordinates",
-        "communication array channel",
+        "turbo",
+        "lights",
+        "beep boop sounds",
     };
 
     public void Initialize()
@@ -20,7 +20,7 @@ public class KeyPadNamer : MonoBehaviour
 
     public string GetName()
     {
-        if(availableNames.Count > 0)
+        if (availableNames.Count > 0)
         {
             string name = Extensions.RandomListItem(availableNames);
             availableNames.Remove(name);
@@ -31,5 +31,4 @@ public class KeyPadNamer : MonoBehaviour
             return "no name found";
         }
     }
-    
 }

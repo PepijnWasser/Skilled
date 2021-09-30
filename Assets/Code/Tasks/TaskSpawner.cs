@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-[CreateAssetMenu(menuName = "Tasks/TaskSpawner")]
-public class TaskSpawner : ScriptableObject
+//[CreateAssetMenu(menuName = "Tasks/TaskSpawner")]
+public class TaskSpawner : MonoBehaviour
 {
     public GameObject TwoWayLeverPrefab;
     public GameObject ThreeWayLeverPrefab;
@@ -19,11 +19,27 @@ public class TaskSpawner : ScriptableObject
     List<KeypadLocation> availibleKeypadLocations;
 
     KeyPadNamer keypadNamer;
+    TwoWayLeverNamer twoWayLeverNamer;
+    ThreeWayLeverNamer threeWayLeverNamer;
+
+    private void Start()
+    {
+        
+    }
 
     public List<Task> SpawnTasks(Transform parent)
     {
         List<Task> tasks = new List<Task>();
+
         keypadNamer = GameObject.FindObjectOfType<KeyPadNamer>();
+        twoWayLeverNamer = GameObject.FindObjectOfType<TwoWayLeverNamer>();
+        threeWayLeverNamer = GameObject.FindObjectOfType<ThreeWayLeverNamer>();
+
+        keypadNamer.Initialize();
+
+        twoWayLeverNamer.Initialize();
+
+        threeWayLeverNamer.Initialize();
 
 
         GetAvailibleLocations();
@@ -35,7 +51,11 @@ public class TaskSpawner : ScriptableObject
 
             GameObject newObject = Instantiate(TwoWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
 
+            TwoWayLever twoWayLever = newObject.GetComponent<TwoWayLever>();
+            twoWayLever.name = twoWayLeverNamer.GetName();
+
             TwoWayLeverTask task = newObject.GetComponent<TwoWayLeverTask>();
+
             tasks.Add(task);
         }
 
@@ -45,6 +65,9 @@ public class TaskSpawner : ScriptableObject
             availibleThreeWayLeverLocations.Remove(newlocation);
 
             GameObject newObject = Instantiate(ThreeWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
+
+            ThreeWayLever threeWayLever = newObject.GetComponent<ThreeWayLever>();
+            threeWayLever.name = threeWayLeverNamer.GetName();
 
             ThreeWayLeverTask task = newObject.GetComponent<ThreeWayLeverTask>();
             tasks.Add(task);

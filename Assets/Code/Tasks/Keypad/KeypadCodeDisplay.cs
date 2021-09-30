@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class KeypadCodeDisplay : MonoBehaviour
 {
-    public List<KeypadTask> tasksToDisplay = new List<KeypadTask>();
+    List<KeypadTask> tasksToDisplay = new List<KeypadTask>();
 
     public List<Image> content;
     public Image itemPrefab;
@@ -65,7 +65,7 @@ public class KeypadCodeDisplay : MonoBehaviour
         {
             KeypadTask keypadTask = task as KeypadTask;
             tasksToDisplay.Add(keypadTask);
-            Debug.Log("adding task");
+           // Debug.Log("adding K task");
             NeedToUpdate = true;
         }
     }

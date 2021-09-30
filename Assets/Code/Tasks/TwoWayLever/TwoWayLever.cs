@@ -13,7 +13,9 @@ public class TwoWayLever : MonoBehaviour
     Animator animator;
 
     [HideInInspector]
-    public int currentPosition = 1;
+    public int currentPosition;
+
+    public string name;
 
     private void Start()
     {
@@ -23,6 +25,7 @@ public class TwoWayLever : MonoBehaviour
         animator = GetComponent<Animator>();
         leverInteractable = GetComponent<TwoWayLeverInteractable>();
 
+        currentPosition = Random.Range(0, 2);
         animator.SetInteger("position", currentPosition);
     }
 

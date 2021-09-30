@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KeyPadNamer : MonoBehaviour
+public class ThreeWayLeverNamer : MonoBehaviour
 {
     List<string> availableNames;
-    
+
     public List<string> names = new List<string>()
     {
-        "adminAccount",
-        "Space coordinates",
-        "communication array channel",
+        "speed",
+        "scan frequency",
+        "intercom volume",
     };
 
     public void Initialize()
@@ -31,5 +31,4 @@ public class KeyPadNamer : MonoBehaviour
             return "no name found";
         }
     }
-    
 }

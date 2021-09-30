@@ -12,7 +12,7 @@ public class TwoWayLeverTask : Task
     public float validationTime;
     float secondCounterValidate = 0;
 
-    TwoWayLever lever;
+    public TwoWayLever lever;
 
     private void Start()
     {

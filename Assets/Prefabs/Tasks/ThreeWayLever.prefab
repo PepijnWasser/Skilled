@@ -703,7 +703,8 @@ MonoBehaviour:
   DamageRate: 1
   hasError: 0
   targetPosition: 0
-  validationTime: 0
+  validationTime: 5
+  lever: {fileID: 0}
 --- !u!114 &1045110450440100342
 MonoBehaviour:
   m_ObjectHideFlags: 0

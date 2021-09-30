@@ -24,9 +24,9 @@ public class KeypadTask : Task
         keyPad = GetComponent<Keypad>();
         keypadCodeEnterer = GetComponent<KeypadCodeEnterer>();
 
-        int first = Random.Range(0,10);
-        int second = Random.Range(0, 10);
-        int third = Random.Range(0, 10);
+        int first = Random.Range(1,10);
+        int second = Random.Range(1, 10);
+        int third = Random.Range(1, 10);
 
         code = first.ToString() + second.ToString() + third.ToString();
     }
@@ -72,6 +72,11 @@ public class KeypadTask : Task
 
     public void ValidateCode()
     {
+        if(keypadCodeEnterer == null)
+        {
+            keypadCodeEnterer = GetComponent<KeypadCodeEnterer>();
+        }
+
         if (hasError)
         {
             if (keypadCodeEnterer.message == code)

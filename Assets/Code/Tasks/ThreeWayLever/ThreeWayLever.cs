@@ -13,7 +13,7 @@ public class ThreeWayLever : MonoBehaviour
     Animator animator;
 
     [HideInInspector]
-    public int currentPosition = 3;
+    public int currentPosition;
 
     private void Start()
     {
@@ -23,6 +23,7 @@ public class ThreeWayLever : MonoBehaviour
         animator = GetComponent<Animator>();
         leverInteractable = GetComponent<ThreeWayLeverInteractable>();
 
+        currentPosition = Random.Range(1, 4);
         animator.SetInteger("Stance", currentPosition);
     }
 

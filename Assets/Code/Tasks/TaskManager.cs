@@ -9,11 +9,11 @@ public class TaskManager : MonoBehaviour
     public int maxErrors;
     
     public Vector2 timeBetweenErrors;
-    float timeToNextError;
+    public float timeToNextError;
     float secondCounter = 0;
 
-    public List<Task> tasksWithoutErrors = new List<Task>();
-    public List<Task> tasksWithErrors = new List<Task>();
+    List<Task> tasksWithoutErrors = new List<Task>();
+    List<Task> tasksWithErrors = new List<Task>();
 
     public delegate void Spawning(Task taskSpawned);
     public static event Spawning taskHasError;
@@ -45,18 +45,24 @@ public class TaskManager : MonoBehaviour
 
         if(secondCounter > timeToNextError)
         {
-            if(tasksWithoutErrors.Count > 0)
+            if(tasksWithErrors.Count < maxErrors)
             {
-                if(tasksWithErrors.Count < maxErrors)
+                if(tasksWithoutErrors.Count > 0)
                 {
                     Task newTask = Extensions.RandomListItem(tasksWithoutErrors);
                     tasksWithErrors.Add(newTask);
                     tasksWithoutErrors.Remove(newTask);
                     newTask.InitializeTask();
 
+                    Debug.Log(newTask.GetType());
                     taskHasError?.Invoke(newTask);
 
                     secondCounter = 0;
+                    timeToNextError = Random.Range(timeBetweenErrors.x, timeBetweenErrors.y);
+                }
+                else
+                {
+                    Debug.LogError("too few tasks");
                 }
             }
         }
