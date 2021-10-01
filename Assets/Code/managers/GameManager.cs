@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     public delegate void PlayerMade(GameObject player);
     public static event PlayerMade playerMade;
 
+    public delegate void PlayerCamSet(Camera POVCam);
+    public static event PlayerCamSet playerCamSet;
+
     public void MakePlayerCharacter(bool playerControlled, Vector3 position, string _name, int playerID)
     {
         GameObject player = Instantiate(playerPrefab, position, Quaternion.identity);
@@ -30,6 +33,7 @@ public class GameManager : MonoBehaviour
             playerPositionUpdater.playerNose = player.GetComponent<PlayerPrefabManager>().nose;
 
             playerMade?.Invoke(player);
+            playerCamSet?.Invoke(player.GetComponent<PlayerPrefabManager>().camera);
         }
     }
 

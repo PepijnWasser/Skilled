@@ -6,11 +6,12 @@ using Cinemachine;
 public class PlayerPrefabManager : MonoBehaviour
 {
     public Camera camera;
+    public Camera skyboxCamera;
     public CinemachineVirtualCamera vCamera;
 
     public AllignWithCamera allignScript;
 
-    public Camera skyboxCamera;
+
     public GameObject nose;
 
     public PlayerMovement playerMovementScript;

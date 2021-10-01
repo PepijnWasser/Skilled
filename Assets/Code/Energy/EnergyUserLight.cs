@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightItem : EnergyItem
+public class EnergyUserLight : EnergyUser
 {
     public Light light;
 

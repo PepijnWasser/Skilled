@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorItem : EnergyItem
+public class EnergyUserDoor : EnergyUser
 {
     public GameObject door;
-    public Vector3 basePos;
+    Vector3 basePos;
 
     protected virtual void Start()
     {
