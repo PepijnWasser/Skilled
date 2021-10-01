@@ -1991,6 +1991,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2793e1701c574734a8efaabb4a491179, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  range: 5
   body: {fileID: 7321166477951896788}
   lookingAtTarget: 0
 --- !u!114 &8660488373691940152
@@ -2005,10 +2006,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f1186b950591b04fb93562b9f720b5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayCam: {fileID: 2480904580605306654}
   isFocused: 0
-  playerRange: 5
   name: 
-  TaskCam: {fileID: 2480904580605306654}
 --- !u!1 &6884327370377382874
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,7 +2070,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.91642374, y: 1}
+    m_SensorSize: {x: 0.94066983, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
