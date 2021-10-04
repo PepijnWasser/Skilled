@@ -9,11 +9,9 @@ public class GameManager : MonoBehaviour
     public PlayerPositionUpdater playerPositionUpdater;
     Dictionary<int, GameObject> characterDictionary = new Dictionary<int, GameObject>();
 
-    public delegate void PlayerMade(GameObject player);
+    public delegate void PlayerMade(GameObject player, Camera cam);
     public static event PlayerMade playerMade;
 
-    public delegate void PlayerCamSet(Camera POVCam);
-    public static event PlayerCamSet playerCamSet;
 
     public void MakePlayerCharacter(bool playerControlled, Vector3 position, string _name, int playerID)
     {
@@ -22,18 +20,17 @@ public class GameManager : MonoBehaviour
         characterDictionary.Add(playerID, player);
 
         player.name = _name + " " +  playerID;
-        if (!playerControlled)
-        {
-            player.GetComponent<PlayerPrefabManager>().DisablePlayerActivity();
-        }
-        else
+        if (playerControlled)
         {
             player.name += " controlled";
             playerPositionUpdater.player = player;
             playerPositionUpdater.playerNose = player.GetComponent<PlayerPrefabManager>().nose;
 
-            playerMade?.Invoke(player);
-            playerCamSet?.Invoke(player.GetComponent<PlayerPrefabManager>().camera);
+            playerMade?.Invoke(player, player.GetComponent<PlayerPrefabManager>().camera);
+        }
+        else
+        {
+            player.GetComponent<PlayerPrefabManager>().DisablePlayerActivity();
         }
     }
 

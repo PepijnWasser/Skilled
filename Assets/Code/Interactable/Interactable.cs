@@ -12,10 +12,14 @@ public class Interactable : MonoBehaviour
     public GameObject body;
 
 
+    protected virtual void Awake()
+    {
+        GameManager.playerMade += SetCam;
+    }
+
     protected virtual void Start()
     {
         mouseCursor = GameObject.FindObjectOfType<MouseCursor>();
-        SetCam();
     }
 
 
@@ -48,9 +52,9 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    void SetCam()
+    void SetCam(GameObject _player, Camera cam)
     {
-        player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
-        playerCamera = player.GetComponentInChildren<Camera>();
+        player = _player;
+        playerCamera = cam;
     }
 }

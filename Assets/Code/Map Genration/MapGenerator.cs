@@ -162,6 +162,7 @@ public class MapGenerator : MonoBehaviour
 
             if(amountOfSectorsSpawned >= amountOfSectors)
             {
+                Debug.Log("finished map generation");
                 OnCompletion?.Invoke();
             }
         }

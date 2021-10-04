@@ -13,15 +13,23 @@ public class ThreeWayLever : MonoBehaviour
     [HideInInspector]
     public int currentPosition;
 
+    private void Awake()
+    {
+        GameManager.playerMade += SetPlayer;
+    }
+
     private void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
-
         animator = GetComponent<Animator>();
         interactable = GetComponent<Interactable>();
 
         currentPosition = Random.Range(1, 4);
         animator.SetInteger("Stance", currentPosition);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.playerMade -= SetPlayer;
     }
 
     private void Update()
@@ -43,5 +51,10 @@ public class ThreeWayLever : MonoBehaviour
             }
             animator.SetInteger("Stance", currentPosition);
         }
+    }
+
+    void SetPlayer(GameObject _player, Camera cam)
+    {
+        player = player;
     }
 }

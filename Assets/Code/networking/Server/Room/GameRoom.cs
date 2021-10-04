@@ -9,7 +9,7 @@ using System;
 using Random = UnityEngine.Random;
 public class GameRoom : Room
 {
-    int gameLoadedMessages = 0;
+    int mapMadeMessages = 0;
     int worldSeed = Random.Range(1, 30);
     int amountOfSectors = 3;
 
@@ -41,6 +41,11 @@ public class GameRoom : Room
         {
             UpdateClientInfoMessage message = tempOBJ as UpdateClientInfoMessage;
             HandleUpdateClientInfo(message, myClient);
+        }
+        else if(tempOBJ is MapMadeMessage)
+        {
+            MapMadeMessage message = tempOBJ as MapMadeMessage;
+            HandleMapMadeMessage(message, myClient);
         }
     }
 
@@ -88,35 +93,10 @@ public class GameRoom : Room
 
     void HandleGameLoadedMessage(MyClient client)
     {
-        gameLoadedMessages += 1;
-
         TCPPacket outPacket = new TCPPacket();
         MakeGameMapMessage makeGameMapMessage = new MakeGameMapMessage(worldSeed, amountOfSectors);
         outPacket.Write(makeGameMapMessage);
         SendTCPMessageToTargetUser(outPacket, client);
-
-        if (gameLoadedMessages == clientsInRoom.Count)
-        {
-
-        }
-        
-        TCPPacket outpacket = new TCPPacket();
-        MakenewPlayerCharacterMessage makePlayerCharacterMessage = new MakenewPlayerCharacterMessage(true, client.playerPosition, client.playerID, client.playerName);
-        outpacket.Write(makePlayerCharacterMessage);
-        SendTCPMessageToTargetUser(outpacket, client);
-            
-
-        foreach(MyClient myClient in clientsInRoom)
-        {
-            if(myClient != client)
-            {
-                TCPPacket outpacket2 = new TCPPacket();
-                MakenewPlayerCharacterMessage makePlayerCharacterMessage2 = new MakenewPlayerCharacterMessage(false, client.playerPosition, client.playerID, client.playerName);
-                outpacket2.Write(makePlayerCharacterMessage2);
-                SendTCPMessageToAllUsersExcept(outpacket2, client);
-            }
-        }
-
     }
 
     void HandleUpdatePlayerPositionMessageUDP(UpdatePlayerPositionUDP _message, MyClient client)
@@ -139,5 +119,43 @@ public class GameRoom : Room
     {
         client.endPoint = new IPEndPoint(message.ip, message.receivePort);
         client.sendPort = message.sendPort;
+    }
+
+    void HandleMapMadeMessage(MapMadeMessage message, MyClient client)
+    {
+        Debug.Log("map loaded");
+        mapMadeMessages += 1;
+
+        if (mapMadeMessages == clientsInRoom.Count)
+        {
+            MakePlayerCharacters();
+     
+            
+        }
+    }
+
+    void MakePlayerCharacters()
+    {
+        foreach (MyClient clientToSendTo in clientsInRoom)
+        {
+            foreach (MyClient clientToSend in clientsInRoom)
+            {
+                if (clientToSend != clientToSendTo)
+                {
+                    TCPPacket outpacket2 = new TCPPacket();
+                    MakenewPlayerCharacterMessage makePlayerCharacterMessage2 = new MakenewPlayerCharacterMessage(false, clientToSend.playerPosition, clientToSend.playerID, clientToSend.playerName);
+                    outpacket2.Write(makePlayerCharacterMessage2);
+                    SendTCPMessageToTargetUser(outpacket2, clientToSendTo);
+                }
+                else
+                {
+                    TCPPacket outpacket = new TCPPacket();
+                    MakenewPlayerCharacterMessage makePlayerCharacterMessage = new MakenewPlayerCharacterMessage(true, clientToSend.playerPosition, clientToSend.playerID, clientToSend.playerName);
+                    outpacket.Write(makePlayerCharacterMessage);
+                    SendTCPMessageToTargetUser(outpacket, clientToSendTo);
+
+                }
+            }
+        }
     }
 }

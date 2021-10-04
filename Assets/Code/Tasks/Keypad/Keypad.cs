@@ -10,15 +10,22 @@ public class Keypad : Focusable
     KeypadCodeEnterer keypadCodeEnterer;
     KeypadInteractable keypadInteractable;
 
+    private void Awake()
+    {
+        GameManager.playerMade += SetPlayer;
+    }
 
     protected virtual void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
-
         keypadCodeEnterer = GetComponent<KeypadCodeEnterer>();
         keypadInteractable = GetComponent<KeypadInteractable>();
     }
 
+    private void OnDestroy()
+    {
+
+        GameManager.playerMade -= SetPlayer;
+    }
 
     private void Update()
     {
@@ -44,5 +51,10 @@ public class Keypad : Focusable
                 DeFocus();
             }
         }
+    }
+
+    void SetPlayer(GameObject _player, Camera cam)
+    {
+        player = _player;
     }
 }

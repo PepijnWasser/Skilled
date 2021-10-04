@@ -23,8 +23,6 @@ public class TaskManager : MonoBehaviour
         MapGenerator.OnCompletion += SpawnTasks;
         Task.taskCompleted += FinishTask;
 
-        SpawnTasks();
-
         timeToNextError = timeBetweenErrors.y;
     }
 
@@ -37,6 +35,7 @@ public class TaskManager : MonoBehaviour
     void SpawnTasks()
     {
         tasksWithoutErrors = taskSpawner.SpawnTasks(this.transform);
+        secondCounter = 0;
     }
 
     private void Update()
@@ -45,24 +44,27 @@ public class TaskManager : MonoBehaviour
 
         if(secondCounter > timeToNextError)
         {
-            if(tasksWithErrors.Count < maxErrors)
+            if(tasksWithErrors != null && tasksWithoutErrors != null)
             {
-                if(tasksWithoutErrors.Count > 0)
+                if (tasksWithErrors.Count < maxErrors)
                 {
-                    Task newTask = Extensions.RandomListItem(tasksWithoutErrors);
-                    tasksWithErrors.Add(newTask);
-                    tasksWithoutErrors.Remove(newTask);
-                    newTask.InitializeTask();
-                    taskHasError?.Invoke(newTask);
+                    if (tasksWithoutErrors.Count > 0)
+                    {
+                        Task newTask = Extensions.RandomListItem(tasksWithoutErrors);
+                        tasksWithErrors.Add(newTask);
+                        tasksWithoutErrors.Remove(newTask);
+                        newTask.InitializeTask();
+                        taskHasError?.Invoke(newTask);
 
-                    secondCounter = 0;
-                    timeToNextError = Random.Range(timeBetweenErrors.x, timeBetweenErrors.y);
+                        secondCounter = 0;
+                        timeToNextError = Random.Range(timeBetweenErrors.x, timeBetweenErrors.y);
+                    }
+                    else
+                    {
+                        Debug.Log("too few tasks");
+                    }
                 }
-                else
-                {
-                    Debug.LogError("too few tasks");
-                }
-            }
+            }       
         }
     }
 

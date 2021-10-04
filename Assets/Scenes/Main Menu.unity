@@ -319,7 +319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d92a40cc30cca748b0156e06ec610d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: 
 --- !u!1 &510176283
 GameObject:
   m_ObjectHideFlags: 0
@@ -691,7 +690,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerID: 0
   playerName: 
-  udpPort: 0
+  udpReceivePort: 0
+  udpSendPort: 0
 --- !u!4 &2054256186
 Transform:
   m_ObjectHideFlags: 0

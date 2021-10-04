@@ -15,15 +15,23 @@ public class TwoWayLever : MonoBehaviour
 
     public string name;
 
+    protected void Awake()
+    {
+        GameManager.playerMade += SetPlayer;
+    }
+
     private void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
-
         animator = GetComponent<Animator>();
         interactable = GetComponent<Interactable>();
 
         currentPosition = Random.Range(0, 2);
         animator.SetInteger("position", currentPosition);
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.playerMade -= SetPlayer;
     }
 
     private void Update()
@@ -46,5 +54,10 @@ public class TwoWayLever : MonoBehaviour
             animator.SetInteger("position", currentPosition);
             Debug.Log(currentPosition);
         }
+    }
+
+    void SetPlayer(GameObject _player, Camera cam)
+    {
+        player = _player;
     }
 }

@@ -18,12 +18,12 @@ public class DisplayClicker : MonoBehaviour
 
     private void Awake()
     {
-        GameManager.playerCamSet += SetPlayerCamera;
+        GameManager.playerMade += SetPlayerCamera;
     }
 
     private void OnDestroy()
     {
-        GameManager.playerCamSet -= SetPlayerCamera;
+        GameManager.playerMade -= SetPlayerCamera;
     }
 
     void Start()
@@ -69,7 +69,7 @@ public class DisplayClicker : MonoBehaviour
         }
     }
 
-    void SetPlayerCamera(Camera cam)
+    void SetPlayerCamera(GameObject _player, Camera cam)
     {
         displayCam = cam;
     }

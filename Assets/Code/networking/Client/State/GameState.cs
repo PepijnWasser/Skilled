@@ -12,6 +12,17 @@ public class GameState : State
     public MapGenerator mapGenerator;
     public GameManager gameManager;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        MapGenerator.OnCompletion += SendMapMadeMessage;    
+    }
+
+    private void OnDestroy()
+    {
+        MapGenerator.OnCompletion += SendMapMadeMessage;
+    }
+
     private void Start()
     {
         SendGameLoadedMessage();
@@ -136,5 +147,11 @@ public class GameState : State
         
         UpdatePlayerPositionUDP message = new UpdatePlayerPositionUDP(position, rotation, noseRotation);
         udpClientNetwork.SendObjectThroughUDP(message);       
+    }
+
+    void SendMapMadeMessage()
+    {
+        MapMadeMessage message = new MapMadeMessage();
+        tcpClientNetwork.SendObjectThroughTCP(message);
     }
 }

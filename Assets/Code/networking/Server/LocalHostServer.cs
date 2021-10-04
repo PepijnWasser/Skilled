@@ -167,7 +167,7 @@ public class LocalHostServer : MonoBehaviour
 			if (connectedClient.endPoint.Address.ToString() == RemoteIP.Address.ToString() && connectedClient.sendPort.ToString() == RemoteIP.Port.ToString())
             {
 				activeRoom.handleUDPNetworkMessageFromUser(TempOBJ, connectedClient);
-				Debug.Log("received message from: " + connectedClient.playerName);
+				Debug.Log("received UDP message from: " + connectedClient.playerName);
 				break;
             }
         }
