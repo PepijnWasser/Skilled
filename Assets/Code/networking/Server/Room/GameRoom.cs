@@ -123,14 +123,11 @@ public class GameRoom : Room
 
     void HandleMapMadeMessage(MapMadeMessage message, MyClient client)
     {
-        Debug.Log("map loaded");
         mapMadeMessages += 1;
 
         if (mapMadeMessages == clientsInRoom.Count)
         {
-            MakePlayerCharacters();
-     
-            
+            MakePlayerCharacters();        
         }
     }
 

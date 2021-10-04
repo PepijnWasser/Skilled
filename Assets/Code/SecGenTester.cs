@@ -8,7 +8,7 @@ using System;
 
 using Random = UnityEngine.Random;
 
-public class SectionGenerator : MonoBehaviour
+public class SecGenTester : MonoBehaviour
 {
 	public List<BuildingRoom> roomPrefabs = new List<BuildingRoom>();
 
@@ -24,10 +24,12 @@ public class SectionGenerator : MonoBehaviour
 	public delegate void Completed(bool succeeded);
 	public static event Completed OnCompletion;
 
-    private void Update()
+    private void Start()
     {
-
+		Initialize(LayerMask.GetMask("Room"));
+		StartGeneration();
     }
+
 
     public void Initialize(LayerMask mask)
 	{
@@ -37,7 +39,7 @@ public class SectionGenerator : MonoBehaviour
 	}
 
 	public void StartGeneration()
-    {
+	{
 		StartCoroutine("GenerateLevel");
 	}
 
@@ -48,93 +50,93 @@ public class SectionGenerator : MonoBehaviour
 		//spawn between the min and max amount of rooms
 		int iterations = Random.Range((int)minMaxRooms.x, (int)minMaxRooms.y);
 
-
 		for (int i = 0; i < iterations; i++)
 		{
 			yield return new WaitForFixedUpdate();
 			yield return 200;
-			if(SpawnRoom() == false)
-            {
+			if (SpawnRoom() == false)
+			{
 				succesfullLevelGenerated = false;
-
+				Debug.Log("success");
 				break;
-            }
+			}
 			RemoveDoorsInSameSpace();
 		}
+		Debug.Log("completed");
 		OnCompletion?.Invoke(succesfullLevelGenerated);
 		StopCoroutine("GenerateLevel");
 	}
 
 	bool SpawnRoom()
-    {
+	{
 		List<Doorway> existingDoorways = availableDoorways;
 		List<Doorway> existingDoorwaysChecked = new List<Doorway>();
 		Doorway existingDoorwayToCheck = Extensions.RandomListItem(existingDoorways);
 
 		while (existingDoorwaysChecked.Count < existingDoorways.Count)
-        {
+		{
 			existingDoorwayToCheck = Extensions.Next(existingDoorways, existingDoorwayToCheck);
 			existingDoorwaysChecked.Add(existingDoorwayToCheck);
-			
-            if (TestRooms(existingDoorwayToCheck))
-            {
+
+			if (TestRooms(existingDoorwayToCheck))
+			{
 				RemoveDoorsInSameSpace();
 				return true;
-            }
+			}
 			//no room can fit on the door
-            else
-            {
+			else
+			{
 				availableDoorways.Remove(existingDoorwayToCheck);
 				existingDoorwayToCheck.GetComponent<MeshRenderer>().material.color = Color.yellow;
-            }			
-        }
+			}
+		}
 		return false;
-    }
+	}
 
 	bool TestRooms(Doorway doorwayToFitOn)
-    {
+	{
 		List<BuildingRoom> roomsToCheck = roomPrefabs;
 		List<BuildingRoom> roomsChecked = new List<BuildingRoom>();
 		BuildingRoom roomToCheck = Extensions.RandomListItem(roomsToCheck);
 
 		while (roomsChecked.Count < roomsToCheck.Count)
-        {
+		{
 			roomToCheck = Instantiate(Extensions.Next(roomsToCheck, roomToCheck), this.transform);
 			roomsChecked.Add(roomToCheck);
-			
-			if(TestDoors(doorwayToFitOn, roomToCheck))
-            {
+
+			if (TestDoors(doorwayToFitOn, roomToCheck))
+			{
 				AddDoorwaysToLists(roomToCheck);
 				roomToCheck.GetComponentInChildren<Renderer>().material.color = roomColor;
 				roomToCheck.GetComponent<BuildingRoom>().generatedFrom = doorwayToFitOn;
 				return true;
-            }
-            else
-            {
+			}
+			else
+			{
 				Destroy(roomToCheck.gameObject);
-            }
-			
-        }
+			}
+
+		}
 		return false;
-    }
+	}
 
 	bool TestDoors(Doorway doorwayToFitOn, BuildingRoom buildingToTest)
-    {
+	{
 		List<Doorway> doorwaysOfRoom = buildingToTest.doorways;
 		List<Doorway> doorwaysOfRoomChecked = new List<Doorway>();
 		Doorway doorwayToCheck = Extensions.RandomListItem(doorwaysOfRoom);
 
-		while(doorwaysOfRoomChecked.Count < doorwaysOfRoom.Count)
-        {
+		while (doorwaysOfRoomChecked.Count < doorwaysOfRoom.Count)
+		{
 			doorwayToCheck = Extensions.Next(doorwaysOfRoom, doorwayToCheck);
 			doorwaysOfRoomChecked.Add(doorwayToCheck);
-			if(TestDoor(doorwayToFitOn, buildingToTest, doorwayToCheck))
-            {
+			if (TestDoor(doorwayToFitOn, buildingToTest, doorwayToCheck))
+			{
 				return true;
-            }
-        }
+			}
+		}
 		return false;
-    }
+	}
 
 	bool TestDoor(Doorway doorwayToFitOn, BuildingRoom room, Doorway doorwayToTest)
 	{
@@ -195,12 +197,13 @@ public class SectionGenerator : MonoBehaviour
 				// Ignore collisions with current room
 				foreach (Collider c in colliders)
 				{
-					if (c.transform.parent.gameObject == room.gameObject)
+					if (c.transform.parent.gameObject == room.gameObject || c.transform.gameObject == room.gameObject)
 					{
 						continue;
 					}
 					else
 					{
+						Debug.Log(c.gameObject + " " + room.gameObject);
 						return true;
 					}
 				}
@@ -247,22 +250,22 @@ public class SectionGenerator : MonoBehaviour
 	}
 
 	public void RemoveAvailibleDoorway(Doorway d)
-    {
-        if (availableDoorways.Contains(d))
-        {
+	{
+		if (availableDoorways.Contains(d))
+		{
 			availableDoorways.Remove(d);
-        }
-    }
+		}
+	}
 
 	public List<Doorway> GetAllDoorWaysExceptStart()
-    {
+	{
 		List<Doorway> _allDoorways = allDoorways;
 		_allDoorways.Remove(startdoor);
 		return _allDoorways;
-    }
+	}
 
 	public List<Doorway> GetAllOpenDoorways()
-    {
+	{
 		List<Doorway> _allOpenDoorways = availableDoorways;
 		return _allOpenDoorways;
 	}

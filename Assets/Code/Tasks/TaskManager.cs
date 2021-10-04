@@ -61,7 +61,7 @@ public class TaskManager : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("too few tasks");
+                        //Debug.Log("too few tasks");
                     }
                 }
             }       

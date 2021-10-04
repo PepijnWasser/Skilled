@@ -8,7 +8,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] private ConsoleRoom consoleRoomPrefab;
     [SerializeField] private SectionGenerator sectionGeneratorPrefab;
 
-    [HideInInspector] public int amountOfSectors = 0;
+    [HideInInspector] int amountOfSectors = 0;
     int amountOfSectorsSpawned = 0;
 
     public List<Doorway> posibleStartingDoors = new List<Doorway>();
@@ -30,8 +30,8 @@ public class MapGenerator : MonoBehaviour
 
     void Start()
     {
-        Initizlize();
         SectionGenerator.OnCompletion += FinishSectionGeneration;
+        Initizlize(1);
     }
 
     private void OnDestroy()
@@ -39,8 +39,10 @@ public class MapGenerator : MonoBehaviour
         SectionGenerator.OnCompletion -= FinishSectionGeneration;
     }
 
-    void Initizlize()
+    public void Initizlize(int _amountOfSectors)
     {
+        amountOfSectors = _amountOfSectors;
+
         ConsoleRoom consoleRoom = Instantiate(consoleRoomPrefab, this.transform);
         foreach (Doorway doorway in consoleRoom.doorways)
         {
@@ -51,12 +53,15 @@ public class MapGenerator : MonoBehaviour
 
     void GenerateLevel()
     {
-        if(amountOfSectorsSpawned < amountOfSectors)
+        if (amountOfSectors > 0)
         {
-            if (!generating)
+            if (amountOfSectorsSpawned < amountOfSectors)
             {
-                generating = true;
-                GenerateSection();
+                if (!generating)
+                {
+                    generating = true;
+                    GenerateSection();
+                }
             }
         }
     }
@@ -162,7 +167,6 @@ public class MapGenerator : MonoBehaviour
 
             if(amountOfSectorsSpawned >= amountOfSectors)
             {
-                Debug.Log("finished map generation");
                 OnCompletion?.Invoke();
             }
         }
