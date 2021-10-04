@@ -53,8 +53,6 @@ public class TaskManager : MonoBehaviour
                     tasksWithErrors.Add(newTask);
                     tasksWithoutErrors.Remove(newTask);
                     newTask.InitializeTask();
-
-                    Debug.Log(newTask.GetType());
                     taskHasError?.Invoke(newTask);
 
                     secondCounter = 0;

@@ -92,6 +92,7 @@ public class GameState : State
     //handle receiving
     void HandleMakeGameMapMessage(MakeGameMapMessage message)
     {
+        Debug.Log(message.worldSeed);
         Extensions.SetSeed(message.worldSeed);
         mapGenerator.amountOfSectors = message.amountOfSectors;
     }

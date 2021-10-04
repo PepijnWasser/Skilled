@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class TwoWayLever : MonoBehaviour
 {
-    public float playerRange;
-
-    TwoWayLeverInteractable leverInteractable;
+    Interactable interactable;
 
     GameObject player;
 
@@ -19,11 +17,10 @@ public class TwoWayLever : MonoBehaviour
 
     private void Start()
     {
-        GameManager.playerMade += SetPlayer;
-        SetPlayer(GameObject.FindObjectOfType<PlayerMovement>().gameObject);
+        player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
 
         animator = GetComponent<Animator>();
-        leverInteractable = GetComponent<TwoWayLeverInteractable>();
+        interactable = GetComponent<Interactable>();
 
         currentPosition = Random.Range(0, 2);
         animator.SetInteger("position", currentPosition);
@@ -31,28 +28,23 @@ public class TwoWayLever : MonoBehaviour
 
     private void Update()
     {
-        TestPull();
-    }
-
-    void TestPull()
-    {
-        if (Vector3.Distance(player.transform.position, this.transform.position) < playerRange)
+        if(player != null)
         {
-            if (Input.GetKeyDown(KeyCode.E) && leverInteractable.lookingAtTarget)
-            {
-                currentPosition += 1;
-                if (currentPosition > 1)
-                {
-                    currentPosition = 0;
-                }
-                animator.SetInteger("position", currentPosition);
-                Debug.Log(currentPosition);
-            }
+            TestPull();
         }
     }
 
-    void SetPlayer(GameObject _player)
-    {
-        player = _player;
+    void TestPull()
+    { 
+        if (Input.GetKeyDown(KeyCode.E) && interactable.lookingAtTarget)
+        {
+            currentPosition += 1;
+            if (currentPosition > 1)
+            {
+                currentPosition = 0;
+            }
+            animator.SetInteger("position", currentPosition);
+            Debug.Log(currentPosition);
+        }
     }
 }

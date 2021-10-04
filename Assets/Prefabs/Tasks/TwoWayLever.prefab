@@ -207,8 +207,8 @@ GameObject:
   - component: {fileID: 3829204413941172727}
   - component: {fileID: 7868807539888849723}
   - component: {fileID: 6695821318015176117}
-  - component: {fileID: 1189267179383102600}
   - component: {fileID: 7226893670403754329}
+  - component: {fileID: 1476174831737088276}
   m_Layer: 0
   m_Name: TwoWayLever
   m_TagString: Untagged
@@ -263,23 +263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3c4ce1235c0734f865c8877c3a45db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRange: 5
   currentPosition: 1
---- !u!114 &1189267179383102600
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4499027364031894349}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b94d645cdc50b0d4e9ef04b1f2cc3cfc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookingAtTarget: 0
-  body:
-  - {fileID: 6174189830757163414}
+  name: 
 --- !u!114 &7226893670403754329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -298,6 +283,22 @@ MonoBehaviour:
   hasError: 0
   targetPosition: 0
   validationTime: 5
+  lever: {fileID: 6695821318015176117}
+--- !u!114 &1476174831737088276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4499027364031894349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20750e9f40b3f2246aa7b004e140abd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookingAtTarget: 0
+  range: 5
+  body: {fileID: 6174189830757163414}
 --- !u!1 &5982307555400194708
 GameObject:
   m_ObjectHideFlags: 0

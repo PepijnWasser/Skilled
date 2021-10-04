@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-//[CreateAssetMenu(menuName = "Tasks/TaskSpawner")]
 public class TaskSpawner : MonoBehaviour
 {
     public GameObject TwoWayLeverPrefab;

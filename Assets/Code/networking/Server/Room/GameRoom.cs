@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 public class GameRoom : Room
 {
     int gameLoadedMessages = 0;
-    int worldSeed = 20;
+    int worldSeed = Random.Range(1, 30);
     int amountOfSectors = 3;
 
     public override void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)

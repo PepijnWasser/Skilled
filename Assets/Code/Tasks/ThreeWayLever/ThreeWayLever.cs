@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class ThreeWayLever : MonoBehaviour
 {
-    public float playerRange;
-
-    ThreeWayLeverInteractable leverInteractable;
+    Interactable interactable;
 
     GameObject player;
 
@@ -17,11 +15,10 @@ public class ThreeWayLever : MonoBehaviour
 
     private void Start()
     {
-        GameManager.playerMade += SetPlayer;
-        SetPlayer(GameObject.FindObjectOfType<PlayerMovement>().gameObject);
+        player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
 
         animator = GetComponent<Animator>();
-        leverInteractable = GetComponent<ThreeWayLeverInteractable>();
+        interactable = GetComponent<Interactable>();
 
         currentPosition = Random.Range(1, 4);
         animator.SetInteger("Stance", currentPosition);
@@ -29,27 +26,22 @@ public class ThreeWayLever : MonoBehaviour
 
     private void Update()
     {
-        TestPull();
-    }
-
-    void TestPull()
-    {       
-        if (Vector3.Distance(player.transform.position, this.transform.position) < playerRange)
+        if(player != null)
         {
-            if (Input.GetKeyDown(KeyCode.E) && leverInteractable.lookingAtTarget)
-            {
-                currentPosition += 1;
-                if(currentPosition > 3)
-                {
-                    currentPosition = 1;
-                }
-                animator.SetInteger("Stance", currentPosition);
-            }
+            TestPull();
         }
     }
 
-    void SetPlayer(GameObject _player)
+    void TestPull()
     {
-        player = _player;
+        if (Input.GetKeyDown(KeyCode.E) && interactable.lookingAtTarget)
+        {
+            currentPosition += 1;
+            if (currentPosition > 3)
+            {
+                currentPosition = 1;
+            }
+            animator.SetInteger("Stance", currentPosition);
+        }
     }
 }

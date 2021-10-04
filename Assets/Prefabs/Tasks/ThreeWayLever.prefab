@@ -629,7 +629,7 @@ GameObject:
   - component: {fileID: 5426352048657278167}
   - component: {fileID: 5230929766661830186}
   - component: {fileID: 4191572602555677454}
-  - component: {fileID: 1045110450440100342}
+  - component: {fileID: 2460529004667407347}
   m_Layer: 0
   m_Name: ThreeWayLever
   m_TagString: Untagged
@@ -684,7 +684,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6242b906ae4cac4f83c3b24b1fc1454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerRange: 5
   currentPosition: 3
 --- !u!114 &4191572602555677454
 MonoBehaviour:
@@ -704,8 +703,8 @@ MonoBehaviour:
   hasError: 0
   targetPosition: 0
   validationTime: 5
-  lever: {fileID: 0}
---- !u!114 &1045110450440100342
+  lever: {fileID: 5230929766661830186}
+--- !u!114 &2460529004667407347
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -714,12 +713,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4249811457755183211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efea7f1d550d32546a57a39c79b3ba4d, type: 3}
+  m_Script: {fileID: 11500000, guid: 20750e9f40b3f2246aa7b004e140abd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lookingAtTarget: 0
-  body:
-  - {fileID: 4483976377427717217}
+  range: 5
+  body: {fileID: 4483976377427717217}
 --- !u!1 &4483976377427717217
 GameObject:
   m_ObjectHideFlags: 0

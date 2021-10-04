@@ -5,37 +5,52 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     protected GameObject player;
+    public bool lookingAtTarget;
     MouseCursor mouseCursor;
     protected Camera playerCamera;
-    protected float range;
+    public float range;
+    public GameObject body;
+
 
     protected virtual void Start()
     {
-        GameManager.playerMade += SetCam;
-        SetCam(GameObject.FindObjectOfType<PlayerMovement>().gameObject);
         mouseCursor = GameObject.FindObjectOfType<MouseCursor>();
+        SetCam();
     }
 
-    protected virtual void OnDestroy()
-    {
-        GameManager.playerMade -= SetCam;
-    }
 
     protected virtual void Update()
     {
+        if (player != null)
+        {
+            lookingAtTarget = false;
+            RaycastHit hit;
 
+            float dist = Vector3.Distance(player.transform.position, this.transform.position);
+            if (dist < range)
+            {
+                // Does the ray intersect any objects excluding the player layer
+                if (Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, range))
+                {
+                    OnHit(hit);
+                }
+            }
+        }
     }
 
     protected virtual void OnHit(RaycastHit hit)
     {
-        Debug.DrawRay(player.transform.position, player.transform.forward * hit.distance, Color.yellow);
-        mouseCursor.ShowCursor();
-
+        if (body == hit.transform.gameObject)
+        {
+            Debug.DrawRay(player.transform.position, player.transform.forward * hit.distance, Color.yellow);
+            lookingAtTarget = true;
+            mouseCursor.ShowCursor();
+        }
     }
 
-    void SetCam(GameObject _player)
+    void SetCam()
     {
-        player = _player;
+        player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
         playerCamera = player.GetComponentInChildren<Camera>();
     }
 }
