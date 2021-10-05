@@ -14,16 +14,19 @@ public class ThreeWayLeverPositionDisplay : MonoBehaviour
 
     bool NeedToUpdate = false;
 
-    private void Start()
+    private void Awake()
     {
         ThreeWayLeverTask.taskCompleted += RemoveTask;
         TaskManager.taskHasError += AddTask;
+        GameState.makeThreeWayLeverTask += AddTask;
     }
+
 
     private void OnDestroy()
     {
         ThreeWayLeverTask.taskCompleted -= RemoveTask;
         TaskManager.taskHasError -= AddTask;
+        GameState.makeThreeWayLeverTask -= AddTask;
     }
 
     private void Update()
@@ -44,7 +47,7 @@ public class ThreeWayLeverPositionDisplay : MonoBehaviour
 
                 ThreeWayLeverPrefabManager manager = spawnedItem.GetComponent<ThreeWayLeverPrefabManager>();
                 manager.position.text = task.targetPosition.ToString();
-                manager.taskName.text = task.lever.name;
+                manager.taskName.text = task.taskName;
 
                 imagesSpawned.Add(spawnedItem);
             }

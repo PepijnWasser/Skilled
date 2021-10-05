@@ -20,6 +20,8 @@ public abstract class Task : MonoBehaviour
     public bool hasError = false;
     protected bool dealingDamage = false;
 
+    public string taskName;
+
 
     public virtual void InitializeTask()
     {
@@ -35,6 +37,11 @@ public abstract class Task : MonoBehaviour
     }
 
     protected virtual void Update()
+    {
+
+    }
+
+    public virtual void TestDamage()
     {
 
     }

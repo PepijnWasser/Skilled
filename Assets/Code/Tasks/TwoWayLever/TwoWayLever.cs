@@ -13,7 +13,6 @@ public class TwoWayLever : MonoBehaviour
     [HideInInspector]
     public int currentPosition;
 
-    public string name;
 
     protected void Awake()
     {

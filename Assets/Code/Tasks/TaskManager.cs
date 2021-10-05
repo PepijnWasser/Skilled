@@ -4,39 +4,35 @@ using UnityEngine;
 
 public class TaskManager : MonoBehaviour
 {
-    public TaskSpawner taskSpawner;
-
     public int maxErrors;
     
     public Vector2 timeBetweenErrors;
     public float timeToNextError;
     float secondCounter = 0;
 
-    List<Task> tasksWithoutErrors = new List<Task>();
+    public List<Task> tasksWithoutErrors = new List<Task>();
     List<Task> tasksWithErrors = new List<Task>();
 
     public delegate void Spawning(Task taskSpawned);
     public static event Spawning taskHasError;
 
+    private void Awake()
+    {
+        Task.taskCompleted += FinishTask;
+        TaskSpawner.allTasksSpawned += getTasks;
+    }
+
     void Start()
     {
-        MapGenerator.OnCompletion += SpawnTasks;
-        Task.taskCompleted += FinishTask;
-
         timeToNextError = timeBetweenErrors.y;
     }
 
     private void OnDestroy()
     {
-        MapGenerator.OnCompletion -= SpawnTasks;
         Task.taskCompleted -= FinishTask;
+        TaskSpawner.allTasksSpawned -= getTasks;
     }
 
-    void SpawnTasks()
-    {
-        tasksWithoutErrors = taskSpawner.SpawnTasks(this.transform);
-        secondCounter = 0;
-    }
 
     private void Update()
     {
@@ -61,10 +57,29 @@ public class TaskManager : MonoBehaviour
                     }
                     else
                     {
-                        //Debug.Log("too few tasks");
+                        Debug.Log("too few tasks");
                     }
                 }
             }       
+        }
+        TestTask();
+    }
+
+    void TestTask()
+    {
+        foreach(Task task in tasksWithErrors)
+        {
+            task.TestDamage();
+            if(task is TwoWayLeverTask)
+            {
+                TwoWayLeverTask twoWayTask = task as TwoWayLeverTask;
+                twoWayTask.ValidatePosition();
+            }
+            else if (task is ThreeWayLeverTask)
+            {
+                ThreeWayLeverTask threeWayTask = task as ThreeWayLeverTask;
+                threeWayTask.ValidatePosition();
+            }
         }
     }
 
@@ -72,5 +87,10 @@ public class TaskManager : MonoBehaviour
     {
         tasksWithErrors.Remove(task);
         tasksWithoutErrors.Add(task);
+    }
+
+    void getTasks(List<Task> tasks)
+    {
+        tasksWithoutErrors = tasks;
     }
 }

@@ -33,20 +33,7 @@ public class TwoWayLeverTask : Task
                 doneChecking = true;
             }
         }
-
     }
-
-    protected override void Update()
-    {
-        base.Update();
-        if (hasError)
-        {
-            TestDamage();
-            ValidatePosition();
-        }
-    }
-
-
 
     protected override void CompleteTask()
     {
@@ -55,9 +42,8 @@ public class TwoWayLeverTask : Task
     }
 
 
-    void TestDamage()
+    public override void TestDamage()
     {
-
         secondCounter += Time.deltaTime;
         if (dealingDamage)
         {
@@ -74,7 +60,6 @@ public class TwoWayLeverTask : Task
                 dealingDamage = true;
             }
         }
-
     }
 
     public void ValidatePosition()

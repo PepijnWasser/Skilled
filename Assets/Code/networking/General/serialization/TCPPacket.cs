@@ -2,6 +2,9 @@
 using UnityEngine;
 using System.IO;
 using System.Net;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.UI;
 
 /**
  * The Packet class provides a simple wrapper around an array of bytes (in the form of a MemoryStream), 
@@ -44,6 +47,10 @@ public class TCPPacket
 	public void Write(IPAddress pIP) { string ips = pIP.ToString(); writer.Write(ips); }
 	public void Write(Vector3 pVector) { writer.Write(pVector.x); writer.Write(pVector.y); writer.Write(pVector.z); }
 
+	public void Write(TwoWayLeverTask task) { writer.Write(task.taskName); writer.Write(task.targetPosition); }
+	public void Write(ThreeWayLeverTask task) { writer.Write(task.taskName); writer.Write(task.targetPosition); }
+	public void Write(KeypadTask task) { writer.Write(task.taskName); writer.Write(task.code); }
+
 	public void Write(ISerializable pSerializable)
 	{
 		Write(pSerializable.GetType().FullName);
@@ -60,6 +67,32 @@ public class TCPPacket
 	public IPAddress ReadIP() { return IPAddress.Parse(reader.ReadString()); }
 	public Vector3 ReadVector3() { return new Vector3(reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle()); }
 
+	public ThreeWayLeverTask ReadThreeWayLeverTask() 
+	{ 
+		GameObject tempO = new GameObject(); 
+		ThreeWayLeverTask task = tempO.AddComponent<ThreeWayLeverTask>();
+		task.taskName = reader.ReadString(); task.targetPosition = reader.ReadInt32();
+		GameObject.Destroy(tempO);
+		return task;
+	}
+
+	public TwoWayLeverTask ReadTwoWayLeverTask()
+	{
+		GameObject tempO = new GameObject();
+		TwoWayLeverTask task = tempO.AddComponent<TwoWayLeverTask>();
+		task.taskName = reader.ReadString(); task.targetPosition = reader.ReadInt32();
+		GameObject.Destroy(tempO);
+		return task;
+	}
+
+	public KeypadTask ReadKeypadTask()
+	{
+		GameObject tempO = new GameObject();
+		KeypadTask task = tempO.AddComponent<KeypadTask>();
+		task.taskName = reader.ReadString(); task.code = reader.ReadString();
+		GameObject.Destroy(tempO);
+		return task;
+	}
 
 	public ISerializable ReadObject()
 	{

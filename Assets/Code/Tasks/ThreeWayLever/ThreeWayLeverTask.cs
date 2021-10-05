@@ -37,18 +37,6 @@ public class ThreeWayLeverTask : Task
 
     }
 
-    protected override void Update()
-    {
-        base.Update();
-        if (hasError)
-        {
-            TestDamage();
-            ValidatePosition();
-        }
-    }
-
-
-
     protected override void CompleteTask()
     {
         base.CompleteTask();
@@ -56,7 +44,7 @@ public class ThreeWayLeverTask : Task
     }
 
 
-    void TestDamage()
+    public override void TestDamage()
     {
 
         secondCounter += Time.deltaTime;

@@ -47,6 +47,26 @@ public class GameRoom : Room
             MapMadeMessage message = tempOBJ as MapMadeMessage;
             HandleMapMadeMessage(message, myClient);
         }
+        else if(tempOBJ is UpdateStationHealthRequest)
+        {
+            UpdateStationHealthRequest message = tempOBJ as UpdateStationHealthRequest;
+            HandleUpdateStationHealthRequest(message, myClient);
+        }
+        else if(tempOBJ is AddKeypadTaskMessage)
+        {
+            AddKeypadTaskMessage message = tempOBJ as AddKeypadTaskMessage;
+            HandleAddKeypadTask(message, myClient);
+        }
+        else if(tempOBJ is AddTwoWayLeverTask)
+        {
+            AddTwoWayLeverTask message = tempOBJ as AddTwoWayLeverTask;
+            HandleAddTwoWayLeverTask(message, myClient);
+        }
+        else if (tempOBJ is AddThreeWayLeverTask)
+        {
+            AddThreeWayLeverTask message = tempOBJ as AddThreeWayLeverTask;
+            HandleAddThreeWayLeverTask(message, myClient);
+        }
     }
 
     protected override void CheckHeartbeat()
@@ -127,7 +147,8 @@ public class GameRoom : Room
 
         if (mapMadeMessages == clientsInRoom.Count)
         {
-            MakePlayerCharacters();        
+            MakeTasks();
+            MakePlayerCharacters();
         }
     }
 
@@ -154,5 +175,47 @@ public class GameRoom : Room
                 }
             }
         }
+    }
+
+    void MakeTasks()
+    {
+        TCPPacket outpacket = new TCPPacket();
+        MakeTaskManager makeTaskManagerMessage = new MakeTaskManager(false);
+        outpacket.Write(makeTaskManagerMessage);
+        SendTCPMessageToAllUsersExcept(outpacket, server.serverInfo.serverOwner);
+
+        TCPPacket outpacket2 = new TCPPacket();
+        MakeTaskManager makeTaskManagerMessage2 = new MakeTaskManager(true);
+        outpacket2.Write(makeTaskManagerMessage2);
+        SendTCPMessageToTargetUser(outpacket2, server.serverInfo.serverOwner);
+    }
+
+    void HandleUpdateStationHealthRequest(UpdateStationHealthRequest message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        UpdateStationHealthResponse updateStationHealthResponse = new UpdateStationHealthResponse(message.stationHealth);
+        outPacket.Write(updateStationHealthResponse);
+        SendTCPMessageToAllUsersExcept(outPacket, client);
+    }
+
+    void HandleAddKeypadTask(AddKeypadTaskMessage message, MyClient client)
+    {
+        TCPPacket outpacket = new TCPPacket();
+        outpacket.Write(message);
+        SendTCPMessageToAllUsersExcept(outpacket, client);
+    }
+
+    void HandleAddTwoWayLeverTask(AddTwoWayLeverTask message, MyClient client)
+    {
+        TCPPacket outpacket = new TCPPacket();
+        outpacket.Write(message);
+        SendTCPMessageToAllUsersExcept(outpacket, client);
+    }
+
+    void HandleAddThreeWayLeverTask(AddThreeWayLeverTask message, MyClient client)
+    {
+        TCPPacket outpacket = new TCPPacket();
+        outpacket.Write(message);
+        SendTCPMessageToAllUsersExcept(outpacket, client);
     }
 }

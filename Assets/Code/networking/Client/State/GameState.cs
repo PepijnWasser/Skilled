@@ -11,16 +11,33 @@ public class GameState : State
 {
     public MapGenerator mapGenerator;
     public GameManager gameManager;
+    
+    public delegate void HealthUpdated(int health);
+    public static event HealthUpdated stationHealthUpdated;
+
+    public delegate void MakeKeypadTask(KeypadTask task);
+    public static event MakeKeypadTask makeKeypadTask;
+
+    public delegate void MakeTwoWayLeverTask(TwoWayLeverTask task);
+    public static event MakeTwoWayLeverTask makeTwoWayleverTask;
+
+    public delegate void MakeThreeWayLeverTask(ThreeWayLeverTask task);
+    public static event MakeThreeWayLeverTask makeThreeWayLeverTask;
+
 
     protected override void Awake()
     {
         base.Awake();
-        MapGenerator.OnCompletion += SendMapMadeMessage;    
+        MapGenerator.OnCompletion += SendMapMadeMessage;
+        StationHealth.updateStationHealth += SendStationHealth;
+        TaskManager.taskHasError += SendNewTask;
     }
 
     private void OnDestroy()
     {
         MapGenerator.OnCompletion += SendMapMadeMessage;
+        StationHealth.updateStationHealth -= SendStationHealth;
+        TaskManager.taskHasError -= SendNewTask;
     }
 
     private void Start()
@@ -89,6 +106,31 @@ public class GameState : State
                     MakenewPlayerCharacterMessage message = tempOBJ as MakenewPlayerCharacterMessage;
                     HandleMakePlayerCharacterMessage(message);
                 }
+                else if(tempOBJ is MakeTaskManager)
+                {
+                    MakeTaskManager message = tempOBJ as MakeTaskManager;
+                    HandleMakeTaskManager(message);
+                }
+                else if(tempOBJ is UpdateStationHealthResponse)
+                {
+                    UpdateStationHealthResponse message = tempOBJ as UpdateStationHealthResponse;
+                    HandleUpdateStationHealthResponse(message);
+                }
+                else if(tempOBJ is AddKeypadTaskMessage)
+                {
+                    AddKeypadTaskMessage message = tempOBJ as AddKeypadTaskMessage;
+                    HandleAddKeypadTask(message);
+                }
+                else if(tempOBJ is AddTwoWayLeverTask)
+                {
+                    AddTwoWayLeverTask message = tempOBJ as AddTwoWayLeverTask;
+                    HandleAddTwoWayLeverTask(message);
+                }
+                else if(tempOBJ is AddThreeWayLeverTask)
+                {
+                    AddThreeWayLeverTask message = tempOBJ as AddThreeWayLeverTask;
+                    HandleAddThreeWayLeverTask(message);
+                }
             }
         }
         catch (Exception e)
@@ -128,6 +170,31 @@ public class GameState : State
         }
     }
 
+    void HandleMakeTaskManager(MakeTaskManager message)
+    {
+        gameManager.MakeTaskmanager(message.playerIsLeader);
+    }
+
+    void HandleUpdateStationHealthResponse(UpdateStationHealthResponse message)
+    {
+        stationHealthUpdated?.Invoke(message.stationHealth);
+    }
+
+    void HandleAddKeypadTask(AddKeypadTaskMessage message)
+    {
+        makeKeypadTask?.Invoke(message.task);
+    }
+
+    void HandleAddTwoWayLeverTask(AddTwoWayLeverTask message)
+    {
+        makeTwoWayleverTask?.Invoke(message.task);
+    }
+
+    void HandleAddThreeWayLeverTask(AddThreeWayLeverTask message)
+    {
+        makeThreeWayLeverTask?.Invoke(message.task);
+    }
+
     //sending
     void SendGameLoadedMessage()
     {
@@ -152,5 +219,33 @@ public class GameState : State
     {
         MapMadeMessage message = new MapMadeMessage();
         tcpClientNetwork.SendObjectThroughTCP(message);
+    }
+
+    void SendStationHealth(int newHealth)
+    {
+        UpdateStationHealthRequest request = new UpdateStationHealthRequest(newHealth);
+        tcpClientNetwork.SendObjectThroughTCP(request);
+    }
+
+    void SendNewTask(Task task)
+    {
+        if(task is KeypadTask)
+        {
+            KeypadTask keypadTask = task as KeypadTask;
+            AddKeypadTaskMessage message = new AddKeypadTaskMessage(keypadTask);
+            tcpClientNetwork.SendObjectThroughTCP(message);
+        }
+        else if(task is TwoWayLeverTask)
+        {
+            TwoWayLeverTask twoWayLeverTask = task as TwoWayLeverTask;
+            AddTwoWayLeverTask message = new AddTwoWayLeverTask(twoWayLeverTask);
+            tcpClientNetwork.SendObjectThroughTCP(message);
+        }
+        else if(task is ThreeWayLeverTask)
+        {
+            ThreeWayLeverTask threeWayLeverTask = task as ThreeWayLeverTask;
+            AddThreeWayLeverTask message = new AddThreeWayLeverTask(threeWayLeverTask);
+            tcpClientNetwork.SendObjectThroughTCP(message);
+        }
     }
 }

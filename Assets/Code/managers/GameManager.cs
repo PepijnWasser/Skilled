@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject playerPrefab;
+    public GameObject taskManagerPrefab;
 
     public PlayerPositionUpdater playerPositionUpdater;
     Dictionary<int, GameObject> characterDictionary = new Dictionary<int, GameObject>();
@@ -39,5 +40,14 @@ public class GameManager : MonoBehaviour
         characterDictionary[playerID].transform.position = position;
         characterDictionary[playerID].transform.rotation = Quaternion.Euler(rotation);
         characterDictionary[playerID].GetComponent<PlayerPrefabManager>().nose.transform.rotation = Quaternion.Euler(noseRotation); 
+    }
+
+    public void MakeTaskmanager(bool playerIsLeader)
+    {
+        GameObject manager = Instantiate(taskManagerPrefab);
+        if (!playerIsLeader)
+        {
+            manager.GetComponent<TaskManager>().enabled = false;
+        }
     }
 }
