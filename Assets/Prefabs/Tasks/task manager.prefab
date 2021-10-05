@@ -101,7 +101,7 @@ MonoBehaviour:
   KeypadPrefab: {fileID: 6880409806940071777, guid: 1199e53bb1f590d44a1b73af6b3b5dab, type: 3}
   amountOfTwoWayLeversToSpawn: 3
   amountOfThreeLeverssToSpawn: 3
-  amountOfKeypadsToSpawn: 4
+  amountOfKeypadsToSpawn: 3
 --- !u!114 &5190529441526039831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c67746dc66d82439f16f0162257de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskSpawner: {fileID: 5190529441526039826}
-  maxErrors: 10
-  timeBetweenErrors: {x: 5, y: 5}
-  timeToNextError: 0
+  maxErrors: 9
+  timeBetweenErrors: {x: 1, y: 1}
+  timeToNextError: 1
+  tasksWithoutErrors: []

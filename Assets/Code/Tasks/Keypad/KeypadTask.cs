@@ -16,13 +16,15 @@ public class KeypadTask : Task
 
     public string code = "";
 
+    private void Start()
+    {
+        keyPad = GetComponent<Keypad>();
+        keypadCodeEnterer = GetComponent<KeypadCodeEnterer>();
+    }
 
     public override void InitializeTask()
     {
         base.InitializeTask();
-
-        keyPad = GetComponent<Keypad>();
-        keypadCodeEnterer = GetComponent<KeypadCodeEnterer>();
 
         int first = Random.Range(1,10);
         int second = Random.Range(1, 10);
@@ -30,14 +32,6 @@ public class KeypadTask : Task
 
         code = first.ToString() + second.ToString() + third.ToString();
     }
-
-    protected override void Update()
-    {
-        base.Update();
-        TestDamage();
-    }
-
-
 
     protected override void CompleteTask()
     {
@@ -47,7 +41,7 @@ public class KeypadTask : Task
     }
 
 
-    void TestDamage()
+    public override void TestDamage()
     {
         if (hasError)
         {

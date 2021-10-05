@@ -14,16 +14,19 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
 
     bool NeedToUpdate = false;
 
-    private void Start()
+    private void Awake()
     {
         TwoWayLeverTask.taskCompleted += RemoveTask;
         TaskManager.taskHasError += AddTask;
+        GameState.makeTwoWayleverTask += AddTask;
     }
+
 
     private void OnDestroy()
     {
         TwoWayLeverTask.taskCompleted -= RemoveTask;
         TaskManager.taskHasError -= AddTask;
+        GameState.makeTwoWayleverTask -= AddTask;
     }
 
     private void Update()
@@ -44,7 +47,7 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
 
                 TwoWayLeverPrefabManager manager = spawnedItem.GetComponent<TwoWayLeverPrefabManager>();
                 manager.position.text = task.targetPosition.ToString();
-                manager.taskName.text = task.lever.name;
+                manager.taskName.text = task.taskName;
 
                 imagesSpawned.Add(spawnedItem);
             }

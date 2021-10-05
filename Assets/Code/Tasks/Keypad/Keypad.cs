@@ -5,26 +5,14 @@ using Cinemachine;
 
 public class Keypad : Focusable
 {
-    public string name;
-
     KeypadCodeEnterer keypadCodeEnterer;
     KeypadInteractable keypadInteractable;
 
-    private void Awake()
+    protected override void Start()
     {
-        GameManager.playerMade += SetPlayer;
-    }
-
-    protected virtual void Start()
-    {
+        base.Start();
         keypadCodeEnterer = GetComponent<KeypadCodeEnterer>();
         keypadInteractable = GetComponent<KeypadInteractable>();
-    }
-
-    private void OnDestroy()
-    {
-
-        GameManager.playerMade -= SetPlayer;
     }
 
     private void Update()
@@ -51,10 +39,5 @@ public class Keypad : Focusable
                 DeFocus();
             }
         }
-    }
-
-    void SetPlayer(GameObject _player, Camera cam)
-    {
-        player = _player;
     }
 }

@@ -31,7 +31,6 @@ public class MapGenerator : MonoBehaviour
     void Start()
     {
         SectionGenerator.OnCompletion += FinishSectionGeneration;
-        Initizlize(1);
     }
 
     private void OnDestroy()

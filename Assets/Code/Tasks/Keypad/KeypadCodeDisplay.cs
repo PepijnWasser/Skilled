@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class KeypadCodeDisplay : MonoBehaviour
 {
-    List<KeypadTask> tasksToDisplay = new List<KeypadTask>();
+     public List<KeypadTask> tasksToDisplay = new List<KeypadTask>();
 
     public List<Image> content;
     public Image itemPrefab;
@@ -14,16 +14,18 @@ public class KeypadCodeDisplay : MonoBehaviour
 
     bool NeedToUpdate = false;
 
-    private void Start()
+    private void Awake()
     {
         KeypadTask.taskCompleted += RemoveTask;
         TaskManager.taskHasError += AddTask;
+        GameState.makeKeypadTask += AddTask;
     }
 
     private void OnDestroy()
     {
         KeypadTask.taskCompleted -= RemoveTask;
         TaskManager.taskHasError -= AddTask;
+        GameState.makeKeypadTask -= AddTask;
     }
 
     private void Update()
@@ -40,11 +42,11 @@ public class KeypadCodeDisplay : MonoBehaviour
             {
                 int display =  (int)((float)imagesSpawned.Count / (float)8);
                 Image spawnedItem = Instantiate(itemPrefab, content[display].transform);
-
+                
                 KeypadPrefabManager manager = spawnedItem.GetComponent<KeypadPrefabManager>();
                 manager.code.text = task.code;
-                manager.taskName.text = task.keyPad.name;
-
+                manager.taskName.text = task.taskName;
+                
                 imagesSpawned.Add(spawnedItem);
             }
             NeedToUpdate = false;
@@ -65,7 +67,6 @@ public class KeypadCodeDisplay : MonoBehaviour
         {
             KeypadTask keypadTask = task as KeypadTask;
             tasksToDisplay.Add(keypadTask);
-           // Debug.Log("adding K task");
             NeedToUpdate = true;
         }
     }

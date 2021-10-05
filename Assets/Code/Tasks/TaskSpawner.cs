@@ -21,15 +21,17 @@ public class TaskSpawner : MonoBehaviour
     TwoWayLeverNamer twoWayLeverNamer;
     ThreeWayLeverNamer threeWayLeverNamer;
 
+    public delegate void TasksSpawned(List<Task> tasks);
+    public static event TasksSpawned allTasksSpawned;
+
     private void Start()
     {
-        
+        SpawnTasks(this.transform);
     }
 
-    public List<Task> SpawnTasks(Transform parent)
+    public void SpawnTasks(Transform parent)
     {
-        List<Task> tasks = new List<Task>();
-
+        List<Task> tasksSpawned = new List<Task>();
         keypadNamer = GameObject.FindObjectOfType<KeyPadNamer>();
         twoWayLeverNamer = GameObject.FindObjectOfType<TwoWayLeverNamer>();
         threeWayLeverNamer = GameObject.FindObjectOfType<ThreeWayLeverNamer>();
@@ -42,7 +44,7 @@ public class TaskSpawner : MonoBehaviour
 
 
         GetAvailibleLocations();
-
+        
         for (int i = 0; i < amountOfTwoWayLeversToSpawn; i++)
         {
             TwoWayLeverLocation newlocation = Extensions.RandomListItem(availibleTwoWayLeverLocations);
@@ -51,11 +53,14 @@ public class TaskSpawner : MonoBehaviour
             GameObject newObject = Instantiate(TwoWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
 
             TwoWayLever twoWayLever = newObject.GetComponent<TwoWayLever>();
-            twoWayLever.name = twoWayLeverNamer.GetName();
+            string name = twoWayLeverNamer.GetName();
+
+            twoWayLever.gameObject.name = name;
 
             TwoWayLeverTask task = newObject.GetComponent<TwoWayLeverTask>();
+            task.taskName = name;
 
-            tasks.Add(task);
+            tasksSpawned.Add(task);
         }
 
         for (int i = 0; i < amountOfThreeLeverssToSpawn; i++)
@@ -66,10 +71,14 @@ public class TaskSpawner : MonoBehaviour
             GameObject newObject = Instantiate(ThreeWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
 
             ThreeWayLever threeWayLever = newObject.GetComponent<ThreeWayLever>();
-            threeWayLever.name = threeWayLeverNamer.GetName();
+            string name = threeWayLeverNamer.GetName();
+
+            threeWayLever.gameObject.name = name;
 
             ThreeWayLeverTask task = newObject.GetComponent<ThreeWayLeverTask>();
-            tasks.Add(task);
+            task.taskName = name;
+
+            tasksSpawned.Add(task);
         }
 
         for (int i = 0; i < amountOfKeypadsToSpawn; i++)
@@ -80,14 +89,17 @@ public class TaskSpawner : MonoBehaviour
             GameObject newObject = Instantiate(KeypadPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
 
             Keypad keypad = newObject.GetComponent<Keypad>();
-            keypad.name = keypadNamer.GetName();
+            string name = keypadNamer.GetName();
+
+            keypad.gameObject.name = name;
 
             KeypadTask task = newObject.GetComponent<KeypadTask>();
+            task.taskName = name;
 
-            tasks.Add(task);
+            tasksSpawned.Add(task);
         }
 
-        return tasks;
+        allTasksSpawned?.Invoke(tasksSpawned);
     }
 
     void GetAvailibleLocations()

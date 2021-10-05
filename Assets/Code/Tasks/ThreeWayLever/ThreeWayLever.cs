@@ -55,6 +55,6 @@ public class ThreeWayLever : MonoBehaviour
 
     void SetPlayer(GameObject _player, Camera cam)
     {
-        player = player;
+        player = _player;
     }
 }

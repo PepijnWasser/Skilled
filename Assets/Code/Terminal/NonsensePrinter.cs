@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Random = UnityEngine.Random;
+
 public class NonsensePrinter : MonoBehaviour
 {
     public Image textPrefab;
@@ -20,6 +22,18 @@ public class NonsensePrinter : MonoBehaviour
 
     float currentSpeedDuration;
     float currentSpeed;
+
+    bool needToPrint = false;
+
+    private void Awake()
+    {
+        MapGenerator.OnCompletion += EnablePrinting;
+    }
+
+    private void OnDestroy()
+    {
+        MapGenerator.OnCompletion -= EnablePrinting;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -41,17 +55,17 @@ public class NonsensePrinter : MonoBehaviour
     {
         secondCounter += Time.deltaTime;
         secondCounterSpeed += Time.deltaTime;
-        if(secondCounter > currentSpeed)
+        if (secondCounter > currentSpeed)
         {
             secondCounter = 0;
-            for(int i = 0; i < 16; i++)
+            for (int i = 0; i < 16; i++)
             {
-                if(i == 15)
+                if (i == 15)
                 {
                     textList[i].text = nonsenseList[0];
                     nonsenseList.RemoveAt(0);
                 }
-                else if(i == 0)
+                else if (i == 0)
                 {
                     nonsenseList.Add(textList[i].text);
                     textList[i].text = textList[i + 1].text;
@@ -63,12 +77,19 @@ public class NonsensePrinter : MonoBehaviour
             }
         }
 
-        if(secondCounterSpeed > currentSpeedDuration)
+        if (secondCounterSpeed > currentSpeedDuration)
         {
-            currentSpeedDuration = 2;// Random.Range(speedDuration.x, speedDuration.y);
-            currentSpeed = 2;//Random.Range(speed.x, speed.y);
+          //  int i = Random.Range(0, 2);
+            currentSpeedDuration = 2;
+            currentSpeedDuration = 2; // Random.Range(speedDuration.x, speedDuration.y);
+            currentSpeed = 2;// Random.Range(speed.x, speed.y);
             secondCounterSpeed = 0;
         }
 
+    }
+
+    void EnablePrinting()
+    {
+        needToPrint = true;
     }
 }

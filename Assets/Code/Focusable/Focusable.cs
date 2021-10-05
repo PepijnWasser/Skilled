@@ -9,14 +9,23 @@ public class Focusable : MonoBehaviour
     public CinemachineVirtualCamera displayCam;
 
     public bool isFocused;
-    protected GameObject player;
+    public GameObject player;
 
     Interactable interactable;
 
+    private void Awake()
+    {
+        GameManager.playerMade += SetPlayer;
+    }
+
     protected virtual void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
         interactable = GetComponent<Interactable>();
+    }
+
+    private void OnDestroy()
+    {
+        GameManager.playerMade -= SetPlayer;
     }
 
     private void Update()
@@ -65,5 +74,10 @@ public class Focusable : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         displayCam.Priority = 10;
+    }
+
+    void SetPlayer(GameObject _player, Camera cam)
+    {
+        player = _player;
     }
 }
