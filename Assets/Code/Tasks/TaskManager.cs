@@ -13,7 +13,7 @@ public class TaskManager : MonoBehaviour
     public List<Task> tasksWithoutErrors = new List<Task>();
     List<Task> tasksWithErrors = new List<Task>();
 
-    public delegate void Spawning(Task taskSpawned);
+    public delegate void Spawning(Task taskSpawned, int taskID);
     public static event Spawning taskHasError;
 
     private void Awake()
@@ -50,7 +50,7 @@ public class TaskManager : MonoBehaviour
                         tasksWithErrors.Add(newTask);
                         tasksWithoutErrors.Remove(newTask);
                         newTask.InitializeTask();
-                        taskHasError?.Invoke(newTask);
+                        taskHasError?.Invoke(newTask, newTask.getID());
 
                         secondCounter = 0;
                         timeToNextError = Random.Range(timeBetweenErrors.x, timeBetweenErrors.y);

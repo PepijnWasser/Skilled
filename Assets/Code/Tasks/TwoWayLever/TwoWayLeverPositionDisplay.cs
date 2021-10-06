@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TwoWayLeverPositionDisplay : MonoBehaviour
 {
-    List<TwoWayLeverTask> tasksToDisplay = new List<TwoWayLeverTask>();
+    Dictionary<int, TwoWayLeverTask> tasksToDisplay = new Dictionary<int, TwoWayLeverTask>();
 
     public List<Image> content;
     public Image itemPrefab;
@@ -39,7 +39,7 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
             }
             imagesSpawned.Clear();
 
-            foreach (TwoWayLeverTask task in tasksToDisplay)
+            foreach (TwoWayLeverTask task in tasksToDisplay.Values)
             {
                 //8 is amount of lines per display
                 int display = (int)((float)imagesSpawned.Count / (float)8);
@@ -58,18 +58,27 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
     void RemoveTask(Task task)
     {
         TwoWayLeverTask twoWayLeverTask = task as TwoWayLeverTask;
-        tasksToDisplay.Remove(twoWayLeverTask);
+        tasksToDisplay.Remove(twoWayLeverTask.lever.leverID);
         Debug.Log("removing task");
         NeedToUpdate = true;
     }
 
-    void AddTask(Task task)
+    void RemoveTask(int taskID)
+    {
+        if (tasksToDisplay.ContainsKey(taskID))
+        {
+            tasksToDisplay.Remove(taskID);
+            Debug.Log("removing task");
+            NeedToUpdate = true;
+        }
+    }
+
+    void AddTask(Task task, int leverID)
     {
         if (task is TwoWayLeverTask)
         {
             TwoWayLeverTask twoWayLeverTask = task as TwoWayLeverTask;
-            tasksToDisplay.Add(twoWayLeverTask);
-            //  Debug.Log("adding TWL task");
+            tasksToDisplay.Add(leverID, twoWayLeverTask);
             NeedToUpdate = true;
         }
     }

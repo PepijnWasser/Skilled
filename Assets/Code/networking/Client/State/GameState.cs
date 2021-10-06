@@ -15,13 +15,13 @@ public class GameState : State
     public delegate void HealthUpdated(int health);
     public static event HealthUpdated stationHealthUpdated;
 
-    public delegate void MakeKeypadTask(KeypadTask task);
+    public delegate void MakeKeypadTask(KeypadTask task, int keypadID);
     public static event MakeKeypadTask makeKeypadTask;
 
-    public delegate void MakeTwoWayLeverTask(TwoWayLeverTask task);
+    public delegate void MakeTwoWayLeverTask(TwoWayLeverTask task, int leverID);
     public static event MakeTwoWayLeverTask makeTwoWayleverTask;
 
-    public delegate void MakeThreeWayLeverTask(ThreeWayLeverTask task);
+    public delegate void MakeThreeWayLeverTask(ThreeWayLeverTask task, int leverID);
     public static event MakeThreeWayLeverTask makeThreeWayLeverTask;
 
 
@@ -167,7 +167,7 @@ public class GameState : State
         }
         catch (Exception e)
         {
-            Debug.Log(e.Message);
+            Debug.Log(e.Message + e.StackTrace);
             if (tcpClientNetwork.tcpClient.Connected)
             {
                 tcpClientNetwork.tcpClient.Close();
@@ -216,17 +216,17 @@ public class GameState : State
 
     void HandleAddKeypadTask(AddKeypadTaskMessage message)
     {
-        makeKeypadTask?.Invoke(message.task);
+        makeKeypadTask?.Invoke(message.task, 0);
     }
 
     void HandleAddTwoWayLeverTask(AddTwoWayLeverTask message)
     {
-        makeTwoWayleverTask?.Invoke(message.task);
+        makeTwoWayleverTask?.Invoke(message.task, message.leverID);
     }
 
     void HandleAddThreeWayLeverTask(AddThreeWayLeverTask message)
     {
-        makeThreeWayLeverTask?.Invoke(message.task);
+        makeThreeWayLeverTask?.Invoke(message.task, 0);
     }
 
     void HandleUpdateTwoWayLeverPosition(UpdateTwoWayLeverPositionMessage message)
@@ -276,7 +276,7 @@ public class GameState : State
         tcpClientNetwork.SendObjectThroughTCP(request);
     }
 
-    void SendNewTask(Task task)
+    void SendNewTask(Task task, int taskID)
     {
         if(task is KeypadTask)
         {
@@ -287,7 +287,7 @@ public class GameState : State
         else if(task is TwoWayLeverTask)
         {
             TwoWayLeverTask twoWayLeverTask = task as TwoWayLeverTask;
-            AddTwoWayLeverTask message = new AddTwoWayLeverTask(twoWayLeverTask);
+            AddTwoWayLeverTask message = new AddTwoWayLeverTask(twoWayLeverTask, twoWayLeverTask.lever.leverID);
             tcpClientNetwork.SendObjectThroughTCP(message);
         }
         else if(task is ThreeWayLeverTask)

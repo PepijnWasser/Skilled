@@ -61,7 +61,7 @@ public class KeypadCodeDisplay : MonoBehaviour
         NeedToUpdate = true;
     }
 
-    void AddTask(Task task)
+    void AddTask(Task task, int taskID)
     {
         if(task is KeypadTask)
         {

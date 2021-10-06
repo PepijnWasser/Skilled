@@ -63,7 +63,7 @@ public class ThreeWayLeverPositionDisplay : MonoBehaviour
         NeedToUpdate = true;
     }
 
-    void AddTask(Task task)
+    void AddTask(Task task, int taskID)
     {
         if (task is ThreeWayLeverTask)
         {

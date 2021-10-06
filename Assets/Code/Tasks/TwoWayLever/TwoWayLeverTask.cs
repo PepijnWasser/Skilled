@@ -89,4 +89,9 @@ public class TwoWayLeverTask : Task
             secondCounter = 0;
         }
     }
+
+    public override int getID()
+    {
+        return lever.leverID;
+    }
 }

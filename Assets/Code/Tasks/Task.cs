@@ -45,4 +45,9 @@ public abstract class Task : MonoBehaviour
     {
 
     }
+
+    public virtual int getID()
+    {
+        return 0;
+    }
 }
