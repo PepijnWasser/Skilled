@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpdateTwoWayLeverPositionRequest : ISerializable
+public class UpdateTwoWayLeverPositionMessage : ISerializable
 {
     public int leverPosition;
     public int leverID;
@@ -19,12 +19,12 @@ public class UpdateTwoWayLeverPositionRequest : ISerializable
         pPacket.Write(leverID);
     }
 
-    public UpdateTwoWayLeverPositionRequest()
+    public UpdateTwoWayLeverPositionMessage()
     {
 
     }
 
-    public UpdateTwoWayLeverPositionRequest(int _leverPosition, int _leverID)
+    public UpdateTwoWayLeverPositionMessage(int _leverPosition, int _leverID)
     {
         leverPosition = _leverPosition;
         leverID = _leverID;

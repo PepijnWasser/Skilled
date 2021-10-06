@@ -53,10 +53,10 @@ public class TaskSpawner : MonoBehaviour
             GameObject newObject = Instantiate(TwoWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
 
             TwoWayLever twoWayLever = newObject.GetComponent<TwoWayLever>();
+            twoWayLever.leverID = i;
+
             string name = twoWayLeverNamer.GetName();
-
             twoWayLever.gameObject.name = name;
-
             TwoWayLeverTask task = newObject.GetComponent<TwoWayLeverTask>();
             task.taskName = name;
 

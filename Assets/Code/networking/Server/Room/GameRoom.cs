@@ -67,6 +67,11 @@ public class GameRoom : Room
             AddThreeWayLeverTask message = tempOBJ as AddThreeWayLeverTask;
             HandleAddThreeWayLeverTask(message, myClient);
         }
+        else if(tempOBJ is UpdateTwoWayLeverPositionMessage)
+        {
+            UpdateTwoWayLeverPositionMessage message = tempOBJ as UpdateTwoWayLeverPositionMessage;
+            HandleUpdateTwoWayLeverPosition(message, myClient);
+        }
     }
 
     protected override void CheckHeartbeat()
@@ -217,5 +222,12 @@ public class GameRoom : Room
         TCPPacket outpacket = new TCPPacket();
         outpacket.Write(message);
         SendTCPMessageToAllUsersExcept(outpacket, client);
+    }
+
+    void HandleUpdateTwoWayLeverPosition(UpdateTwoWayLeverPositionMessage message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToAllUsers(outPacket);
     }
 }

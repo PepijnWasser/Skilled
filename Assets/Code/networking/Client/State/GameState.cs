@@ -25,12 +25,17 @@ public class GameState : State
     public static event MakeThreeWayLeverTask makeThreeWayLeverTask;
 
 
+    public delegate void UpdateTwoWayLeverPos(UpdateTwoWayLeverPositionMessage task);
+    public static event UpdateTwoWayLeverPos updateTwoWayLeverPos;
+
     protected override void Awake()
     {
         base.Awake();
         MapGenerator.OnCompletion += SendMapMadeMessage;
         StationHealth.updateStationHealth += SendStationHealth;
         TaskManager.taskHasError += SendNewTask;
+
+        TwoWayLever.leverPulled += SendTwoWayLeverPos;
     }
 
     private void OnDestroy()
@@ -38,6 +43,8 @@ public class GameState : State
         MapGenerator.OnCompletion += SendMapMadeMessage;
         StationHealth.updateStationHealth -= SendStationHealth;
         TaskManager.taskHasError -= SendNewTask;
+
+        TwoWayLever.leverPulled += SendTwoWayLeverPos;
     }
 
     private void Start()
@@ -131,6 +138,11 @@ public class GameState : State
                     AddThreeWayLeverTask message = tempOBJ as AddThreeWayLeverTask;
                     HandleAddThreeWayLeverTask(message);
                 }
+                else if(tempOBJ is UpdateTwoWayLeverPositionMessage)
+                {
+                    UpdateTwoWayLeverPositionMessage message = tempOBJ as UpdateTwoWayLeverPositionMessage;
+                    HandleUpdateTwoWayLeverPosition(message);
+                }
             }
         }
         catch (Exception e)
@@ -142,6 +154,13 @@ public class GameState : State
             }
         }
     }
+
+    void SendTwoWayLeverPos(int ID, int newPos)
+    {
+        UpdateTwoWayLeverPositionMessage message = new UpdateTwoWayLeverPositionMessage(newPos, ID);
+        tcpClientNetwork.SendObjectThroughTCP(message);
+    }
+
     //handle receiving
     void HandleMakeGameMapMessage(MakeGameMapMessage message)
     {
@@ -193,6 +212,11 @@ public class GameState : State
     void HandleAddThreeWayLeverTask(AddThreeWayLeverTask message)
     {
         makeThreeWayLeverTask?.Invoke(message.task);
+    }
+
+    void HandleUpdateTwoWayLeverPosition(UpdateTwoWayLeverPositionMessage message)
+    {
+        updateTwoWayLeverPos?.Invoke(message);
     }
 
     //sending

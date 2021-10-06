@@ -15,21 +15,15 @@ public class Keypad : Focusable
         keypadInteractable = GetComponent<KeypadInteractable>();
     }
 
-    private void Update()
-    {
-        if(player != null)
-        {
-            TestFocus();
-        }
-    }
 
-    void TestFocus()
+    protected override void TestFocus()
     {
-        if (isFocused == false)
+        if (isFocused == false && playerIsUsing == false)
         {
             if (Input.GetKeyDown(KeyCode.E) && keypadInteractable.lookingAtTarget)
             {
                 Focus();
+                playerIsUsing = true;
             }
         }
         if (isFocused)
@@ -37,6 +31,7 @@ public class Keypad : Focusable
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 DeFocus();
+                playerIsUsing = false;
             }
         }
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UpdateKeypadRequest : ISerializable
+public class UpdateKeypadMessage : ISerializable
 {
     public string code;
     public int keypadID;
@@ -19,12 +19,12 @@ public class UpdateKeypadRequest : ISerializable
         pPacket.Write(keypadID);
     }
 
-    public UpdateKeypadRequest()
+    public UpdateKeypadMessage()
     {
 
     }
 
-    public UpdateKeypadRequest(string _code, int _keypadID)
+    public UpdateKeypadMessage(string _code, int _keypadID)
     {
         code = _code;
         keypadID = _keypadID;

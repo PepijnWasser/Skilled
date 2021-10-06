@@ -13,7 +13,9 @@ public class Focusable : MonoBehaviour
 
     Interactable interactable;
 
-    private void Awake()
+    protected bool playerIsUsing = false;
+
+    protected virtual void Awake()
     {
         GameManager.playerMade += SetPlayer;
     }
@@ -23,12 +25,12 @@ public class Focusable : MonoBehaviour
         interactable = GetComponent<Interactable>();
     }
 
-    private void OnDestroy()
+    protected virtual void OnDestroy()
     {
         GameManager.playerMade -= SetPlayer;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (player != null)
         {
@@ -36,7 +38,7 @@ public class Focusable : MonoBehaviour
         }
     }
 
-    void TestFocus()
+    protected virtual void TestFocus()
     {
         if (isFocused == false)
         {
