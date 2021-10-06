@@ -28,6 +28,9 @@ public class GameState : State
     public delegate void UpdateTwoWayLeverPos(UpdateTwoWayLeverPositionMessage task);
     public static event UpdateTwoWayLeverPos updateTwoWayLeverPos;
 
+    public delegate void UpdateThreeWayLeverPos(UpdateThreeWayLeverPositionMessage task);
+    public static event UpdateThreeWayLeverPos updateThreeWayLeverPos;
+
     protected override void Awake()
     {
         base.Awake();
@@ -36,6 +39,7 @@ public class GameState : State
         TaskManager.taskHasError += SendNewTask;
 
         TwoWayLever.leverPulled += SendTwoWayLeverPos;
+        ThreeWayLever.leverPulled -= SendThreeWayLeverPos;
     }
 
     private void OnDestroy()
@@ -45,6 +49,7 @@ public class GameState : State
         TaskManager.taskHasError -= SendNewTask;
 
         TwoWayLever.leverPulled += SendTwoWayLeverPos;
+        ThreeWayLever.leverPulled -= SendThreeWayLeverPos;
     }
 
     private void Start()
@@ -143,6 +148,11 @@ public class GameState : State
                     UpdateTwoWayLeverPositionMessage message = tempOBJ as UpdateTwoWayLeverPositionMessage;
                     HandleUpdateTwoWayLeverPosition(message);
                 }
+                else if (tempOBJ is UpdateThreeWayLeverPositionMessage)
+                {
+                    UpdateThreeWayLeverPositionMessage message = tempOBJ as UpdateThreeWayLeverPositionMessage;
+                    HandleUpdateThreeWayLeverPosition(message);
+                }
             }
         }
         catch (Exception e)
@@ -155,11 +165,6 @@ public class GameState : State
         }
     }
 
-    void SendTwoWayLeverPos(int ID, int newPos)
-    {
-        UpdateTwoWayLeverPositionMessage message = new UpdateTwoWayLeverPositionMessage(newPos, ID);
-        tcpClientNetwork.SendObjectThroughTCP(message);
-    }
 
     //handle receiving
     void HandleMakeGameMapMessage(MakeGameMapMessage message)
@@ -219,6 +224,11 @@ public class GameState : State
         updateTwoWayLeverPos?.Invoke(message);
     }
 
+    void HandleUpdateThreeWayLeverPosition(UpdateThreeWayLeverPositionMessage message)
+    {
+        updateThreeWayLeverPos?.Invoke(message);
+    }
+
     //sending
     void SendGameLoadedMessage()
     {
@@ -271,5 +281,17 @@ public class GameState : State
             AddThreeWayLeverTask message = new AddThreeWayLeverTask(threeWayLeverTask);
             tcpClientNetwork.SendObjectThroughTCP(message);
         }
+    }
+
+    void SendTwoWayLeverPos(int ID, int newPos)
+    {
+        UpdateTwoWayLeverPositionMessage message = new UpdateTwoWayLeverPositionMessage(newPos, ID);
+        tcpClientNetwork.SendObjectThroughTCP(message);
+    }
+
+    void SendThreeWayLeverPos(int ID, int newPos)
+    {
+        UpdateThreeWayLeverPositionMessage message = new UpdateThreeWayLeverPositionMessage(newPos, ID);
+        tcpClientNetwork.SendObjectThroughTCP(message);
     }
 }
