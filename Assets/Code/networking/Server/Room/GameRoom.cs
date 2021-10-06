@@ -77,6 +77,11 @@ public class GameRoom : Room
             UpdateThreeWayLeverPositionMessage message = tempOBJ as UpdateThreeWayLeverPositionMessage;
             HandleUpdateThreeWayLeverPosition(message, myClient);
         }
+        else if(tempOBJ is UpdateKeypadStatusMessage)
+        {
+            UpdateKeypadStatusMessage message = tempOBJ as UpdateKeypadStatusMessage;
+            HandleUpdatekeypadStatus(message, myClient);
+        }
     }
 
     protected override void CheckHeartbeat()
@@ -237,6 +242,13 @@ public class GameRoom : Room
     }
 
     void HandleUpdateThreeWayLeverPosition(UpdateThreeWayLeverPositionMessage message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToAllUsers(outPacket);
+    }
+
+    void HandleUpdatekeypadStatus(UpdateKeypadStatusMessage message, MyClient client)
     {
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);

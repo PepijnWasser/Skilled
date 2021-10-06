@@ -25,11 +25,14 @@ public class GameState : State
     public static event MakeThreeWayLeverTask makeThreeWayLeverTask;
 
 
-    public delegate void UpdateTwoWayLeverPos(UpdateTwoWayLeverPositionMessage task);
+    public delegate void UpdateTwoWayLeverPos(UpdateTwoWayLeverPositionMessage message);
     public static event UpdateTwoWayLeverPos updateTwoWayLeverPos;
 
-    public delegate void UpdateThreeWayLeverPos(UpdateThreeWayLeverPositionMessage task);
+    public delegate void UpdateThreeWayLeverPos(UpdateThreeWayLeverPositionMessage message);
     public static event UpdateThreeWayLeverPos updateThreeWayLeverPos;
+
+    public delegate void UpdateKeypadStatus(UpdateKeypadStatusMessage message);
+    public static event UpdateKeypadStatus updateKeypadStatus;
 
     protected override void Awake()
     {
@@ -40,6 +43,7 @@ public class GameState : State
 
         TwoWayLever.leverPulled += SendTwoWayLeverPos;
         ThreeWayLever.leverPulled += SendThreeWayLeverPos;
+        Keypad.keypadUsed += SendKeypadStatus;
     }
 
     private void OnDestroy()
@@ -50,6 +54,7 @@ public class GameState : State
 
         TwoWayLever.leverPulled += SendTwoWayLeverPos;
         ThreeWayLever.leverPulled -= SendThreeWayLeverPos;
+        Keypad.keypadUsed -= SendKeypadStatus;
     }
 
     private void Start()
@@ -153,6 +158,11 @@ public class GameState : State
                     UpdateThreeWayLeverPositionMessage message = tempOBJ as UpdateThreeWayLeverPositionMessage;
                     HandleUpdateThreeWayLeverPosition(message);
                 }
+                else if(tempOBJ is UpdateKeypadStatusMessage)
+                {
+                    UpdateKeypadStatusMessage message = tempOBJ as UpdateKeypadStatusMessage;
+                    HandleUpdateKeypadStatus(message);
+                }
             }
         }
         catch (Exception e)
@@ -229,6 +239,11 @@ public class GameState : State
         updateThreeWayLeverPos?.Invoke(message);
     }
 
+    void HandleUpdateKeypadStatus(UpdateKeypadStatusMessage message)
+    {
+        updateKeypadStatus?.Invoke(message);
+    }
+
     //sending
     void SendGameLoadedMessage()
     {
@@ -294,4 +309,10 @@ public class GameState : State
         UpdateThreeWayLeverPositionMessage message = new UpdateThreeWayLeverPositionMessage(newPos, ID);
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
+    void SendKeypadStatus(int ID, bool inUse)
+    {
+        UpdateKeypadStatusMessage message = new UpdateKeypadStatusMessage(ID, inUse);
+        tcpClientNetwork.SendObjectThroughTCP(message);
+    }
+
 }

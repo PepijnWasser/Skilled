@@ -13,8 +13,6 @@ public class Focusable : MonoBehaviour
 
     Interactable interactable;
 
-    protected bool playerIsUsing = false;
-
     protected virtual void Awake()
     {
         GameManager.playerMade += SetPlayer;
@@ -56,7 +54,7 @@ public class Focusable : MonoBehaviour
         }
     }
 
-    public void Focus()
+    public virtual void Focus()
     {
         isFocused = true;
         player.GetComponent<MeshRenderer>().enabled = false;
@@ -67,7 +65,7 @@ public class Focusable : MonoBehaviour
         displayCam.Priority = 12;
     }
 
-    public void DeFocus()
+    public virtual void DeFocus()
     {
         isFocused = false;
         player.GetComponent<MeshRenderer>().enabled = true;
