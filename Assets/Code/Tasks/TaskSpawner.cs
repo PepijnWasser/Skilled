@@ -69,10 +69,10 @@ public class TaskSpawner : MonoBehaviour
             availibleThreeWayLeverLocations.Remove(newlocation);
 
             GameObject newObject = Instantiate(ThreeWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
-
             ThreeWayLever threeWayLever = newObject.GetComponent<ThreeWayLever>();
-            string name = threeWayLeverNamer.GetName();
+            threeWayLever.leverID = i;
 
+            string name = threeWayLeverNamer.GetName();
             threeWayLever.gameObject.name = name;
 
             ThreeWayLeverTask task = newObject.GetComponent<ThreeWayLeverTask>();

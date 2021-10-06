@@ -14,9 +14,21 @@ public class TwoWayLeverTask : Task
 
     public TwoWayLever lever;
 
+    bool completed = false;
+
     private void Start()
     {
         lever = GetComponent<TwoWayLever>();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (completed)
+        {
+            CompleteTask();
+            completed = false;
+        }
     }
 
     public override void InitializeTask()
@@ -69,7 +81,7 @@ public class TwoWayLeverTask : Task
             secondCounterValidate += Time.deltaTime;
             if (secondCounter > validationTime)
             {
-                CompleteTask();
+                completed = true;
             }
         }
         else

@@ -39,7 +39,7 @@ public class GameState : State
         TaskManager.taskHasError += SendNewTask;
 
         TwoWayLever.leverPulled += SendTwoWayLeverPos;
-        ThreeWayLever.leverPulled -= SendThreeWayLeverPos;
+        ThreeWayLever.leverPulled += SendThreeWayLeverPos;
     }
 
     private void OnDestroy()

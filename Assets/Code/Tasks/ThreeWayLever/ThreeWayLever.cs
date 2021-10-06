@@ -72,7 +72,7 @@ public class ThreeWayLever : MonoBehaviour
         if (message.leverID == leverID)
         {
             currentPosition = message.leverPosition;
-            animator.SetInteger("position", currentPosition);
+            animator.SetInteger("Stance", currentPosition);
         }
     }
 }

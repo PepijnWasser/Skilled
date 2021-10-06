@@ -11,7 +11,7 @@ public class GameRoom : Room
 {
     int mapMadeMessages = 0;
     int worldSeed = Random.Range(1, 30);
-    int amountOfSectors = 3;
+    int amountOfSectors = 1;
 
     public override void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
     {
