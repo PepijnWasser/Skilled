@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 301541205273119763}
   - component: {fileID: 301541205273119762}
   m_Layer: 5
-  m_Name: Display
+  m_Name: EnergyDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &301541205273119766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,6 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayCam: {fileID: 3625049173759891399}
   isFocused: 0
+  player: {fileID: 0}
 --- !u!65 &301541205273119760
 BoxCollider:
   m_ObjectHideFlags: 0

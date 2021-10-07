@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyMapCamera : MonoBehaviour
+public class MapCamera : MonoBehaviour
 {
 
     public Camera camera;
@@ -11,12 +11,7 @@ public class EnergyMapCamera : MonoBehaviour
 
     Vector3 dragOrigin;
 
-    private void Update()
-    {
-        PanCamera(); 
-    }
-
-    void PanCamera()
+    public void PanCamera()
     {
         Vector3 difference = Vector3.zero;
         if (Input.GetMouseButtonDown(0))

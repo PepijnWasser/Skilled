@@ -9,7 +9,7 @@ public class Focusable : MonoBehaviour
     public CinemachineVirtualCamera displayCam;
 
     public bool isFocused;
-    public GameObject player;
+    protected GameObject player;
 
     Interactable interactable;
 
