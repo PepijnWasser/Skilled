@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69a5d6d68c92b9d41828d80ee334dd71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 4983759103546187816, guid: 1a0bf6c136abdb74ab475bd72fa60b04, type: 3}
+  playerPrefab: {fileID: 5732217132210592382, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
   taskManagerPrefab: {fileID: 5190529441526039828, guid: 1e392aa78cb36774db62e9446859ef59, type: 3}
   playerPositionUpdater: {fileID: 906473608}
 --- !u!4 &1388254687

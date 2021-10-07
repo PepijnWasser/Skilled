@@ -11,6 +11,8 @@ public class PlayerPrefabManager : MonoBehaviour
 
     public AllignWithCamera allignScript;
 
+    public GameObject player;
+    public GameObject icon;
 
     public GameObject nose;
 
