@@ -57,10 +57,13 @@ public class ThreeWayLeverPositionDisplay : MonoBehaviour
 
     void RemoveTask(Task task)
     {
-        ThreeWayLeverTask threeWayLeverTask = task as ThreeWayLeverTask;
-        tasksToDisplay.Remove(threeWayLeverTask);
-        Debug.Log("removing task");
-        NeedToUpdate = true;
+        if(task is ThreeWayLeverTask)
+        {
+            ThreeWayLeverTask threeWayLeverTask = task as ThreeWayLeverTask;
+            tasksToDisplay.Remove(threeWayLeverTask);
+            Debug.Log("removing task");
+            NeedToUpdate = true;
+        }
     }
 
     void AddTask(Task task, int taskID)

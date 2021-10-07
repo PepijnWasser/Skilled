@@ -34,6 +34,11 @@ public class GameState : State
     public delegate void UpdateKeypadStatus(UpdateKeypadStatusMessage message);
     public static event UpdateKeypadStatus updateKeypadStatus;
 
+
+    public delegate void TwoWayLeverCompleted(int leverID);
+    public static event TwoWayLeverCompleted twoWayLeverCompleted;
+
+
     protected override void Awake()
     {
         base.Awake();
@@ -44,6 +49,8 @@ public class GameState : State
         TwoWayLever.leverPulled += SendTwoWayLeverPos;
         ThreeWayLever.leverPulled += SendThreeWayLeverPos;
         Keypad.keypadUsed += SendKeypadStatus;
+
+        Task.taskCompleted += SendTaskCompleted;
     }
 
     private void OnDestroy()
@@ -55,6 +62,8 @@ public class GameState : State
         TwoWayLever.leverPulled += SendTwoWayLeverPos;
         ThreeWayLever.leverPulled -= SendThreeWayLeverPos;
         Keypad.keypadUsed -= SendKeypadStatus;
+
+        Task.taskCompleted -= SendTaskCompleted;
     }
 
     private void Start()
@@ -163,11 +172,16 @@ public class GameState : State
                     UpdateKeypadStatusMessage message = tempOBJ as UpdateKeypadStatusMessage;
                     HandleUpdateKeypadStatus(message);
                 }
+                else if(tempOBJ is TwoWayLeverCompletedMessage)
+                {
+                    TwoWayLeverCompletedMessage message = tempOBJ as TwoWayLeverCompletedMessage;
+                    HandleTwoWayLeverCompleted(message);
+                }
             }
         }
         catch (Exception e)
         {
-            Debug.Log(e.Message + e.StackTrace);
+            Debug.Log(e.Message);
             if (tcpClientNetwork.tcpClient.Connected)
             {
                 tcpClientNetwork.tcpClient.Close();
@@ -244,6 +258,11 @@ public class GameState : State
         updateKeypadStatus?.Invoke(message);
     }
 
+    void HandleTwoWayLeverCompleted(TwoWayLeverCompletedMessage message)
+    {
+        twoWayLeverCompleted?.Invoke(message.leverID);
+    }
+
     //sending
     void SendGameLoadedMessage()
     {
@@ -315,4 +334,13 @@ public class GameState : State
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
+    void SendTaskCompleted(Task task)
+    {
+        if(task is TwoWayLeverTask)
+        {
+            TwoWayLeverTask twoWayLeverTask = task as TwoWayLeverTask;
+            TwoWayLeverCompletedMessage message = new TwoWayLeverCompletedMessage(twoWayLeverTask, twoWayLeverTask.lever.leverID);
+            tcpClientNetwork.SendObjectThroughTCP(message);
+        }
+    }
 }

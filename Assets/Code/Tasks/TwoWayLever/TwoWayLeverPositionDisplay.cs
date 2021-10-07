@@ -19,6 +19,7 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
         TwoWayLeverTask.taskCompleted += RemoveTask;
         TaskManager.taskHasError += AddTask;
         GameState.makeTwoWayleverTask += AddTask;
+        GameState.twoWayLeverCompleted += RemoveTask;
     }
 
 
@@ -27,6 +28,7 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
         TwoWayLeverTask.taskCompleted -= RemoveTask;
         TaskManager.taskHasError -= AddTask;
         GameState.makeTwoWayleverTask -= AddTask;
+        GameState.twoWayLeverCompleted -= RemoveTask;
     }
 
     private void Update()
@@ -57,10 +59,13 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
 
     void RemoveTask(Task task)
     {
-        TwoWayLeverTask twoWayLeverTask = task as TwoWayLeverTask;
-        tasksToDisplay.Remove(twoWayLeverTask.lever.leverID);
-        Debug.Log("removing task");
-        NeedToUpdate = true;
+        if (task is TwoWayLeverTask)
+        {
+            TwoWayLeverTask twoWayLeverTask = task as TwoWayLeverTask;
+            tasksToDisplay.Remove(twoWayLeverTask.lever.leverID);
+            Debug.Log("removing task");
+            NeedToUpdate = true;
+        }
     }
 
     void RemoveTask(int taskID)

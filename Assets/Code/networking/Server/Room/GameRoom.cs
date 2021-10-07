@@ -82,6 +82,11 @@ public class GameRoom : Room
             UpdateKeypadStatusMessage message = tempOBJ as UpdateKeypadStatusMessage;
             HandleUpdatekeypadStatus(message, myClient);
         }
+        else if(tempOBJ is TwoWayLeverCompletedMessage)
+        {
+            TwoWayLeverCompletedMessage message = tempOBJ as TwoWayLeverCompletedMessage;
+            HandleTwoWayLeverTaskCompleted(message, myClient);
+        }
     }
 
     protected override void CheckHeartbeat()
@@ -249,6 +254,13 @@ public class GameRoom : Room
     }
 
     void HandleUpdatekeypadStatus(UpdateKeypadStatusMessage message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToAllUsers(outPacket);
+    }
+
+    void HandleTwoWayLeverTaskCompleted(TwoWayLeverCompletedMessage message, MyClient client)
     {
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);

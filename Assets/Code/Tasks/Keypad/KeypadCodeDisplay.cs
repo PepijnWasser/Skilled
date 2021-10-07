@@ -55,10 +55,13 @@ public class KeypadCodeDisplay : MonoBehaviour
 
     void RemoveTask(Task task)
     {
-        KeypadTask keypadTask = task as KeypadTask;
-        tasksToDisplay.Remove(keypadTask);
-        Debug.Log("removing task");
-        NeedToUpdate = true;
+        if(task is KeypadTask)
+        {
+            KeypadTask keypadTask = task as KeypadTask;
+            tasksToDisplay.Remove(keypadTask);
+            Debug.Log("removing task");
+            NeedToUpdate = true;
+        }
     }
 
     void AddTask(Task task, int taskID)
