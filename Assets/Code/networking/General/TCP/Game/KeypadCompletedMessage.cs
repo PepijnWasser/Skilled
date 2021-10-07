@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddKeypadTaskMessage : ISerializable
+public class KeypadCompletedMessage : ISerializable
 {
     public KeypadTask task;
     public int keypadID;
@@ -19,12 +19,12 @@ public class AddKeypadTaskMessage : ISerializable
         pPacket.Write(keypadID);
     }
 
-    public AddKeypadTaskMessage()
+    public KeypadCompletedMessage()
     {
 
     }
 
-    public AddKeypadTaskMessage(KeypadTask _task, int _keypadID)
+    public KeypadCompletedMessage(KeypadTask _task, int _keypadID)
     {
         task = _task;
         keypadID = _keypadID;

@@ -87,6 +87,16 @@ public class GameRoom : Room
             TwoWayLeverCompletedMessage message = tempOBJ as TwoWayLeverCompletedMessage;
             HandleTwoWayLeverTaskCompleted(message, myClient);
         }
+        else if (tempOBJ is ThreeWayLeverCompletedMessage)
+        {
+            ThreeWayLeverCompletedMessage message = tempOBJ as ThreeWayLeverCompletedMessage;
+            HandleThreeWayLeverTaskCompleted(message, myClient);
+        }
+        else if (tempOBJ is KeypadCompletedMessage)
+        {
+            KeypadCompletedMessage message = tempOBJ as KeypadCompletedMessage;
+            HandleKeypadTaskCompleted(message, myClient);
+        }
     }
 
     protected override void CheckHeartbeat()
@@ -261,6 +271,20 @@ public class GameRoom : Room
     }
 
     void HandleTwoWayLeverTaskCompleted(TwoWayLeverCompletedMessage message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToAllUsers(outPacket);
+    }
+
+    void HandleThreeWayLeverTaskCompleted(ThreeWayLeverCompletedMessage message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToAllUsers(outPacket);
+    }
+
+    void HandleKeypadTaskCompleted(KeypadCompletedMessage message, MyClient client)
     {
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);

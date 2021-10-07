@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ThreeWayLeverPositionDisplay : MonoBehaviour
 {
-    List<ThreeWayLeverTask> tasksToDisplay = new List<ThreeWayLeverTask>();
+    Dictionary<int, ThreeWayLeverTask> tasksToDisplay = new Dictionary<int, ThreeWayLeverTask>();
 
     public List<Image> content;
     public Image itemPrefab;
@@ -19,6 +19,7 @@ public class ThreeWayLeverPositionDisplay : MonoBehaviour
         ThreeWayLeverTask.taskCompleted += RemoveTask;
         TaskManager.taskHasError += AddTask;
         GameState.makeThreeWayLeverTask += AddTask;
+        GameState.threeWayLeverCompleted += RemoveTask;
     }
 
 
@@ -27,6 +28,7 @@ public class ThreeWayLeverPositionDisplay : MonoBehaviour
         ThreeWayLeverTask.taskCompleted -= RemoveTask;
         TaskManager.taskHasError -= AddTask;
         GameState.makeThreeWayLeverTask -= AddTask;
+        GameState.threeWayLeverCompleted -= RemoveTask;
     }
 
     private void Update()
@@ -39,7 +41,7 @@ public class ThreeWayLeverPositionDisplay : MonoBehaviour
             }
             imagesSpawned.Clear();
 
-            foreach (ThreeWayLeverTask task in tasksToDisplay)
+            foreach (ThreeWayLeverTask task in tasksToDisplay.Values)
             {
                 //8 is amount of lines per display
                 int display = (int)((float)imagesSpawned.Count / (float)8);
@@ -57,22 +59,31 @@ public class ThreeWayLeverPositionDisplay : MonoBehaviour
 
     void RemoveTask(Task task)
     {
-        if(task is ThreeWayLeverTask)
+        if (task is ThreeWayLeverTask)
         {
             ThreeWayLeverTask threeWayLeverTask = task as ThreeWayLeverTask;
-            tasksToDisplay.Remove(threeWayLeverTask);
+            tasksToDisplay.Remove(threeWayLeverTask.lever.leverID);
             Debug.Log("removing task");
             NeedToUpdate = true;
         }
     }
 
-    void AddTask(Task task, int taskID)
+    void RemoveTask(int taskID)
+    {
+        if (tasksToDisplay.ContainsKey(taskID))
+        {
+            tasksToDisplay.Remove(taskID);
+            Debug.Log("removing task");
+            NeedToUpdate = true;
+        }
+    }
+
+    void AddTask(Task task, int leverID)
     {
         if (task is ThreeWayLeverTask)
         {
             ThreeWayLeverTask threeWayLeverTask = task as ThreeWayLeverTask;
-            tasksToDisplay.Add(threeWayLeverTask);
-            //  Debug.Log("adding 3WL task");
+            tasksToDisplay.Add(leverID, threeWayLeverTask);
             NeedToUpdate = true;
         }
     }

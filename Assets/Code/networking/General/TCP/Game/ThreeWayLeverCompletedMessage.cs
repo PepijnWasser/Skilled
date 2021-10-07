@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddThreeWayLeverTask : ISerializable
+public class ThreeWayLeverCompletedMessage : ISerializable
 {
     public ThreeWayLeverTask task;
     public int leverID;
@@ -19,14 +19,14 @@ public class AddThreeWayLeverTask : ISerializable
         pPacket.Write(leverID);
     }
 
-    public AddThreeWayLeverTask()
+    public ThreeWayLeverCompletedMessage()
     {
 
     }
 
-    public AddThreeWayLeverTask(ThreeWayLeverTask _task, int _levereID)
+    public ThreeWayLeverCompletedMessage(ThreeWayLeverTask _task, int _leverID)
     {
         task = _task;
-        leverID = _levereID;
+        leverID = _leverID;
     }
 }

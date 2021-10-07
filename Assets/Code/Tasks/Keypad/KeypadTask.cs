@@ -87,4 +87,9 @@ public class KeypadTask : Task
             keypadCodeEnterer.DisplayErrorMessage();
         }
     }
+
+    public override int getID()
+    {
+        return keyPad.keypadID;
+    }
 }

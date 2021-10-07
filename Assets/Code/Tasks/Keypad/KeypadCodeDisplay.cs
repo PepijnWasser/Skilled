@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class KeypadCodeDisplay : MonoBehaviour
 {
-     public List<KeypadTask> tasksToDisplay = new List<KeypadTask>();
+    Dictionary<int, KeypadTask> tasksToDisplay = new Dictionary<int, KeypadTask>();
 
     public List<Image> content;
     public Image itemPrefab;
@@ -19,6 +19,7 @@ public class KeypadCodeDisplay : MonoBehaviour
         KeypadTask.taskCompleted += RemoveTask;
         TaskManager.taskHasError += AddTask;
         GameState.makeKeypadTask += AddTask;
+        GameState.keypadCompleted += RemoveTask;
     }
 
     private void OnDestroy()
@@ -26,6 +27,7 @@ public class KeypadCodeDisplay : MonoBehaviour
         KeypadTask.taskCompleted -= RemoveTask;
         TaskManager.taskHasError -= AddTask;
         GameState.makeKeypadTask -= AddTask;
+        GameState.keypadCompleted += RemoveTask;
     }
 
     private void Update()
@@ -38,7 +40,7 @@ public class KeypadCodeDisplay : MonoBehaviour
             }
             imagesSpawned.Clear();
 
-            foreach(KeypadTask task in tasksToDisplay)
+            foreach(KeypadTask task in tasksToDisplay.Values)
             {
                 int display =  (int)((float)imagesSpawned.Count / (float)8);
                 Image spawnedItem = Instantiate(itemPrefab, content[display].transform);
@@ -55,21 +57,31 @@ public class KeypadCodeDisplay : MonoBehaviour
 
     void RemoveTask(Task task)
     {
-        if(task is KeypadTask)
+        if (task is KeypadTask)
         {
             KeypadTask keypadTask = task as KeypadTask;
-            tasksToDisplay.Remove(keypadTask);
+            tasksToDisplay.Remove(keypadTask.keyPad.keypadID);
             Debug.Log("removing task");
             NeedToUpdate = true;
         }
     }
 
-    void AddTask(Task task, int taskID)
+    void RemoveTask(int taskID)
     {
-        if(task is KeypadTask)
+        if (tasksToDisplay.ContainsKey(taskID))
+        {
+            tasksToDisplay.Remove(taskID);
+            Debug.Log("removing task");
+            NeedToUpdate = true;
+        }
+    }
+
+    void AddTask(Task task, int leverID)
+    {
+        if (task is KeypadTask)
         {
             KeypadTask keypadTask = task as KeypadTask;
-            tasksToDisplay.Add(keypadTask);
+            tasksToDisplay.Add(leverID, keypadTask);
             NeedToUpdate = true;
         }
     }

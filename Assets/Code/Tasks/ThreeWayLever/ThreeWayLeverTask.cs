@@ -94,4 +94,9 @@ public class ThreeWayLeverTask : Task
             secondCounterValidate = 0;
         }
     }
+
+    public override int getID()
+    {
+        return lever.leverID;
+    }
 }
