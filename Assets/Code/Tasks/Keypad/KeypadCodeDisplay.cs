@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class KeypadCodeDisplay : MonoBehaviour
 {
-    Dictionary<int, KeypadTask> tasksToDisplay = new Dictionary<int, KeypadTask>();
+   public Dictionary<int, KeypadTask> tasksToDisplay = new Dictionary<int, KeypadTask>();
 
     public List<Image> content;
     public Image itemPrefab;
@@ -61,7 +61,7 @@ public class KeypadCodeDisplay : MonoBehaviour
         {
             KeypadTask keypadTask = task as KeypadTask;
             tasksToDisplay.Remove(keypadTask.keyPad.keypadID);
-            Debug.Log("removing task");
+            Debug.Log("removing task" + keypadTask.keyPad.keypadID);
             NeedToUpdate = true;
         }
     }
@@ -83,6 +83,8 @@ public class KeypadCodeDisplay : MonoBehaviour
             KeypadTask keypadTask = task as KeypadTask;
             tasksToDisplay.Add(leverID, keypadTask);
             NeedToUpdate = true;
+
+            Debug.Log("adding task");
         }
     }
 }

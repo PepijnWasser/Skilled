@@ -97,6 +97,11 @@ public class GameRoom : Room
             KeypadCompletedMessage message = tempOBJ as KeypadCompletedMessage;
             HandleKeypadTaskCompleted(message, myClient);
         }
+        else if(tempOBJ is KeypadValidationMessage)
+        {
+            KeypadValidationMessage message = tempOBJ as KeypadValidationMessage;
+            HandleKeypadValidationMessage(message, myClient);
+        }
     }
 
     protected override void CheckHeartbeat()
@@ -274,20 +279,27 @@ public class GameRoom : Room
     {
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);
-        SendTCPMessageToAllUsers(outPacket);
+        SendTCPMessageToAllUsersExcept(outPacket, client);
     }
 
     void HandleThreeWayLeverTaskCompleted(ThreeWayLeverCompletedMessage message, MyClient client)
     {
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);
-        SendTCPMessageToAllUsers(outPacket);
+        SendTCPMessageToAllUsersExcept(outPacket, client);
     }
 
     void HandleKeypadTaskCompleted(KeypadCompletedMessage message, MyClient client)
     {
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);
-        SendTCPMessageToAllUsers(outPacket);
+        SendTCPMessageToAllUsersExcept(outPacket, client);
+    }
+
+    void HandleKeypadValidationMessage(KeypadValidationMessage message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToTargetUser(outPacket, server.serverInfo.serverOwner);
     }
 }

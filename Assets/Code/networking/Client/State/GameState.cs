@@ -44,6 +44,9 @@ public class GameState : State
     public delegate void KeypadCompleted(int keypadID);
     public static event KeypadCompleted keypadCompleted;
 
+    public delegate void Validate(int code, int keypadID);
+    public static event Validate testKeypadCode;
+
 
     protected override void Awake()
     {
@@ -57,6 +60,7 @@ public class GameState : State
         Keypad.keypadUsed += SendKeypadStatus;
 
         Task.taskCompleted += SendTaskCompleted;
+        KeypadTask.validateCode += SendValidationMessage;
     }
 
     private void OnDestroy()
@@ -70,6 +74,7 @@ public class GameState : State
         Keypad.keypadUsed -= SendKeypadStatus;
 
         Task.taskCompleted -= SendTaskCompleted;
+        KeypadTask.validateCode -= SendValidationMessage;
     }
 
     private void Start()
@@ -193,11 +198,16 @@ public class GameState : State
                     KeypadCompletedMessage message = tempOBJ as KeypadCompletedMessage;
                     HandleKeypadCompleted(message);
                 }
+                else if(tempOBJ is KeypadValidationMessage)
+                {
+                    KeypadValidationMessage message = tempOBJ as KeypadValidationMessage;
+                    HandleValidationMessage(message);
+                }
             }
         }
         catch (Exception e)
         {
-            Debug.Log(e.Message);
+            Debug.Log(e.Message +  e.Source);
             if (tcpClientNetwork.tcpClient.Connected)
             {
                 tcpClientNetwork.tcpClient.Close();
@@ -289,6 +299,10 @@ public class GameState : State
         keypadCompleted?.Invoke(message.keypadID);
     }
 
+    void HandleValidationMessage(KeypadValidationMessage message)
+    {
+        testKeypadCode?.Invoke(message.code, message.keypadID);
+    }
 
     //sending
     void SendGameLoadedMessage()
@@ -381,5 +395,11 @@ public class GameState : State
             KeypadCompletedMessage message = new KeypadCompletedMessage(keypadTask, keypadTask.keyPad.keypadID);
             tcpClientNetwork.SendObjectThroughTCP(message);
         }
+    }
+
+    void SendValidationMessage(int code, int ID)
+    {
+        KeypadValidationMessage message = new KeypadValidationMessage(code, ID);
+        tcpClientNetwork.SendObjectThroughTCP(message);
     }
 }

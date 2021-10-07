@@ -34,6 +34,19 @@ public class Keypad : Focusable
         GameState.updateKeypadStatus -= UpdateIsInUse;
     }
 
+    public override void Focus()
+    {
+        base.Focus();
+        playerIsUsing = true;
+        keypadUsed?.Invoke(keypadID, playerIsUsing);
+    }
+
+    public override void DeFocus()
+    {
+        base.DeFocus();
+        playerIsUsing = false;
+        keypadUsed?.Invoke(keypadID, playerIsUsing);
+    }
     protected override void TestFocus()
     {
         if (isFocused == false)
@@ -41,8 +54,6 @@ public class Keypad : Focusable
             if (Input.GetKeyDown(KeyCode.E) && keypadInteractable.lookingAtTarget)
             {
                 Focus();
-                playerIsUsing = true;
-                keypadUsed?.Invoke(keypadID, playerIsUsing);
             }
         }
         else
@@ -50,8 +61,6 @@ public class Keypad : Focusable
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 DeFocus();
-                playerIsUsing = false;
-                keypadUsed?.Invoke(keypadID, playerIsUsing);
             }
         }
     }
