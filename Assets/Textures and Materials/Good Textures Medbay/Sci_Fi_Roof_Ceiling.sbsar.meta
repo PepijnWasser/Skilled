@@ -17,7 +17,7 @@ ScriptedImporter:
     generateAllOutputs: 0
     generateMipMaps: 1
     preset: " <sbspreset pkgurl=\"pkg://Sci_Fi_Roof_Ceiling\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"3755929393\" type=\"8\" value=\"11,11\" />\n 
+      identifier=\"$outputsize\" uid=\"3755929393\" type=\"8\" value=\"10,10\" />\n 
       <presetinput identifier=\"outputcolor\" uid=\"2983407990\" type=\"3\" value=\"0.501961,0.552941,0.584314,1\"
       />\n  <presetinput identifier=\"outputcolor_1\" uid=\"2985181188\" type=\"3\"
       value=\"0.172549,0.313726,0.329412,1\" />\n  <presetinput identifier=\"outputcolor_2\"
@@ -225,8 +225,8 @@ ScriptedImporter:
     - label: Default
       bOverride: 0
       bLockRatio: 1
-      textureWidth: 2048
-      textureHeight: 2048
+      textureWidth: 1024
+      textureHeight: 1024
       textureFormatMode: 0
       normalCompressed: 0
       bGenerateOnLoad: 1
