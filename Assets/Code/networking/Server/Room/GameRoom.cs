@@ -13,6 +13,7 @@ public class GameRoom : Room
     int worldSeed = Random.Range(1, 30);
     int amountOfSectors = 1;
 
+    //processes udp message of a given user
     public override void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
     {
         if(pMessage is UDPMessage)
@@ -27,6 +28,7 @@ public class GameRoom : Room
         }
     }
 
+    //processes tcp message of a given user 
     public override void handleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient myClient)
     {
         if (tempOBJ is HeartBeat)
@@ -104,6 +106,7 @@ public class GameRoom : Room
         }
     }
 
+    //checks if the clients are still alive
     protected override void CheckHeartbeat()
     {
         List<MyClient> clientsInRoomToRemove = new List<MyClient>();
@@ -125,6 +128,7 @@ public class GameRoom : Room
         }
     }
 
+    //sends a message that a player timed out
     void SendPlayerDisconnectMessages(string playerWhoDisconnected)
     {
         DateTime time = DateTime.Now;
@@ -136,6 +140,7 @@ public class GameRoom : Room
         SendTCPMessageToAllUsers(outPacket);
     }
 
+    //refreshes the heartbeat of a client
     private void RefreshHeartbeat(MyClient pClient)
     {
         pClient.heartbeat = server.timeOutTime;
@@ -146,6 +151,7 @@ public class GameRoom : Room
         base.UpdateRoom();
     }
 
+    //tells the user to make a map with the given seed and amountOfSectors
     void HandleGameLoadedMessage(MyClient client)
     {
         TCPPacket outPacket = new TCPPacket();
@@ -154,6 +160,7 @@ public class GameRoom : Room
         SendTCPMessageToTargetUser(outPacket, client);
     }
 
+    //sends a udp message to all users with the new location when a player moves
     void HandleUpdatePlayerPositionMessageUDP(UpdatePlayerPositionUDP _message, MyClient client)
     {  
         UDPPacket outpacket = new UDPPacket();
@@ -170,12 +177,14 @@ public class GameRoom : Room
         SendUDPMessageToAllUsersExcept(outpacket, client);
     }
 
+    //sets the client endpoint end sendPort used for udp communication
     void HandleUpdateClientInfo(UpdateClientInfoMessage message, MyClient client)
     {
         client.endPoint = new IPEndPoint(message.ip, message.receivePort);
         client.sendPort = message.sendPort;
     }
 
+    //checks if all players have made the map and are ready to make tasks/characters
     void HandleMapMadeMessage(MapMadeMessage message, MyClient client)
     {
         mapMadeMessages += 1;
@@ -187,6 +196,7 @@ public class GameRoom : Room
         }
     }
 
+    //sends a message to all users that makes them an avatar and adds that avatar to all other clients
     void MakePlayerCharacters()
     {
         foreach (MyClient clientToSendTo in clientsInRoom)
@@ -212,6 +222,8 @@ public class GameRoom : Room
         }
     }
 
+    //send a message to all clients to make tasks
+    //only the server owner makes a taskManager
     void MakeTasks()
     {
         TCPPacket outpacket = new TCPPacket();
@@ -225,6 +237,7 @@ public class GameRoom : Room
         SendTCPMessageToTargetUser(outpacket2, server.serverInfo.serverOwner);
     }
 
+    //updates the station health
     void HandleUpdateStationHealthRequest(UpdateStationHealthRequest message, MyClient client)
     {
         TCPPacket outPacket = new TCPPacket();
@@ -233,6 +246,8 @@ public class GameRoom : Room
         SendTCPMessageToAllUsersExcept(outPacket, client);
     }
 
+    //when a taskLocation on the taskManager produces a task. add that task to all users except the client who generated it
+    //under normal conditions the serverOwner is the only one that makes tasks
     void HandleAddKeypadTask(AddKeypadTaskMessage message, MyClient client)
     {
         TCPPacket outpacket = new TCPPacket();
@@ -254,6 +269,7 @@ public class GameRoom : Room
         SendTCPMessageToAllUsersExcept(outpacket, client);
     }
 
+    //sends the new position of a lever to all other clients when a client pulls it
     void HandleUpdateTwoWayLeverPosition(UpdateTwoWayLeverPositionMessage message, MyClient client)
     {
         TCPPacket outPacket = new TCPPacket();
@@ -275,6 +291,8 @@ public class GameRoom : Room
         SendTCPMessageToAllUsers(outPacket);
     }
 
+    //sends the completed task to all users except the user who completed it
+    //under normal conditions the serverOwner is the only one that completes tasks
     void HandleTwoWayLeverTaskCompleted(TwoWayLeverCompletedMessage message, MyClient client)
     {
         TCPPacket outPacket = new TCPPacket();

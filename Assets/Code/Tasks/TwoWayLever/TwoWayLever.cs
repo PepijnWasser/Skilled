@@ -39,6 +39,7 @@ public class TwoWayLever : MonoBehaviour
         GameState.updateTwoWayLeverPos -= UpdatePos;
     }
 
+    //if we have a player check if the lever is pulled
     private void Update()
     {
         if(player != null)
@@ -47,6 +48,7 @@ public class TwoWayLever : MonoBehaviour
         }
     }
 
+    //check if the lever is pulled and play the correct position
     void TestPull()
     { 
         if (Input.GetKeyDown(KeyCode.E) && interactable.lookingAtTarget)
@@ -67,6 +69,7 @@ public class TwoWayLever : MonoBehaviour
         player = _player;
     }
 
+    //updates the lever position when another player pulled it
     void UpdatePos(UpdateTwoWayLeverPositionMessage message)
     { 
         if(message.leverID == leverID)

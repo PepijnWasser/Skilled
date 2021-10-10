@@ -11,6 +11,8 @@ public class GameState : State
 {
     public MapGenerator mapGenerator;
     public GameManager gameManager;
+
+    //events that trigger when certain messages are received from the server
     
     public delegate void HealthUpdated(int health);
     public static event HealthUpdated stationHealthUpdated;
@@ -77,6 +79,8 @@ public class GameState : State
         KeypadTask.validateCode -= SendValidationMessage;
     }
 
+    //send a message to the server that we loaded the new scene
+    //sends the udp connection data to the server
     private void Start()
     {
         SendGameLoadedMessage();
@@ -106,6 +110,7 @@ public class GameState : State
         SendPlayerInfo();
     }
 
+    //handle udp messages
     protected override void recv(IAsyncResult res)
     {
         IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Any, 60240);
@@ -122,6 +127,7 @@ public class GameState : State
         client.BeginReceive(new AsyncCallback(recv), null);
     }
 
+    //handle tcp messages
     protected override void Update()
     {
         try
@@ -217,17 +223,21 @@ public class GameState : State
 
 
     //handle receiving
+
+    //starts map generation on a certain worldSeed
     void HandleMakeGameMapMessage(MakeGameMapMessage message)
     {
         Extensions.SetSeed(message.worldSeed);
         mapGenerator.Initizlize(message.amountOfSectors);
     }
 
+    //makes a new player character
     void HandleMakePlayerCharacterMessage(MakenewPlayerCharacterMessage message)
     {
         gameManager.MakePlayerCharacter(message.isPlayer, message.characterPosition, message.playerName, message.playerID);
     }
 
+    //moves a player to the new position
     void HandleUpdatePlayerPosition(UpdatePlayerPositionUDP message)
     {
         try
@@ -244,16 +254,19 @@ public class GameState : State
         }
     }
 
+    //makes a task manager
     void HandleMakeTaskManager(MakeTaskManager message)
     {
         gameManager.MakeTaskmanager(message.playerIsLeader);
     }
 
+    //update station health
     void HandleUpdateStationHealthResponse(UpdateStationHealthResponse message)
     {
         stationHealthUpdated?.Invoke(message.stationHealth);
     }
 
+    //add Tasks to display
     void HandleAddKeypadTask(AddKeypadTaskMessage message)
     {
         makeKeypadTask?.Invoke(message.task, message.keypadID);
@@ -269,6 +282,7 @@ public class GameState : State
         makeThreeWayLeverTask?.Invoke(message.task, message.leverID);
     }
 
+    //updates task status-info
     void HandleUpdateTwoWayLeverPosition(UpdateTwoWayLeverPositionMessage message)
     {
         updateTwoWayLeverPos?.Invoke(message);
@@ -284,6 +298,8 @@ public class GameState : State
         updateKeypadStatus?.Invoke(message);
     }
 
+
+    //handles task completion
     void HandleTwoWayLeverCompleted(TwoWayLeverCompletedMessage message)
     {
         twoWayLeverCompleted?.Invoke(message.leverID);
@@ -299,6 +315,8 @@ public class GameState : State
         keypadCompleted?.Invoke(message.keypadID);
     }
 
+    //checks if the code is the correct code
+    //usually the server owner is the only one that validates tasks
     void HandleValidationMessage(KeypadValidationMessage message)
     {
         testKeypadCode?.Invoke(message.code, message.keypadID);
@@ -311,12 +329,14 @@ public class GameState : State
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
+    //sends player data
     void SendPlayerInfo()
     {
         UpdateClientInfoMessage message = new UpdateClientInfoMessage(Extensions.GetLocalIPAddress(), playerInfo.udpSendPort, playerInfo.udpReceivePort);
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
+    //sends player position
     public void SendPlayerPosition(Vector3 position, Vector3 rotation, Vector3 noseRotation)
     {
         
@@ -324,18 +344,22 @@ public class GameState : State
         udpClientNetwork.SendObjectThroughUDP(message);       
     }
 
+    //sends map made message
     void SendMapMadeMessage()
     {
         MapMadeMessage message = new MapMadeMessage();
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
+    //sends station health
+    //under normal conditions the server owner is the only one that sends station health
     void SendStationHealth(int newHealth)
     {
         UpdateStationHealthRequest request = new UpdateStationHealthRequest(newHealth);
         tcpClientNetwork.SendObjectThroughTCP(request);
     }
 
+    //sends the newly generated task to all other users
     void SendNewTask(Task task, int taskID)
     {
         if(task is KeypadTask)
@@ -358,6 +382,7 @@ public class GameState : State
         }
     }
 
+    //send task status
     void SendTwoWayLeverPos(int ID, int newPos)
     {
         UpdateTwoWayLeverPositionMessage message = new UpdateTwoWayLeverPositionMessage(newPos, ID);
@@ -375,6 +400,7 @@ public class GameState : State
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
+    //send the completed task
     void SendTaskCompleted(Task task)
     {
         if(task is TwoWayLeverTask)
@@ -397,6 +423,7 @@ public class GameState : State
         }
     }
 
+    //send keypadCode to calidate
     void SendValidationMessage(int code, int ID)
     {
         KeypadValidationMessage message = new KeypadValidationMessage(code, ID);

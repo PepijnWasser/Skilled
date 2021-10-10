@@ -13,10 +13,12 @@ public abstract class Room
 
 	UdpClient client = new UdpClient();
 
+
 	//sets the udpClient of the room
 	public virtual void Initialize(LocalHostServer _server)
 	{
 		server = _server;
+		/*
 		int i = 0;
 		bool finishedInitialization = false;
 
@@ -33,6 +35,7 @@ public abstract class Room
 				i++;
 			}
 		}
+		*/
 	}
 
 	//method for adding a member to the room

@@ -8,6 +8,8 @@ using System;
 
 public class LobbyRoom : Room
 {
+
+	//sends all the correct lobby info to all players
     public override void AddMember(MyClient newClient)
     {
 		base.AddMember(newClient);
@@ -69,6 +71,7 @@ public class LobbyRoom : Room
 
 	}
 
+	//removes the player bar from all users's screens and updates player count
     public override void RemoveMember(MyClient clientToRemove)
     {
         base.RemoveMember(clientToRemove);
@@ -84,11 +87,13 @@ public class LobbyRoom : Room
 		SendTCPMessageToAllUsers(outPacket2);
 	}
 
+	//udp messages from user
 	public override void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
 	{
 		
 	}
 
+	//tcp messages from user
 	public override void handleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
 	{
 		if (tempOBJ is HeartBeat)
@@ -125,6 +130,7 @@ public class LobbyRoom : Room
         }
 	}
 
+	//checks if the clients are still alive
     protected override void CheckHeartbeat()
     {
 		List<MyClient> clientsInRoomToRemove = new List<MyClient>();
@@ -146,11 +152,14 @@ public class LobbyRoom : Room
 		}
 	}
 
+	//refreshes the heartbeat of a client
     private void RefreshHeartbeat(MyClient pClient)
 	{
 		pClient.heartbeat = server.timeOutTime;
 	}
 
+	//checks of the name is availible and sends the new name to all users
+	//if the request is from the server owner it also sets the server name
 	void HandleUpdateNameRequest(MyClient client, UpdatePlayerNameRequest message)
 	{
 		string requestedName = message.playerName;
@@ -206,6 +215,7 @@ public class LobbyRoom : Room
 		}		
 	}
 
+	//sends all commands to the client
 	void HandleHelpRequest(MyClient client)
     {
 		string messageToSend =	"/help\n"+
@@ -218,6 +228,7 @@ public class LobbyRoom : Room
 		SendTCPMessageToTargetUser(outPacket, client);
 	}
 
+	//sends the requested color to all users
 	void HandleUpdateColorMessage(MyClient client, UpdateColorRequest message)
 	{
 		if (message.sideToChangeTo > 0)
@@ -236,12 +247,14 @@ public class LobbyRoom : Room
 		SendTCPMessageToAllUsers(outPacket);
 	}
 
+	//handles when a client leaves
 	void HandleLeaveServerMessage(MyClient client, LeaveServermessage message)
 	{
 		SendPlayerLeftMessages(client.playerName);
 		removeAndCloseMember(client);
 	}
 
+	//appends chat message with time and sends it to al users
 	void HandleChatMessage(MyClient client, ChatRequest message)
     {
 		DateTime time = DateTime.Now;
@@ -252,6 +265,7 @@ public class LobbyRoom : Room
 		SendTCPMessageToAllUsers(outPacket);
     }
 
+	//when the owner starts the room this, move all members to the game room
 	void HandleStartRoomRequest()
     {
 		TCPPacket outPacket = new TCPPacket();
@@ -261,6 +275,7 @@ public class LobbyRoom : Room
 		server.MovePlayersToDifferentRoom(this, server.gameRoom);
     }
 
+	//send player disconnect message to all users
 	void SendPlayerLeftMessages(string playerWhoLeft)
     {
 		DateTime time = DateTime.Now;
@@ -272,6 +287,7 @@ public class LobbyRoom : Room
 		SendTCPMessageToAllUsers(outPacket);
 	}
 
+	//send player join message to all users
 	void SendPlayerJoinedMessages(string playerWhoJoined)
     {
 		DateTime time = DateTime.Now;
@@ -283,6 +299,7 @@ public class LobbyRoom : Room
 		SendTCPMessageToAllUsers(outPacket);
 	}
 
+	//send player disconnect message to all users (player has no hearbeat)
 	void SendPlayerDisconnectMessages(string playerWhoDisconnected)
     {
 		DateTime time = DateTime.Now;
@@ -294,6 +311,7 @@ public class LobbyRoom : Room
 		SendTCPMessageToAllUsers(outPacket);
 	}
 		
+	//sends a message displaying the new name to all users
 	void SendNameChangeChatMessages(string oldName, string newName)
     {
 		DateTime time = DateTime.Now;
@@ -305,6 +323,7 @@ public class LobbyRoom : Room
 		SendTCPMessageToAllUsers(outPacket);
 	}
 
+	//sends new player name to all users
 	void UpdatePlayerName(MyClient client, string newName)
     {
 		client.playerName = newName;
@@ -315,6 +334,7 @@ public class LobbyRoom : Room
 		SendTCPMessageToAllUsers(outPacket);
 	}
 
+	//sends new server name to all users
 	void UpdateServerName(MyClient client)
     {
 		//send server info to new user
@@ -331,6 +351,7 @@ public class LobbyRoom : Room
 		SendTCPMessageToAllUsersExcept(serverInfoPacket, client);
 	}
 
+	//checks if a given name is already in use
 	bool CheckNameAvailible(string name)
 	{
 		foreach (MyClient c in clientsInRoom)

@@ -21,6 +21,7 @@ public class LobbyState : State
         backButtonUIElement.onClick.AddListener(SendLeaveServerMessage);
     }
 
+    //sends the playerInfo from the inputWindow to the server
     private void Start()
     {
         SendUpdateNameRequest(playerInfo.playerName);
@@ -31,6 +32,7 @@ public class LobbyState : State
         backButtonUIElement.onClick.RemoveListener(SendLeaveServerMessage);
     }
 
+    //handles tcp data from server
     protected override void Update()
     {
         try
@@ -49,7 +51,7 @@ public class LobbyState : State
                 }
                 else if (tempOBJ is HeartBeat)
                 {
-                    HandleHeartbeat();
+                    RefreshHeartbeat();
                 }
                 else if (tempOBJ is UpdateColorRespons)
                 {
@@ -104,15 +106,13 @@ public class LobbyState : State
         }
     }
 
-    //
-    //Handling messages from the server
-    //
+    //sets the correct player count in the view
     void HandlePlayerCountMessage(UpdatePlayerCountMessage message)
     {
         playerCountUIElement.text = message.playerCount.ToString();
     }
 
-
+    //sets the variables of the view to the correct values and save the data in the serverConnectionData
     void HandleServerInfoMessage(UpdateServerInfo message)
     {
         serverNameUIElement.text = message.owner + "'s server";
@@ -129,6 +129,8 @@ public class LobbyState : State
        
     }
 
+    //makes a new player bar
+    //if we are the owner, set the playerInfo
     void HandleMakeNewPlayerMessage(MakeNewPlayerBarMessage message)
     {
         lobbyView.AddPlayer(message.playerID, message.playerColor, message.playerName, message.isPlayer);
@@ -139,16 +141,19 @@ public class LobbyState : State
         }
     }
 
+    //removes a player from the view
     void HandleRemovePlayerMessage(RemovePlayerBarMessage message)
     {
         lobbyView.RemovePlayer(message.playerID);
     }
 
+    //sets tje color of a player in the view
     void HandleUpdateColorMessage(UpdateColorRespons message)
     {
         lobbyView.UpdatePlayerColor(message.playerID, message.color.ToString());
     }
 
+    //updates the name of a player in the view
     void HandleUpdatePlayerNameRespons(UpdatePlayerNameRespons message)
     {
         lobbyView.UpdateName(message.playerID, message.playerName);
@@ -160,16 +165,19 @@ public class LobbyState : State
         }
     }
 
+    //displays the chatmessage in the view
     void HandleChatMessage(ChatRespons message)
     {
         GameObject.FindObjectOfType<ChatManager>().DisplayMessage(message.sender, message.chatMessage, message.hourSend, message.minuteSend, message.secondSend);
     }
 
+    //displays help commands in the chat
     void HandleHelpRespons(HelpRespons message)
     {
         GameObject.FindObjectOfType<ChatManager>().DisplayMessage(message.sender, message.message, message.hourSend, message.minuteSend, message.secondSend);
     }
 
+    //loads the game scene
     void HandleJoinRoomMessage(JoinRoomMessage message)
     {
         if(message.roomToJoin == JoinRoomMessage.rooms.game)
@@ -221,6 +229,7 @@ public class LobbyState : State
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
+    //if the server has no more heartbeat, we leave the server
     void HandleHeartbeatStatus()
     {
         if(CheckHeartbeat() == false)

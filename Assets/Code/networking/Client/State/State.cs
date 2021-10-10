@@ -8,14 +8,19 @@ using System;
 
 public abstract class State : MonoBehaviour
 {
+    //communication methods
     protected LocalHostClientTCP tcpClientNetwork;
     protected LocalHostClientUDP udpClientNetwork;
+
+    //info for server / client
     protected PlayerInfo playerInfo;
     protected ServerConnectionData serverInfo;
 
+    //general variables
     protected float timeOutTime = 5f;
     protected float lastHeartbeat = 5f;
 
+    //udp client to receive on
     protected UdpClient client = new UdpClient();
 
 
@@ -39,6 +44,7 @@ public abstract class State : MonoBehaviour
         client.BeginReceive(new AsyncCallback(recv), null);
     }
 
+    //handle incoming tcp data
     protected virtual void Update()
     {      
         try
@@ -51,7 +57,7 @@ public abstract class State : MonoBehaviour
                 var tempOBJ = inPacket.ReadObject();
                 if(tempOBJ is HeartBeat)
                 {
-                    HandleHeartbeat();
+                    RefreshHeartbeat();
                 }
             }
         }
@@ -65,11 +71,13 @@ public abstract class State : MonoBehaviour
         }     
     }
 
-    protected virtual void HandleHeartbeat()
+    //refreshes server heartbeat
+    protected virtual void RefreshHeartbeat()
     {
         lastHeartbeat = timeOutTime;
     }
     
+    //checks if the server is still alive
     protected bool CheckHeartbeat()
     {
         lastHeartbeat -= Time.deltaTime;

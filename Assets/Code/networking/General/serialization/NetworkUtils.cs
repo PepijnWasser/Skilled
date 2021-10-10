@@ -3,18 +3,6 @@ using System.Net.Sockets;
 using System.Linq;
 using UnityEngine;
 
-/**
- * StreamUtil class should be used whenever you want to send/receive bytes over a TcpClient connection.
- * The reason is that communication across a TcpClient does not preserve message boundaries.
- * In other words 1 send MIGHT equal one receive, but due to whatever network conditions, 
- * 1 send might also equal 2+ receives and 2+ sends might end up being seen as 1 receive.
- * 
- * In other words: 
- * We need to overlay a mechanism over the TcpConnection to detect these boundaries ourselves.
- * 
- * That mechanism is very simple: we send the size of our message first so that we know how many bytes
- * make up our single message on the receiving end.
- */
 public static class NetworkUtils
 {
 	/**

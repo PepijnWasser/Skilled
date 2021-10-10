@@ -31,6 +31,7 @@ public class TwoWayLeverTask : Task
         }
     }
 
+    //get a new random targetPosition
     public override void InitializeTask()
     {
         base.InitializeTask();
@@ -53,7 +54,7 @@ public class TwoWayLeverTask : Task
         Debug.Log("task completed");
     }
 
-
+    //test damage
     public override void TestDamage()
     {
         secondCounter += Time.deltaTime;
@@ -74,6 +75,7 @@ public class TwoWayLeverTask : Task
         }
     }
 
+    //check if the lever is in the correct position for validationTime seconds
     public void ValidatePosition()
     {
         if (lever.currentPosition == targetPosition)

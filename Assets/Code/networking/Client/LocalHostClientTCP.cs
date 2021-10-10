@@ -31,6 +31,8 @@ public class LocalHostClientTCP : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    //tries to connect in 1 second
+    //prints a message on fail
     public bool ConnectToServer(System.Net.IPAddress address, int _port)
     {
         try
@@ -83,6 +85,7 @@ public class LocalHostClientTCP : MonoBehaviour
         }
     }
 
+    //sends a Iserializable to thr server through tcp
     public void SendObjectThroughTCP(ISerializable pOutObject)
     {
         try

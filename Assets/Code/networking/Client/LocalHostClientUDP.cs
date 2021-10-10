@@ -55,6 +55,7 @@ public class LocalHostClientUDP : MonoBehaviour
         }
     }
 
+    //send a userializable to the server on the known port/IP
     public void SendObjectThroughUDP(USerializable pOutObject)
     {
         try

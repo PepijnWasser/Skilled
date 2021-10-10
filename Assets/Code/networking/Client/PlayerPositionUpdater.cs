@@ -12,6 +12,7 @@ public class PlayerPositionUpdater : MonoBehaviour
     Vector3 oldPos;
     Vector3 oldRot;
 
+    //sends the new player position/rotation through udp
     void Update()
     {
         secondCounter += Time.deltaTime;

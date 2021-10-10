@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TwoWayLeverPositionDisplay : MonoBehaviour
 {
+    //dictionary of all tasks to display
     Dictionary<int, TwoWayLeverTask> tasksToDisplay = new Dictionary<int, TwoWayLeverTask>();
 
     public List<Image> content;
@@ -31,6 +32,7 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
         GameState.twoWayLeverCompleted -= RemoveTask;
     }
 
+    //if we need to update, we clear the display and repopulate it with new prefabs
     private void Update()
     {
         if (NeedToUpdate)
@@ -57,6 +59,7 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
         }
     }
 
+    //removes the displayItem which corresponds with the given taskID
     void RemoveTask(Task task)
     {
         if (task is TwoWayLeverTask)
@@ -68,6 +71,7 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
         }
     }
 
+
     void RemoveTask(int taskID)
     {
         if (tasksToDisplay.ContainsKey(taskID))
@@ -78,6 +82,7 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
         }
     }
 
+    //adds a task and leverID
     void AddTask(Task task, int leverID)
     {
         if (task is TwoWayLeverTask)
