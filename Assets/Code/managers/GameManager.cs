@@ -19,11 +19,11 @@ public class GameManager : MonoBehaviour
         GameObject newPlayer = Instantiate(playerPrefab, position, Quaternion.identity);
         PlayerPrefabManager manager = newPlayer.GetComponent<PlayerPrefabManager>();
 
-
         characterDictionary.Add(playerID, manager);
 
-        manager.player.name = _name + " " +  playerID;
+        manager.player.name = _name + " " + playerID;
         manager.name = _name + " " + playerID;
+
         if (playerControlled)
         {
             manager.player.name += " controlled";
@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefabManager manager = characterDictionary[playerID];
         manager.player.transform.position = position;
         manager.player.transform.rotation = Quaternion.Euler(rotation);
-        manager.nose.transform.rotation = Quaternion.Euler(noseRotation); 
+        manager.nose.transform.rotation = Quaternion.Euler(noseRotation);
     }
 
     public void MakeTaskmanager(bool playerIsLeader)
