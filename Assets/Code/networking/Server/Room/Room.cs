@@ -13,6 +13,7 @@ public abstract class Room
 
 	UdpClient client = new UdpClient();
 
+	//sets the udpClient of the room
 	public virtual void Initialize(LocalHostServer _server)
 	{
 		server = _server;
@@ -34,40 +35,47 @@ public abstract class Room
 		}
 	}
 
+	//method for adding a member to the room
 	public virtual void AddMember(MyClient clientToAdd)
 	{
 		Debug.Log("accepted new member to: " + this.GetType());
 		clientsInRoom.Add(clientToAdd);
 	}
 
+	//method for removing a member of the room
 	public virtual void RemoveMember(MyClient clientToRemove)
 	{
 		clientsInRoom.Remove(clientToRemove);
 		Debug.Log("removing " + clientToRemove.playerName + " from: " + this.GetType());
 	}
 
+	//gets a list of all MyClients in room
 	public List<MyClient> GetMembers()
 	{
 		List<MyClient> memberList = clientsInRoom;
 		return memberList;
 	}
 
+	//clears all members in room
 	public virtual void ClearMembers()
     {
 		clientsInRoom.Clear();
     }
 
+	//remove a member from room and server
 	protected void removeAndCloseMember(MyClient pMember)
 	{
 		RemoveMember(pMember);
 		server.RemovePlayer(pMember);
 	}
 
+	//method which is called from server.update
 	public virtual void UpdateRoom()
     {
 		CheckHeartbeat();
     }
 
+	//checks the heartbeat of all members in room
 	protected virtual void CheckHeartbeat()
 	{
 		List<MyClient> clientsInRoomToRemove = new List<MyClient>();
@@ -87,6 +95,7 @@ public abstract class Room
 			removeAndCloseMember(client);
 		}
 	}
+
 	//handling messages
 	abstract public void handleTCPNetworkMessageFromUser(ISerializable pMessage, MyClient pSender);
 
