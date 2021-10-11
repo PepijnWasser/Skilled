@@ -13,11 +13,15 @@ public class TwoWayLever : MonoBehaviour
     [HideInInspector]
     public int currentPosition;
 
-    public string name;
+    public int leverID = 0;
+
+    public delegate void LeverPulled(int ID, int newPos);
+    public static event LeverPulled leverPulled;
 
     protected void Awake()
     {
         GameManager.playerMade += SetPlayer;
+        GameState.updateTwoWayLeverPos += UpdatePos;
     }
 
     private void Start()
@@ -32,6 +36,7 @@ public class TwoWayLever : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.playerMade -= SetPlayer;
+        GameState.updateTwoWayLeverPos -= UpdatePos;
     }
 
     private void Update()
@@ -52,12 +57,22 @@ public class TwoWayLever : MonoBehaviour
                 currentPosition = 0;
             }
             animator.SetInteger("position", currentPosition);
-            Debug.Log(currentPosition);
+
+            leverPulled?.Invoke(leverID, currentPosition);
         }
     }
 
     void SetPlayer(GameObject _player, Camera cam)
     {
         player = _player;
+    }
+
+    void UpdatePos(UpdateTwoWayLeverPositionMessage message)
+    { 
+        if(message.leverID == leverID)
+        {
+            currentPosition = message.leverPosition;
+            animator.SetInteger("position", currentPosition);
+        }
     }
 }

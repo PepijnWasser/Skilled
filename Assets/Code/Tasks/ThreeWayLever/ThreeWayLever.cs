@@ -13,9 +13,15 @@ public class ThreeWayLever : MonoBehaviour
     [HideInInspector]
     public int currentPosition;
 
+    public int leverID = 0;
+
+    public delegate void LeverPulled(int ID, int newPos);
+    public static event LeverPulled leverPulled;
+
     private void Awake()
     {
         GameManager.playerMade += SetPlayer;
+        GameState.updateThreeWayLeverPos += UpdatePos;
     }
 
     private void Start()
@@ -30,6 +36,7 @@ public class ThreeWayLever : MonoBehaviour
     private void OnDestroy()
     {
         GameManager.playerMade -= SetPlayer;
+        GameState.updateThreeWayLeverPos -= UpdatePos;
     }
 
     private void Update()
@@ -50,11 +57,22 @@ public class ThreeWayLever : MonoBehaviour
                 currentPosition = 1;
             }
             animator.SetInteger("Stance", currentPosition);
+
+            leverPulled?.Invoke(leverID, currentPosition);
         }
     }
 
     void SetPlayer(GameObject _player, Camera cam)
     {
-        player = player;
+        player = _player;
+    }
+
+    void UpdatePos(UpdateThreeWayLeverPositionMessage message)
+    {
+        if (message.leverID == leverID)
+        {
+            currentPosition = message.leverPosition;
+            animator.SetInteger("Stance", currentPosition);
+        }
     }
 }

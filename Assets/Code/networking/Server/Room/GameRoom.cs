@@ -11,7 +11,7 @@ public class GameRoom : Room
 {
     int mapMadeMessages = 0;
     int worldSeed = Random.Range(1, 30);
-    int amountOfSectors = 3;
+    int amountOfSectors = 1;
 
     public override void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
     {
@@ -46,6 +46,61 @@ public class GameRoom : Room
         {
             MapMadeMessage message = tempOBJ as MapMadeMessage;
             HandleMapMadeMessage(message, myClient);
+        }
+        else if(tempOBJ is UpdateStationHealthRequest)
+        {
+            UpdateStationHealthRequest message = tempOBJ as UpdateStationHealthRequest;
+            HandleUpdateStationHealthRequest(message, myClient);
+        }
+        else if(tempOBJ is AddKeypadTaskMessage)
+        {
+            AddKeypadTaskMessage message = tempOBJ as AddKeypadTaskMessage;
+            HandleAddKeypadTask(message, myClient);
+        }
+        else if(tempOBJ is AddTwoWayLeverTask)
+        {
+            AddTwoWayLeverTask message = tempOBJ as AddTwoWayLeverTask;
+            HandleAddTwoWayLeverTask(message, myClient);
+        }
+        else if (tempOBJ is AddThreeWayLeverTask)
+        {
+            AddThreeWayLeverTask message = tempOBJ as AddThreeWayLeverTask;
+            HandleAddThreeWayLeverTask(message, myClient);
+        }
+        else if(tempOBJ is UpdateTwoWayLeverPositionMessage)
+        {
+            UpdateTwoWayLeverPositionMessage message = tempOBJ as UpdateTwoWayLeverPositionMessage;
+            HandleUpdateTwoWayLeverPosition(message, myClient);
+        }
+        else if (tempOBJ is UpdateThreeWayLeverPositionMessage)
+        {
+            UpdateThreeWayLeverPositionMessage message = tempOBJ as UpdateThreeWayLeverPositionMessage;
+            HandleUpdateThreeWayLeverPosition(message, myClient);
+        }
+        else if(tempOBJ is UpdateKeypadStatusMessage)
+        {
+            UpdateKeypadStatusMessage message = tempOBJ as UpdateKeypadStatusMessage;
+            HandleUpdatekeypadStatus(message, myClient);
+        }
+        else if(tempOBJ is TwoWayLeverCompletedMessage)
+        {
+            TwoWayLeverCompletedMessage message = tempOBJ as TwoWayLeverCompletedMessage;
+            HandleTwoWayLeverTaskCompleted(message, myClient);
+        }
+        else if (tempOBJ is ThreeWayLeverCompletedMessage)
+        {
+            ThreeWayLeverCompletedMessage message = tempOBJ as ThreeWayLeverCompletedMessage;
+            HandleThreeWayLeverTaskCompleted(message, myClient);
+        }
+        else if (tempOBJ is KeypadCompletedMessage)
+        {
+            KeypadCompletedMessage message = tempOBJ as KeypadCompletedMessage;
+            HandleKeypadTaskCompleted(message, myClient);
+        }
+        else if(tempOBJ is KeypadValidationMessage)
+        {
+            KeypadValidationMessage message = tempOBJ as KeypadValidationMessage;
+            HandleKeypadValidationMessage(message, myClient);
         }
     }
 
@@ -127,7 +182,8 @@ public class GameRoom : Room
 
         if (mapMadeMessages == clientsInRoom.Count)
         {
-            MakePlayerCharacters();        
+            MakeTasks();
+            MakePlayerCharacters();
         }
     }
 
@@ -154,5 +210,96 @@ public class GameRoom : Room
                 }
             }
         }
+    }
+
+    void MakeTasks()
+    {
+        TCPPacket outpacket = new TCPPacket();
+        MakeTaskManager makeTaskManagerMessage = new MakeTaskManager(false);
+        outpacket.Write(makeTaskManagerMessage);
+        SendTCPMessageToAllUsersExcept(outpacket, server.serverInfo.serverOwner);
+
+        TCPPacket outpacket2 = new TCPPacket();
+        MakeTaskManager makeTaskManagerMessage2 = new MakeTaskManager(true);
+        outpacket2.Write(makeTaskManagerMessage2);
+        SendTCPMessageToTargetUser(outpacket2, server.serverInfo.serverOwner);
+    }
+
+    void HandleUpdateStationHealthRequest(UpdateStationHealthRequest message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        UpdateStationHealthResponse updateStationHealthResponse = new UpdateStationHealthResponse(message.stationHealth);
+        outPacket.Write(updateStationHealthResponse);
+        SendTCPMessageToAllUsersExcept(outPacket, client);
+    }
+
+    void HandleAddKeypadTask(AddKeypadTaskMessage message, MyClient client)
+    {
+        TCPPacket outpacket = new TCPPacket();
+        outpacket.Write(message);
+        SendTCPMessageToAllUsersExcept(outpacket, client);
+    }
+
+    void HandleAddTwoWayLeverTask(AddTwoWayLeverTask message, MyClient client)
+    {
+        TCPPacket outpacket = new TCPPacket();
+        outpacket.Write(message);
+        SendTCPMessageToAllUsersExcept(outpacket, client);
+    }
+
+    void HandleAddThreeWayLeverTask(AddThreeWayLeverTask message, MyClient client)
+    {
+        TCPPacket outpacket = new TCPPacket();
+        outpacket.Write(message);
+        SendTCPMessageToAllUsersExcept(outpacket, client);
+    }
+
+    void HandleUpdateTwoWayLeverPosition(UpdateTwoWayLeverPositionMessage message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToAllUsers(outPacket);
+    }
+
+    void HandleUpdateThreeWayLeverPosition(UpdateThreeWayLeverPositionMessage message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToAllUsers(outPacket);
+    }
+
+    void HandleUpdatekeypadStatus(UpdateKeypadStatusMessage message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToAllUsers(outPacket);
+    }
+
+    void HandleTwoWayLeverTaskCompleted(TwoWayLeverCompletedMessage message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToAllUsersExcept(outPacket, client);
+    }
+
+    void HandleThreeWayLeverTaskCompleted(ThreeWayLeverCompletedMessage message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToAllUsersExcept(outPacket, client);
+    }
+
+    void HandleKeypadTaskCompleted(KeypadCompletedMessage message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToAllUsersExcept(outPacket, client);
+    }
+
+    void HandleKeypadValidationMessage(KeypadValidationMessage message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToTargetUser(outPacket, server.serverInfo.serverOwner);
     }
 }

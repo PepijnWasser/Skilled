@@ -14,9 +14,21 @@ public class TwoWayLeverTask : Task
 
     public TwoWayLever lever;
 
+    bool completed = false;
+
     private void Start()
     {
         lever = GetComponent<TwoWayLever>();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if (completed)
+        {
+            CompleteTask();
+            completed = false;
+        }
     }
 
     public override void InitializeTask()
@@ -33,20 +45,7 @@ public class TwoWayLeverTask : Task
                 doneChecking = true;
             }
         }
-
     }
-
-    protected override void Update()
-    {
-        base.Update();
-        if (hasError)
-        {
-            TestDamage();
-            ValidatePosition();
-        }
-    }
-
-
 
     protected override void CompleteTask()
     {
@@ -55,9 +54,8 @@ public class TwoWayLeverTask : Task
     }
 
 
-    void TestDamage()
+    public override void TestDamage()
     {
-
         secondCounter += Time.deltaTime;
         if (dealingDamage)
         {
@@ -74,7 +72,6 @@ public class TwoWayLeverTask : Task
                 dealingDamage = true;
             }
         }
-
     }
 
     public void ValidatePosition()
@@ -84,12 +81,17 @@ public class TwoWayLeverTask : Task
             secondCounterValidate += Time.deltaTime;
             if (secondCounter > validationTime)
             {
-                CompleteTask();
+                completed = true;
             }
         }
         else
         {
             secondCounter = 0;
         }
+    }
+
+    public override int getID()
+    {
+        return lever.leverID;
     }
 }

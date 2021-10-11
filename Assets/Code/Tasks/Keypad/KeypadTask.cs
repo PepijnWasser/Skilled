@@ -14,15 +14,34 @@ public class KeypadTask : Task
     public delegate void Damage(int amount);
     public static event Damage taskDealDamage;
 
+    public delegate void Validate(int code, int id);
+    public static event Validate validateCode;
+
     public string code = "";
 
+    bool isServerOwner = true;
+
+    private void Awake()
+    {
+        GameState.makeKeypadTask += SetCode;
+        GameState.testKeypadCode += TestKeypadCode;
+    }
+
+    private void Start()
+    {
+        keyPad = GetComponent<Keypad>();
+        keypadCodeEnterer = GetComponent<KeypadCodeEnterer>();
+    }
+
+    private void OnDestroy()
+    {
+        GameState.makeKeypadTask += SetCode;
+        GameState.testKeypadCode -= TestKeypadCode;
+    }
 
     public override void InitializeTask()
     {
         base.InitializeTask();
-
-        keyPad = GetComponent<Keypad>();
-        keypadCodeEnterer = GetComponent<KeypadCodeEnterer>();
 
         int first = Random.Range(1,10);
         int second = Random.Range(1, 10);
@@ -31,23 +50,23 @@ public class KeypadTask : Task
         code = first.ToString() + second.ToString() + third.ToString();
     }
 
-    protected override void Update()
-    {
-        base.Update();
-        TestDamage();
-    }
-
-
-
     protected override void CompleteTask()
     {
-        base.CompleteTask();
-        keyPad.DeFocus();
-        Debug.Log("task completed");
+        if (isServerOwner)
+        {
+            base.CompleteTask();
+            keyPad.DeFocus();
+            Debug.Log(true);
+        }
+        else
+        {
+            Debug.Log(false);
+            validateCode?.Invoke(int.Parse(keypadCodeEnterer.message), keyPad.keypadID);
+        }
     }
 
 
-    void TestDamage()
+    public override void TestDamage()
     {
         if (hasError)
         {
@@ -91,6 +110,35 @@ public class KeypadTask : Task
         else
         {
             keypadCodeEnterer.DisplayErrorMessage();
+        }
+    }
+
+    public override int getID()
+    {
+        return keyPad.keypadID;
+    }
+
+    void SetCode(KeypadTask task, int keypadID)
+    {
+        hasError = true;
+        isServerOwner = false;
+        if(keyPad != null)
+        {
+            if(keyPad.keypadID == keypadID)
+            {
+                code = task.code;
+            }
+        }
+    }
+
+    void TestKeypadCode(int _code, int _id)
+    {
+        if(keyPad.keypadID == _id)
+        {
+            if(code == _code.ToString())
+            {
+                CompleteTask();
+            }
         }
     }
 }

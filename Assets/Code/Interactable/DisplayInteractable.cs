@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class DisplayInteractable : Interactable
 {
-    EnergyInterface energyManager;
+    Focusable focusable;
 
     protected override void Start()
     {
         base.Start();
-        energyManager = GetComponent<EnergyInterface>();
+        player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
+        playerCamera = player.GetComponent<PlayerPrefabManager>().camera;
+        focusable = GetComponent<Focusable>();
     }
 
 
@@ -17,7 +19,7 @@ public class DisplayInteractable : Interactable
     {
         if (hit.transform.gameObject == body)
         {
-            if (energyManager.isFocused == false)
+            if (focusable.isFocused == false)
             {
                 base.OnHit(hit);
             }

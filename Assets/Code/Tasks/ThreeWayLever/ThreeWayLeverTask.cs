@@ -15,6 +15,8 @@ public class ThreeWayLeverTask : Task
 
     public ThreeWayLever lever;
 
+    bool completed = false;
+
     private void Start()
     {
         lever = GetComponent<ThreeWayLever>();
@@ -40,13 +42,12 @@ public class ThreeWayLeverTask : Task
     protected override void Update()
     {
         base.Update();
-        if (hasError)
+        if (completed)
         {
-            TestDamage();
-            ValidatePosition();
+            CompleteTask();
+            completed = false;
         }
     }
-
 
 
     protected override void CompleteTask()
@@ -56,7 +57,7 @@ public class ThreeWayLeverTask : Task
     }
 
 
-    void TestDamage()
+    public override void TestDamage()
     {
 
         secondCounter += Time.deltaTime;
@@ -85,12 +86,17 @@ public class ThreeWayLeverTask : Task
             secondCounterValidate += Time.deltaTime;
             if(secondCounterValidate > validationTime)
             {
-                CompleteTask();
+                completed = true;
             }
         }
         else
         {
             secondCounterValidate = 0;
         }
+    }
+
+    public override int getID()
+    {
+        return lever.leverID;
     }
 }

@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class CenterMinimap : MonoBehaviour
 {
-    public Camera energyMinimapCamera;
+    public Camera mapCamera;
 
     public void ResetCamera()
     {
-        energyMinimapCamera.transform.position = new Vector3(0, 100, 0);
+       mapCamera.transform.position = new Vector3(0, 100, 0);
     }
 }

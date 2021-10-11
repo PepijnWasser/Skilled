@@ -935,6 +935,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1728931206 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3625049173855522205, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
+  m_PrefabInstance: {fileID: 3625049172258951516}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb4dd7e8270b494b88c511001c35d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &1770753711 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 2377342629449177449, guid: 1a0bf6c136abdb74ab475bd72fa60b04, type: 3}
@@ -1112,6 +1123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!20 &2003337098 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3625049173855522206, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
+  m_PrefabInstance: {fileID: 3625049172258951516}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2033846709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1408,6 +1424,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 301541205273119761, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 1728931206}
+    - target: {fileID: 301541205273119762, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
+      propertyPath: mapCamera
+      value: 
+      objectReference: {fileID: 2003337098}
     - target: {fileID: 301541205273119763, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
       propertyPath: displayCam
       value: 
@@ -1499,6 +1523,10 @@ PrefabInstance:
     - target: {fileID: 301541205273119771, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3625049173759891399, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
+      propertyPath: m_Lens.m_SensorSize.x
+      value: 1.7777778
       objectReference: {fileID: 0}
     - target: {fileID: 3625049173951021901, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class KeypadCodeDisplay : MonoBehaviour
 {
-    List<KeypadTask> tasksToDisplay = new List<KeypadTask>();
+   public Dictionary<int, KeypadTask> tasksToDisplay = new Dictionary<int, KeypadTask>();
 
     public List<Image> content;
     public Image itemPrefab;
@@ -14,16 +14,20 @@ public class KeypadCodeDisplay : MonoBehaviour
 
     bool NeedToUpdate = false;
 
-    private void Start()
+    private void Awake()
     {
         KeypadTask.taskCompleted += RemoveTask;
         TaskManager.taskHasError += AddTask;
+        GameState.makeKeypadTask += AddTask;
+        GameState.keypadCompleted += RemoveTask;
     }
 
     private void OnDestroy()
     {
         KeypadTask.taskCompleted -= RemoveTask;
         TaskManager.taskHasError -= AddTask;
+        GameState.makeKeypadTask -= AddTask;
+        GameState.keypadCompleted += RemoveTask;
     }
 
     private void Update()
@@ -36,15 +40,15 @@ public class KeypadCodeDisplay : MonoBehaviour
             }
             imagesSpawned.Clear();
 
-            foreach(KeypadTask task in tasksToDisplay)
+            foreach(KeypadTask task in tasksToDisplay.Values)
             {
                 int display =  (int)((float)imagesSpawned.Count / (float)8);
                 Image spawnedItem = Instantiate(itemPrefab, content[display].transform);
-
+                
                 KeypadPrefabManager manager = spawnedItem.GetComponent<KeypadPrefabManager>();
                 manager.code.text = task.code;
-                manager.taskName.text = task.keyPad.name;
-
+                manager.taskName.text = task.taskName;
+                
                 imagesSpawned.Add(spawnedItem);
             }
             NeedToUpdate = false;
@@ -53,20 +57,34 @@ public class KeypadCodeDisplay : MonoBehaviour
 
     void RemoveTask(Task task)
     {
-        KeypadTask keypadTask = task as KeypadTask;
-        tasksToDisplay.Remove(keypadTask);
-        Debug.Log("removing task");
-        NeedToUpdate = true;
-    }
-
-    void AddTask(Task task)
-    {
-        if(task is KeypadTask)
+        if (task is KeypadTask)
         {
             KeypadTask keypadTask = task as KeypadTask;
-            tasksToDisplay.Add(keypadTask);
-           // Debug.Log("adding K task");
+            tasksToDisplay.Remove(keypadTask.keyPad.keypadID);
+            Debug.Log("removing task" + keypadTask.keyPad.keypadID);
             NeedToUpdate = true;
+        }
+    }
+
+    void RemoveTask(int taskID)
+    {
+        if (tasksToDisplay.ContainsKey(taskID))
+        {
+            tasksToDisplay.Remove(taskID);
+            Debug.Log("removing task");
+            NeedToUpdate = true;
+        }
+    }
+
+    void AddTask(Task task, int leverID)
+    {
+        if (task is KeypadTask)
+        {
+            KeypadTask keypadTask = task as KeypadTask;
+            tasksToDisplay.Add(leverID, keypadTask);
+            NeedToUpdate = true;
+
+            Debug.Log("adding task");
         }
     }
 }

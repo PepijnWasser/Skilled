@@ -11,16 +11,70 @@ public class GameState : State
 {
     public MapGenerator mapGenerator;
     public GameManager gameManager;
+    
+    public delegate void HealthUpdated(int health);
+    public static event HealthUpdated stationHealthUpdated;
+
+    public delegate void MakeKeypadTask(KeypadTask task, int keypadID);
+    public static event MakeKeypadTask makeKeypadTask;
+
+    public delegate void MakeTwoWayLeverTask(TwoWayLeverTask task, int leverID);
+    public static event MakeTwoWayLeverTask makeTwoWayleverTask;
+
+    public delegate void MakeThreeWayLeverTask(ThreeWayLeverTask task, int leverID);
+    public static event MakeThreeWayLeverTask makeThreeWayLeverTask;
+
+
+    public delegate void UpdateTwoWayLeverPos(UpdateTwoWayLeverPositionMessage message);
+    public static event UpdateTwoWayLeverPos updateTwoWayLeverPos;
+
+    public delegate void UpdateThreeWayLeverPos(UpdateThreeWayLeverPositionMessage message);
+    public static event UpdateThreeWayLeverPos updateThreeWayLeverPos;
+
+    public delegate void UpdateKeypadStatus(UpdateKeypadStatusMessage message);
+    public static event UpdateKeypadStatus updateKeypadStatus;
+
+
+    public delegate void TwoWayLeverCompleted(int leverID);
+    public static event TwoWayLeverCompleted twoWayLeverCompleted;
+
+    public delegate void ThreeWayLeverCompleted(int leverID);
+    public static event ThreeWayLeverCompleted threeWayLeverCompleted;
+
+    public delegate void KeypadCompleted(int keypadID);
+    public static event KeypadCompleted keypadCompleted;
+
+    public delegate void Validate(int code, int keypadID);
+    public static event Validate testKeypadCode;
+
 
     protected override void Awake()
     {
         base.Awake();
-        MapGenerator.OnCompletion += SendMapMadeMessage;    
+        MapGenerator.OnCompletion += SendMapMadeMessage;
+        StationHealth.updateStationHealth += SendStationHealth;
+        TaskManager.taskHasError += SendNewTask;
+
+        TwoWayLever.leverPulled += SendTwoWayLeverPos;
+        ThreeWayLever.leverPulled += SendThreeWayLeverPos;
+        Keypad.keypadUsed += SendKeypadStatus;
+
+        Task.taskCompleted += SendTaskCompleted;
+        KeypadTask.validateCode += SendValidationMessage;
     }
 
     private void OnDestroy()
     {
         MapGenerator.OnCompletion += SendMapMadeMessage;
+        StationHealth.updateStationHealth -= SendStationHealth;
+        TaskManager.taskHasError -= SendNewTask;
+
+        TwoWayLever.leverPulled += SendTwoWayLeverPos;
+        ThreeWayLever.leverPulled -= SendThreeWayLeverPos;
+        Keypad.keypadUsed -= SendKeypadStatus;
+
+        Task.taskCompleted -= SendTaskCompleted;
+        KeypadTask.validateCode -= SendValidationMessage;
     }
 
     private void Start()
@@ -89,17 +143,79 @@ public class GameState : State
                     MakenewPlayerCharacterMessage message = tempOBJ as MakenewPlayerCharacterMessage;
                     HandleMakePlayerCharacterMessage(message);
                 }
+                else if(tempOBJ is MakeTaskManager)
+                {
+                    MakeTaskManager message = tempOBJ as MakeTaskManager;
+                    HandleMakeTaskManager(message);
+                }
+                else if(tempOBJ is UpdateStationHealthResponse)
+                {
+                    UpdateStationHealthResponse message = tempOBJ as UpdateStationHealthResponse;
+                    HandleUpdateStationHealthResponse(message);
+                }
+                else if(tempOBJ is AddKeypadTaskMessage)
+                {
+                    AddKeypadTaskMessage message = tempOBJ as AddKeypadTaskMessage;
+                    HandleAddKeypadTask(message);
+                }
+                else if(tempOBJ is AddTwoWayLeverTask)
+                {
+                    AddTwoWayLeverTask message = tempOBJ as AddTwoWayLeverTask;
+                    HandleAddTwoWayLeverTask(message);
+                }
+                else if(tempOBJ is AddThreeWayLeverTask)
+                {
+                    AddThreeWayLeverTask message = tempOBJ as AddThreeWayLeverTask;
+                    HandleAddThreeWayLeverTask(message);
+                }
+                else if(tempOBJ is UpdateTwoWayLeverPositionMessage)
+                {
+                    UpdateTwoWayLeverPositionMessage message = tempOBJ as UpdateTwoWayLeverPositionMessage;
+                    HandleUpdateTwoWayLeverPosition(message);
+                }
+                else if (tempOBJ is UpdateThreeWayLeverPositionMessage)
+                {
+                    UpdateThreeWayLeverPositionMessage message = tempOBJ as UpdateThreeWayLeverPositionMessage;
+                    HandleUpdateThreeWayLeverPosition(message);
+                }
+                else if(tempOBJ is UpdateKeypadStatusMessage)
+                {
+                    UpdateKeypadStatusMessage message = tempOBJ as UpdateKeypadStatusMessage;
+                    HandleUpdateKeypadStatus(message);
+                }
+                else if(tempOBJ is TwoWayLeverCompletedMessage)
+                {
+                    TwoWayLeverCompletedMessage message = tempOBJ as TwoWayLeverCompletedMessage;
+                    HandleTwoWayLeverCompleted(message);
+                }
+                else if (tempOBJ is ThreeWayLeverCompletedMessage)
+                {
+                    ThreeWayLeverCompletedMessage message = tempOBJ as ThreeWayLeverCompletedMessage;
+                    HandleThreeWayLeverCompleted(message);
+                }
+                else if (tempOBJ is KeypadCompletedMessage)
+                {
+                    KeypadCompletedMessage message = tempOBJ as KeypadCompletedMessage;
+                    HandleKeypadCompleted(message);
+                }
+                else if(tempOBJ is KeypadValidationMessage)
+                {
+                    KeypadValidationMessage message = tempOBJ as KeypadValidationMessage;
+                    HandleValidationMessage(message);
+                }
             }
         }
         catch (Exception e)
         {
-            Debug.Log(e.Message);
+            Debug.Log(e.Message +  e.Source);
             if (tcpClientNetwork.tcpClient.Connected)
             {
                 tcpClientNetwork.tcpClient.Close();
             }
         }
     }
+
+
     //handle receiving
     void HandleMakeGameMapMessage(MakeGameMapMessage message)
     {
@@ -128,6 +244,66 @@ public class GameState : State
         }
     }
 
+    void HandleMakeTaskManager(MakeTaskManager message)
+    {
+        gameManager.MakeTaskmanager(message.playerIsLeader);
+    }
+
+    void HandleUpdateStationHealthResponse(UpdateStationHealthResponse message)
+    {
+        stationHealthUpdated?.Invoke(message.stationHealth);
+    }
+
+    void HandleAddKeypadTask(AddKeypadTaskMessage message)
+    {
+        makeKeypadTask?.Invoke(message.task, message.keypadID);
+    }
+
+    void HandleAddTwoWayLeverTask(AddTwoWayLeverTask message)
+    {
+        makeTwoWayleverTask?.Invoke(message.task, message.leverID);
+    }
+
+    void HandleAddThreeWayLeverTask(AddThreeWayLeverTask message)
+    {
+        makeThreeWayLeverTask?.Invoke(message.task, message.leverID);
+    }
+
+    void HandleUpdateTwoWayLeverPosition(UpdateTwoWayLeverPositionMessage message)
+    {
+        updateTwoWayLeverPos?.Invoke(message);
+    }
+
+    void HandleUpdateThreeWayLeverPosition(UpdateThreeWayLeverPositionMessage message)
+    {
+        updateThreeWayLeverPos?.Invoke(message);
+    }
+
+    void HandleUpdateKeypadStatus(UpdateKeypadStatusMessage message)
+    {
+        updateKeypadStatus?.Invoke(message);
+    }
+
+    void HandleTwoWayLeverCompleted(TwoWayLeverCompletedMessage message)
+    {
+        twoWayLeverCompleted?.Invoke(message.leverID);
+    }
+
+    void HandleThreeWayLeverCompleted(ThreeWayLeverCompletedMessage message)
+    {
+        threeWayLeverCompleted?.Invoke(message.leverID);
+    }
+
+    void HandleKeypadCompleted(KeypadCompletedMessage message)
+    {
+        keypadCompleted?.Invoke(message.keypadID);
+    }
+
+    void HandleValidationMessage(KeypadValidationMessage message)
+    {
+        testKeypadCode?.Invoke(message.code, message.keypadID);
+    }
+
     //sending
     void SendGameLoadedMessage()
     {
@@ -151,6 +327,79 @@ public class GameState : State
     void SendMapMadeMessage()
     {
         MapMadeMessage message = new MapMadeMessage();
+        tcpClientNetwork.SendObjectThroughTCP(message);
+    }
+
+    void SendStationHealth(int newHealth)
+    {
+        UpdateStationHealthRequest request = new UpdateStationHealthRequest(newHealth);
+        tcpClientNetwork.SendObjectThroughTCP(request);
+    }
+
+    void SendNewTask(Task task, int taskID)
+    {
+        if(task is KeypadTask)
+        {
+            KeypadTask keypadTask = task as KeypadTask;
+            AddKeypadTaskMessage message = new AddKeypadTaskMessage(keypadTask, keypadTask.keyPad.keypadID);
+            tcpClientNetwork.SendObjectThroughTCP(message);
+        }
+        else if(task is TwoWayLeverTask)
+        {
+            TwoWayLeverTask twoWayLeverTask = task as TwoWayLeverTask;
+            AddTwoWayLeverTask message = new AddTwoWayLeverTask(twoWayLeverTask, twoWayLeverTask.lever.leverID);
+            tcpClientNetwork.SendObjectThroughTCP(message);
+        }
+        else if(task is ThreeWayLeverTask)
+        {
+            ThreeWayLeverTask threeWayLeverTask = task as ThreeWayLeverTask;
+            AddThreeWayLeverTask message = new AddThreeWayLeverTask(threeWayLeverTask, threeWayLeverTask.lever.leverID);
+            tcpClientNetwork.SendObjectThroughTCP(message);
+        }
+    }
+
+    void SendTwoWayLeverPos(int ID, int newPos)
+    {
+        UpdateTwoWayLeverPositionMessage message = new UpdateTwoWayLeverPositionMessage(newPos, ID);
+        tcpClientNetwork.SendObjectThroughTCP(message);
+    }
+
+    void SendThreeWayLeverPos(int ID, int newPos)
+    {
+        UpdateThreeWayLeverPositionMessage message = new UpdateThreeWayLeverPositionMessage(newPos, ID);
+        tcpClientNetwork.SendObjectThroughTCP(message);
+    }
+    void SendKeypadStatus(int ID, bool inUse)
+    {
+        UpdateKeypadStatusMessage message = new UpdateKeypadStatusMessage(ID, inUse);
+        tcpClientNetwork.SendObjectThroughTCP(message);
+    }
+
+    void SendTaskCompleted(Task task)
+    {
+        if(task is TwoWayLeverTask)
+        {
+            TwoWayLeverTask twoWayLeverTask = task as TwoWayLeverTask;
+            TwoWayLeverCompletedMessage message = new TwoWayLeverCompletedMessage(twoWayLeverTask, twoWayLeverTask.lever.leverID);
+            tcpClientNetwork.SendObjectThroughTCP(message);
+        }
+        else if (task is ThreeWayLeverTask)
+        {
+            ThreeWayLeverTask threeWayLeverTask = task as ThreeWayLeverTask;
+            ThreeWayLeverCompletedMessage message = new ThreeWayLeverCompletedMessage(threeWayLeverTask, threeWayLeverTask.lever.leverID);
+            tcpClientNetwork.SendObjectThroughTCP(message);
+        }
+        else if (task is KeypadTask)
+        {
+            KeypadTask keypadTask = task as KeypadTask;
+            KeypadCompletedMessage message = new KeypadCompletedMessage(keypadTask, keypadTask.keyPad.keypadID);
+            tcpClientNetwork.SendObjectThroughTCP(message);
+        }
+    }
+
+    void SendValidationMessage(int code, int ID)
+    {
+        KeypadValidationMessage message = new KeypadValidationMessage(code, ID);
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 }

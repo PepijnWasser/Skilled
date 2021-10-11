@@ -5,37 +5,49 @@ using Cinemachine;
 
 public class Keypad : Focusable
 {
-    public string name;
-
     KeypadCodeEnterer keypadCodeEnterer;
     KeypadInteractable keypadInteractable;
 
-    private void Awake()
+    public int keypadID = 0;
+
+    public delegate void KeypadUsed(int ID, bool InUse);
+    public static event KeypadUsed keypadUsed;
+
+    public bool playerIsUsing = false;
+
+    protected override void Awake()
     {
-        GameManager.playerMade += SetPlayer;
+        base.Awake();
+        GameState.updateKeypadStatus += UpdateIsInUse;
     }
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         keypadCodeEnterer = GetComponent<KeypadCodeEnterer>();
         keypadInteractable = GetComponent<KeypadInteractable>();
     }
 
-    private void OnDestroy()
+    protected override void OnDestroy()
     {
-
-        GameManager.playerMade -= SetPlayer;
+        base.OnDestroy();
+        GameState.updateKeypadStatus -= UpdateIsInUse;
     }
 
-    private void Update()
+    public override void Focus()
     {
-        if(player != null)
-        {
-            TestFocus();
-        }
+        base.Focus();
+        playerIsUsing = true;
+        keypadUsed?.Invoke(keypadID, playerIsUsing);
     }
 
-    void TestFocus()
+    public override void DeFocus()
+    {
+        base.DeFocus();
+        playerIsUsing = false;
+        keypadUsed?.Invoke(keypadID, playerIsUsing);
+    }
+    protected override void TestFocus()
     {
         if (isFocused == false)
         {
@@ -44,7 +56,7 @@ public class Keypad : Focusable
                 Focus();
             }
         }
-        if (isFocused)
+        else
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -52,9 +64,12 @@ public class Keypad : Focusable
             }
         }
     }
-
-    void SetPlayer(GameObject _player, Camera cam)
+    void UpdateIsInUse(UpdateKeypadStatusMessage message)
     {
-        player = _player;
+        if (message.keypadID == keypadID)
+        {
+            playerIsUsing = message.isInUse;
+        }
     }
+
 }

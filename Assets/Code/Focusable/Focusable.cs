@@ -13,13 +13,22 @@ public class Focusable : MonoBehaviour
 
     Interactable interactable;
 
+    protected virtual void Awake()
+    {
+        GameManager.playerMade += SetPlayer;
+    }
+
     protected virtual void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
         interactable = GetComponent<Interactable>();
     }
 
-    private void Update()
+    protected virtual void OnDestroy()
+    {
+        GameManager.playerMade -= SetPlayer;
+    }
+
+    protected virtual void Update()
     {
         if (player != null)
         {
@@ -27,7 +36,7 @@ public class Focusable : MonoBehaviour
         }
     }
 
-    void TestFocus()
+    protected virtual void TestFocus()
     {
         if (isFocused == false)
         {
@@ -45,7 +54,7 @@ public class Focusable : MonoBehaviour
         }
     }
 
-    public void Focus()
+    public virtual void Focus()
     {
         isFocused = true;
         player.GetComponent<MeshRenderer>().enabled = false;
@@ -56,7 +65,7 @@ public class Focusable : MonoBehaviour
         displayCam.Priority = 12;
     }
 
-    public void DeFocus()
+    public virtual void DeFocus()
     {
         isFocused = false;
         player.GetComponent<MeshRenderer>().enabled = true;
@@ -65,5 +74,10 @@ public class Focusable : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         displayCam.Priority = 10;
+    }
+
+    void SetPlayer(GameObject _player, Camera cam)
+    {
+        player = _player;
     }
 }
