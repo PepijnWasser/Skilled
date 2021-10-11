@@ -92,7 +92,7 @@ public class TwoWayLeverTask : Task
         }
     }
 
-    public override int getID()
+    public override int GetID()
     {
         return lever.leverID;
     }

@@ -154,7 +154,7 @@ public class LocalHostServer : MonoBehaviour
 
 			var tempOBJ = inPacket.ReadObject();
 
-			activeRoom.handleTCPNetworkMessageFromUser(tempOBJ, client);
+			activeRoom.HandleTCPNetworkMessageFromUser(tempOBJ, client);
 		}
 		catch (Exception e)
 		{
@@ -177,7 +177,7 @@ public class LocalHostServer : MonoBehaviour
         {
 			if (connectedClient.endPoint.Address.ToString() == RemoteIP.Address.ToString() && connectedClient.sendPort.ToString() == RemoteIP.Port.ToString())
             {
-				activeRoom.handleUDPNetworkMessageFromUser(TempOBJ, connectedClient);
+				activeRoom.HandleUDPNetworkMessageFromUser(TempOBJ, connectedClient);
 				Debug.Log("received UDP message from: " + connectedClient.playerName);
 				break;
             }

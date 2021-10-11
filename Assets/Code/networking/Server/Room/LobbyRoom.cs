@@ -88,13 +88,13 @@ public class LobbyRoom : Room
 	}
 
 	//udp messages from user
-	public override void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
+	public override void HandleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
 	{
 		
 	}
 
 	//tcp messages from user
-	public override void handleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
+	public override void HandleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient client)
 	{
 		if (tempOBJ is HeartBeat)
 		{

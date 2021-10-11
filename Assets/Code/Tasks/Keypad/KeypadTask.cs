@@ -113,7 +113,7 @@ public class KeypadTask : Task
         }
     }
 
-    public override int getID()
+    public override int GetID()
     {
         return keyPad.keypadID;
     }

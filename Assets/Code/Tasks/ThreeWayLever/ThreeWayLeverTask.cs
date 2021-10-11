@@ -95,7 +95,7 @@ public class ThreeWayLeverTask : Task
         }
     }
 
-    public override int getID()
+    public override int GetID()
     {
         return lever.leverID;
     }

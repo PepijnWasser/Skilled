@@ -9,8 +9,8 @@ public class DisplayInteractable : Interactable
     protected override void Start()
     {
         base.Start();
-        player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
-        playerCamera = player.GetComponent<PlayerPrefabManager>().camera;
+        //player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
+        //playerCamera = player.GetComponent<PlayerPrefabManager>().camera;
         focusable = GetComponent<Focusable>();
     }
 

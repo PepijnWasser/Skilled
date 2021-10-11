@@ -33,7 +33,7 @@ public class TaskManager : MonoBehaviour
         TaskSpawner.allTasksSpawned -= getTasks;
     }
 
-
+    //if there is a task availible, and we need to spawn a task, spawn a random task from list
     private void Update()
     {
         secondCounter += Time.deltaTime;
@@ -50,7 +50,7 @@ public class TaskManager : MonoBehaviour
                         tasksWithErrors.Add(newTask);
                         tasksWithoutErrors.Remove(newTask);
                         newTask.InitializeTask();
-                        taskHasError?.Invoke(newTask, newTask.getID());
+                        taskHasError?.Invoke(newTask, newTask.GetID());
 
                         secondCounter = 0;
                         timeToNextError = Random.Range(timeBetweenErrors.x, timeBetweenErrors.y);
@@ -65,6 +65,7 @@ public class TaskManager : MonoBehaviour
         TestTask();
     }
 
+    //test if the current tasks are correct
     void TestTask()
     {
         foreach(Task task in tasksWithErrors)

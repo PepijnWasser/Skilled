@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,13 +11,27 @@ public class GameManager : MonoBehaviour
     public PlayerPositionUpdater playerPositionUpdater;
     Dictionary<int, PlayerPrefabManager> characterDictionary = new Dictionary<int, PlayerPrefabManager>();
 
+    List<PlayerSpawnLocation> availiblePlayerSpawnLocations;
+
     public delegate void PlayerMade(GameObject player, Camera cam);
     public static event PlayerMade playerMade;
 
+    private void Awake()
+    {
+        MapGenerator.OnCompletion += GetAvailibleLocations;
+    }
+
+    private void OnDestroy()
+    {
+        MapGenerator.OnCompletion -= GetAvailibleLocations;
+    }
 
     public void MakePlayerCharacter(bool playerControlled, Vector3 position, string _name, int playerID)
     {
-        GameObject newPlayer = Instantiate(playerPrefab, position, Quaternion.identity);
+        PlayerSpawnLocation newlocation = Extensions.RandomListItem(availiblePlayerSpawnLocations);
+        availiblePlayerSpawnLocations.Remove(newlocation);
+
+        GameObject newPlayer = Instantiate(playerPrefab, newlocation.transform.position + new Vector3(0, 0, 0), newlocation.transform.rotation);
         PlayerPrefabManager manager = newPlayer.GetComponent<PlayerPrefabManager>();
 
         characterDictionary.Add(playerID, manager);
@@ -55,5 +70,11 @@ public class GameManager : MonoBehaviour
         {
             manager.GetComponent<TaskManager>().enabled = false;
         }
+    }
+
+    //gets all positions a player can spawn
+    void GetAvailibleLocations()
+    {
+         availiblePlayerSpawnLocations = GameObject.FindObjectsOfType<PlayerSpawnLocation>().ToList();
     }
 }

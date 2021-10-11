@@ -50,7 +50,7 @@ public abstract class Task : MonoBehaviour
 
     }
 
-    public virtual int getID()
+    public virtual int GetID()
     {
         return 0;
     }

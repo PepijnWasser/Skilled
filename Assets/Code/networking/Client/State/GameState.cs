@@ -12,8 +12,10 @@ public class GameState : State
     public MapGenerator mapGenerator;
     public GameManager gameManager;
 
+    UdpClient client = new UdpClient();
+
     //events that trigger when certain messages are received from the server
-    
+
     public delegate void HealthUpdated(int health);
     public static event HealthUpdated stationHealthUpdated;
 
@@ -111,7 +113,7 @@ public class GameState : State
     }
 
     //handle udp messages
-    protected override void recv(IAsyncResult res)
+    void recv(IAsyncResult res)
     {
         IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Any, 60240);
         byte[] received = client.EndReceive(res, ref RemoteIP);

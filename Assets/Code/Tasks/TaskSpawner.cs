@@ -29,6 +29,7 @@ public class TaskSpawner : MonoBehaviour
         SpawnTasks(this.transform);
     }
 
+    //foreach type of task, spawn the given amount of that task. Give it a name and id, and set the location
     public void SpawnTasks(Transform parent)
     {
         List<Task> tasksSpawned = new List<Task>();
@@ -102,6 +103,7 @@ public class TaskSpawner : MonoBehaviour
         allTasksSpawned?.Invoke(tasksSpawned);
     }
 
+    //gets all positions a task can spawn
     void GetAvailibleLocations()
     {
         availibleThreeWayLeverLocations = GameObject.FindObjectsOfType<ThreeWayLeverLocation>().ToList();

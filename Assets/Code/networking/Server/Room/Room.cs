@@ -18,24 +18,6 @@ public abstract class Room
 	public virtual void Initialize(LocalHostServer _server)
 	{
 		server = _server;
-		/*
-		int i = 0;
-		bool finishedInitialization = false;
-
-		while (finishedInitialization == false && i < 20)
-		{
-			try
-			{
-				client = new UdpClient(45645 + i);
-				finishedInitialization = true;
-			}
-			catch (Exception e)
-			{
-				e.ToString();
-				i++;
-			}
-		}
-		*/
 	}
 
 	//method for adding a member to the room
@@ -100,9 +82,9 @@ public abstract class Room
 	}
 
 	//handling messages
-	abstract public void handleTCPNetworkMessageFromUser(ISerializable pMessage, MyClient pSender);
+	abstract public void HandleTCPNetworkMessageFromUser(ISerializable pMessage, MyClient pSender);
 
-	abstract public void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender);
+	abstract public void HandleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender);
 
 	//sending messages
 

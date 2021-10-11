@@ -308,6 +308,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateFrequency: 60
+  gameState: {fileID: 0}
+  player: {fileID: 0}
   playerNose: {fileID: 767075814119264275}
 --- !u!1 &767075815121425892
 GameObject:
@@ -781,7 +783,7 @@ Transform:
   m_GameObject: {fileID: 5732217130474669687}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.1922731, y: 0.099999994, z: 2}
+  m_LocalScale: {x: 8, y: 0.1, z: 8}
   m_Children:
   - {fileID: 5732217132304127470}
   m_Father: {fileID: 5732217132210592383}

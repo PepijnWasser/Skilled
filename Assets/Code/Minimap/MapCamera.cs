@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class MapCamera : MonoBehaviour
 {
-
     public Camera camera;
 
     public float speed;
 
     Vector3 dragOrigin;
+
+    Vector3 originalPos;
+
+    private void Start()
+    {
+        transform.rotation = Quaternion.Euler(90, 0, 0);
+        transform.position = new Vector3(camera.transform.position.x, 100, camera.transform.position.z);
+        originalPos = transform.position;
+    }
 
     public void PanCamera()
     {

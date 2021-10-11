@@ -14,7 +14,7 @@ public class GameRoom : Room
     int amountOfSectors = 1;
 
     //processes udp message of a given user
-    public override void handleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
+    public override void HandleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
     {
         if(pMessage is UDPMessage)
         {
@@ -29,7 +29,7 @@ public class GameRoom : Room
     }
 
     //processes tcp message of a given user 
-    public override void handleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient myClient)
+    public override void HandleTCPNetworkMessageFromUser(ISerializable tempOBJ, MyClient myClient)
     {
         if (tempOBJ is HeartBeat)
         {

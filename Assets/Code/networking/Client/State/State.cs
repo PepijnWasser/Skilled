@@ -20,9 +20,6 @@ public abstract class State : MonoBehaviour
     protected float timeOutTime = 5f;
     protected float lastHeartbeat = 5f;
 
-    //udp client to receive on
-    protected UdpClient client = new UdpClient();
-
 
     protected virtual void Awake()
     {
@@ -30,18 +27,6 @@ public abstract class State : MonoBehaviour
         udpClientNetwork = GameObject.FindObjectOfType<LocalHostClientUDP>();
         playerInfo = GameObject.FindObjectOfType<PlayerInfo>();
         serverInfo = GameObject.FindObjectOfType<ServerConnectionData>();
-    }
-
-
-    protected virtual void recv(IAsyncResult res)
-    {
-        IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Any, 60240);
-        byte[] received = client.EndReceive(res, ref RemoteIP);
-
-        UDPPacket packet = new UDPPacket(received);
-        var TempOBJ = packet.ReadObject();
-
-        client.BeginReceive(new AsyncCallback(recv), null);
     }
 
     //handle incoming tcp data
