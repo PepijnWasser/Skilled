@@ -657,6 +657,7 @@ GameObject:
   - component: {fileID: 3625049173855522207}
   - component: {fileID: 3625049173855522206}
   - component: {fileID: 3625049173855522205}
+  - component: {fileID: 147455408415131382}
   m_Layer: 0
   m_Name: EnergyUsersCamera
   m_TagString: Untagged
@@ -735,6 +736,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 3625049173855522206}
   speed: 10
+--- !u!114 &147455408415131382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3625049173855522204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013c16e56602ce643abca370975742b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateFrequency: 5
 --- !u!1 &3625049173951021907
 GameObject:
   m_ObjectHideFlags: 0

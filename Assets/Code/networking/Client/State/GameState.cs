@@ -51,6 +51,10 @@ public class GameState : State
     public delegate void Validate(int code, int keypadID);
     public static event Validate testKeypadCode;
 
+    public delegate void PosUpdater(Vector3 newPos);
+    public static event PosUpdater updatePlayerCamPosition;
+    public static event PosUpdater updateEnergyCamPosition;
+
 
     protected override void Awake()
     {
@@ -65,6 +69,8 @@ public class GameState : State
 
         Task.taskCompleted += SendTaskCompleted;
         KeypadTask.validateCode += SendValidationMessage;
+
+        PositionUpdater.positionChanged += SendMapCameraPosition;
     }
 
     private void OnDestroy()
@@ -79,6 +85,8 @@ public class GameState : State
 
         Task.taskCompleted -= SendTaskCompleted;
         KeypadTask.validateCode -= SendValidationMessage;
+
+        PositionUpdater.positionChanged += SendMapCameraPosition;
     }
 
     //send a message to the server that we loaded the new scene
@@ -124,6 +132,18 @@ public class GameState : State
         {
             UpdatePlayerPositionUDP message = TempOBJ as UpdatePlayerPositionUDP;
             HandleUpdatePlayerPosition(message);
+        }
+        else if (TempOBJ is UpdatePlayerCamPosition)
+        {
+            UpdatePlayerCamPosition message = TempOBJ as UpdatePlayerCamPosition;
+            HandleUpdatePlayerCamPosition(message);
+            Debug.Log("receiving player cam pos CLIENT");
+        }
+        else if (TempOBJ is UpdateEnergyCamPosition)
+        {
+           UpdateEnergyCamPosition message = TempOBJ as UpdateEnergyCamPosition;
+           HandleUpdateEnergyCamPosition(message);
+           Debug.Log("receiving energy cam pos CLIENT");
         }
 
         client.BeginReceive(new AsyncCallback(recv), null);
@@ -324,6 +344,16 @@ public class GameState : State
         testKeypadCode?.Invoke(message.code, message.keypadID);
     }
 
+    void HandleUpdatePlayerCamPosition(UpdatePlayerCamPosition message)
+    {
+        updatePlayerCamPosition?.Invoke(message.cameraPosition);
+    }
+
+    void HandleUpdateEnergyCamPosition(UpdateEnergyCamPosition message)
+    {
+        updateEnergyCamPosition?.Invoke(message.cameraPosition);
+    }
+
     //sending
     void SendGameLoadedMessage()
     {
@@ -430,5 +460,19 @@ public class GameState : State
     {
         KeypadValidationMessage message = new KeypadValidationMessage(code, ID);
         tcpClientNetwork.SendObjectThroughTCP(message);
+    }
+
+    void SendMapCameraPosition(Vector3 newPos, PositionUpdater updater)
+    {
+        if(updater is PlayerMapPositionUpdater)
+        {
+            UpdatePlayerCamPosition updatePlayerCamPosition = new UpdatePlayerCamPosition(newPos);
+            udpClientNetwork.SendObjectThroughUDP(updatePlayerCamPosition);
+        }
+        else if(updater is EnergyMapPositionUpdater)
+        {
+            UpdateEnergyCamPosition updateEnergyCamPosition = new UpdateEnergyCamPosition(newPos);
+            udpClientNetwork.SendObjectThroughUDP(updateEnergyCamPosition);
+        }
     }
 }

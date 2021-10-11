@@ -25,6 +25,19 @@ public class GameRoom : Room
         {
             UpdatePlayerPositionUDP message = pMessage as UpdatePlayerPositionUDP;
             HandleUpdatePlayerPositionMessageUDP(message, pSender);
+            Debug.Log("receiving player pos");
+        }
+        else if(pMessage is UpdatePlayerCamPosition)
+        {
+            UpdatePlayerCamPosition message = pMessage as UpdatePlayerCamPosition;
+            HandleUpdatePlayerCamPosition(message, pSender);
+            Debug.Log("receiving player cam pos");
+        }
+        else if(pMessage is UpdateEnergyCamPosition)
+        {
+            UpdateEnergyCamPosition message = pMessage as UpdateEnergyCamPosition;
+            HandleUpdateEnergyCamPosition(message, pSender);
+            Debug.Log("receiving energy cam pos");
         }
     }
 
@@ -319,5 +332,20 @@ public class GameRoom : Room
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);
         SendTCPMessageToTargetUser(outPacket, server.serverInfo.serverOwner);
+    }
+
+    //send new pos to all users
+    void HandleUpdatePlayerCamPosition(UpdatePlayerCamPosition message, MyClient client)
+    {
+        UDPPacket outPacket = new UDPPacket();
+        outPacket.Write(message);
+        SendUDPMessageToAllUsers(outPacket);
+    }
+
+    void HandleUpdateEnergyCamPosition(UpdateEnergyCamPosition message, MyClient client)
+    {
+        UDPPacket outPacket = new UDPPacket();
+        outPacket.Write(message);
+        SendUDPMessageToAllUsersExcept(outPacket, client);
     }
 }

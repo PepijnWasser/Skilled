@@ -19,6 +19,11 @@ public class MapCamera : MonoBehaviour
         originalPos = transform.position;
     }
 
+    private void OnDestroy()
+    {
+        
+    }
+
     public void PanCamera()
     {
         Vector3 difference = Vector3.zero;
@@ -38,5 +43,10 @@ public class MapCamera : MonoBehaviour
 
         camera.transform.position += difference;
         camera.transform.position += direction * Time.deltaTime * speed;
+    }
+
+    public void SetPosition(Vector3 newPos)
+    {
+        Debug.Log(this.transform);
     }
 }

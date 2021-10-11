@@ -71,7 +71,6 @@ public class KeypadCodeDisplay : MonoBehaviour
         if (tasksToDisplay.ContainsKey(taskID))
         {
             tasksToDisplay.Remove(taskID);
-            Debug.Log("removing task");
             NeedToUpdate = true;
         }
     }
@@ -83,8 +82,6 @@ public class KeypadCodeDisplay : MonoBehaviour
             KeypadTask keypadTask = task as KeypadTask;
             tasksToDisplay.Add(leverID, keypadTask);
             NeedToUpdate = true;
-
-            Debug.Log("adding task");
         }
     }
 }
