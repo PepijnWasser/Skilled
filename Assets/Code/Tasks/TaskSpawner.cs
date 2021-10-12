@@ -88,16 +88,16 @@ public class TaskSpawner : MonoBehaviour
             availibleKeypadLocations.Remove(newlocation);
 
             GameObject newObject = Instantiate(KeypadPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
-            Keypad keypad = newObject.GetComponent<Keypad>();
-            keypad.keypadID = i;
+            KeypadPrefabManager1 manager = newObject.GetComponent<KeypadPrefabManager1>();
+
+            manager.keypad.keypadID = i;
 
             string name = keypadNamer.GetName();
-            keypad.gameObject.name = name;
+            manager.keypad.gameObject.name = name;
+            manager.keypadTask.taskName = name;
+            manager.iconText.text = name;
 
-            KeypadTask task = newObject.GetComponent<KeypadTask>();
-            task.taskName = name;
-
-            tasksSpawned.Add(task);
+            tasksSpawned.Add(manager.keypadTask);
         }
 
         allTasksSpawned?.Invoke(tasksSpawned);

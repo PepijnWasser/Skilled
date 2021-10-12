@@ -39,6 +39,12 @@ public class GameRoom : Room
             HandleUpdateEnergyCamPosition(message, pSender);
             Debug.Log("receiving energy cam pos");
         }
+        else if (pMessage is UpdateTaskCamPosition)
+        {
+            UpdateTaskCamPosition message = pMessage as UpdateTaskCamPosition;
+            HandleUpdateTaskCamPosition(message, pSender);
+            Debug.Log("receiving energy cam pos");
+        }
     }
 
     //processes tcp message of a given user 
@@ -343,6 +349,13 @@ public class GameRoom : Room
     }
 
     void HandleUpdateEnergyCamPosition(UpdateEnergyCamPosition message, MyClient client)
+    {
+        UDPPacket outPacket = new UDPPacket();
+        outPacket.Write(message);
+        SendUDPMessageToAllUsersExcept(outPacket, client);
+    }
+
+    void HandleUpdateTaskCamPosition(UpdateTaskCamPosition message, MyClient client)
     {
         UDPPacket outPacket = new UDPPacket();
         outPacket.Write(message);

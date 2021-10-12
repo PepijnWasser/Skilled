@@ -54,6 +54,7 @@ public class GameState : State
     public delegate void PosUpdater(Vector3 newPos);
     public static event PosUpdater updatePlayerCamPosition;
     public static event PosUpdater updateEnergyCamPosition;
+    public static event PosUpdater updateTaskCamPosition;
 
 
     protected override void Awake()
@@ -137,15 +138,17 @@ public class GameState : State
         {
             UpdatePlayerCamPosition message = TempOBJ as UpdatePlayerCamPosition;
             HandleUpdatePlayerCamPosition(message);
-            Debug.Log("receiving player cam pos CLIENT");
         }
         else if (TempOBJ is UpdateEnergyCamPosition)
         {
            UpdateEnergyCamPosition message = TempOBJ as UpdateEnergyCamPosition;
            HandleUpdateEnergyCamPosition(message);
-           Debug.Log("receiving energy cam pos CLIENT");
         }
-
+        else if (TempOBJ is UpdateTaskCamPosition)
+        {
+            UpdateTaskCamPosition message = TempOBJ as UpdateTaskCamPosition;
+            HandleUpdateTaskCamPosition(message);
+        }
         client.BeginReceive(new AsyncCallback(recv), null);
     }
 
@@ -344,6 +347,7 @@ public class GameState : State
         testKeypadCode?.Invoke(message.code, message.keypadID);
     }
 
+    //Handle map cam updates
     void HandleUpdatePlayerCamPosition(UpdatePlayerCamPosition message)
     {
         try
@@ -358,7 +362,6 @@ public class GameState : State
         {
             Debug.Log(e.Message);
         }
-
     }
 
     void HandleUpdateEnergyCamPosition(UpdateEnergyCamPosition message)
@@ -375,7 +378,22 @@ public class GameState : State
         {
             Debug.Log(e.Message);
         }
+    }
 
+    void HandleUpdateTaskCamPosition(UpdateTaskCamPosition message)
+    {
+        try
+        {
+            UnityMainThread.wkr.AddJob(() =>
+            {
+                // Will run on main thread, hence issue is solved
+                updateTaskCamPosition?.Invoke(message.cameraPosition);
+            });
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
     }
 
     //sending
@@ -497,6 +515,11 @@ public class GameState : State
         {
             UpdateEnergyCamPosition updateEnergyCamPosition = new UpdateEnergyCamPosition(newPos);
             udpClientNetwork.SendObjectThroughUDP(updateEnergyCamPosition);
+        }
+        else if (updater is TaskMapPositionUpdater)
+        {
+            UpdateTaskCamPosition updateTaskCamPosition = new UpdateTaskCamPosition(newPos);
+            udpClientNetwork.SendObjectThroughUDP(updateTaskCamPosition);
         }
     }
 }

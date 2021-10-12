@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
         manager.player.name = _name + " " + playerID;
         manager.name = _name + " " + playerID;
+        manager.iconText.text = _name;
 
         if (playerControlled)
         {
