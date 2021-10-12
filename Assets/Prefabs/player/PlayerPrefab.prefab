@@ -291,7 +291,7 @@ MonoBehaviour:
   vCamera: {fileID: 767075815464117239}
   allignScript: {fileID: 767075814420350581}
   player: {fileID: 0}
-  icon: {fileID: 0}
+  iconText: {fileID: 0}
   nose: {fileID: 767075814420350583}
   playerMovementScript: {fileID: 767075814832258190}
   playerRotationScript: {fileID: 767075814832258191}
@@ -865,7 +865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 80, z: 0}
-  player: {fileID: 767075814832258177}
+  parent: {fileID: 767075814832258177}
 --- !u!1 &5732217131944884145
 GameObject:
   m_ObjectHideFlags: 0
@@ -997,7 +997,7 @@ MonoBehaviour:
   vCamera: {fileID: 767075815464117239}
   allignScript: {fileID: 767075814420350581}
   player: {fileID: 767075814832258177}
-  icon: {fileID: 5732217130474669687}
+  iconText: {fileID: 5732217131944884159}
   nose: {fileID: 767075814420350583}
   playerMovementScript: {fileID: 767075814832258190}
   playerRotationScript: {fileID: 767075814832258191}

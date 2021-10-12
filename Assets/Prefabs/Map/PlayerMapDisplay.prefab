@@ -378,6 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1428435694740893555}
   speed: 10
+  zoomSensitivity: 140
 --- !u!114 &4750138630358167951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ded91f2ec25aaca48aa04b5af9b88a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateFrequency: 5
+  updateFrequency: 30
 --- !u!1 &1428435694879343779
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,10 +640,10 @@ GameObject:
   - component: {fileID: 2716615703192743675}
   - component: {fileID: 2716615703192743677}
   - component: {fileID: 2716615703192743649}
-  - component: {fileID: 2475174386129789613}
   - component: {fileID: 2716615703192743679}
+  - component: {fileID: 6972628813443646801}
   m_Layer: 5
-  m_Name: playerMapDisplay
+  m_Name: PlayerMapDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -712,7 +713,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2716615703192743675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,21 +759,6 @@ MonoBehaviour:
   lookingAtTarget: 0
   range: 5
   body: {fileID: 2716615703192743674}
---- !u!114 &2475174386129789613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2716615703192743674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2d3d796d39c5684a91762d22ab38d0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayCam: {fileID: 1428435694618391850}
-  isFocused: 0
-  mapCam: {fileID: 1428435694740893552}
 --- !u!114 &2716615703192743679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,6 +772,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapCamera: {fileID: 1428435694740893555}
+--- !u!114 &6972628813443646801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2716615703192743674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db797a28e94c2d4ea21f257511ae0e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayCam: {fileID: 1428435694618391850}
+  isFocused: 0
+  mapCam: {fileID: 1428435694740893552}
 --- !u!1 &4101708951996553342
 GameObject:
   m_ObjectHideFlags: 0

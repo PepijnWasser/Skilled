@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class KeypadPrefabManager : MonoBehaviour
 {
-    public Text code;
-    public Text taskName;
+    public Keypad keypad;
+    public KeypadTask keypadTask;
+    public Text iconText;
+    public KeypadCodeEnterer codeEnterer;
 }

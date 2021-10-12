@@ -167,7 +167,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &301541205273119766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,8 +700,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1
-    height: 1
+    width: 1920
+    height: 768
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -736,6 +736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 3625049173855522206}
   speed: 10
+  zoomSensitivity: 140
 --- !u!114 &147455408415131382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,7 +749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 013c16e56602ce643abca370975742b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  updateFrequency: 5
+  updateFrequency: 30
 --- !u!1 &3625049173951021907
 GameObject:
   m_ObjectHideFlags: 0

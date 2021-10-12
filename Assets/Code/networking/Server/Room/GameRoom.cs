@@ -25,19 +25,21 @@ public class GameRoom : Room
         {
             UpdatePlayerPositionUDP message = pMessage as UpdatePlayerPositionUDP;
             HandleUpdatePlayerPositionMessageUDP(message, pSender);
-            Debug.Log("receiving player pos");
         }
         else if(pMessage is UpdatePlayerCamPosition)
         {
             UpdatePlayerCamPosition message = pMessage as UpdatePlayerCamPosition;
             HandleUpdatePlayerCamPosition(message, pSender);
-            Debug.Log("receiving player cam pos");
         }
         else if(pMessage is UpdateEnergyCamPosition)
         {
             UpdateEnergyCamPosition message = pMessage as UpdateEnergyCamPosition;
             HandleUpdateEnergyCamPosition(message, pSender);
-            Debug.Log("receiving energy cam pos");
+        }
+        else if (pMessage is UpdateTaskCamPosition)
+        {
+            UpdateTaskCamPosition message = pMessage as UpdateTaskCamPosition;
+            HandleUpdateTaskCamPosition(message, pSender);
         }
     }
 
@@ -343,6 +345,13 @@ public class GameRoom : Room
     }
 
     void HandleUpdateEnergyCamPosition(UpdateEnergyCamPosition message, MyClient client)
+    {
+        UDPPacket outPacket = new UDPPacket();
+        outPacket.Write(message);
+        SendUDPMessageToAllUsersExcept(outPacket, client);
+    }
+
+    void HandleUpdateTaskCamPosition(UpdateTaskCamPosition message, MyClient client)
     {
         UDPPacket outPacket = new UDPPacket();
         outPacket.Write(message);

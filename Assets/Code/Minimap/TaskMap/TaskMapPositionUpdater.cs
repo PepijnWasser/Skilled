@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMapPositionUpdater : PositionUpdater
+public class TaskMapPositionUpdater : PositionUpdater
 {
     private void Awake()
     {
-        GameState.updatePlayerCamPosition += SetCamPosition;
+        GameState.updateTaskCamPosition += SetCamPosition;
     }
 
     protected override void Start()
@@ -16,7 +16,7 @@ public class PlayerMapPositionUpdater : PositionUpdater
 
     private void OnDestroy()
     {
-        GameState.updatePlayerCamPosition -= SetCamPosition;
+        GameState.updateTaskCamPosition -= SetCamPosition;
     }
 
     void SetCamPosition(Vector3 newPos)

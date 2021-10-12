@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;
 
 public class PlayerPrefabManager : MonoBehaviour
@@ -12,7 +13,7 @@ public class PlayerPrefabManager : MonoBehaviour
     public AllignWithCamera allignScript;
 
     public GameObject player;
-    public GameObject icon;
+    public Text iconText;
 
     public GameObject nose;
 

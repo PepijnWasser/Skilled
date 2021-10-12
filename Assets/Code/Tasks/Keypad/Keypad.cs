@@ -8,12 +8,19 @@ public class Keypad : Focusable
     KeypadCodeEnterer keypadCodeEnterer;
     KeypadInteractable keypadInteractable;
 
+    [HideInInspector]
     public int keypadID = 0;
+
+    public float resetTime;
+
 
     public delegate void KeypadUsed(int ID, bool InUse);
     public static event KeypadUsed keypadUsed;
 
     public bool playerIsUsing = false;
+
+
+    float secondCounter = 0;
 
     protected override void Awake()
     {
@@ -32,6 +39,31 @@ public class Keypad : Focusable
     {
         base.OnDestroy();
         GameState.updateKeypadStatus -= UpdateIsInUse;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        if(keypadCodeEnterer.message != keypadCodeEnterer.nameMessage)
+        {
+            if(playerIsUsing == false)
+            {
+                secondCounter += Time.deltaTime;
+                if(secondCounter > resetTime)
+                {
+                    secondCounter = 0;
+                    keypadCodeEnterer.DisplayWelcomeMessage();
+                }
+            }
+            else
+            {
+                secondCounter = 0;
+            }
+        }
+        else
+        {
+            secondCounter = 0;
+        }
     }
 
     public override void Focus()

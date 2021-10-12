@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 public class KeypadCodeEnterer : MonoBehaviour
 {
-    public KeypadTask task;
     public Text display;
 
     public string message = "";
+    public string nameMessage;
+    string errorMessage = "Error....";
+
 
     public void AddDigit(int digit)
     {
@@ -18,13 +20,29 @@ public class KeypadCodeEnterer : MonoBehaviour
 
     public void DisplayWelcomeMessage()
     {
-        display.text = "Welcome";
+        display.text = nameMessage;
         message = "";
     }
 
     public void DisplayErrorMessage()
     {
-        display.text = "Error...";
+        display.text = errorMessage;
         message = "";
+    }
+
+    public void RemoveDigit()
+    {
+        if(message.Length > 0)
+        {
+            message = message.Remove(message.Length - 1);
+            display.text = message;
+        }
+    }
+
+    public void SetWelcomeMessage(string message)
+    {
+        nameMessage = message;
+        DisplayWelcomeMessage();
+        Debug.Log(message);
     }
 }
