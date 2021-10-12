@@ -346,12 +346,36 @@ public class GameState : State
 
     void HandleUpdatePlayerCamPosition(UpdatePlayerCamPosition message)
     {
-        updatePlayerCamPosition?.Invoke(message.cameraPosition);
+        try
+        {
+            UnityMainThread.wkr.AddJob(() =>
+            {
+                // Will run on main thread, hence issue is solved
+                updatePlayerCamPosition?.Invoke(message.cameraPosition);
+            });
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+
     }
 
     void HandleUpdateEnergyCamPosition(UpdateEnergyCamPosition message)
     {
-        updateEnergyCamPosition?.Invoke(message.cameraPosition);
+        try
+        {
+            UnityMainThread.wkr.AddJob(() =>
+            {
+                // Will run on main thread, hence issue is solved
+                updateEnergyCamPosition?.Invoke(message.cameraPosition);
+            });
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+
     }
 
     //sending

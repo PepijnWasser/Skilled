@@ -21,7 +21,6 @@ public class PlayerMapPositionUpdater : PositionUpdater
 
     void SetCamPosition(Vector3 newPos)
     {
-        //Debug.Log(mapCamera);
-        //this.transform.position = newPos;
+        mapCamera.transform.position = newPos;
     }
 }
