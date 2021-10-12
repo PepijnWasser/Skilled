@@ -45,7 +45,7 @@ public class KeypadCodeDisplay : MonoBehaviour
                 int display =  (int)((float)imagesSpawned.Count / (float)8);
                 Image spawnedItem = Instantiate(itemPrefab, content[display].transform);
                 
-                KeypadPrefabManager manager = spawnedItem.GetComponent<KeypadPrefabManager>();
+                KeypadDisplayItemPrefabManager manager = spawnedItem.GetComponent<KeypadDisplayItemPrefabManager>();
                 manager.code.text = task.code;
                 manager.taskName.text = task.taskName;
                 

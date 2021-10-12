@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ThreeWayLeverPrefabManager : MonoBehaviour
 {
-    public Text position;
+    public ThreeWayLever lever;
+    public ThreeWayLeverTask leverTask;
     public Text taskName;
 }

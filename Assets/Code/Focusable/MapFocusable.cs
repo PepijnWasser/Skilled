@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMapFocusable : Focusable
+public class MapFocusable : Focusable
 {
     public MapCamera mapCam;
 
@@ -18,6 +18,7 @@ public class PlayerMapFocusable : Focusable
         if (isFocused)
         {
             mapCam.PanCamera();
+            mapCam.ZoomCamera();
         }
     }
 }

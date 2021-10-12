@@ -378,6 +378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 303854553387509311}
   speed: 10
+  zoomSensitivity: 140
 --- !u!114 &6201088641609185475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,8 +638,8 @@ GameObject:
   - component: {fileID: 3627098918250473399}
   - component: {fileID: 3627098918250473393}
   - component: {fileID: 3627098918250473389}
-  - component: {fileID: 3872186746311650273}
   - component: {fileID: 3627098918250473395}
+  - component: {fileID: 6137564239688446876}
   m_Layer: 5
   m_Name: TaskMapDisplay
   m_TagString: Untagged
@@ -756,21 +757,6 @@ MonoBehaviour:
   lookingAtTarget: 0
   range: 5
   body: {fileID: 3627098918250473398}
---- !u!114 &3872186746311650273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3627098918250473398}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2d3d796d39c5684a91762d22ab38d0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayCam: {fileID: 303854553248267366}
-  isFocused: 0
-  mapCam: {fileID: 303854553387509308}
 --- !u!114 &3627098918250473395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -784,6 +770,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapCamera: {fileID: 303854553387509311}
+--- !u!114 &6137564239688446876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3627098918250473398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db797a28e94c2d4ea21f257511ae0e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  displayCam: {fileID: 303854553248267366}
+  isFocused: 0
+  mapCam: {fileID: 303854553387509308}
 --- !u!1 &3779490992709941076
 GameObject:
   m_ObjectHideFlags: 0

@@ -736,6 +736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 3625049173855522206}
   speed: 10
+  zoomSensitivity: 140
 --- !u!114 &147455408415131382
 MonoBehaviour:
   m_ObjectHideFlags: 0

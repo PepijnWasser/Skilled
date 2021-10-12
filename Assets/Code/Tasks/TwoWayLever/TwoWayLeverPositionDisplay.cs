@@ -49,7 +49,7 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
                 int display = (int)((float)imagesSpawned.Count / (float)8);
                 Image spawnedItem = Instantiate(itemPrefab, content[display].transform);
 
-                TwoWayLeverPrefabManager manager = spawnedItem.GetComponent<TwoWayLeverPrefabManager>();
+                TwoWayLeverDisplayItemPrefabManager manager = spawnedItem.GetComponent<TwoWayLeverDisplayItemPrefabManager>();
                 manager.position.text = task.targetPosition.ToString();
                 manager.taskName.text = task.taskName;
 

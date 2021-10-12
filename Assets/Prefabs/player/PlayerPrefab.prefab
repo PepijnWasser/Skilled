@@ -865,7 +865,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 80, z: 0}
-  player: {fileID: 767075814832258177}
+  parent: {fileID: 767075814832258177}
 --- !u!1 &5732217131944884145
 GameObject:
   m_ObjectHideFlags: 0

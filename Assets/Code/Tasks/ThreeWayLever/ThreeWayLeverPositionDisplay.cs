@@ -47,7 +47,7 @@ public class ThreeWayLeverPositionDisplay : MonoBehaviour
                 int display = (int)((float)imagesSpawned.Count / (float)8);
                 Image spawnedItem = Instantiate(itemPrefab, content[display].transform);
 
-                ThreeWayLeverPrefabManager manager = spawnedItem.GetComponent<ThreeWayLeverPrefabManager>();
+                ThreeWayLeverDisplayItemPrefabManager manager = spawnedItem.GetComponent<ThreeWayLeverDisplayItemPrefabManager>();
                 manager.position.text = task.targetPosition.ToString();
                 manager.taskName.text = task.taskName;
 

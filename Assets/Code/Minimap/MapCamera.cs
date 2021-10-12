@@ -12,6 +12,8 @@ public class MapCamera : MonoBehaviour
 
     Vector3 originalPos;
 
+    public float zoomSensitivity;
+
     private void Start()
     {
         transform.rotation = Quaternion.Euler(90, 0, 0);
@@ -43,6 +45,24 @@ public class MapCamera : MonoBehaviour
 
         camera.transform.position += difference;
         camera.transform.position += direction * Time.deltaTime * speed;
+    }
+
+    public void ZoomCamera()
+    {
+        Debug.Log("zooming");
+        float camZoom = camera.orthographicSize;
+
+        if(Input.mouseScrollDelta.y < 0)
+        {
+            camZoom += zoomSensitivity * Time.deltaTime;
+        }
+        else if(Input.mouseScrollDelta.y > 0)
+        {
+            camZoom -= zoomSensitivity * Time.deltaTime;
+        }
+        camZoom = Mathf.Clamp(camZoom, 10, 100);
+        Debug.Log(camZoom);
+        camera.orthographicSize = camZoom;
     }
 
     public void SetPosition(Vector3 newPos)
