@@ -8,6 +8,11 @@ public class MapIcon : MonoBehaviour
 
     public GameObject parent;
 
+    private void Start()
+    {
+        this.transform.rotation = Quaternion.identity; 
+    }
+
     private void Update()
     {
         this.transform.position = new Vector3(parent.transform.position.x, targetPos.y, parent.transform.position.z);
