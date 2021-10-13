@@ -17,7 +17,7 @@ ScriptedImporter:
     generateAllOutputs: 0
     generateMipMaps: 1
     preset: " <sbspreset pkgurl=\"pkg://Substance_graph\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"10,10\" />\n 
+      identifier=\"$outputsize\" uid=\"3795302352\" type=\"8\" value=\"11,11\" />\n 
       <presetinput identifier=\"outputcolor_1\" uid=\"2352679929\" type=\"3\" value=\"0.176471,0.403922,0.74902,1\"
       />\n  <presetinput identifier=\"leveloutlow\" uid=\"2352679153\" type=\"0\"
       value=\"1\" />\n  <presetinput identifier=\"outputcolor_2\" uid=\"2349853878\"
@@ -224,8 +224,8 @@ ScriptedImporter:
     - label: Default
       bOverride: 0
       bLockRatio: 1
-      textureWidth: 1024
-      textureHeight: 1024
+      textureWidth: 2048
+      textureHeight: 2048
       textureFormatMode: 0
       normalCompressed: 0
       bGenerateOnLoad: 1
