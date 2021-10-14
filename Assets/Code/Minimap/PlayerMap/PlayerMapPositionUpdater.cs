@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMapPositionUpdater : PositionUpdater
+public class PlayerMapPositionUpdater : MapPositionUpdater
 {
     private void Awake()
     {
@@ -19,8 +19,9 @@ public class PlayerMapPositionUpdater : PositionUpdater
         GameState.updatePlayerCamPosition -= SetCamPosition;
     }
 
-    void SetCamPosition(Vector3 newPos)
+    void SetCamPosition(Vector3 newPos, float newZoom)
     {
         mapCamera.transform.position = newPos;
+        mapCamera.camera.orthographicSize = newZoom;
     }
 }

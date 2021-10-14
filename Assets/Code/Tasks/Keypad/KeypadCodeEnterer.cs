@@ -43,6 +43,5 @@ public class KeypadCodeEnterer : MonoBehaviour
     {
         nameMessage = message;
         DisplayWelcomeMessage();
-        Debug.Log(message);
     }
 }

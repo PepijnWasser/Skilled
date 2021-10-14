@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyMapPositionUpdater : PositionUpdater
+public class EnergyMapPositionUpdater : MapPositionUpdater
 {
     private void Awake()
     {
@@ -19,8 +19,10 @@ public class EnergyMapPositionUpdater : PositionUpdater
         GameState.updateEnergyCamPosition -= SetCamPosition;
     }
 
-    void SetCamPosition(Vector3 newPos)
+    void SetCamPosition(Vector3 newPos, float newZoom)
     {
+        Debug.Log(newZoom);
         mapCamera.transform.position = newPos;
+        mapCamera.camera.orthographicSize = newZoom;
     }
 }

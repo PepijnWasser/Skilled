@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PositionUpdater : MonoBehaviour
+public class MapPositionUpdater : MonoBehaviour
 {
     float secondCounter = 0;
     public int updateFrequency;
     protected MapCamera mapCamera;
     protected Vector3 oldPos;
+    protected float oldZoom;
 
-    public delegate void UpdatePosition(Vector3 newPos, PositionUpdater updater);
+    public delegate void UpdatePosition(Vector3 newPos, float newZoom,  MapPositionUpdater updater);
     public static event UpdatePosition positionChanged;
 
     protected virtual void Start()
@@ -26,10 +27,11 @@ public class PositionUpdater : MonoBehaviour
             secondCounter = 0;
             if (mapCamera != null)
             {
-                if (mapCamera.transform.position != oldPos)
+                if (mapCamera.transform.position != oldPos || mapCamera.camera.orthographicSize != oldZoom)
                 {
-                    positionChanged?.Invoke(mapCamera.transform.position, this);
+                    positionChanged?.Invoke(mapCamera.transform.position, mapCamera.camera.orthographicSize, this);
                     oldPos = mapCamera.transform.position;
+                    oldZoom = mapCamera.camera.orthographicSize;
                 }
             }
             else
