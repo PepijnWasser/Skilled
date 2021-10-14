@@ -21,6 +21,6 @@ public class EnergyMapPositionUpdater : PositionUpdater
 
     void SetCamPosition(Vector3 newPos)
     {
-        //mapCamera.transform.position = newPos;
+        mapCamera.transform.position = newPos;
     }
 }
