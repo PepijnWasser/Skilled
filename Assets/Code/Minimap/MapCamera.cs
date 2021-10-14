@@ -49,7 +49,6 @@ public class MapCamera : MonoBehaviour
 
     public void ZoomCamera()
     {
-        Debug.Log("zooming");
         float camZoom = camera.orthographicSize;
 
         if(Input.mouseScrollDelta.y < 0)
@@ -61,7 +60,6 @@ public class MapCamera : MonoBehaviour
             camZoom -= zoomSensitivity * Time.deltaTime;
         }
         camZoom = Mathf.Clamp(camZoom, 10, 100);
-        Debug.Log(camZoom);
         camera.orthographicSize = camZoom;
     }
 

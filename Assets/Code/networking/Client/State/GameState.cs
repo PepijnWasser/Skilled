@@ -51,7 +51,7 @@ public class GameState : State
     public delegate void Validate(int code, int keypadID);
     public static event Validate testKeypadCode;
 
-    public delegate void PosUpdater(Vector3 newPos);
+    public delegate void PosUpdater(Vector3 newPos, float newZoom);
     public static event PosUpdater updatePlayerCamPosition;
     public static event PosUpdater updateEnergyCamPosition;
     public static event PosUpdater updateTaskCamPosition;
@@ -71,7 +71,7 @@ public class GameState : State
         Task.taskCompleted += SendTaskCompleted;
         KeypadTask.validateCode += SendValidationMessage;
 
-        PositionUpdater.positionChanged += SendMapCameraPosition;
+        MapPositionUpdater.positionChanged += SendMapCameraPosition;
     }
 
     private void OnDestroy()
@@ -87,7 +87,7 @@ public class GameState : State
         Task.taskCompleted -= SendTaskCompleted;
         KeypadTask.validateCode -= SendValidationMessage;
 
-        PositionUpdater.positionChanged += SendMapCameraPosition;
+        MapPositionUpdater.positionChanged += SendMapCameraPosition;
     }
 
     //send a message to the server that we loaded the new scene
@@ -355,7 +355,7 @@ public class GameState : State
             UnityMainThread.wkr.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
-                updatePlayerCamPosition?.Invoke(message.cameraPosition);
+                updatePlayerCamPosition?.Invoke(message.cameraPosition, message.zoom);
             });
         }
         catch (Exception e)
@@ -371,7 +371,7 @@ public class GameState : State
             UnityMainThread.wkr.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
-                updateEnergyCamPosition?.Invoke(message.cameraPosition);
+                updateEnergyCamPosition?.Invoke(message.cameraPosition, message.zoom);
             });
         }
         catch (Exception e)
@@ -387,7 +387,7 @@ public class GameState : State
             UnityMainThread.wkr.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
-                updateTaskCamPosition?.Invoke(message.cameraPosition);
+                updateTaskCamPosition?.Invoke(message.cameraPosition, message.zoom);
             });
         }
         catch (Exception e)
@@ -504,21 +504,22 @@ public class GameState : State
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
-    void SendMapCameraPosition(Vector3 newPos, PositionUpdater updater)
+    void SendMapCameraPosition(Vector3 newPos, float newZoom, MapPositionUpdater updater)
     {
         if(updater is PlayerMapPositionUpdater)
         {
-            UpdatePlayerCamPosition updatePlayerCamPosition = new UpdatePlayerCamPosition(newPos);
+            UpdatePlayerCamPosition updatePlayerCamPosition = new UpdatePlayerCamPosition(newPos, newZoom);
             udpClientNetwork.SendObjectThroughUDP(updatePlayerCamPosition);
         }
         else if(updater is EnergyMapPositionUpdater)
         {
-            UpdateEnergyCamPosition updateEnergyCamPosition = new UpdateEnergyCamPosition(newPos);
+            Debug.Log(newZoom);
+            UpdateEnergyCamPosition updateEnergyCamPosition = new UpdateEnergyCamPosition(newPos, newZoom);
             udpClientNetwork.SendObjectThroughUDP(updateEnergyCamPosition);
         }
         else if (updater is TaskMapPositionUpdater)
         {
-            UpdateTaskCamPosition updateTaskCamPosition = new UpdateTaskCamPosition(newPos);
+            UpdateTaskCamPosition updateTaskCamPosition = new UpdateTaskCamPosition(newPos, newZoom);
             udpClientNetwork.SendObjectThroughUDP(updateTaskCamPosition);
         }
     }
