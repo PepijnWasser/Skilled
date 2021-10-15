@@ -152,6 +152,7 @@ MonoBehaviour:
   selectedImage: {fileID: 1837878966628698676}
   typeContentField: {fileID: 8217218952678046084}
   typeContentImage: {fileID: 1723558771734893373, guid: 8f8af83aa782b5c4aa1e9eac2c1894f3, type: 3}
+  confirmButton: {fileID: 0}
 --- !u!1 &674727438339975231
 GameObject:
   m_ObjectHideFlags: 0
@@ -299,7 +300,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 45
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -458,6 +459,7 @@ MonoBehaviour:
   selectedImage: {fileID: 2889660959769005974}
   typeContentField: {fileID: 8217218952678046084}
   typeContentImage: {fileID: 625466632050872429, guid: 043441a93fa26dc46b458caed29638b4, type: 3}
+  confirmButton: {fileID: 0}
 --- !u!1 &5131954661101958112
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,7 +532,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 45
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1064,6 +1066,7 @@ MonoBehaviour:
   selectedImage: {fileID: 1597863714934054708}
   typeContentField: {fileID: 8217218952678046084}
   typeContentImage: {fileID: 7842100867270778841, guid: bf2660f8636a87a418a5506d2c95f6b5, type: 3}
+  confirmButton: {fileID: 0}
 --- !u!1 &8217218951546416036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,7 +1537,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 45
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -1810,6 +1813,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6621790e49f7f4a4a85b491446841e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typePanel: {fileID: 8217218952678046202}
+  typeSelectionManager: {fileID: 8217218951579786589}
 --- !u!1 &8217218952526503186
 GameObject:
   m_ObjectHideFlags: 0
@@ -2055,6 +2060,7 @@ GameObject:
   - component: {fileID: 8217218952778183219}
   - component: {fileID: 8217218952778183218}
   - component: {fileID: 8217218952778183217}
+  - component: {fileID: 1138711879772802490}
   m_Layer: 5
   m_Name: Okay
   m_TagString: Untagged
@@ -2103,7 +2109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.5943396, b: 0.5643224, a: 1}
+  m_Color: {r: 0, g: 0.59607846, b: 0.5647059, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2127,7 +2133,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8217218952778183223}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
   m_Name: 
@@ -2163,7 +2169,45 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8217218952778183218}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1138711879772802490}
+        m_TargetAssemblyTypeName: SettingSaver, Assembly-CSharp
+        m_MethodName: saveSettings
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4148054395141447650}
+        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+        m_MethodName: Close
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1138711879772802490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8217218952778183223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29de3dcf8bacf9545a32f80df5c42242, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tabsWithChanges: []
+  saveButton: {fileID: 8217218952778183217}
 --- !u!1 &8217218952884847658
 GameObject:
   m_ObjectHideFlags: 0

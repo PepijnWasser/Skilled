@@ -12,12 +12,21 @@ public class TypeSelector : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     public Image typeContentField;
     public Image typeContentImage;
 
-    Image instantiatedTypeContentImage;
+    public Button confirmButton;
+
+    GameObject instantiatedTypeContentImage;
 
     public void Activate()
     {
         selectedImage.enabled = true;
-        instantiatedTypeContentImage = Instantiate(typeContentImage, typeContentField.transform.position, Quaternion.identity, typeContentField.transform);
+        if(instantiatedTypeContentImage == null)
+        {
+            instantiatedTypeContentImage = Instantiate(typeContentImage, typeContentField.transform.position, Quaternion.identity, typeContentField.transform).gameObject;
+        }
+        else
+        {
+            instantiatedTypeContentImage.SetActive(true);
+        }
     }
 
     public void DeActivate()
@@ -25,7 +34,7 @@ public class TypeSelector : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         selectedImage.enabled = false;
         if(instantiatedTypeContentImage != null)
         {
-            Destroy(instantiatedTypeContentImage);
+            instantiatedTypeContentImage.SetActive(false);
         }
     }
 

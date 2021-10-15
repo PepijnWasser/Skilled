@@ -6,7 +6,7 @@ public class TypeSelectorManager : MonoBehaviour
 {
     public List<TypeSelector> typeSelectors;
 
-    void Start()
+    public void OnOpen()
     {
         Activate(typeSelectors[0]);
     }
