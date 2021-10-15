@@ -513,7 +513,6 @@ public class GameState : State
         }
         else if(updater is EnergyMapPositionUpdater)
         {
-            Debug.Log(newZoom);
             UpdateEnergyCamPosition updateEnergyCamPosition = new UpdateEnergyCamPosition(newPos, newZoom);
             udpClientNetwork.SendObjectThroughUDP(updateEnergyCamPosition);
         }
