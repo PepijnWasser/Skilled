@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 
     List<PlayerSpawnLocation> availiblePlayerSpawnLocations;
 
+
     public delegate void PlayerMade(GameObject player, Camera cam);
     public static event PlayerMade playerMade;
 
@@ -78,4 +79,6 @@ public class GameManager : MonoBehaviour
     {
          availiblePlayerSpawnLocations = GameObject.FindObjectsOfType<PlayerSpawnLocation>().ToList();
     }
+
+    
 }
