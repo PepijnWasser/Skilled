@@ -10,6 +10,7 @@ public class SoundChannel : MonoBehaviour
 
     public Slider slider;
     public Image muteIcon;
+    public Text count;
     public string muteChannel;
     public string volumeChannel;
 
@@ -17,11 +18,15 @@ public class SoundChannel : MonoBehaviour
 
     private void Start()
     {
-        manager.AddSoundChannel(this);
-        slider.SetValueWithoutNotify(PlayerPrefs.GetFloat(volumeChannel));
+        Reset();
+    }
+
+    public void Reset()
+    {
+        float soundVolume = PlayerPrefs.GetFloat(volumeChannel);
 
         float muteVolume = PlayerPrefs.GetFloat(muteChannel);
-        if(muteVolume == -80)
+        if (muteVolume == -80)
         {
             muted = true;
         }
@@ -29,7 +34,8 @@ public class SoundChannel : MonoBehaviour
         {
             muted = false;
         }
-        manager.SetMuteImage(this);
+        manager.SetInitialMuteImage(this);
+        manager.SetVolumeNoAlert(this, soundVolume);
     }
 
     public void SetVolume(float newVolume)

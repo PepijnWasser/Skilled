@@ -5,8 +5,11 @@ using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
-    public GameObject typePanel;
+    public GameObject background;
     public TypeSelectorManager typeSelectionManager;
+
+    public delegate void OnDisable();
+    public static event OnDisable disabled;
 
     Canvas settingsMenuGameObject;
 
@@ -39,6 +42,8 @@ public class SettingsManager : MonoBehaviour
         settingsMenuGameObject.enabled = true;
 
         typeSelectionManager.OnOpen();
+
+        background.SetActive(true);
     }
 
     public void Close()
@@ -46,9 +51,7 @@ public class SettingsManager : MonoBehaviour
         inSettings = false;
         settingsMenuGameObject.enabled = false;
 
-        foreach (Transform child in typePanel.transform)
-        {
-            GameObject.Destroy(child.gameObject);
-        }
+        background.SetActive(false);
+        disabled?.Invoke();
     }
 }

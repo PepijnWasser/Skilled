@@ -16,6 +16,14 @@ public class TypeSelector : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     GameObject instantiatedTypeContentImage;
 
+    private void Awake()
+    {
+        if (instantiatedTypeContentImage == null)
+        {
+            instantiatedTypeContentImage = Instantiate(typeContentImage, typeContentField.transform.position, Quaternion.identity, typeContentField.transform).gameObject;
+        }
+    }
+
     public void Activate()
     {
         selectedImage.enabled = true;

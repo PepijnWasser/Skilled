@@ -153,6 +153,7 @@ MonoBehaviour:
   typeContentField: {fileID: 8217218952678046084}
   typeContentImage: {fileID: 1723558771734893373, guid: 8f8af83aa782b5c4aa1e9eac2c1894f3, type: 3}
   confirmButton: {fileID: 0}
+  instantiatedTypeContentImage: {fileID: 0}
 --- !u!1 &674727438339975231
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,6 +461,7 @@ MonoBehaviour:
   typeContentField: {fileID: 8217218952678046084}
   typeContentImage: {fileID: 625466632050872429, guid: 043441a93fa26dc46b458caed29638b4, type: 3}
   confirmButton: {fileID: 0}
+  instantiatedTypeContentImage: {fileID: 0}
 --- !u!1 &5131954661101958112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,6 +1069,7 @@ MonoBehaviour:
   typeContentField: {fileID: 8217218952678046084}
   typeContentImage: {fileID: 7842100867270778841, guid: bf2660f8636a87a418a5506d2c95f6b5, type: 3}
   confirmButton: {fileID: 0}
+  instantiatedTypeContentImage: {fileID: 0}
 --- !u!1 &8217218951546416036
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,6 +1270,7 @@ MonoBehaviour:
   typeSelectors:
   - {fileID: 8217218951441186897}
   - {fileID: 6427796210616196450}
+  - {fileID: 7449986584583033955}
 --- !u!1 &8217218951691900515
 GameObject:
   m_ObjectHideFlags: 0
@@ -1813,7 +1817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6621790e49f7f4a4a85b491446841e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  typePanel: {fileID: 8217218952678046202}
+  background: {fileID: 8217218953083824853}
   typeSelectionManager: {fileID: 8217218951579786589}
 --- !u!1 &8217218952526503186
 GameObject:

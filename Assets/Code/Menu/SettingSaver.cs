@@ -5,37 +5,62 @@ using UnityEngine.UI;
 
 public class SettingSaver : MonoBehaviour
 {
-    public List<SettingTab> tabsWithChanges;
+    public List<SettingsTab> tabsWithChanges;
     public Button saveButton;
 
     private void Start()
     {
-        SoundSettingsManager.changeCreated += SetButtonStatus;
+        SoundSettingsManager.changeCreated += AddChanges;
+        HotkeysSettingsManager.changeCreated += AddChanges;
+
+        SettingsManager.disabled += ClearChanges;
     }
+
 
     private void OnDestroy()
     {
-        SoundSettingsManager.changeCreated -= SetButtonStatus;
+        SoundSettingsManager.changeCreated -= AddChanges;
+        HotkeysSettingsManager.changeCreated -= AddChanges;
+
+        SettingsManager.disabled -= ClearChanges;
     }
 
-    void SetButtonStatus(SettingTab tab)
+
+    void AddChanges(SettingsTab tab)
     {
-        if(tabsWithChanges.Contains(tab) == false)
+        if (tabsWithChanges.Contains(tab) == false)
         {
             tabsWithChanges.Add(tab);
         }
-        saveButton.enabled = true;
+        TestButtonStatus();
+    }
+
+    void ClearChanges()
+    {
+        tabsWithChanges.Clear();
+        TestButtonStatus();
+    }
+
+    void TestButtonStatus()
+    {
+        if(tabsWithChanges.Count > 0)
+        {
+            saveButton.enabled = true;
+        }
+        else
+        {
+            saveButton.enabled = false;
+        }
+
     }
 
     public void saveSettings()
     {
-        foreach(SettingTab tab in tabsWithChanges)
+        foreach(SettingsTab tab in tabsWithChanges)
         {
-
-                tab.SaveSettings();
-            
+            tab.SaveSettings();    
         }
-
+        tabsWithChanges.Clear();
         saveButton.enabled = false;
     }
 }
