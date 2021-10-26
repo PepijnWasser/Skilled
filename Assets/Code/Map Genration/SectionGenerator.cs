@@ -16,10 +16,12 @@ public class SectionGenerator : MonoBehaviour
 	public List<Doorway> allDoorways = new List<Doorway>();
 	public List<Doorway> availableDoorways = new List<Doorway>();
 
+	[HideInInspector]
 	public Doorway startdoor;
 
+	public Color roomColor;
+
 	LayerMask roomLayerMask;
-	Color roomColor;
 
 	public delegate void Completed(bool succeeded);
 	public static event Completed OnCompletion;
@@ -32,7 +34,6 @@ public class SectionGenerator : MonoBehaviour
     public void Initialize(LayerMask mask)
 	{
 		roomLayerMask = mask;
-		roomColor = Random.ColorHSV();
 		AddDoorwayToLists(startdoor);
 	}
 

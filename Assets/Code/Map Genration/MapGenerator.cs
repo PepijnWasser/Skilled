@@ -6,7 +6,9 @@ public class MapGenerator : MonoBehaviour
 {
     
     [SerializeField] private ConsoleRoom consoleRoomPrefab;
-    [SerializeField] private SectionGenerator sectionGeneratorPrefab;
+    [SerializeField] private List<SectionGenerator> sectionGeneratorPrefabs;
+
+    List<SectionGenerator> availibleSectionGenerators;
 
     [HideInInspector] int amountOfSectors = 0;
     int amountOfSectorsSpawned = 0;
@@ -31,6 +33,8 @@ public class MapGenerator : MonoBehaviour
     void Start()
     {
         SectionGenerator.OnCompletion += FinishSectionGeneration;
+        availibleSectionGenerators = sectionGeneratorPrefabs;
+        Debug.Log(availibleSectionGenerators.Count);
     }
 
     private void OnDestroy()
@@ -68,7 +72,7 @@ public class MapGenerator : MonoBehaviour
     void GenerateSection()
     {
         UpdateAvailibleDoorList();
-        SectionGenerator sectionGenerator = Instantiate(sectionGeneratorPrefab, this.transform);
+        SectionGenerator sectionGenerator = Instantiate(GetSectionGenerator(), this.transform);
         Doorway startDoor = Extensions.RandomListItem(posibleStartingDoors);
 
         sectionGenerator.transform.position = startDoor.transform.position;
@@ -160,6 +164,7 @@ public class MapGenerator : MonoBehaviour
                 availableDoorwaysFromThis.Remove(lastDoorUsed);
             }
             sectionGenerators.Add(lastSectionGenerated);
+            availibleSectionGenerators.Remove(lastSectionGenerated);
 
             RemoveDoorsInSameSpace();
             UpdateAvailibleDoorList();
@@ -179,5 +184,16 @@ public class MapGenerator : MonoBehaviour
     private void Update()
     {
         GenerateLevel();
+    }
+
+    SectionGenerator GetSectionGenerator()
+    {
+        if(availibleSectionGenerators.Count > 0)
+        {
+            SectionGenerator generator = Extensions.RandomListItem(availibleSectionGenerators);
+            return generator;
+        }
+        return null;
+
     }
 }

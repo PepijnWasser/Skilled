@@ -47,7 +47,7 @@ public class Focusable : MonoBehaviour
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 DeFocus();
             }

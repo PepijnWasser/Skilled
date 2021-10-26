@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1940732853011553369}
   - component: {fileID: 1940732853011553374}
   m_Layer: 0
-  m_Name: SectionGenerator 1
+  m_Name: WorkshopGenerator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,15 +44,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomPrefabs:
-  - {fileID: 1482037250925742694, guid: 52542779ba803f0489cc62d28570b9ba, type: 3}
   - {fileID: 7054294906166701656, guid: 89484f13d62c0dd45b8add22773f9285, type: 3}
   - {fileID: 1700285816135092679, guid: 9bc8974192efbb447952f757e615b988, type: 3}
   - {fileID: 185890243161021943, guid: a26faff6541b4404db4264f66c52b68d, type: 3}
   - {fileID: 7136555688134437947, guid: 188c21035c3f53048965ffecbf0896ee, type: 3}
   - {fileID: 7042378991981768543, guid: c391fd51b16e63448b3227c349f8c056, type: 3}
   - {fileID: 4345375341482280295, guid: 1b2f83698110b5c4ab78d0fdfb313d8f, type: 3}
-  - {fileID: 4485934777949228240, guid: f8d4604e7719c484c90cadb55dc61ec5, type: 3}
   minMaxRooms: {x: 80, y: 80}
   allDoorways: []
   availableDoorways: []
   startdoor: {fileID: 0}
+  roomColor: {r: 0.33962262, g: 0, b: 0, a: 0}
