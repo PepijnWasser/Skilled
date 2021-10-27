@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class SettingsManager : MonoBehaviour
 {
@@ -17,22 +18,27 @@ public class SettingsManager : MonoBehaviour
 
     private void Start()
     {
+        InputManager.controls.MainMenu.OpenSettings.performed += _ => SwitchOpen();
         settingsMenuGameObject = GetComponent<Canvas>();
+
+        DontDestroyOnLoad(this.gameObject);
         Close();
     }
 
-    private void Update()
+    private void OnDestroy()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        InputManager.controls.MainMenu.OpenSettings.performed -= _ => SwitchOpen();
+    }
+
+    public void SwitchOpen()
+    {
+        if (inSettings)
         {
-            if (inSettings)
-            {
-                Close();
-            }
-            else
-            {
-                Open();
-            }
+            Close();
+        }
+        else
+        {
+            Open();
         }
     }
 

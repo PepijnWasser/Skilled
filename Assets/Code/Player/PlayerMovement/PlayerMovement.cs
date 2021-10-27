@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -31,13 +32,14 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector3 moveDir = Vector3.zero;
-        moveDir += Input.GetAxisRaw("Vertical") * playerTransform.forward;
-        moveDir += Input.GetAxisRaw("Horizontal") * playerTransform.right;
+        Vector2 input = InputManager.controls.Game.Movement.ReadValue<Vector2>();
+        moveDir += input.y * playerTransform.forward;
+        moveDir += input.x * playerTransform.right;
 
 
         moveDir.Normalize();
         moveDir.y = velocityY;
 
-        rb.velocity = moveDir * speed;
+        rb.velocity = moveDir * speed * Time.deltaTime;
     }
 }

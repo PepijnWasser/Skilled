@@ -888,6 +888,7 @@ GameObject:
   - component: {fileID: 5919268785662334040}
   - component: {fileID: 5919268785662334047}
   - component: {fileID: 5919268785662334046}
+  - component: {fileID: 5912148294470306260}
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -1031,6 +1032,19 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_ShouldActivateOnSelect: 1
+--- !u!114 &5912148294470306260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919268785662334044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114584038845dee418d0d929bcb01bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isfocused: 0
 --- !u!1 &5919268785690900954
 GameObject:
   m_ObjectHideFlags: 0

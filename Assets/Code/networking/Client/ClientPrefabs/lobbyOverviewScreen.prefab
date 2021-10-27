@@ -288,6 +288,7 @@ GameObject:
   - component: {fileID: 4054276409375754023}
   - component: {fileID: 2437115223000869116}
   - component: {fileID: 2465784597260123865}
+  - component: {fileID: 3796904630578392320}
   m_Layer: 5
   m_Name: IPField
   m_TagString: Untagged
@@ -419,6 +420,19 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_ShouldActivateOnSelect: 1
+--- !u!114 &3796904630578392320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3110022252348840423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114584038845dee418d0d929bcb01bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isfocused: 0
 --- !u!1 &3558119779064238347
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,6 +738,7 @@ GameObject:
   - component: {fileID: 7946583450571594947}
   - component: {fileID: 5454186497925479687}
   - component: {fileID: 4251094899067586705}
+  - component: {fileID: 8140376664594581873}
   m_Layer: 5
   m_Name: PortField
   m_TagString: Untagged
@@ -855,6 +870,19 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_ShouldActivateOnSelect: 1
+--- !u!114 &8140376664594581873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6944718656739900387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 114584038845dee418d0d929bcb01bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isfocused: 0
 --- !u!1 &8714127818318935129
 GameObject:
   m_ObjectHideFlags: 0
