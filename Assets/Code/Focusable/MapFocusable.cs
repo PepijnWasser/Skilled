@@ -9,12 +9,10 @@ public class MapFocusable : Focusable
     protected override void Start()
     {
         base.Start();
-        //player = GameObject.FindObjectOfType<PlayerMovement>().gameObject;
     }
 
-    protected override void Update()
+    protected void Update()
     {
-        base.Update();
         if (isFocused)
         {
             mapCam.PanCamera();

@@ -16,6 +16,7 @@ public class Focusable : MonoBehaviour
     protected virtual void Awake()
     {
         GameManager.playerMade += SetPlayer;
+        InputManager.controls.Game.Interact.performed += _ => TestFocus();
     }
 
     protected virtual void Start()
@@ -26,28 +27,21 @@ public class Focusable : MonoBehaviour
     protected virtual void OnDestroy()
     {
         GameManager.playerMade -= SetPlayer;
-    }
-
-    protected virtual void Update()
-    {
-        if (player != null)
-        {
-            TestFocus();
-        }
+        InputManager.controls.Game.Interact.performed -= _ => TestFocus();
     }
 
     protected virtual void TestFocus()
     {
-        if (isFocused == false)
+        if(player != null)
         {
-            if (Input.GetKeyDown(KeyCode.E) && interactable.lookingAtTarget)
+            if (isFocused == false)
             {
-                Focus();
+                if (interactable.lookingAtTarget)
+                {
+                    Focus();
+                }
             }
-        }
-        else
-        {
-            if (Input.GetKeyDown(KeyCode.E))
+            else
             {
                 DeFocus();
             }
