@@ -1,5 +1,33 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!64 &6489848354409621052
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187815229740284381}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3321288981930467235, guid: 12ecc9bfac2f9934d83a286ebf6e04e2, type: 3}
+--- !u!64 &1696607143523935648
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2720403773532696964}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 461730777802287721, guid: 12ecc9bfac2f9934d83a286ebf6e04e2, type: 3}
 --- !u!1 &2894037771208333355
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,6 +196,34 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!64 &2713617189873074655
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4486637170877454738}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -3667376852794033217, guid: 12ecc9bfac2f9934d83a286ebf6e04e2, type: 3}
+--- !u!64 &5826546755979616925
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611377678229656821}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2123333576498120701, guid: 12ecc9bfac2f9934d83a286ebf6e04e2, type: 3}
 --- !u!1001 &1050384977443550894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -306,6 +362,26 @@ PrefabInstance:
 --- !u!4 &2502975183327582472 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 12ecc9bfac2f9934d83a286ebf6e04e2, type: 3}
+  m_PrefabInstance: {fileID: 2681581142941286115}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2720403773532696964 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 69298945442631527, guid: 12ecc9bfac2f9934d83a286ebf6e04e2, type: 3}
+  m_PrefabInstance: {fileID: 2681581142941286115}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8611377678229656821 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5960269500199594518, guid: 12ecc9bfac2f9934d83a286ebf6e04e2, type: 3}
+  m_PrefabInstance: {fileID: 2681581142941286115}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4486637170877454738 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1978592528010602353, guid: 12ecc9bfac2f9934d83a286ebf6e04e2, type: 3}
+  m_PrefabInstance: {fileID: 2681581142941286115}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &187815229740284381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2859120710535956286, guid: 12ecc9bfac2f9934d83a286ebf6e04e2, type: 3}
   m_PrefabInstance: {fileID: 2681581142941286115}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2721617762721509527
@@ -453,7 +529,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8269069634579788736, guid: 6ce227bbb23a6b94eb4670fed569e2ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7500005
+      value: 0.49999952
       objectReference: {fileID: 0}
     - target: {fileID: 8269069634579788736, guid: 6ce227bbb23a6b94eb4670fed569e2ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -650,7 +726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8269069634579788736, guid: 6ce227bbb23a6b94eb4670fed569e2ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7500005
+      value: 0.49999952
       objectReference: {fileID: 0}
     - target: {fileID: 8269069634579788736, guid: 6ce227bbb23a6b94eb4670fed569e2ec, type: 3}
       propertyPath: m_LocalPosition.z
