@@ -7,6 +7,5 @@ public class ThreeWayLeverPrefabManager : MonoBehaviour
 {
     public ThreeWayLever lever;
     public ThreeWayLeverTask leverTask;
-    public Text iconText;
     public Text taskName;
 }
