@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Cinemachine;
 
 
@@ -13,10 +14,13 @@ public class Focusable : MonoBehaviour
 
     Interactable interactable;
 
+    InputActionMap originalActionMap;
+
     protected virtual void Awake()
     {
         GameManager.playerMade += SetPlayer;
-        InputManager.controls.Game.Interact.performed += _ => TestFocus();
+        InputManager.savedControls.Game.Interact.performed += _ => TestFocus();
+        InputManager.savedControls.Focusable.Leave.performed += _ => DeFocus();
     }
 
     protected virtual void Start()
@@ -27,47 +31,52 @@ public class Focusable : MonoBehaviour
     protected virtual void OnDestroy()
     {
         GameManager.playerMade -= SetPlayer;
-        InputManager.controls.Game.Interact.performed -= _ => TestFocus();
+        InputManager.savedControls.Game.Interact.performed -= _ => TestFocus();
+        InputManager.savedControls.Focusable.Leave.performed -= _ => DeFocus();
     }
 
     protected virtual void TestFocus()
     {
-        if(player != null)
+        if (player != null)
         {
-            if (isFocused == false)
+            if (interactable.lookingAtTarget)
             {
-                if (interactable.lookingAtTarget)
-                {
-                    Focus();
-                }
-            }
-            else
-            {
-                DeFocus();
+                Focus();
             }
         }
     }
 
     public virtual void Focus()
     {
-        isFocused = true;
-        player.GetComponent<MeshRenderer>().enabled = false;
-        player.GetComponent<PlayerMovement>().enabled = false;
-        player.GetComponent<PlayerRotation>().enabled = false;
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
-        displayCam.Priority = 12;
+        if (!isFocused)
+        {
+            isFocused = true;
+            player.GetComponent<MeshRenderer>().enabled = false;
+            player.GetComponent<PlayerMovement>().enabled = false;
+            player.GetComponent<PlayerRotation>().enabled = false;
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            displayCam.Priority = 12;
+
+            originalActionMap = InputManager.activeAction;
+            InputManager.ToggleActionMap(InputManager.focusable);
+        }
     }
 
     public virtual void DeFocus()
     {
-        isFocused = false;
-        player.GetComponent<MeshRenderer>().enabled = true;
-        player.GetComponent<PlayerMovement>().enabled = true;
-        player.GetComponent<PlayerRotation>().enabled = true;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        displayCam.Priority = 10;
+        if (isFocused)
+        {
+            isFocused = false;
+            player.GetComponent<MeshRenderer>().enabled = true;
+            player.GetComponent<PlayerMovement>().enabled = true;
+            player.GetComponent<PlayerRotation>().enabled = true;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            displayCam.Priority = 10;
+
+            InputManager.ToggleActionMap(originalActionMap);
+        }
     }
 
     void SetPlayer(GameObject _player, Camera cam)

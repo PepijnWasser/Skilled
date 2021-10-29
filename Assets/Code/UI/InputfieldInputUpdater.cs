@@ -6,18 +6,18 @@ using UnityEngine.InputSystem;
 
 public class InputfieldInputUpdater : MonoBehaviour
 {
-    InputField inputField;
+    protected InputField inputField;
 
     public bool isfocused = false;
 
-    InputActionMap originalActionMap;
+    protected InputActionMap originalActionMap;
 
     private void Start()
     {
         inputField = GetComponent<InputField>();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (inputField.isFocused && isfocused == false)
         {

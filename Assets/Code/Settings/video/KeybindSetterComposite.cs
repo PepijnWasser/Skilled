@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class KeybindSetter : MonoBehaviour
+public class KeybindSetterComposite : MonoBehaviour
 {
     public InputActionReference actionToChange;
     public Text nameText;
@@ -12,10 +12,11 @@ public class KeybindSetter : MonoBehaviour
     public GameObject startRebindObjecet;
     public GameObject waitingForInputObject;
 
+    public int index;
+
     InputActionMap originalActionMap;
 
     InputActionRebindingExtensions.RebindingOperation rebindingOperation;
-
     private void Awake()
     {
         InputManager.bindingsRestored += Setbinding;
@@ -26,7 +27,6 @@ public class KeybindSetter : MonoBehaviour
         InputManager.bindingsRestored -= Setbinding;
     }
 
-
     public void StartRebinding()
     {
         startRebindObjecet.SetActive(false);
@@ -34,7 +34,7 @@ public class KeybindSetter : MonoBehaviour
 
         originalActionMap = InputManager.activeAction;
         InputManager.ToggleActionMap(InputManager.rebind);
-        rebindingOperation = actionToChange.action.PerformInteractiveRebinding()
+        rebindingOperation = actionToChange.action.PerformInteractiveRebinding(index)
             .WithControlsExcluding("Mouse")
             .OnMatchWaitForAnother(0.1f)
             .OnComplete(operation => Complete())
@@ -44,18 +44,18 @@ public class KeybindSetter : MonoBehaviour
     private void Complete()
     {
         rebindingOperation.Dispose();
-
         startRebindObjecet.SetActive(true);
         waitingForInputObject.SetActive(false);
 
-        InputBinding newBinding = new InputBinding(actionToChange.action.bindings[0].effectivePath);
-        InputManager.SetBinding(actionToChange.action.name, newBinding, this);
+
+        InputBinding newBinding = new InputBinding(actionToChange.action.bindings[index].effectivePath);
+        InputManager.SetBindingComposite(actionToChange.action.name, index, newBinding, this);
         InputManager.ToggleActionMap(originalActionMap);
     }
 
-    void Setbinding(string action, string newBinding, int index)
+    void Setbinding(string action, string newBinding, int actionIndex)
     {
-        if(action == actionToChange.name)
+        if (action == actionToChange.name && actionIndex == index)
         {
             nameText.text = newBinding;
         }

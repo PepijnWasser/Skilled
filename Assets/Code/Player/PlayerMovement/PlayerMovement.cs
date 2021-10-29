@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Vector3 moveDir = Vector3.zero;
-        Vector2 input = InputManager.controls.Game.Movement.ReadValue<Vector2>();
+        Vector2 input = InputManager.savedControls.Game.Movement.ReadValue<Vector2>();
         moveDir += input.y * playerTransform.forward;
         moveDir += input.x * playerTransform.right;
 

@@ -29,33 +29,6 @@
             ]
         },
         {
-            "name": "InputField",
-            "id": "fdd66ed9-2e63-4e81-9e55-dad106f719e2",
-            "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "73e8e045-9505-4c89-98a2-62092c06126b",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "cefa72e0-bb85-451b-9585-0cf1a2d8670d",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
             "name": "Game",
             "id": "e28e2ec6-c45e-412f-a004-d0e722ed93da",
             "actions": [
@@ -82,6 +55,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Increase Volume",
+                    "type": "Button",
+                    "id": "ab8a0580-50f4-4bba-be35-379bea5902ee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Decrease Volume",
+                    "type": "Button",
+                    "id": "10eee5d1-77dc-4644-ad2f-96c981508106",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -92,17 +81,6 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "keyboard & mouse",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d60c517c-289d-4b2c-afeb-f67253225ee6",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "gamepad",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -227,8 +205,115 @@
                     "action": "Open Settings",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "78645f4e-3e8c-4605-8143-7f1ffdb89e81",
+                    "path": "<Keyboard>/numpadPlus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard & mouse",
+                    "action": "Increase Volume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "81a39bad-af02-453d-bafe-0375a3719967",
+                    "path": "<Keyboard>/minus",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard & mouse",
+                    "action": "Decrease Volume",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Focusable",
+            "id": "4f069e3b-6042-4f2c-b486-c4fd7aced73b",
+            "actions": [
+                {
+                    "name": "Leave",
+                    "type": "Button",
+                    "id": "57a0a472-31af-41ac-8ce8-6922cf5049f1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Open Settings",
+                    "type": "Button",
+                    "id": "d879735e-9694-442e-828d-7f303e34050c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "49c96855-9a63-439a-81bb-968b6b3c3a10",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard & mouse",
+                    "action": "Leave",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "967fafbc-d1c7-46e1-80c2-2bdedac353f5",
+                    "path": "<Keyboard>/j",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard & mouse",
+                    "action": "Open Settings",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "InputField",
+            "id": "fdd66ed9-2e63-4e81-9e55-dad106f719e2",
+            "actions": [],
+            "bindings": []
+        },
+        {
+            "name": "Chat",
+            "id": "49b08441-138b-4eee-8f57-a0ef8228b48f",
+            "actions": [
+                {
+                    "name": "SendMessage",
+                    "type": "Button",
+                    "id": "9bf7a74d-2131-496b-9bbb-af41d54ad8ab",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a4c6d83e-6805-40f3-a4a6-25e901f1078e",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard & mouse",
+                    "action": "SendMessage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Rebind",
+            "id": "1d725380-3750-4c0e-82e7-363b49c9b9dd",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": [

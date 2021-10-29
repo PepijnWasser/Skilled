@@ -18,7 +18,9 @@ public class SettingsManager : MonoBehaviour
 
     private void Start()
     {
-        InputManager.controls.MainMenu.OpenSettings.performed += _ => SwitchOpen();
+        InputManager.savedControls.MainMenu.OpenSettings.performed += _ => SwitchOpen();
+        InputManager.savedControls.Game.OpenSettings.performed += _ => SwitchOpen();
+        InputManager.savedControls.Focusable.OpenSettings.performed += _ => SwitchOpen();
         settingsMenuGameObject = GetComponent<Canvas>();
 
         DontDestroyOnLoad(this.gameObject);
@@ -27,7 +29,9 @@ public class SettingsManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        InputManager.controls.MainMenu.OpenSettings.performed -= _ => SwitchOpen();
+        InputManager.savedControls.MainMenu.OpenSettings.performed -= _ => SwitchOpen();
+        InputManager.savedControls.Game.OpenSettings.performed -= _ => SwitchOpen();
+        InputManager.savedControls.Focusable.OpenSettings.performed -= _ => SwitchOpen();
     }
 
     public void SwitchOpen()

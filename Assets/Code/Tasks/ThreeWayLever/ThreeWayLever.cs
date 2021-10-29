@@ -22,6 +22,8 @@ public class ThreeWayLever : MonoBehaviour
     {
         GameManager.playerMade += SetPlayer;
         GameState.updateThreeWayLeverPos += UpdatePos;
+
+        InputManager.savedControls.Game.Interact.performed += _ => TestPull();
     }
 
     private void Start()
@@ -37,28 +39,24 @@ public class ThreeWayLever : MonoBehaviour
     {
         GameManager.playerMade -= SetPlayer;
         GameState.updateThreeWayLeverPos -= UpdatePos;
-    }
-
-    private void Update()
-    {
-        if(player != null)
-        {
-            TestPull();
-        }
+        InputManager.savedControls.Game.Interact.performed -= _ => TestPull();
     }
 
     void TestPull()
     {
-        if (Input.GetKeyDown(KeyCode.E) && interactable.lookingAtTarget)
+        if(player != null)
         {
-            currentPosition += 1;
-            if (currentPosition > 3)
+            if (interactable.lookingAtTarget)
             {
-                currentPosition = 1;
-            }
-            animator.SetInteger("Stance", currentPosition);
+                currentPosition += 1;
+                if (currentPosition > 3)
+                {
+                    currentPosition = 1;
+                }
+                animator.SetInteger("Stance", currentPosition);
 
-            leverPulled?.Invoke(leverID, currentPosition);
+                leverPulled?.Invoke(leverID, currentPosition);
+            }
         }
     }
 
