@@ -16,16 +16,18 @@ public class ChatManager : MonoBehaviour
     private void Start()
     {
         lobbyState = GameObject.FindObjectOfType<LobbyState>().GetComponent<LobbyState>();
+        InputManager.savedControls.Chat.SendMessage.performed += _ => TestMessage();
+    }
+    private void OnDestroy()
+    {
+        InputManager.savedControls.Chat.SendMessage.performed -= _ => TestMessage();
     }
 
-    void Update()
+    void TestMessage()
     {
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (chatInputField.text != "")
         {
-            if (chatInputField.text != "")
-            {
-                HandleTypedMessage();
-            }
+            HandleTypedMessage();
         }
     }
 

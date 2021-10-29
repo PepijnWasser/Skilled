@@ -22,6 +22,8 @@ public class TwoWayLever : MonoBehaviour
     {
         GameManager.playerMade += SetPlayer;
         GameState.updateTwoWayLeverPos += UpdatePos;
+
+        InputManager.savedControls.Game.Interact.performed += _ => TestPull();
     }
 
     private void Start()
@@ -37,30 +39,25 @@ public class TwoWayLever : MonoBehaviour
     {
         GameManager.playerMade -= SetPlayer;
         GameState.updateTwoWayLeverPos -= UpdatePos;
-    }
-
-    //if we have a player check if the lever is pulled
-    private void Update()
-    {
-        if(player != null)
-        {
-            TestPull();
-        }
+        InputManager.savedControls.Game.Interact.performed -= _ => TestPull();
     }
 
     //check if the lever is pulled and play the correct position
     void TestPull()
     { 
-        if (Input.GetKeyDown(KeyCode.E) && interactable.lookingAtTarget)
+        if(player != null)
         {
-            currentPosition += 1;
-            if (currentPosition > 1)
+            if (interactable.lookingAtTarget)
             {
-                currentPosition = 0;
-            }
-            animator.SetInteger("position", currentPosition);
+                currentPosition += 1;
+                if (currentPosition > 1)
+                {
+                    currentPosition = 0;
+                }
+                animator.SetInteger("position", currentPosition);
 
-            leverPulled?.Invoke(leverID, currentPosition);
+                leverPulled?.Invoke(leverID, currentPosition);
+            }
         }
     }
 
