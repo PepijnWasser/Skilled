@@ -47,7 +47,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767075814119264275}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -111,7 +111,7 @@ Transform:
   m_Children:
   - {fileID: 767075814119264272}
   m_Father: {fileID: 767075814832258184}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -2.6, y: 0, z: 0}
 --- !u!114 &767075814420350581
 MonoBehaviour:
@@ -161,7 +161,6 @@ Transform:
   m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1.5204918, z: 1}
   m_Children:
-  - {fileID: 5858994437188620237}
   - {fileID: 767075815422512372}
   - {fileID: 767075814420350580}
   - {fileID: 767075815121425891}
@@ -183,7 +182,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 767075814832258177}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -273,7 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5c91dcc6cc5d4b489c0a20b7b068606, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 350
+  speed: 250
   gravity: 9.81
 --- !u!114 &767075814832258185
 MonoBehaviour:
@@ -343,7 +342,7 @@ Transform:
   m_Children:
   - {fileID: 767075815334729544}
   m_Father: {fileID: 767075814832258184}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &767075815121425890
 Camera:
@@ -465,7 +464,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.47751206, y: 1}
+    m_SensorSize: {x: 1.7769321, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -504,7 +503,7 @@ Transform:
   - {fileID: 2538927737857625739}
   - {fileID: 767075815464117236}
   m_Father: {fileID: 767075814832258184}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &767075815464117238
 GameObject:
@@ -567,7 +566,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.47751206, y: 1}
+    m_SensorSize: {x: 1.7769321, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1220,77 +1219,3 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!1001 &6252664347276044326
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 767075814832258184}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.82
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.0856299
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.82
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.000000011676
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.21
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.12
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-      propertyPath: m_Name
-      value: Male Rig
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
---- !u!4 &5858994437188620237 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4b9440663d0763142a1926efbd5355d1, type: 3}
-  m_PrefabInstance: {fileID: 6252664347276044326}
-  m_PrefabAsset: {fileID: 0}
