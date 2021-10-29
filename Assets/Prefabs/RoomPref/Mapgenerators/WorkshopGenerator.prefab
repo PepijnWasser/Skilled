@@ -48,8 +48,9 @@ MonoBehaviour:
   - {fileID: 1700285816135092679, guid: 9bc8974192efbb447952f757e615b988, type: 3}
   - {fileID: 185890243161021943, guid: a26faff6541b4404db4264f66c52b68d, type: 3}
   - {fileID: 7136555688134437947, guid: 188c21035c3f53048965ffecbf0896ee, type: 3}
-  - {fileID: 7042378991981768543, guid: c391fd51b16e63448b3227c349f8c056, type: 3}
+  - {fileID: 4806160391475138319, guid: cae4c5e9b0917a74b89bdba2a57b50ed, type: 3}
   - {fileID: 4345375341482280295, guid: 1b2f83698110b5c4ab78d0fdfb313d8f, type: 3}
+  - {fileID: 4485934777949228240, guid: f8d4604e7719c484c90cadb55dc61ec5, type: 3}
   minMaxRooms: {x: 80, y: 80}
   allDoorways: []
   availableDoorways: []

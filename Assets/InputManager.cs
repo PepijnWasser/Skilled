@@ -68,6 +68,7 @@ public class InputManager : MonoBehaviour
     private void Update()
     {
         Debug.Log(savedControls.Game.Movement.bindings[1] + " saved");
+        Debug.Log(savedControls.MainMenu.OpenSettings.bindings[0].effectivePath);
         Debug.Log(controlsToChange.Game.Movement.bindings[1] + " change");
     }
 
@@ -97,9 +98,17 @@ public class InputManager : MonoBehaviour
                 else
                 {
                     string readString = PlayerPrefs.GetString(map.name + "/" + action.name);
-                    InputBinding newBinding = new InputBinding(readString);
+                    if(readString != "")
+                    {
+                        InputBinding newBinding = new InputBinding(readString);
+                        SetInitialValue(action, newBinding);
+                    }
+                    else
+                    {
+                        InputBinding newBinding = new InputBinding(action.bindings[0].path);
+                        SetInitialValue(action, newBinding);
+                    }
 
-                    SetInitialValue(action, newBinding);
                 }
             }
         }
