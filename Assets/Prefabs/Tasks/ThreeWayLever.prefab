@@ -711,6 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lever: {fileID: 3949355504963765413}
   leverTask: {fileID: 4932116772614261121}
+  iconText: {fileID: 6535637514403350332}
   taskName: {fileID: 6848747347343547653}
 --- !u!1 &4402389742658953240
 GameObject:
