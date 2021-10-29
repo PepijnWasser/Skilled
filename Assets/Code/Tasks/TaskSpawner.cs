@@ -57,6 +57,7 @@ public class TaskSpawner : MonoBehaviour
             string name = twoWayLeverNamer.GetName();
             manager.gameObject.name = name;
             manager.leverTask.taskName = name;
+            manager.iconText.text = name;
             manager.taskName.text = name;
 
             tasksSpawned.Add(manager.leverTask);
@@ -75,6 +76,7 @@ public class TaskSpawner : MonoBehaviour
             string name = threeWayLeverNamer.GetName();
             manager.lever.gameObject.name = name;
             manager.leverTask.taskName = name;
+            manager.iconText.text = name;
             manager.taskName.text = name;
 
             tasksSpawned.Add(manager.leverTask);

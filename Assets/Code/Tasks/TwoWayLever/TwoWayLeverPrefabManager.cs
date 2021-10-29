@@ -7,5 +7,6 @@ public class TwoWayLeverPrefabManager : MonoBehaviour
 {
     public TwoWayLever lever;
     public TwoWayLeverTask leverTask;
+    public Text iconText;
     public Text taskName;
 }
