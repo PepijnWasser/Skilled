@@ -82,9 +82,16 @@ public class InputManager : MonoBehaviour
                     for (int i = 0; i < action.bindings.Count; i++)
                     {
                         string readString = PlayerPrefs.GetString(map.name + "/" + action.name + i);
-                        InputBinding newBinding = new InputBinding(readString);
-
-                        SetInitialCompositeValue(action, i, newBinding);
+                        if(readString != "")
+                        {
+                            InputBinding newBinding = new InputBinding(readString);
+                            SetInitialCompositeValue(action, i, newBinding);
+                        }
+                        else
+                        {
+                            InputBinding newBinding = new InputBinding(action.bindings[i].path);
+                            SetInitialCompositeValue(action, i, newBinding);
+                        }
                     }
                 }
                 else
@@ -108,7 +115,6 @@ public class InputManager : MonoBehaviour
         if (action.bindings.Count > actionIndex)
         {
             action.ApplyBindingOverride(actionIndex, newKeyBinding.path);
-          //  Debug.Log(action.bindings[actionIndex].effectivePath);
         }
         else
         {
