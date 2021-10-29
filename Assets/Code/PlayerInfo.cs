@@ -3,33 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Net;
 
-public class PlayerInfo : MonoBehaviour
+public class PlayerInfo
 {
-	public int playerID;
-	public string playerName;
-	public int udpReceivePort;
-	public int udpSendPort;
-	public IPAddress ip;
-
-	private static PlayerInfo _instance;
-
-	public static PlayerInfo Instance
-	{
-		get
-		{
-			if (_instance == null)
-			{
-				_instance = GameObject.FindObjectOfType<PlayerInfo>();
-			}
-
-			return _instance;
-		}
-	}
-
-	private void Awake()
-	{
-		DontDestroyOnLoad(this.gameObject);
-	}
+	public static int playerID;
+	public static string playerName;
+	public static int udpReceivePort;
+	public static int udpSendPort;
+	public static IPAddress ip;
 
     private void Start()
     {

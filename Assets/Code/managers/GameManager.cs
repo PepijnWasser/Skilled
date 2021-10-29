@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
         manager.nose.transform.rotation = Quaternion.Euler(noseRotation);
     }
 
+
     public void MakeTaskmanager(bool playerIsLeader)
     {
         GameObject manager = Instantiate(taskManagerPrefab);

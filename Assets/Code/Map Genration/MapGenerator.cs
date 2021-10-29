@@ -34,7 +34,6 @@ public class MapGenerator : MonoBehaviour
     {
         SectionGenerator.OnCompletion += FinishSectionGeneration;
         availibleSectionGenerators = sectionGeneratorPrefabs;
-        Debug.Log(availibleSectionGenerators.Count);
     }
 
     private void OnDestroy()

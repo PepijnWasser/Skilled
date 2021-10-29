@@ -9,12 +9,20 @@ public class StationHealth : MonoBehaviour
     public delegate void Damage(int health);
     public static event Damage updateStationHealth;
 
+    public delegate void Destroyed();
+    public static event Destroyed stationDestroyed;
+
     private void Awake()
     {
         ThreeWayLeverTask.taskDealDamage += TakeDamage;
         TwoWayLeverTask.taskDealDamage += TakeDamage;
         KeypadTask.taskDealDamage += TakeDamage;
         GameState.stationHealthUpdated += SetHealth;
+    }
+
+    private void Start()
+    {
+        Debug.Log(ServerConnectionData.isOwner);
     }
 
 
@@ -30,6 +38,15 @@ public class StationHealth : MonoBehaviour
     {
         stationHealth -= amount;
         updateStationHealth?.Invoke(stationHealth);
+        Debug.Log(stationHealth);
+
+        if(stationHealth < 0)
+        {
+            if (ServerConnectionData.isOwner)
+            {
+                //TODO
+            }
+        }
     }
 
     void SetHealth(int health)

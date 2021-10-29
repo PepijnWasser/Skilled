@@ -9,9 +9,6 @@ public class LocalHostClientUDP : MonoBehaviour
 {
     [HideInInspector] public UdpClient client = new UdpClient();
 
-    ServerConnectionData serverInfo;
-
-
     private static LocalHostClientTCP _instance;
 
     public static LocalHostClientTCP Instance
@@ -34,8 +31,6 @@ public class LocalHostClientUDP : MonoBehaviour
 
     private void Start()
     {
-        serverInfo = GameObject.FindObjectOfType<ServerConnectionData>();
-
         int i = 0;
         bool finishedInitialization = false;
 
@@ -44,7 +39,7 @@ public class LocalHostClientUDP : MonoBehaviour
             try
             {
                 client = new UdpClient(20700 + i);
-                GameObject.FindObjectOfType<PlayerInfo>().udpSendPort = 20700 + i;
+                PlayerInfo.udpSendPort = 20700 + i;
                 finishedInitialization = true;
             }
             catch (Exception e)
@@ -60,7 +55,7 @@ public class LocalHostClientUDP : MonoBehaviour
     {
         try
         {
-            IPEndPoint RemoteIP = new IPEndPoint(serverInfo.ip, serverInfo.udpPort);
+            IPEndPoint RemoteIP = new IPEndPoint(ServerConnectionData.ip, ServerConnectionData.udpPort);
             UDPPacket packet = new UDPPacket();
             packet.Write(pOutObject);
 

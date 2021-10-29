@@ -24,7 +24,7 @@ public class LobbyState : State
     //sends the playerInfo from the inputWindow to the server
     private void Start()
     {
-        SendUpdateNameRequest(playerInfo.playerName);
+        SendUpdateNameRequest(PlayerInfo.playerName);
     }
 
     private void OnDestroy()
@@ -120,12 +120,11 @@ public class LobbyState : State
         lobbyView.SetServerIP(message.ip.ToString());
         lobbyView.SetServerPort(message.tcpPort);
 
-        ServerConnectionData serverData = GameObject.FindObjectOfType<ServerConnectionData>();
-        serverData.owner = message.owner;
-        serverData.isOwner = message.isOwner;
-        serverData.udpPort = message.udpPort;
-        serverData.tcpPort = message.tcpPort;
-        serverData.ip = message.ip;
+        ServerConnectionData.owner = message.owner;
+        ServerConnectionData.isOwner = message.isOwner;
+        ServerConnectionData.udpPort = message.udpPort;
+        ServerConnectionData.tcpPort = message.tcpPort;
+        ServerConnectionData.ip = message.ip;
        
     }
 
@@ -136,8 +135,7 @@ public class LobbyState : State
         lobbyView.AddPlayer(message.playerID, message.playerColor, message.playerName, message.isPlayer);
         if (message.isPlayer)
         {
-            PlayerInfo playerInfo = GameObject.FindObjectOfType<PlayerInfo>();
-            playerInfo.playerID = message.playerID;
+            PlayerInfo.playerID = message.playerID;
         }
     }
 
@@ -158,10 +156,9 @@ public class LobbyState : State
     {
         lobbyView.UpdateName(message.playerID, message.playerName);
 
-        PlayerInfo playerInfo = GameObject.FindObjectOfType<PlayerInfo>();
-        if (message.playerID == playerInfo.playerID)
+        if (message.playerID == PlayerInfo.playerID)
         {
-            playerInfo.playerName = message.playerName;
+            PlayerInfo.playerName = message.playerName;
         }
     }
 

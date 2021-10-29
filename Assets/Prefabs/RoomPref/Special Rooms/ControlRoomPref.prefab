@@ -2567,6 +2567,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TaskMapDisplay
       objectReference: {fileID: 0}
+    - target: {fileID: 3627098918250473400, guid: 6fe0997ae94c30a40b792c00481d89eb, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3627098918250473402, guid: 6fe0997ae94c30a40b792c00481d89eb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

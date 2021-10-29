@@ -107,8 +107,7 @@ public class GameState : State
                 client = new UdpClient(40004 + i);
                 Debug.Log("listening on " + Extensions.GetLocalIPAddress() + " port " + 40004 + i);
 
-                PlayerInfo playerInfo = GameObject.FindObjectOfType<PlayerInfo>();
-                playerInfo.udpReceivePort = 40004 + i;
+                PlayerInfo.udpReceivePort = 40004 + i;
 
                 finishedInitialization = true;
             }
@@ -407,7 +406,7 @@ public class GameState : State
     //sends player data
     void SendPlayerInfo()
     {
-        UpdateClientInfoMessage message = new UpdateClientInfoMessage(Extensions.GetLocalIPAddress(), playerInfo.udpSendPort, playerInfo.udpReceivePort);
+        UpdateClientInfoMessage message = new UpdateClientInfoMessage(Extensions.GetLocalIPAddress(), PlayerInfo.udpSendPort, PlayerInfo.udpReceivePort);
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
