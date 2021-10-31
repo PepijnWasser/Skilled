@@ -114,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c67746dc66d82439f16f0162257de8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxErrors: 6
-  timeBetweenErrors: {x: 30, y: 90}
-  timeToNextError: 70
+  maxErrors: 9
+  timeBetweenErrors: {x: 20, y: 30}
+  timeToNextError: 50
   tasksWithoutErrors: []
