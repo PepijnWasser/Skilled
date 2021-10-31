@@ -1602,7 +1602,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7790698, y: 1}
+    m_SensorSize: {x: 0.6861244, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1663,7 +1663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeTillDamage: 100
   damageAmount: 1
-  DamageRate: 60
+  DamageRate: 20
   hasError: 0
   taskName: 
   keyPad: {fileID: 0}
