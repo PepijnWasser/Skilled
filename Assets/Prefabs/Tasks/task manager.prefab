@@ -51,6 +51,10 @@ MonoBehaviour:
   - 'turbo '
   - airco
   - life support
+  - thrusters
+  - Energy Shield
+  - Fluid Transfer
+  - Catalyser
 --- !u!114 &5190529441526039827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +71,10 @@ MonoBehaviour:
   - speed
   - scan frequency
   - intercom volume
+  - oxygen
+  - Flux Capacitor
+  - Flux Condenser
+  - Engine State
 --- !u!114 &5190529441526039825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -84,6 +92,8 @@ MonoBehaviour:
   - Space coordinates
   - communication array channel
   - backdoorAccess
+  - Temperature
+  - Course
 --- !u!114 &5190529441526039826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,9 +109,9 @@ MonoBehaviour:
   TwoWayLeverPrefab: {fileID: 5370336949094765367, guid: 152ca7366d086734e844d0e45d826d1a, type: 3}
   ThreeWayLeverPrefab: {fileID: 3865054668215456674, guid: 063c3322d1d9b6741a1808ba06d98b2c, type: 3}
   KeypadPrefab: {fileID: 7582960985815283988, guid: 924b166f9e9415c4a908d6cfa9934889, type: 3}
-  amountOfTwoWayLeversToSpawn: 3
-  amountOfThreeLeverssToSpawn: 3
-  amountOfKeypadsToSpawn: 3
+  amountOfTwoWayLeversToSpawn: 5
+  amountOfThreeLeverssToSpawn: 5
+  amountOfKeypadsToSpawn: 5
 --- !u!114 &5190529441526039831
 MonoBehaviour:
   m_ObjectHideFlags: 0

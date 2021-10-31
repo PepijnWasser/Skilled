@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
         playerTransform = this.transform;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(Physics.Raycast(transform.position, -transform.up, 2))
         {
