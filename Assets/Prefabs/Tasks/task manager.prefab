@@ -116,5 +116,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxErrors: 6
   timeBetweenErrors: {x: 30, y: 90}
-  timeToNextError: 90
+  timeToNextError: 70
   tasksWithoutErrors: []

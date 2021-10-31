@@ -1602,7 +1602,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.6861244, y: 1}
+    m_SensorSize: {x: 0.68803835, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1661,7 +1661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f921d455150b614790e9a1ed52b28ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeTillDamage: 100
+  timeTillDamage: 2
   damageAmount: 1
   DamageRate: 20
   hasError: 0
