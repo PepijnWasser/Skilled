@@ -711,6 +711,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lever: {fileID: 3949355504963765413}
   leverTask: {fileID: 4932116772614261121}
+  iconText: {fileID: 6535637514403350332}
   taskName: {fileID: 6848747347343547653}
 --- !u!1 &4402389742658953240
 GameObject:
@@ -1002,9 +1003,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51d72c5eb335a7745b252fd6d6752995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeTillDamage: 1
+  timeTillDamage: 100
   damageAmount: 1
-  DamageRate: 1
+  DamageRate: 60
   hasError: 0
   taskName: 
   targetPosition: 0

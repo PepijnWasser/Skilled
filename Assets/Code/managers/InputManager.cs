@@ -65,12 +65,6 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        Debug.Log(savedControls.Game.Movement.bindings[1] + " saved");
-        Debug.Log(savedControls.MainMenu.OpenSettings.bindings[0].effectivePath);
-        Debug.Log(controlsToChange.Game.Movement.bindings[1] + " change");
-    }
 
     static void GetSavedValues(List<InputActionMap> actionMaps)
     {

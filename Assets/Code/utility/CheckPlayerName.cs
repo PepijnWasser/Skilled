@@ -26,7 +26,7 @@ public class CheckPlayerName : MonoBehaviour
         if (CheckValidName())
         {
             Instantiate(CJScreenPrefab);
-            GameObject.FindObjectOfType<PlayerInfo>().playerName = nameField.text;
+            PlayerInfo.playerName = nameField.text;
             Destroy(nameInput);
         }
         else
