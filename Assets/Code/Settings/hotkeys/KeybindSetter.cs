@@ -33,7 +33,7 @@ public class KeybindSetter : MonoBehaviour
         waitingForInputObject.SetActive(true);
 
         originalActionMap = InputManager.activeAction;
-        InputManager.ToggleActionMap(InputManager.rebind);
+        InputManager.SetActiveActionMap(InputManager.rebind);
         rebindingOperation = actionToChange.action.PerformInteractiveRebinding()
             .WithControlsExcluding("Mouse")
             .OnMatchWaitForAnother(0.1f)
@@ -50,7 +50,7 @@ public class KeybindSetter : MonoBehaviour
 
         InputBinding newBinding = new InputBinding(actionToChange.action.bindings[0].effectivePath);
         InputManager.SetBinding(actionToChange.action.name, newBinding, this);
-        InputManager.ToggleActionMap(originalActionMap);
+        InputManager.SetActiveActionMap(originalActionMap);
     }
 
     void Setbinding(string action, string newBinding, int index)
@@ -59,5 +59,10 @@ public class KeybindSetter : MonoBehaviour
         {
             nameText.text = newBinding;
         }
+    }
+
+    public void ResetSetting()
+    {
+
     }
 }

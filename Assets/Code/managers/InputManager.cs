@@ -39,7 +39,7 @@ public class InputManager : MonoBehaviour
         GetSavedValues(actionMapsToChange);
         GetSavedValues(savedActionMaps);
 
-        ToggleActionMap(mainMenu);
+        SetActiveActionMap(mainMenu);
     }
 
     private void Start()
@@ -125,7 +125,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public static void ToggleActionMap(InputActionMap actionMap)
+    public static void SetActiveActionMap(InputActionMap actionMap)
     {
         if (!actionMap.enabled)
         {

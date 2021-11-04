@@ -8,9 +8,19 @@ public class HotkeysSettingsManager : SettingsTab
     public delegate void Changes(SettingsTab tab);
     public static event Changes changeCreated;
 
+    public List<KeybindSetter> keybindSetters;
+
     private void Awake()
     {
         InputManager.changeCreated += SetHasChanges;
+    }
+
+    protected override void OnEnable()
+    {
+        foreach(KeybindSetter setter in keybindSetters)
+        {
+            setter.ResetSetting();
+        }
     }
 
     private void OnDestroy()

@@ -12,6 +12,12 @@ public class PlayerRotation : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        SensitivitySlider.changeCreated += SetSensitivity;
+    }
+
+    private void OnDestroy()
+    {
+        SensitivitySlider.changeCreated -= SetSensitivity;
     }
 
     void Update()
@@ -24,5 +30,10 @@ public class PlayerRotation : MonoBehaviour
         cameraPos.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         transform.Rotate(Vector3.up, mouseX);
+    }
+
+    void SetSensitivity(int _sensitivity)
+    {
+        sensitivity = _sensitivity;
     }
 }

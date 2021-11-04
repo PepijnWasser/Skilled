@@ -13,7 +13,6 @@ public class VSyncLoader : DropDownLoader
     protected override void HandleValue()
     {
         base.HandleValue();
-        Debug.Log(value);
         if(value == 0)
         {
             manager.SetVsync(1, true);
