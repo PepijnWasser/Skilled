@@ -57,6 +57,7 @@ public class KeybindSetterComposite : MonoBehaviour
     {
         if (action == actionToChange.name && actionIndex == index)
         {
+            //Debug.Log(nameText + " " + newBinding +  this.gameObject.name);
             nameText.text = newBinding;
         }
     }

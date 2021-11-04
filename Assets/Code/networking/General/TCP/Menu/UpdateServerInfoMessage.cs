@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Net;
 
-public class UpdateServerInfo : ISerializable
+public class UpdateServerInfoMessage : ISerializable
 {
     public int udpPort;
     public int tcpPort;
@@ -29,12 +29,12 @@ public class UpdateServerInfo : ISerializable
         pPacket.Write(isOwner);
     }
 
-    public UpdateServerInfo()
+    public UpdateServerInfoMessage()
     {
 
     }
 
-    public UpdateServerInfo(int _udpPort, int _tcpPort, IPAddress _ip, string _owner, bool _isOwner)
+    public UpdateServerInfoMessage(int _udpPort, int _tcpPort, IPAddress _ip, string _owner, bool _isOwner)
     {
         udpPort = _udpPort;
         tcpPort = _tcpPort;
