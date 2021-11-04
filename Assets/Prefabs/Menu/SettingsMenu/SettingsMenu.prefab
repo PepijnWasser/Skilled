@@ -151,9 +151,8 @@ MonoBehaviour:
   hoverImage: {fileID: 4443776701307414797}
   selectedImage: {fileID: 1837878966628698676}
   typeContentField: {fileID: 8217218952678046084}
-  typeContentImage: {fileID: 1723558771734893373, guid: 8f8af83aa782b5c4aa1e9eac2c1894f3, type: 3}
+  typeContentImage: {fileID: 625466632050872429, guid: d9376b5f9c0810441b89f4bdb3477f74, type: 3}
   confirmButton: {fileID: 0}
-  instantiatedTypeContentImage: {fileID: 0}
 --- !u!1 &674727438339975231
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,7 +460,6 @@ MonoBehaviour:
   typeContentField: {fileID: 8217218952678046084}
   typeContentImage: {fileID: 625466632050872429, guid: 043441a93fa26dc46b458caed29638b4, type: 3}
   confirmButton: {fileID: 0}
-  instantiatedTypeContentImage: {fileID: 0}
 --- !u!1 &5131954661101958112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,7 +1067,6 @@ MonoBehaviour:
   typeContentField: {fileID: 8217218952678046084}
   typeContentImage: {fileID: 7842100867270778841, guid: bf2660f8636a87a418a5506d2c95f6b5, type: 3}
   confirmButton: {fileID: 0}
-  instantiatedTypeContentImage: {fileID: 0}
 --- !u!1 &8217218951546416036
 GameObject:
   m_ObjectHideFlags: 0

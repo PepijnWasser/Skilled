@@ -83,9 +83,9 @@ public class LobbyState : State
                     HelpRespons message = tempOBJ as HelpRespons;
                     HandleHelpRespons(message);
                 }
-                else if(tempOBJ is UpdateServerInfo)
+                else if(tempOBJ is UpdateServerInfoMessage)
                 {
-                    UpdateServerInfo message = tempOBJ as UpdateServerInfo;
+                    UpdateServerInfoMessage message = tempOBJ as UpdateServerInfoMessage;
                     HandleServerInfoMessage(message);
                 }
                 else if(tempOBJ is JoinRoomMessage)
@@ -113,7 +113,7 @@ public class LobbyState : State
     }
 
     //sets the variables of the view to the correct values and save the data in the serverConnectionData
-    void HandleServerInfoMessage(UpdateServerInfo message)
+    void HandleServerInfoMessage(UpdateServerInfoMessage message)
     {
         serverNameUIElement.text = message.owner + "'s server";
         lobbyView.SetServerOwner(message.isOwner);

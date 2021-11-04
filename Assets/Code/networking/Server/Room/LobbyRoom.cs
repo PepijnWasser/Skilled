@@ -54,7 +54,7 @@ public class LobbyRoom : Room
 			//send server info to new user
 			TCPPacket serverInfoPacket = new TCPPacket();
 			ServerInfo serverInfo = server.serverInfo;
-			UpdateServerInfo serverInfoMessage = new UpdateServerInfo(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, true);
+			UpdateServerInfoMessage serverInfoMessage = new UpdateServerInfoMessage(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, true);
 			serverInfoPacket.Write(serverInfoMessage);
 			SendTCPMessageToTargetUser(serverInfoPacket, newClient);
 		}
@@ -64,7 +64,7 @@ public class LobbyRoom : Room
 			//send server info to new user
 			TCPPacket serverInfoPacket = new TCPPacket();
 			ServerInfo serverInfo = server.serverInfo;
-			UpdateServerInfo serverInfoMessage = new UpdateServerInfo(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, false);
+			UpdateServerInfoMessage serverInfoMessage = new UpdateServerInfoMessage(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, false);
 			serverInfoPacket.Write(serverInfoMessage);
 			SendTCPMessageToTargetUser(serverInfoPacket, newClient);
 		}
@@ -340,13 +340,13 @@ public class LobbyRoom : Room
 		//send server info to new user
 		TCPPacket serverInfoPacket = new TCPPacket();
 		ServerInfo serverInfo = server.serverInfo;
-		UpdateServerInfo serverInfoMessage = new UpdateServerInfo(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, true);
+		UpdateServerInfoMessage serverInfoMessage = new UpdateServerInfoMessage(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, true);
 		serverInfoPacket.Write(serverInfoMessage);
 		SendTCPMessageToTargetUser(serverInfoPacket, client);
 
 		//send server info to new user
 		TCPPacket serverInfoPacket2 = new TCPPacket();
-		UpdateServerInfo serverInfoMessage2 = new UpdateServerInfo(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, false);
+		UpdateServerInfoMessage serverInfoMessage2 = new UpdateServerInfoMessage(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, false);
 		serverInfoPacket2.Write(serverInfoMessage2);
 		SendTCPMessageToAllUsersExcept(serverInfoPacket, client);
 	}

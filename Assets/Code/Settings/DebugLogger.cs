@@ -1,18 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class MakeTwoWayLever : MonoBehaviour
+public class DebugLogger : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Text text;
 
     // Update is called once per frame
     void Update()
     {
-        
+        text.text = Screen.width.ToString();
     }
 }
