@@ -293,8 +293,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: VideoSettingsManager, Assembly-CSharp
+      - m_Target: {fileID: 335032843363385627}
+        m_TargetAssemblyTypeName: GameSettingsManager, Assembly-CSharp
         m_MethodName: RestoreDefaults
         m_Mode: 1
         m_Arguments:

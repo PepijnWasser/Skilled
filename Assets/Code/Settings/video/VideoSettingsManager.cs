@@ -17,9 +17,6 @@ public class VideoSettingsManager : SettingsTab
     public delegate void Reset();
     public static event Reset settingsReset;
 
-    public delegate void Saved();
-    public static event Saved settingsSaved;
-
     public List<VideoSetting> videoSettings;
 
     private void Awake()
@@ -49,8 +46,6 @@ public class VideoSettingsManager : SettingsTab
         SetVsync(PlayerPrefs.GetInt("VSync"), true);
         SetResolution(PlayerPrefs.GetInt("resolutionX"), PlayerPrefs.GetInt("resolutionY"), true);
         SetMode(PlayerPrefs.GetInt("fullScreenMode"), true);
-
-        Debug.Log("setting values" + " " + PlayerPrefs.GetInt("fullScreenMode"));
     }
 
     public void SetOverallQuality(int index)
@@ -207,12 +202,15 @@ public class VideoSettingsManager : SettingsTab
         FullScreenMode mode = Screen.fullScreenMode;
         bool fullScreen = Screen.fullScreen;
 
-        Screen.SetResolution(resX, resY, false);
-        Screen.fullScreenMode = mode;
-        Screen.fullScreen = fullScreen;
-        if (!startup)
+        if(Screen.currentResolution.width != resX && Screen.currentResolution.height != resY)
         {
-            changeCreated?.Invoke(this);
+            Screen.SetResolution(resX, resY, false);
+            Screen.fullScreenMode = mode;
+            Screen.fullScreen = fullScreen;
+            if (!startup)
+            {
+                changeCreated?.Invoke(this);
+            }
         }
     }
 
@@ -301,6 +299,4 @@ public class VideoSettingsManager : SettingsTab
         settingsReset?.Invoke();
         changeCreated?.Invoke(this);
     }
-
-
 }

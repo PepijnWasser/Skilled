@@ -19,12 +19,12 @@ public class KeybindSetterComposite : MonoBehaviour
     InputActionRebindingExtensions.RebindingOperation rebindingOperation;
     private void Awake()
     {
-        InputManager.bindingsRestored += Setbinding;
+        InputManager.bindingSet += Setbinding;
     }
 
     private void OnDestroy()
     {
-        InputManager.bindingsRestored -= Setbinding;
+        InputManager.bindingSet -= Setbinding;
     }
 
     public void StartRebinding()

@@ -18,12 +18,12 @@ public class KeybindSetter : MonoBehaviour
 
     private void Awake()
     {
-        InputManager.bindingsRestored += Setbinding;
+        InputManager.bindingSet += Setbinding;
     }
 
     private void OnDestroy()
     {
-        InputManager.bindingsRestored -= Setbinding;
+        InputManager.bindingSet -= Setbinding;
     }
 
 
@@ -49,6 +49,7 @@ public class KeybindSetter : MonoBehaviour
         waitingForInputObject.SetActive(false);
 
         InputBinding newBinding = new InputBinding(actionToChange.action.bindings[0].effectivePath);
+        Debug.Log(newBinding);
         InputManager.SetBinding(actionToChange.action.name, newBinding, this);
         InputManager.SetActiveActionMap(originalActionMap);
     }
@@ -57,12 +58,9 @@ public class KeybindSetter : MonoBehaviour
     {
         if(action == actionToChange.name)
         {
+            Debug.Log(action);
             nameText.text = newBinding;
         }
     }
 
-    public void ResetSetting()
-    {
-
-    }
 }

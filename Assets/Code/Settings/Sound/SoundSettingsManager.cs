@@ -37,6 +37,13 @@ public class SoundSettingsManager : SettingsTab
         }
     }
 
+    private void OnDisable()
+    {
+        foreach (SoundChannel channel in soundChannels)
+        {
+            channel.Reset();
+        }
+    }
 
     public void SwitchMute(SoundChannel channel)
     {

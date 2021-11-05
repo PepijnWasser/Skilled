@@ -12,12 +12,14 @@ public class PlayerRotation : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        VideoSettingsManager.settingsSaved += SetSensitivity;
+        GameSettingsManager.settingsSaved += SetSensitivity;
+
+        SetSensitivity();
     }
 
     private void OnDestroy()
     {
-        VideoSettingsManager.settingsSaved -= SetSensitivity;
+        GameSettingsManager.settingsSaved -= SetSensitivity;
     }
 
     void Update()
@@ -34,6 +36,15 @@ public class PlayerRotation : MonoBehaviour
 
     void SetSensitivity()
     {
-        sensitivity = PlayerPrefs.GetInt("sensitivity");
+        int savedSensitivity = PlayerPrefs.GetInt("sensitivity");
+        Debug.Log(savedSensitivity);
+        if (savedSensitivity != 0)
+        {
+            sensitivity = savedSensitivity;
+        }
+        else
+        {
+            sensitivity = PlayerInfo.sensitivity;
+        }
     }
 }

@@ -17,10 +17,12 @@ public class HotkeysSettingsManager : SettingsTab
 
     protected override void OnEnable()
     {
-        foreach(KeybindSetter setter in keybindSetters)
-        {
-            setter.ResetSetting();
-        }
+
+    }
+
+    private void OnDisable()
+    {
+        InputManager.ResetChanges();
     }
 
     private void OnDestroy()

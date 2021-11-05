@@ -20,11 +20,6 @@ public class StationHealth : MonoBehaviour
         GameState.stationHealthUpdated += SetHealth;
     }
 
-    private void Start()
-    {
-        Debug.Log(ServerConnectionData.isOwner);
-    }
-
 
     private void OnDestroy()
     {

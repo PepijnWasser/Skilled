@@ -23,11 +23,13 @@ public class InputfieldInputUpdater : MonoBehaviour
         {
             originalActionMap = InputManager.activeAction;
             InputManager.SetActiveActionMap(InputManager.inputField);
+
             isfocused = true;
         }
         else if(!inputField.isFocused && isfocused == true)
         {
             InputManager.SetActiveActionMap(originalActionMap);
+
             isfocused = false;
         }
     }

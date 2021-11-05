@@ -4,5 +4,8 @@ using UnityEngine;
 
 public abstract class GameSetting : MonoBehaviour
 {
-    public abstract void ResetSetting();
+    public abstract void SetVisualToSaved();
+
+    public abstract void RestoreToDefault();
+
 }

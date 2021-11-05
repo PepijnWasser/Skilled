@@ -11,25 +11,20 @@ public class SensitivitySlider : GameSetting
 
     private void Awake()
     {
-        GameSettingsManager.settingsReset += ResetSetting;
+        GameSettingsManager.settingsReset += RestoreToDefault;
        
         SetVisualToSaved();
-        manager.SetSensitivity(PlayerInfo.sensitivity);
     }
 
     private void OnDestroy()
     {
-        GameSettingsManager.settingsReset -= ResetSetting;
+        GameSettingsManager.settingsReset -= RestoreToDefault;
     }
 
     //called when page is loaded
-    public override void ResetSetting()
-    {
-        SetVisualToSaved();
-    }
 
     //sets setting data to saved data
-    void SetVisualToSaved()
+    public override void SetVisualToSaved()
     {
         int sensitivity = PlayerPrefs.GetInt("sensitivity");
         slider.SetValueWithoutNotify(sensitivity);
@@ -40,6 +35,13 @@ public class SensitivitySlider : GameSetting
     {
         int sensitivityRounded = (int)sensitivity;
         text.text = sensitivityRounded.ToString();
-        manager.SetSensitivity(sensitivityRounded);
+        manager.SetSensitivity(sensitivityRounded, false);
+    }
+
+    public override void RestoreToDefault()
+    {
+        int sensitivity = 300;
+        slider.SetValueWithoutNotify(sensitivity);
+        text.text = sensitivity.ToString();
     }
 }

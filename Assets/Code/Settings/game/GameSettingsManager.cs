@@ -12,27 +12,53 @@ public class GameSettingsManager : SettingsTab
     public delegate void Reset();
     public static event Reset settingsReset;
 
+    public delegate void Saved();
+    public static event Saved settingsSaved;
+
     int sensitivity = 0;
+
+    private void Awake()
+    {
+        SetSavedValues();
+        sensitivity = PlayerPrefs.GetInt("sensitivity");
+        PlayerInfo.sensitivity = sensitivity;
+    }
 
     protected override void OnEnable()
     {
         foreach(GameSetting setting in gameSettings)
         {
-            setting.ResetSetting();
+            setting.SetVisualToSaved();
         }
-
-        sensitivity = 0;
     }
 
-    public void SetSensitivity(int _sensitivity)
+    private void OnDisable()
+    {
+        SetSavedValues();
+    }
+
+    void SetSavedValues()
+    {
+        SetSensitivity(PlayerPrefs.GetInt("sensitivity"), true);
+    }
+
+    public void SetSensitivity(int _sensitivity, bool startup)
     {
         sensitivity = _sensitivity;
-        changeCreated?.Invoke(this);
+        if (!startup)
+        {
+            changeCreated?.Invoke(this);
+        }
     }
 
     public override void RestoreDefaults()
     {
-        PlayerPrefs.SetInt("sensitivity", 300);
+        sensitivity = 300;
+
+        foreach(GameSetting setting in gameSettings)
+        {
+            setting.RestoreToDefault();
+        }
 
         settingsReset?.Invoke();
         changeCreated?.Invoke(this);
@@ -42,5 +68,7 @@ public class GameSettingsManager : SettingsTab
     {
         PlayerInfo.sensitivity = sensitivity;
         PlayerPrefs.SetInt("sensitivity", sensitivity);
+
+        settingsSaved?.Invoke();
     }
 }
