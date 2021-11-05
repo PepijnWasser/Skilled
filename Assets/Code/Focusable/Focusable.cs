@@ -59,7 +59,7 @@ public class Focusable : MonoBehaviour
             displayCam.Priority = 12;
 
             originalActionMap = InputManager.activeAction;
-            InputManager.ToggleActionMap(InputManager.focusable);
+            InputManager.SetActiveActionMap(InputManager.focusable);
         }
     }
 
@@ -75,7 +75,7 @@ public class Focusable : MonoBehaviour
             Cursor.visible = false;
             displayCam.Priority = 10;
 
-            InputManager.ToggleActionMap(originalActionMap);
+            InputManager.SetActiveActionMap(originalActionMap);
         }
     }
 

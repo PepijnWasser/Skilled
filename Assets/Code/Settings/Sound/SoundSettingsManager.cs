@@ -11,7 +11,7 @@ public class SoundSettingsManager : SettingsTab
     public Sprite unMuteImage;
 
 
-    public List<SoundChannel> soundChannels = new List<SoundChannel>();
+    public List<SoundChannel> soundChannels;
     SoundChannel masterChannel;
 
     public delegate void Changes(SettingsTab tab);
@@ -20,7 +20,6 @@ public class SoundSettingsManager : SettingsTab
 
     private void Start()
     {
-        soundChannels = new List<SoundChannel>(GameObject.FindObjectsOfType<SoundChannel>());
         foreach(SoundChannel channel in soundChannels)
         {
             if (channel.volumeChannel == "Master Volume")
@@ -30,7 +29,7 @@ public class SoundSettingsManager : SettingsTab
         }
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
         foreach(SoundChannel channel in soundChannels)
         {
@@ -38,6 +37,13 @@ public class SoundSettingsManager : SettingsTab
         }
     }
 
+    private void OnDisable()
+    {
+        foreach (SoundChannel channel in soundChannels)
+        {
+            channel.Reset();
+        }
+    }
 
     public void SwitchMute(SoundChannel channel)
     {
@@ -89,15 +95,6 @@ public class SoundSettingsManager : SettingsTab
         }
     }
 
-    public override void RestoreDefaults()
-    {
-        foreach(SoundChannel channel in soundChannels)
-        {
-            UnMute(channel);
-            SetVolumeNoAlert(channel, 0);
-        }
-        changeCreated?.Invoke(this);
-    }
 
     void Mute(SoundChannel channel)
     {
@@ -197,4 +194,15 @@ public class SoundSettingsManager : SettingsTab
             Debug.Log("no changes detected");
         }
     }
+
+    public override void RestoreDefaults()
+    {
+        foreach (SoundChannel channel in soundChannels)
+        {
+            UnMute(channel);
+            SetVolumeNoAlert(channel, 0);
+        }
+        changeCreated?.Invoke(this);
+    }
+
 }

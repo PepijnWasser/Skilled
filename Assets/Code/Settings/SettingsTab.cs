@@ -14,6 +14,8 @@ public abstract class SettingsTab : MonoBehaviour
         SettingsManager.disabled += RemoveChanges;
     }
 
+    protected abstract void OnEnable();
+
     private void OnDisable()
     {
         SettingsManager.disabled -= RemoveChanges;

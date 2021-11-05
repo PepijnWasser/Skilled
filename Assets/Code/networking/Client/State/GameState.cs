@@ -95,7 +95,7 @@ public class GameState : State
     private void Start()
     {
         SendGameLoadedMessage();
-        InputManager.ToggleActionMap(InputManager.game);
+        InputManager.SetActiveActionMap(InputManager.game);
 
         int i = 0;
         bool finishedInitialization = false;

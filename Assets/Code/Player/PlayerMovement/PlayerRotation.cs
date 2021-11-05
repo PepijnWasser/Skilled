@@ -12,6 +12,14 @@ public class PlayerRotation : MonoBehaviour
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        GameSettingsManager.settingsSaved += SetSensitivity;
+
+        SetSensitivity();
+    }
+
+    private void OnDestroy()
+    {
+        GameSettingsManager.settingsSaved -= SetSensitivity;
     }
 
     void Update()
@@ -24,5 +32,19 @@ public class PlayerRotation : MonoBehaviour
         cameraPos.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         transform.Rotate(Vector3.up, mouseX);
+    }
+
+    void SetSensitivity()
+    {
+        int savedSensitivity = PlayerPrefs.GetInt("sensitivity");
+        Debug.Log(savedSensitivity);
+        if (savedSensitivity != 0)
+        {
+            sensitivity = savedSensitivity;
+        }
+        else
+        {
+            sensitivity = PlayerInfo.sensitivity;
+        }
     }
 }

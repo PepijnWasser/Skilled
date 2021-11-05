@@ -46,6 +46,8 @@ public class GameManager : MonoBehaviour
             manager.player.name += " controlled";
             manager.name += " controlled";
 
+            manager.playerRotationScript.sensitivity = PlayerInfo.sensitivity;
+
             playerPositionUpdater.player = manager.player;
             playerPositionUpdater.playerNose = manager.nose;
 

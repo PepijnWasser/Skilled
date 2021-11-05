@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
     public static InputActionMap focusable;
     public static InputActionMap chat;
     public static InputActionMap rebind;
+    public static InputActionMap settings;
 
     public static List<InputActionMap> actionMapsToChange = new List<InputActionMap>();
     public static List<InputActionMap> savedActionMaps = new List<InputActionMap>();
@@ -24,12 +25,17 @@ public class InputManager : MonoBehaviour
     public static event Changes changeCreated;
 
     public delegate void BindingsReset(string action, string newBinding, int index = 0);
-    public static event BindingsReset bindingsRestored;
+    public static event BindingsReset bindingSet;
 
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
 
+        Starter();
+    }
+
+    public static void Starter()
+    {
         controlsToChange = new Controls();
         savedControls = new Controls();
 
@@ -39,34 +45,21 @@ public class InputManager : MonoBehaviour
         GetSavedValues(actionMapsToChange);
         GetSavedValues(savedActionMaps);
 
-        ToggleActionMap(mainMenu);
+        SetActiveActionMap(mainMenu);
+
+        SetSavedValues();
     }
 
-    private void Start()
+    public static void ResetChanges()
     {
-        foreach(InputActionMap map in savedActionMaps)
-        {
-            foreach(InputAction action in map)
-            {
-                if (action.bindings[0].isComposite)
-                {
-                    for (int i = 0; i < action.bindings.Count; i++)
-                    {
-                        string binding = InputControlPath.ToHumanReadableString(action.bindings[i].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
-                        bindingsRestored?.Invoke(map.name + "/" + action.name, binding, i);
-                    }
-                }
-                else
-                {
-                    string binding = InputControlPath.ToHumanReadableString(action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
-                    bindingsRestored?.Invoke(map.name + "/" + action.name, binding);
-                }
-            }
-        }
+        controlsToChange = new Controls();
+        actionMapsToChange = GetMapsFromControls(controlsToChange);
+        GetSavedValues(actionMapsToChange);
+        SetSavedValues();
     }
 
-
-    static void GetSavedValues(List<InputActionMap> actionMaps)
+    //sets the actions in the actionmap to the saved hotkey
+    public static void GetSavedValues(List<InputActionMap> actionMaps)
     {
         foreach (InputActionMap map in actionMaps)
         {
@@ -108,6 +101,30 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    //sets the setter text to the hotkey from the actionMap
+    public static void SetSavedValues()
+    {
+        foreach (InputActionMap map in savedActionMaps)
+        {
+            foreach (InputAction action in map)
+            {
+                if (action.bindings[0].isComposite)
+                {
+                    for (int i = 0; i < action.bindings.Count; i++)
+                    {
+                        string binding = InputControlPath.ToHumanReadableString(action.bindings[i].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+                        bindingSet?.Invoke(map.name + "/" + action.name, binding, i);
+                    }
+                }
+                else
+                {
+                    string binding = InputControlPath.ToHumanReadableString(action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+                    bindingSet?.Invoke(map.name + "/" + action.name, binding);
+                }
+            }
+        }
+    }
+
     public static void SetInitialValue(InputAction actionToChange, InputBinding newKeyBinding)
     {
         actionToChange.ApplyBindingOverride(newKeyBinding.path);
@@ -125,7 +142,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public static void ToggleActionMap(InputActionMap actionMap)
+    public static void SetActiveActionMap(InputActionMap actionMap)
     {
         if (!actionMap.enabled)
         {
@@ -138,7 +155,7 @@ public class InputManager : MonoBehaviour
     //set bingdings of controlsToChange
     public static void SetBinding(string actionName, InputBinding newKeyBinding, KeybindSetter keybindSetter)
     {
-        InputAction actionToChange = null;
+        List<InputAction> actionsToChange = new List<InputAction>();
 
         foreach (InputActionMap map in actionMapsToChange)
         {
@@ -146,15 +163,18 @@ public class InputManager : MonoBehaviour
             {
                 if (action.name == actionName)
                 {
-                    actionToChange = action;
+                    actionsToChange.Add(action);
                 }
             }
         }
 
-        actionToChange.ApplyBindingOverride(newKeyBinding.path);
+        foreach(InputAction actionToChange in actionsToChange)
+        {
+            actionToChange.ApplyBindingOverride(newKeyBinding.path);
 
-        string binding = InputControlPath.ToHumanReadableString(actionToChange.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
-        bindingsRestored?.Invoke(actionToChange.actionMap.name + "/" + actionToChange.name, binding);
+            string binding = InputControlPath.ToHumanReadableString(actionToChange.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+            bindingSet?.Invoke(actionToChange.actionMap.name + "/" + actionToChange.name, binding);
+        }
         
         changeCreated?.Invoke();
 
@@ -182,7 +202,7 @@ public class InputManager : MonoBehaviour
             keybindSetter.nameText.text = InputControlPath.ToHumanReadableString(actionToChange.bindings[actionIndex].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
 
             string binding = InputControlPath.ToHumanReadableString(actionToChange.bindings[actionIndex].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
-            bindingsRestored?.Invoke(actionToChange.actionMap.name + "/" + actionToChange.name, binding, actionIndex);
+            bindingSet?.Invoke(actionToChange.actionMap.name + "/" + actionToChange.name, binding, actionIndex);
 
 
 
@@ -194,62 +214,6 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    //reset the controlsToChange to the original keybindings
-    public static void RestoreToDefault()
-    {
-        controlsToChange = new Controls();
-
-        actionMapsToChange = GetMapsFromControls(controlsToChange, false);
-
-        changeCreated?.Invoke();
-
-        //send all the original actions to the setters
-        foreach(InputActionMap map in actionMapsToChange)
-        {
-            foreach(InputAction action in map.actions)
-            {
-                if (action.bindings[0].isComposite)
-                {
-                    for (int i = 0; i < action.bindings.Count; i++)
-                    {
-                        string binding = InputControlPath.ToHumanReadableString(action.bindings[i].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
-                        bindingsRestored?.Invoke(map.name + "/" + action.name, binding, i);
-                    }
-                }
-                else
-                {
-                    string binding = InputControlPath.ToHumanReadableString(action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
-                    bindingsRestored?.Invoke(map.name + "/" + action.name, binding);
-                }
-            }
-        }
-    }
-
-    public static void SaveBindings()
-    {
-        foreach (InputActionMap map in actionMapsToChange)
-        {
-            foreach (InputAction action in map.actions)
-            {
-                if (action.bindings[0].isComposite)
-                {
-                    for (int i = 0; i < action.bindings.Count; i++)
-                    {
-                        PlayerPrefs.SetString(map.name + "/" + action.name + i, action.bindings[i].effectivePath);
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < action.bindings.Count; i++)
-                    {
-                        PlayerPrefs.SetString(map.name + "/" + action.name, action.bindings[i].effectivePath);
-                    }
-                }
-            }
-        }
-
-        GetBindingsFromPlayerPrefs(savedActionMaps);
-    }
 
     //sets the values of a given list according to playerprefs
     static void GetBindingsFromPlayerPrefs(List<InputActionMap> actionMaps)
@@ -291,6 +255,7 @@ public class InputManager : MonoBehaviour
             focusable = controls.Focusable;
             chat = controls.Chat;
             rebind = controls.Rebind;
+            settings = controls.Settings;
 
             maps.Add(mainMenu);
             maps.Add(game);
@@ -298,6 +263,7 @@ public class InputManager : MonoBehaviour
             maps.Add(focusable);
             maps.Add(chat);
             maps.Add(rebind);
+            maps.Add(settings);
         }
         else
         {
@@ -307,7 +273,66 @@ public class InputManager : MonoBehaviour
             maps.Add(controls.Focusable);
             maps.Add(controls.Chat);
             maps.Add(controls.Rebind);
+            maps.Add(controls.Settings);
         }
         return maps;
+    }
+
+
+    //reset the controlsToChange to the original keybindings
+    public static void RestoreToDefault()
+    {
+        controlsToChange = new Controls();
+
+        actionMapsToChange = GetMapsFromControls(controlsToChange, false);
+
+        //send all the original actions to the setters
+        foreach (InputActionMap map in actionMapsToChange)
+        {
+            foreach (InputAction action in map.actions)
+            {
+                if (action.bindings[0].isComposite)
+                {
+                    for (int i = 0; i < action.bindings.Count; i++)
+                    {
+                        string binding = InputControlPath.ToHumanReadableString(action.bindings[i].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+                        bindingSet?.Invoke(map.name + "/" + action.name, binding, i);
+                    }
+                }
+                else
+                {
+                    string binding = InputControlPath.ToHumanReadableString(action.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+                    bindingSet?.Invoke(map.name + "/" + action.name, binding);
+                }
+            }
+        }
+
+        changeCreated?.Invoke();
+    }
+
+    public static void SaveBindings()
+    {
+        foreach (InputActionMap map in actionMapsToChange)
+        {
+            foreach (InputAction action in map.actions)
+            {
+                if (action.bindings[0].isComposite)
+                {
+                    for (int i = 0; i < action.bindings.Count; i++)
+                    {
+                        PlayerPrefs.SetString(map.name + "/" + action.name + i, action.bindings[i].effectivePath);
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < action.bindings.Count; i++)
+                    {
+                        PlayerPrefs.SetString(map.name + "/" + action.name, action.bindings[i].effectivePath);
+                    }
+                }
+            }
+        }
+
+        GetBindingsFromPlayerPrefs(savedActionMaps);
     }
 }

@@ -42,6 +42,33 @@ public class @Controls : IInputActionCollection, IDisposable
             ]
         },
         {
+            ""name"": ""Chat"",
+            ""id"": ""49b08441-138b-4eee-8f57-a0ef8228b48f"",
+            ""actions"": [
+                {
+                    ""name"": ""SendMessage"",
+                    ""type"": ""Button"",
+                    ""id"": ""9bf7a74d-2131-496b-9bbb-af41d54ad8ab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""a4c6d83e-6805-40f3-a4a6-25e901f1078e"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""keyboard & mouse"",
+                    ""action"": ""SendMessage"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
             ""name"": ""Game"",
             ""id"": ""e28e2ec6-c45e-412f-a004-d0e722ed93da"",
             ""actions"": [
@@ -222,7 +249,7 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""78645f4e-3e8c-4605-8143-7f1ffdb89e81"",
-                    ""path"": ""<Keyboard>/numpadPlus"",
+                    ""path"": ""<Keyboard>/minus"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""keyboard & mouse"",
@@ -296,13 +323,19 @@ public class @Controls : IInputActionCollection, IDisposable
             ""bindings"": []
         },
         {
-            ""name"": ""Chat"",
-            ""id"": ""49b08441-138b-4eee-8f57-a0ef8228b48f"",
+            ""name"": ""Rebind"",
+            ""id"": ""1d725380-3750-4c0e-82e7-363b49c9b9dd"",
+            ""actions"": [],
+            ""bindings"": []
+        },
+        {
+            ""name"": ""Settings"",
+            ""id"": ""7ec8b1fe-96a7-4e95-90a5-b5e31f2a747d"",
             ""actions"": [
                 {
-                    ""name"": ""SendMessage"",
+                    ""name"": ""CloseSettings"",
                     ""type"": ""Button"",
-                    ""id"": ""9bf7a74d-2131-496b-9bbb-af41d54ad8ab"",
+                    ""id"": ""82904bef-ee9d-4712-b02c-3de4e363bea0"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -311,22 +344,16 @@ public class @Controls : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""a4c6d83e-6805-40f3-a4a6-25e901f1078e"",
-                    ""path"": ""<Keyboard>/enter"",
+                    ""id"": ""852ad0df-46b9-4a1c-919b-3d734755fd0b"",
+                    ""path"": ""<Keyboard>/j"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""keyboard & mouse"",
-                    ""action"": ""SendMessage"",
+                    ""groups"": """",
+                    ""action"": ""CloseSettings"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
             ]
-        },
-        {
-            ""name"": ""Rebind"",
-            ""id"": ""1d725380-3750-4c0e-82e7-363b49c9b9dd"",
-            ""actions"": [],
-            ""bindings"": []
         }
     ],
     ""controlSchemes"": [
@@ -362,6 +389,9 @@ public class @Controls : IInputActionCollection, IDisposable
         // Main Menu
         m_MainMenu = asset.FindActionMap("Main Menu", throwIfNotFound: true);
         m_MainMenu_OpenSettings = m_MainMenu.FindAction("Open Settings", throwIfNotFound: true);
+        // Chat
+        m_Chat = asset.FindActionMap("Chat", throwIfNotFound: true);
+        m_Chat_SendMessage = m_Chat.FindAction("SendMessage", throwIfNotFound: true);
         // Game
         m_Game = asset.FindActionMap("Game", throwIfNotFound: true);
         m_Game_Movement = m_Game.FindAction("Movement", throwIfNotFound: true);
@@ -375,11 +405,11 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Focusable_OpenSettings = m_Focusable.FindAction("Open Settings", throwIfNotFound: true);
         // InputField
         m_InputField = asset.FindActionMap("InputField", throwIfNotFound: true);
-        // Chat
-        m_Chat = asset.FindActionMap("Chat", throwIfNotFound: true);
-        m_Chat_SendMessage = m_Chat.FindAction("SendMessage", throwIfNotFound: true);
         // Rebind
         m_Rebind = asset.FindActionMap("Rebind", throwIfNotFound: true);
+        // Settings
+        m_Settings = asset.FindActionMap("Settings", throwIfNotFound: true);
+        m_Settings_CloseSettings = m_Settings.FindAction("CloseSettings", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -458,6 +488,39 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public MainMenuActions @MainMenu => new MainMenuActions(this);
+
+    // Chat
+    private readonly InputActionMap m_Chat;
+    private IChatActions m_ChatActionsCallbackInterface;
+    private readonly InputAction m_Chat_SendMessage;
+    public struct ChatActions
+    {
+        private @Controls m_Wrapper;
+        public ChatActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SendMessage => m_Wrapper.m_Chat_SendMessage;
+        public InputActionMap Get() { return m_Wrapper.m_Chat; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ChatActions set) { return set.Get(); }
+        public void SetCallbacks(IChatActions instance)
+        {
+            if (m_Wrapper.m_ChatActionsCallbackInterface != null)
+            {
+                @SendMessage.started -= m_Wrapper.m_ChatActionsCallbackInterface.OnSendMessage;
+                @SendMessage.performed -= m_Wrapper.m_ChatActionsCallbackInterface.OnSendMessage;
+                @SendMessage.canceled -= m_Wrapper.m_ChatActionsCallbackInterface.OnSendMessage;
+            }
+            m_Wrapper.m_ChatActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @SendMessage.started += instance.OnSendMessage;
+                @SendMessage.performed += instance.OnSendMessage;
+                @SendMessage.canceled += instance.OnSendMessage;
+            }
+        }
+    }
+    public ChatActions @Chat => new ChatActions(this);
 
     // Game
     private readonly InputActionMap m_Game;
@@ -590,39 +653,6 @@ public class @Controls : IInputActionCollection, IDisposable
     }
     public InputFieldActions @InputField => new InputFieldActions(this);
 
-    // Chat
-    private readonly InputActionMap m_Chat;
-    private IChatActions m_ChatActionsCallbackInterface;
-    private readonly InputAction m_Chat_SendMessage;
-    public struct ChatActions
-    {
-        private @Controls m_Wrapper;
-        public ChatActions(@Controls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @SendMessage => m_Wrapper.m_Chat_SendMessage;
-        public InputActionMap Get() { return m_Wrapper.m_Chat; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(ChatActions set) { return set.Get(); }
-        public void SetCallbacks(IChatActions instance)
-        {
-            if (m_Wrapper.m_ChatActionsCallbackInterface != null)
-            {
-                @SendMessage.started -= m_Wrapper.m_ChatActionsCallbackInterface.OnSendMessage;
-                @SendMessage.performed -= m_Wrapper.m_ChatActionsCallbackInterface.OnSendMessage;
-                @SendMessage.canceled -= m_Wrapper.m_ChatActionsCallbackInterface.OnSendMessage;
-            }
-            m_Wrapper.m_ChatActionsCallbackInterface = instance;
-            if (instance != null)
-            {
-                @SendMessage.started += instance.OnSendMessage;
-                @SendMessage.performed += instance.OnSendMessage;
-                @SendMessage.canceled += instance.OnSendMessage;
-            }
-        }
-    }
-    public ChatActions @Chat => new ChatActions(this);
-
     // Rebind
     private readonly InputActionMap m_Rebind;
     private IRebindActions m_RebindActionsCallbackInterface;
@@ -647,6 +677,39 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public RebindActions @Rebind => new RebindActions(this);
+
+    // Settings
+    private readonly InputActionMap m_Settings;
+    private ISettingsActions m_SettingsActionsCallbackInterface;
+    private readonly InputAction m_Settings_CloseSettings;
+    public struct SettingsActions
+    {
+        private @Controls m_Wrapper;
+        public SettingsActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @CloseSettings => m_Wrapper.m_Settings_CloseSettings;
+        public InputActionMap Get() { return m_Wrapper.m_Settings; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SettingsActions set) { return set.Get(); }
+        public void SetCallbacks(ISettingsActions instance)
+        {
+            if (m_Wrapper.m_SettingsActionsCallbackInterface != null)
+            {
+                @CloseSettings.started -= m_Wrapper.m_SettingsActionsCallbackInterface.OnCloseSettings;
+                @CloseSettings.performed -= m_Wrapper.m_SettingsActionsCallbackInterface.OnCloseSettings;
+                @CloseSettings.canceled -= m_Wrapper.m_SettingsActionsCallbackInterface.OnCloseSettings;
+            }
+            m_Wrapper.m_SettingsActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @CloseSettings.started += instance.OnCloseSettings;
+                @CloseSettings.performed += instance.OnCloseSettings;
+                @CloseSettings.canceled += instance.OnCloseSettings;
+            }
+        }
+    }
+    public SettingsActions @Settings => new SettingsActions(this);
     private int m_keyboardmouseSchemeIndex = -1;
     public InputControlScheme keyboardmouseScheme
     {
@@ -669,6 +732,10 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnOpenSettings(InputAction.CallbackContext context);
     }
+    public interface IChatActions
+    {
+        void OnSendMessage(InputAction.CallbackContext context);
+    }
     public interface IGameActions
     {
         void OnMovement(InputAction.CallbackContext context);
@@ -685,11 +752,11 @@ public class @Controls : IInputActionCollection, IDisposable
     public interface IInputFieldActions
     {
     }
-    public interface IChatActions
-    {
-        void OnSendMessage(InputAction.CallbackContext context);
-    }
     public interface IRebindActions
     {
+    }
+    public interface ISettingsActions
+    {
+        void OnCloseSettings(InputAction.CallbackContext context);
     }
 }

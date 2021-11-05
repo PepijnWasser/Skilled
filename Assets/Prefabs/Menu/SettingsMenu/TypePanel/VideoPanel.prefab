@@ -94,8 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropdown: {fileID: 9025899585155723213}
   manager: {fileID: 4329648947103120936}
-  text: {fileID: 4350158692742597408}
-  text2: {fileID: 3491906546866303762}
+  dropdownName: 
 --- !u!1 &310759721786347418
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,8 +622,15 @@ MonoBehaviour:
   overAllQualityDropdown: {fileID: 5936796230289943834}
   textureQualityDropdown: {fileID: 6137564892377262418}
   shadowQualityDropdown: {fileID: 1191412226168357874}
-  resolutionDropdown: {fileID: 3763383442068606311}
   resolutionLoader: {fileID: 7828147400075698955}
+  videoSettings:
+  - {fileID: 7828147400075698955}
+  - {fileID: 7328949003038622661}
+  - {fileID: 4055198339686347645}
+  - {fileID: 6483466077254991615}
+  - {fileID: 4321121545765735363}
+  - {fileID: 3535965746073965137}
+  - {fileID: 680047594219474852}
 --- !u!1 &636290780661595793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1265,6 +1271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropdown: {fileID: 5936796230289943834}
   manager: {fileID: 4329648947103120936}
+  dropdownName: 
 --- !u!1 &980033170087803238
 GameObject:
   m_ObjectHideFlags: 0
@@ -2103,7 +2110,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enabled
+  m_Text: Disabled
 --- !u!1 &1560619694332430305
 GameObject:
   m_ObjectHideFlags: 0
@@ -4084,6 +4091,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropdown: {fileID: 7250519560973399522}
   manager: {fileID: 4329648947103120936}
+  dropdownName: 
 --- !u!1 &2924782605770194382
 GameObject:
   m_ObjectHideFlags: 0
@@ -5541,6 +5549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropdown: {fileID: 3763383442068606311}
   manager: {fileID: 4329648947103120936}
+  dropdownName: 
   text: {fileID: 0}
 --- !u!1 &4274911863453644735
 GameObject:
@@ -7151,9 +7160,9 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Enabled
-      m_Image: {fileID: 0}
     - m_Text: Disabled
+      m_Image: {fileID: 0}
+    - m_Text: Enabled
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8926,6 +8935,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropdown: {fileID: 6137564892377262418}
   manager: {fileID: 4329648947103120936}
+  dropdownName: 
 --- !u!1 &7828551541098151064
 GameObject:
   m_ObjectHideFlags: 0
@@ -9018,6 +9028,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropdown: {fileID: 3915934606433745765}
   manager: {fileID: 4329648947103120936}
+  dropdownName: 
 --- !u!1 &7840523966238184184
 GameObject:
   m_ObjectHideFlags: 0
@@ -9489,6 +9500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dropdown: {fileID: 1191412226168357874}
   manager: {fileID: 4329648947103120936}
+  dropdownName: 
 --- !u!1 &8523930792140331090
 GameObject:
   m_ObjectHideFlags: 0

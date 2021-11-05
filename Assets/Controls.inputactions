@@ -29,6 +29,33 @@
             ]
         },
         {
+            "name": "Chat",
+            "id": "49b08441-138b-4eee-8f57-a0ef8228b48f",
+            "actions": [
+                {
+                    "name": "SendMessage",
+                    "type": "Button",
+                    "id": "9bf7a74d-2131-496b-9bbb-af41d54ad8ab",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a4c6d83e-6805-40f3-a4a6-25e901f1078e",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "keyboard & mouse",
+                    "action": "SendMessage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "Game",
             "id": "e28e2ec6-c45e-412f-a004-d0e722ed93da",
             "actions": [
@@ -209,7 +236,7 @@
                 {
                     "name": "",
                     "id": "78645f4e-3e8c-4605-8143-7f1ffdb89e81",
-                    "path": "<Keyboard>/numpadPlus",
+                    "path": "<Keyboard>/minus",
                     "interactions": "",
                     "processors": "",
                     "groups": "keyboard & mouse",
@@ -283,13 +310,19 @@
             "bindings": []
         },
         {
-            "name": "Chat",
-            "id": "49b08441-138b-4eee-8f57-a0ef8228b48f",
+            "name": "Rebind",
+            "id": "1d725380-3750-4c0e-82e7-363b49c9b9dd",
+            "actions": [],
+            "bindings": []
+        },
+        {
+            "name": "Settings",
+            "id": "7ec8b1fe-96a7-4e95-90a5-b5e31f2a747d",
             "actions": [
                 {
-                    "name": "SendMessage",
+                    "name": "CloseSettings",
                     "type": "Button",
-                    "id": "9bf7a74d-2131-496b-9bbb-af41d54ad8ab",
+                    "id": "82904bef-ee9d-4712-b02c-3de4e363bea0",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -298,22 +331,16 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "a4c6d83e-6805-40f3-a4a6-25e901f1078e",
-                    "path": "<Keyboard>/enter",
+                    "id": "852ad0df-46b9-4a1c-919b-3d734755fd0b",
+                    "path": "<Keyboard>/j",
                     "interactions": "",
                     "processors": "",
-                    "groups": "keyboard & mouse",
-                    "action": "SendMessage",
+                    "groups": "",
+                    "action": "CloseSettings",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
-        },
-        {
-            "name": "Rebind",
-            "id": "1d725380-3750-4c0e-82e7-363b49c9b9dd",
-            "actions": [],
-            "bindings": []
         }
     ],
     "controlSchemes": [

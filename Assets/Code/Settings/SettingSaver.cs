@@ -13,6 +13,7 @@ public class SettingSaver : MonoBehaviour
         SoundSettingsManager.changeCreated += AddChanges;
         HotkeysSettingsManager.changeCreated += AddChanges;
         VideoSettingsManager.changeCreated += AddChanges;
+        GameSettingsManager.changeCreated += AddChanges;
 
         SettingsManager.disabled += ClearChanges;
     }
@@ -23,6 +24,7 @@ public class SettingSaver : MonoBehaviour
         SoundSettingsManager.changeCreated -= AddChanges;
         HotkeysSettingsManager.changeCreated -= AddChanges;
         VideoSettingsManager.changeCreated -= AddChanges;
+        GameSettingsManager.changeCreated -= AddChanges;
 
         SettingsManager.disabled -= ClearChanges;
     }

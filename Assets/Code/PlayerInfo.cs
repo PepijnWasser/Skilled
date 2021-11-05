@@ -10,6 +10,7 @@ public class PlayerInfo
 	public static int udpReceivePort;
 	public static int udpSendPort;
 	public static IPAddress ip;
+	public static int sensitivity;
 
     private void Start()
     {

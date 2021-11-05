@@ -9,12 +9,12 @@ public class ChatFieldInputUpdater : InputfieldInputUpdater
         if (inputField.isFocused && isfocused == false)
         {
             originalActionMap = InputManager.activeAction;
-            InputManager.ToggleActionMap(InputManager.chat);
+            InputManager.SetActiveActionMap(InputManager.chat);
             isfocused = true;
         }
         else if (!inputField.isFocused && isfocused == true)
         {
-            InputManager.ToggleActionMap(originalActionMap);
+            InputManager.SetActiveActionMap(originalActionMap);
             isfocused = false;
         }
     }
