@@ -3,73 +3,55 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResolutionLoader : DropDownLoader
+public class ResolutionLoader : VideoSetting
 {
     public Resolution[] resolutions;
-    public Text text;
 
     protected override void Awake()
     {
-        base.Awake();
-
-        dropdownName = "resolution";
-
-        int valX = PlayerPrefs.GetInt(dropdownName + "X");
-        int valY = PlayerPrefs.GetInt(dropdownName + "Y");
-    
         resolutions = Screen.resolutions;
         dropdown.ClearOptions();
-
-        int currentResolutionIndex = 0;
 
         List<string> options = new List<string>();
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + " x " + resolutions[i].height;
             options.Add(option);
-
-            if(valX == 0 && valY == 0)
-            {
-                if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-                {
-                    currentResolutionIndex = i;
-                }
-            }
-            else
-            {
-                if (resolutions[i].width == valX && resolutions[i].height == valY)
-                {
-                    currentResolutionIndex = i;
-                }
-            }
         }
 
         dropdown.AddOptions(options);
-        dropdown.SetValueWithoutNotify(currentResolutionIndex);
 
-        manager.SetResolution(currentResolutionIndex, true);
+        base.Awake();
     }
 
-    protected override void Reset()
+    protected override void SetVisualsToSavedValues()
     {
-        base.Reset();
-        StartCoroutine("SetValue");
-    }
+        int value1 = PlayerPrefs.GetInt("resolutionX");
+        int value2 = PlayerPrefs.GetInt("resolutionY");
 
-    IEnumerator SetValue()
-    {
-        yield return new WaitForFixedUpdate();
 
-        int currentResolutionIndex = 0;
-        for (int i = 0; i < resolutions.Length; i++)
+        if(resolutions != null)
         {
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
-            {
-                currentResolutionIndex = i;
-            }
-        }
-        dropdown.SetValueWithoutNotify(currentResolutionIndex);
+            int currentResolution = 0;
 
-        yield return null;
+            for (int i = 0; i < resolutions.Length - 1; i++)
+            {
+                if (value1 == 0 && value2 == 0)
+                {
+                    if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+                    {
+                        currentResolution = i;
+                    }
+                }
+                else
+                {
+                    if (resolutions[i].width == value1 && resolutions[i].height == value2)
+                    {
+                        currentResolution = i;
+                    }
+                }
+            }
+            dropdown.SetValueWithoutNotify(currentResolution);
+        }
     }
 }

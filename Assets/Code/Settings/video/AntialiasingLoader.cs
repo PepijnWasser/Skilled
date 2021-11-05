@@ -2,39 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AntialiasingLoader : DropDownLoader 
+public class AntialiasingLoader : VideoSetting 
 {
-    protected override void Awake()
+    public override void ResetSetting()
     {
-        dropdownName = "antiAliasing";
-        base.Awake();
+        base.ResetSetting();
     }
 
-    protected override void HandleValue()
+    protected override void SetVisualsToSavedValues()
     {
-        base.HandleValue();
-        manager.SetAntialiasing(value, true);
-    }
-
-    protected override void Reset()
-    {
-        base.Reset();
-        int val = QualitySettings.antiAliasing;
-        if (val == 0)
-        {
-            dropdown.SetValueWithoutNotify(0);
-        }
-        else if (val == 2)
-        {
-            dropdown.SetValueWithoutNotify(1);
-        }
-        else if (val == 4)
-        {
-            dropdown.SetValueWithoutNotify(2);
-        }
-        else if (val == 8)
-        {
-            dropdown.SetValueWithoutNotify(3);
-        }
+        int value = PlayerPrefs.GetInt("antiAliasing");
+        dropdown.SetValueWithoutNotify(value);
     }
 }

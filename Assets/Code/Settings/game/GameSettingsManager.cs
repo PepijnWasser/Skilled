@@ -32,7 +32,7 @@ public class GameSettingsManager : SettingsTab
 
     public override void RestoreDefaults()
     {
-        PlayerInfo.sensitivity = 300;
+        PlayerPrefs.SetInt("sensitivity", 300);
 
         settingsReset?.Invoke();
         changeCreated?.Invoke(this);
@@ -42,10 +42,5 @@ public class GameSettingsManager : SettingsTab
     {
         PlayerInfo.sensitivity = sensitivity;
         PlayerPrefs.SetInt("sensitivity", sensitivity);
-    }
-
-    private void Update()
-    {
-        Debug.Log(PlayerInfo.sensitivity);   
     }
 }

@@ -8,7 +8,6 @@ public class VideoSettingsManager : SettingsTab
     public Dropdown overAllQualityDropdown;
     public Dropdown textureQualityDropdown;
     public Dropdown shadowQualityDropdown;
-    public Dropdown resolutionDropdown;
 
     public ResolutionLoader resolutionLoader;
 
@@ -18,6 +17,42 @@ public class VideoSettingsManager : SettingsTab
     public delegate void Reset();
     public static event Reset settingsReset;
 
+    public delegate void Saved();
+    public static event Saved settingsSaved;
+
+    public List<VideoSetting> videoSettings;
+
+    private void Awake()
+    {
+        SetSavedValues();
+    }
+
+    protected override void OnEnable()
+    {
+        foreach(VideoSetting setting in videoSettings)
+        {
+            setting.ResetSetting();
+        }
+    }
+
+    private void OnDisable()
+    {
+        SetSavedValues();
+    }
+
+    void SetSavedValues()
+    {
+        SetOverallQuality(PlayerPrefs.GetInt("overallQuality"), true);
+        SetShadowQuality(PlayerPrefs.GetInt("shadowQuality"), false, true);
+        SetTextureQuality(PlayerPrefs.GetInt("textureQuality"), false, true);
+        SetAntialiasing(PlayerPrefs.GetInt("antiAliasing"), true);
+        SetVsync(PlayerPrefs.GetInt("VSync"), true);
+        SetResolution(PlayerPrefs.GetInt("resolutionX"), PlayerPrefs.GetInt("resolutionY"), true);
+        SetMode(PlayerPrefs.GetInt("fullScreenMode"), true);
+
+        Debug.Log("setting values" + " " + PlayerPrefs.GetInt("fullScreenMode"));
+    }
+
     public void SetOverallQuality(int index)
     {
         SetOverallQuality(index, false);
@@ -25,15 +60,14 @@ public class VideoSettingsManager : SettingsTab
 
     public void SetOverallQuality(int index, bool startup)
     {
-        SetShadowQuality(index, false, false);
-        SetTextureQuality(index, false, false);
-
         if(overAllQualityDropdown.options.Count == 4 && index < 4)
         {
             overAllQualityDropdown.options.RemoveAt(overAllQualityDropdown.options.Count - 1);
         }
         if (!startup)
         {
+            SetShadowQuality(index, false, false);
+            SetTextureQuality(index, false, false);
             changeCreated?.Invoke(this);
         }
     }
@@ -127,7 +161,7 @@ public class VideoSettingsManager : SettingsTab
     {
         if (value == 0)
         {
-            QualitySettings.antiAliasing = 0;
+           QualitySettings.antiAliasing = 0;
         }
         else if (value == 1)
         {
@@ -154,14 +188,7 @@ public class VideoSettingsManager : SettingsTab
 
     public void SetVsync(int value, bool startup)
     {
-        if(value == 1)
-        {
-            QualitySettings.vSyncCount = 0;
-        }
-        else
-        {
-            QualitySettings.vSyncCount = 1;
-        }
+        QualitySettings.vSyncCount = value;
         if (!startup)
         {
             changeCreated?.Invoke(this);
@@ -170,16 +197,17 @@ public class VideoSettingsManager : SettingsTab
 
     public void SetResolution(int value)
     {
-        SetResolution(value, false);
+        Resolution resolution = resolutionLoader.resolutions[value];
+        SetResolution(resolution.width, resolution.height, false);
+
     }
 
-    public void SetResolution(int value, bool startup)
+    public void SetResolution(int resX, int resY, bool startup)
     {
-        Resolution resolution = resolutionLoader.resolutions[value];
         FullScreenMode mode = Screen.fullScreenMode;
         bool fullScreen = Screen.fullScreen;
 
-        Screen.SetResolution(resolution.width, resolution.height, false);
+        Screen.SetResolution(resX, resY, false);
         Screen.fullScreenMode = mode;
         Screen.fullScreen = fullScreen;
         if (!startup)
@@ -216,11 +244,6 @@ public class VideoSettingsManager : SettingsTab
         }
     }
 
-    private void Update()
-    {
-        Debug.Log(Screen.currentResolution);
-        Debug.Log(QualitySettings.names[QualitySettings.GetQualityLevel()] + " Cascades: " + QualitySettings.shadowCascades + " Pixel light count: " + QualitySettings.pixelLightCount + " V-Sync: " + QualitySettings.vSyncCount + " Antiailisaing: " + QualitySettings.antiAliasing);
-    }
 
     public override void SaveSettings()
     {
@@ -238,21 +261,28 @@ public class VideoSettingsManager : SettingsTab
         }
         PlayerPrefs.SetInt("resolutionX", Screen.width);
         PlayerPrefs.SetInt("resolutionY", Screen.height);
-        PlayerPrefs.SetInt("VSync", QualitySettings.vSyncCount);
-        int antiAliasing = QualitySettings.antiAliasing;
-        if(antiAliasing == 0)
+        if(QualitySettings.vSyncCount == 0)
+        {
+            PlayerPrefs.SetInt("VSync", 0); ;
+
+        } else if(QualitySettings.vSyncCount == 1)
+        {
+            PlayerPrefs.SetInt("VSync", 1); ;
+        }
+
+        if(QualitySettings.antiAliasing == 0)
         {
             PlayerPrefs.SetInt("antiAliasing", 0);
         }
-        else if(antiAliasing == 2)
+        else if(QualitySettings.antiAliasing == 2)
         {
             PlayerPrefs.SetInt("antiAliasing", 1);
         }
-        else if(antiAliasing == 4)
+        else if(QualitySettings.antiAliasing == 4)
         {
             PlayerPrefs.SetInt("antiAliasing", 2);
         } 
-        else if(antiAliasing == 8)
+        else if(QualitySettings.antiAliasing == 8)
         {
             PlayerPrefs.SetInt("antiAliasing", 3);
         }
@@ -271,4 +301,6 @@ public class VideoSettingsManager : SettingsTab
         settingsReset?.Invoke();
         changeCreated?.Invoke(this);
     }
+
+
 }

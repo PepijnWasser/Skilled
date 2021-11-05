@@ -2,34 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShadowQualityLoader : DropDownLoader
+public class ShadowQualityLoader : VideoSetting
 {
-    protected override void Awake()
+    protected override void SetVisualsToSavedValues()
     {
-        dropdownName = "shadowQuality";
-        base.Awake();
-    }
-
-    protected override void HandleValue()
-    {
-        base.HandleValue();
-        manager.SetShadowQuality(value, false, true);
-    }
-
-    protected override void Reset()
-    {
-        base.Reset();
-        if(QualitySettings.shadowCascades == 0)
-        {
-            dropdown.SetValueWithoutNotify(0);
-        }
-        else if(QualitySettings.shadowCascades == 2)
-        {
-            dropdown.SetValueWithoutNotify(1);
-        }
-        else if(QualitySettings.shadowCascades == 4)
-        {
-            dropdown.SetValueWithoutNotify(2);
-        }
+        int value = PlayerPrefs.GetInt("shadowQuality");
+        dropdown.SetValueWithoutNotify(value);
     }
 }

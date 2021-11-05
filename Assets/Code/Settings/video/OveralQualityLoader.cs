@@ -2,13 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OveralQualityLoader : DropDownLoader
+public class OveralQualityLoader : VideoSetting
 {
-    protected override void Awake()
+    protected override void SetVisualsToSavedValues()
     {
-        base.Awake();
-        dropdownName = "overallQuality";
-        int value = PlayerPrefs.GetInt(dropdownName);
+        int value = PlayerPrefs.GetInt("overallQuality");
         if (value == 3)
         {
             List<string> newOptions = new List<string>();
@@ -16,12 +14,5 @@ public class OveralQualityLoader : DropDownLoader
             dropdown.AddOptions(newOptions);
         }
         dropdown.SetValueWithoutNotify(value);
-    }
-
-    protected override void Reset()
-    {
-        base.Reset();
-        //see value in videosettingsmanager
-        dropdown.SetValueWithoutNotify(2);
     }
 }

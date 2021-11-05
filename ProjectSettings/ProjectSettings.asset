@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: Pep&Luc
-  productName: SpaceError(Skilled)
+  companyName: Guts
+  productName: Game
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.4377358, g: 0.9187772, b: 1, a: 1}
