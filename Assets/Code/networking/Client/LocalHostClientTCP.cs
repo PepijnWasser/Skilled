@@ -13,6 +13,8 @@ public class LocalHostClientTCP : MonoBehaviour
 
     private static LocalHostClientTCP _instance;
 
+    bool tryingToConnect = false;
+
     public static LocalHostClientTCP Instance
     {
         get
@@ -35,28 +37,43 @@ public class LocalHostClientTCP : MonoBehaviour
     //prints a message on fail
     public bool ConnectToServer(System.Net.IPAddress address, int _port)
     {
-        try
+        if (tryingToConnect == false)
         {
-            tcpClient = new TcpClient();
+            tryingToConnect = true;
+            try
+            {
+                if(tcpClient == null)
+                {
+                    tcpClient = new TcpClient();
+                }
 
-            bool result = tcpClient.ConnectAsync(address, _port).Wait(1000);
-            if (result)
-            {
-                Debug.Log("Connected to server on port " + _port);
-                return true;
+                bool result = tcpClient.ConnectAsync(address, _port).Wait(100);
+                if (result)
+                {
+                    Debug.Log("Connected to server on port " + _port);
+                    tryingToConnect = false;
+                    return true;
+                }
+                else
+                {
+                    Debug.Log("failed to connect");
+                    tryingToConnect = false;
+                    return false;
+                }
+
             }
-            else
+            catch (Exception e)
             {
-                Debug.Log("failed to connect");
+                Debug.Log(e.Message);
+                tryingToConnect = false;
                 return false;
             }
-
         }
-        catch (Exception e)
+        else
         {
-            Debug.Log(e.Message);
             return false;
         }
+    
     }
 
 

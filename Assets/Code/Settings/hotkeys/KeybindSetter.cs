@@ -58,7 +58,6 @@ public class KeybindSetter : MonoBehaviour
     {
         if(action == actionToChange.name)
         {
-            Debug.Log(action);
             nameText.text = newBinding;
         }
     }
