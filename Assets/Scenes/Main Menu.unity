@@ -1581,7 +1581,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6909089, y: 1}
+    m_SensorSize: {x: 0.4775119, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2432,35 +2432,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2002371726835392120, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2002371726835392120, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2002371726835392120, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 2002371726835392120, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -75
       objectReference: {fileID: 0}
     - target: {fileID: 3021539462460341898, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3021539462460341898, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3021539462460341898, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 3021539462460341898, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -125
       objectReference: {fileID: 0}
     - target: {fileID: 4148054395141447650, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_Enabled
@@ -2500,19 +2500,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8217218951441186902, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8217218951441186902, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8217218951441186902, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 8217218951441186902, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 8217218951579786589, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: typeSelectors.Array.size
@@ -2525,6 +2525,10 @@ PrefabInstance:
     - target: {fileID: 8217218952136573960, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_Name
       value: SettingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 8217218952136573960, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8217218952136573972, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_Pivot.x
@@ -6032,10 +6036,10 @@ MonoBehaviour:
   finalBlitToCameraTarget: 0
   antialiasingMode: 0
   temporalAntialiasing:
-    jitterSpread: 0.75
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
+    jitterSpread: 1
+    sharpness: 0
+    stationaryBlending: 0.99
+    motionBlending: 0.99
   subpixelMorphologicalAntialiasing:
     quality: 2
   fastApproximateAntialiasing:
