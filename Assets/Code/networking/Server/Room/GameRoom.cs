@@ -256,9 +256,20 @@ public class GameRoom : Room
     void HandleUpdateStationHealthRequest(UpdateStationHealthRequest message, MyClient client)
     {
         TCPPacket outPacket = new TCPPacket();
-        UpdateStationHealthResponse updateStationHealthResponse = new UpdateStationHealthResponse(message.stationHealth);
-        outPacket.Write(updateStationHealthResponse);
-        SendTCPMessageToAllUsersExcept(outPacket, client);
+
+        if(message.stationHealth > 0)
+        {
+            UpdateStationHealthResponse updateStationHealthResponse = new UpdateStationHealthResponse(message.stationHealth);
+            outPacket.Write(updateStationHealthResponse);
+            SendTCPMessageToAllUsersExcept(outPacket, client);
+        }
+        else
+        {
+            JoinRoomMessage joinRoomMessage = new JoinRoomMessage(JoinRoomMessage.rooms.endScreen);
+            outPacket.Write(joinRoomMessage);
+            SendTCPMessageToAllUsers(outPacket);
+        }
+
     }
 
     //when a taskLocation on the taskManager produces a task. add that task to all users except the client who generated it
@@ -357,4 +368,5 @@ public class GameRoom : Room
         outPacket.Write(message);
         SendUDPMessageToAllUsersExcept(outPacket, client);
     }
+
 }

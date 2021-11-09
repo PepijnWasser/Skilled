@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class StationHealth : MonoBehaviour
 {
-    public int stationHealth = 100;
+    public static int stationHealth = 10;
 
     public delegate void Damage(int health);
     public static event Damage updateStationHealth;
-
-    public delegate void Destroyed();
-    public static event Destroyed stationDestroyed;
 
     private void Awake()
     {
@@ -34,14 +31,6 @@ public class StationHealth : MonoBehaviour
         stationHealth -= amount;
         updateStationHealth?.Invoke(stationHealth);
         Debug.Log(stationHealth);
-
-        if(stationHealth < 0)
-        {
-            if (ServerConnectionData.isOwner)
-            {
-                //TODO
-            }
-        }
     }
 
     void SetHealth(int health)

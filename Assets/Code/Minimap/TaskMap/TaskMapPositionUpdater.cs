@@ -22,6 +22,6 @@ public class TaskMapPositionUpdater : MapPositionUpdater
     void SetCamPosition(Vector3 newPos, float newZoom)
     {
         mapCamera.transform.position = newPos;
-        mapCamera.camera.orthographicSize = newZoom;
+        mapCamera.mapCam.orthographicSize = newZoom;
     }
 }

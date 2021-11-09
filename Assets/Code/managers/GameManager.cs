@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
             playerPositionUpdater.player = manager.player;
             playerPositionUpdater.playerNose = manager.nose;
 
-            playerMade?.Invoke(manager.player, manager.camera);
+            playerMade?.Invoke(manager.player, manager.playerCam);
         }
         else
         {

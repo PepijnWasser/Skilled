@@ -234,6 +234,11 @@ public class GameState : State
                     KeypadValidationMessage message = tempOBJ as KeypadValidationMessage;
                     HandleValidationMessage(message);
                 }
+                else if (tempOBJ is JoinRoomMessage)
+                {
+                    JoinRoomMessage message = tempOBJ as JoinRoomMessage;
+                    HandleJoinRoomMessage(message);
+                }
             }
         }
         catch (Exception e)
@@ -393,6 +398,19 @@ public class GameState : State
         catch (Exception e)
         {
             Debug.Log(e.Message);
+        }
+    }
+
+    //loads the end scene
+    void HandleJoinRoomMessage(JoinRoomMessage message)
+    {
+        if (message.roomToJoin == JoinRoomMessage.rooms.endScreen)
+        {
+            GameObject.FindObjectOfType<MySceneManager>().LoadScene("EndScene");
+        }
+        else
+        {
+            Debug.Log("request to join room failed");
         }
     }
 
