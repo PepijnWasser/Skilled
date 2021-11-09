@@ -1,18 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EndView : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Text tasksCompletedText;
 
-    // Update is called once per frame
-    void Update()
+    public void SetTasksCompleted(int amount)
     {
-        
+        tasksCompletedText.text = amount.ToString();
     }
 }

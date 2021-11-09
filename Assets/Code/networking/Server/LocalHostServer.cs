@@ -10,7 +10,7 @@ using System.Text;
 public class LocalHostServer : MonoBehaviour
 {
 	//if a heartbeat isn't received within the timeOutTime, kick the client
-	public float timeOutTime = 5f;
+	public float timeOutTime = 10f;
 	float secondCounter = 0;
 
 	UdpClient client = new UdpClient();
@@ -26,6 +26,7 @@ public class LocalHostServer : MonoBehaviour
 	Room activeRoom;
 	public LobbyRoom lobbyRoom;
 	public GameRoom gameRoom;
+	public EndRoom endRoom;
 	List<Room> activeRooms = new List<Room>();
 
 	//server info
@@ -103,9 +104,14 @@ public class LocalHostServer : MonoBehaviour
 		lobbyRoom = new LobbyRoom();
 		activeRooms.Add(lobbyRoom);
 		lobbyRoom.Initialize(this);
+
 		gameRoom = new GameRoom();
 		activeRooms.Add(gameRoom);
 		gameRoom.Initialize(this);
+
+		endRoom = new EndRoom();
+		activeRooms.Add(endRoom);
+		endRoom.Initialize(this);
 
 		lobbyRoom.server = this;
 		activeRoom = lobbyRoom;
@@ -115,11 +121,12 @@ public class LocalHostServer : MonoBehaviour
 	{
 		ProcessNewClients();
 		ProcessExistingClients();
-		//activeRoom.UpdateRoom();
 		foreach(Room room in activeRooms)
         {
 			room.UpdateRoom();
         }
+		
+
 		SendServerHeartbeats();
 		MovePlayersToDifferentRoom();
 	}
@@ -177,7 +184,7 @@ public class LocalHostServer : MonoBehaviour
 	//send the incoming tcp message to the activeRoom
 	private void HandleIncomingMessage(MyClient client, Room roomOfPlayer)
 	{
-		
+		Debug.Log("received TCP message from: " + client.playerName + " in: " + roomOfPlayer);
 		try
 		{
 			byte[] inBytes = NetworkUtils.Read(client.tcpClient.GetStream());

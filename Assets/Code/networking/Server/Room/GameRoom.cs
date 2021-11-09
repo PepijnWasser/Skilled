@@ -13,6 +13,8 @@ public class GameRoom : Room
     int worldSeed = Random.Range(1, 30);
     int amountOfSectors = 1;
 
+    int tasksCompleted = 0;
+
     //processes udp message of a given user
     public override void HandleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
     {
@@ -50,9 +52,10 @@ public class GameRoom : Room
         {
             RefreshHeartbeat(myClient);
         }
-        else if (tempOBJ is GameLoadedMessage)
+        else if (tempOBJ is SceneLoadedMessage)
         {
-            HandleGameLoadedMessage(myClient);
+            SceneLoadedMessage message = tempOBJ as SceneLoadedMessage;
+            HandleSceneLoadedMessage(message, myClient);
         }
         else if(tempOBJ is UpdateClientInfoMessage)
         {
@@ -167,12 +170,15 @@ public class GameRoom : Room
     }
 
     //tells the user to make a map with the given seed and amountOfSectors
-    void HandleGameLoadedMessage(MyClient client)
+    void HandleSceneLoadedMessage(SceneLoadedMessage _message, MyClient client)
     {
-        TCPPacket outPacket = new TCPPacket();
-        MakeGameMapMessage makeGameMapMessage = new MakeGameMapMessage(worldSeed, amountOfSectors);
-        outPacket.Write(makeGameMapMessage);
-        SendTCPMessageToTargetUser(outPacket, client);
+        if(_message.sceneJoined == SceneLoadedMessage.scenes.game)
+        {
+            TCPPacket outPacket = new TCPPacket();
+            MakeGameMapMessage makeGameMapMessage = new MakeGameMapMessage(worldSeed, amountOfSectors);
+            outPacket.Write(makeGameMapMessage);
+            SendTCPMessageToTargetUser(outPacket, client);
+        }
     }
 
     //sends a udp message to all users with the new location when a player moves
@@ -268,8 +274,10 @@ public class GameRoom : Room
             JoinRoomMessage joinRoomMessage = new JoinRoomMessage(JoinRoomMessage.rooms.endScreen);
             outPacket.Write(joinRoomMessage);
             SendTCPMessageToAllUsers(outPacket);
-        }
 
+            server.serverInfo.finishedGamesTasksCompleted = tasksCompleted;
+            server.AddRoomToMoveDictionary(this, server.endRoom);
+        }
     }
 
     //when a taskLocation on the taskManager produces a task. add that task to all users except the client who generated it
@@ -331,6 +339,8 @@ public class GameRoom : Room
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);
         SendTCPMessageToAllUsersExcept(outPacket, client);
+
+        tasksCompleted += 1;
     }
 
     void HandleKeypadTaskCompleted(KeypadCompletedMessage message, MyClient client)
@@ -338,6 +348,8 @@ public class GameRoom : Room
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);
         SendTCPMessageToAllUsersExcept(outPacket, client);
+
+        tasksCompleted += 1;
     }
 
     void HandleKeypadValidationMessage(KeypadValidationMessage message, MyClient client)
@@ -345,6 +357,8 @@ public class GameRoom : Room
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);
         SendTCPMessageToTargetUser(outPacket, server.serverInfo.serverOwner);
+
+        tasksCompleted += 1;
     }
 
     //send new pos to all users

@@ -10,6 +10,8 @@ public class ServerInfo
     public IPAddress ip;
 	public MyClient serverOwner;
 
+    public int finishedGamesTasksCompleted;
+
 
     public ServerInfo()
     {

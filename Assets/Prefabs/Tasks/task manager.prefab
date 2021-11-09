@@ -125,6 +125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxErrors: 9
-  timeBetweenErrors: {x: 20, y: 30}
-  timeToNextError: 50
+  timeBetweenErrors: {x: 1, y: 1}
+  timeToNextError: 5
   tasksWithoutErrors: []

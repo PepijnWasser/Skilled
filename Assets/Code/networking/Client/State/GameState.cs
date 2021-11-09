@@ -243,7 +243,7 @@ public class GameState : State
         }
         catch (Exception e)
         {
-            Debug.Log(e.Message +  e.Source);
+            Debug.Log(e.Message +  e.StackTrace);
             if (tcpClientNetwork.tcpClient.Connected)
             {
                 tcpClientNetwork.tcpClient.Close();
@@ -417,7 +417,7 @@ public class GameState : State
     //sending
     void SendGameLoadedMessage()
     {
-        GameLoadedMessage message = new GameLoadedMessage();
+        SceneLoadedMessage message = new SceneLoadedMessage(SceneLoadedMessage.scenes.game);
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
