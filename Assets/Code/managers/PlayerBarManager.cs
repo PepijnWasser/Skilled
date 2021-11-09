@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerBarManager : MonoBehaviour
 {
 
-    public Image backgroundColor;
+    public Text backgroundColor;
     public Text nameField;
     public Button nextColorButton;
     public Button previousColorButton;
