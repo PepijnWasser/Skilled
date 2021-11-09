@@ -173,8 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea451c7f2ab237f47867c66ec8bbc344, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avgFrameRate: 0
-  display_Text: {fileID: 268240884}
+  _fpsText: {fileID: 268240884}
+  _hudRefreshRate: 1
 --- !u!114 &268240884
 MonoBehaviour:
   m_ObjectHideFlags: 0

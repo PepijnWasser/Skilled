@@ -37,7 +37,6 @@ public class PlayerRotation : MonoBehaviour
     void SetSensitivity()
     {
         int savedSensitivity = PlayerPrefs.GetInt("sensitivity");
-        Debug.Log(savedSensitivity);
         if (savedSensitivity != 0)
         {
             sensitivity = savedSensitivity;
