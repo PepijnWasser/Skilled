@@ -4,17 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class FpsCounter : MonoBehaviour
-
 {
-    public int avgFrameRate;
-    public Text display_Text;
+    [SerializeField] private Text _fpsText;
+    [SerializeField] private float _hudRefreshRate = 1f;
 
-    public void Update()
+    private float _timer;
+
+    
+    private void Update()
     {
-        float current = 0;
-        current = Time.frameCount / Time.time;
-        avgFrameRate = (int)current;
-        display_Text.text = avgFrameRate.ToString() + " FPS";
+        if (Time.unscaledTime > _timer)
+        {
+            int fps = (int)(1f / Time.unscaledDeltaTime);
+            _fpsText.text = "FPS: " + fps;
+            _timer = Time.unscaledTime + _hudRefreshRate;
+        }
     }
+    
 }
 

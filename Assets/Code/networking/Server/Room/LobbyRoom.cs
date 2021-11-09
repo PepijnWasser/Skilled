@@ -20,11 +20,6 @@ public class LobbyRoom : Room
 		outPacket.Write(playerCountMessage);
 		SendTCPMessageToAllUsers(outPacket);
 
-		if (clientsInRoom.Count == 1)
-		{
-			server.SetOwner(newClient);
-		}
-
 
 		//send new player to all users
 		TCPPacket outpacket3 = new TCPPacket();
@@ -272,7 +267,7 @@ public class LobbyRoom : Room
 		JoinRoomMessage startRoomMessage = new JoinRoomMessage(JoinRoomMessage.rooms.game);
 		outPacket.Write(startRoomMessage);
 		SendTCPMessageToAllUsers(outPacket);
-		server.MovePlayersToDifferentRoom(this, server.gameRoom);
+		server.AddRoomToMoveDictionary(this, server.gameRoom);
     }
 
 	//send player disconnect message to all users

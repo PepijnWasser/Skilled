@@ -212,6 +212,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4844125569494563240}
+        m_TargetAssemblyTypeName: DeleteServer, Assembly-CSharp
+        m_MethodName: Leave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5919268784835019600
 GameObject:
   m_ObjectHideFlags: 0
@@ -641,6 +653,7 @@ GameObject:
   - component: {fileID: 5919268785238396647}
   - component: {fileID: 3750858999479022768}
   - component: {fileID: 6058440465728679208}
+  - component: {fileID: 4844125569494563240}
   m_Layer: 5
   m_Name: lobbyScreen
   m_TagString: Untagged
@@ -797,6 +810,18 @@ MonoBehaviour:
   chatInputField: {fileID: 5919268785662334046}
   chatDisplayContent: {fileID: 1356419290763179245}
   chatMessagePrefab: {fileID: 4970756283768244887, guid: b903d942f3ae6c34b85e3812916e8523, type: 3}
+--- !u!114 &4844125569494563240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919268785238396665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6b8f2aec26d3e346998a9b02f010d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5919268785276502941
 GameObject:
   m_ObjectHideFlags: 0

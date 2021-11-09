@@ -26,9 +26,12 @@ public class LocalHostServer : MonoBehaviour
 	Room activeRoom;
 	public LobbyRoom lobbyRoom;
 	public GameRoom gameRoom;
+	List<Room> activeRooms = new List<Room>();
 
 	//server info
 	public ServerInfo serverInfo = new ServerInfo();
+
+	public Dictionary<Room, Room> roomsToMoveTo = new Dictionary<Room, Room>();
 
 	private static LocalHostServer _instance;
 	public static LocalHostServer Instance
@@ -89,7 +92,7 @@ public class LocalHostServer : MonoBehaviour
 				_listener.Start();
 				finishedInitialization = true;
 				serverInfo.tcpPort = startPort + i;
-				Debug.Log("Server started on port: " + (startPort + i));
+				Debug.Log("Server started on port: " + (startPort + i), this.gameObject);
 			}
 			catch (Exception e)
 			{
@@ -98,8 +101,10 @@ public class LocalHostServer : MonoBehaviour
 			}
 		}
 		lobbyRoom = new LobbyRoom();
+		activeRooms.Add(lobbyRoom);
 		lobbyRoom.Initialize(this);
 		gameRoom = new GameRoom();
+		activeRooms.Add(gameRoom);
 		gameRoom.Initialize(this);
 
 		lobbyRoom.server = this;
@@ -110,8 +115,13 @@ public class LocalHostServer : MonoBehaviour
 	{
 		ProcessNewClients();
 		ProcessExistingClients();
-		activeRoom.UpdateRoom();
+		//activeRoom.UpdateRoom();
+		foreach(Room room in activeRooms)
+        {
+			room.UpdateRoom();
+        }
 		SendServerHeartbeats();
+		MovePlayersToDifferentRoom();
 	}
 
 	//if there is a tcpclient that wants to join, accept and give him a MyClient
@@ -123,6 +133,12 @@ public class LocalHostServer : MonoBehaviour
 			{
 				MyClient newClient = new MyClient(_listener.AcceptTcpClient(), timeOutTime, MyClient.colors.blue, newPlayerID, "");
 				newPlayerID += 1;
+
+				if(serverInfo.serverOwner == null)
+                {
+					serverInfo.serverOwner = newClient;
+				}
+
 				lobbyRoom.AddMember(newClient);
 				connectedClients.Add(newClient);
 			}
@@ -140,13 +156,28 @@ public class LocalHostServer : MonoBehaviour
 		{
 			if (connectedClients[i].tcpClient.Available == 0) continue;
 
-			HandleIncomingMessage(connectedClients[i]);
+			foreach(Room room in activeRooms)
+            {
+                if (room.GetMembers().Contains(connectedClients[i]))
+                {
+                    try
+                    {
+						HandleIncomingMessage(connectedClients[i], room);
+					}
+					catch(Exception e)
+                    {
+						Debug.Log(e.Message);
+                    }
+                }
+            }
+			
 		}
 	}
 
 	//send the incoming tcp message to the activeRoom
-	private void HandleIncomingMessage(MyClient client)
+	private void HandleIncomingMessage(MyClient client, Room roomOfPlayer)
 	{
+		
 		try
 		{
 			byte[] inBytes = NetworkUtils.Read(client.tcpClient.GetStream());
@@ -154,12 +185,13 @@ public class LocalHostServer : MonoBehaviour
 
 			var tempOBJ = inPacket.ReadObject();
 
-			activeRoom.HandleTCPNetworkMessageFromUser(tempOBJ, client);
+			roomOfPlayer.HandleTCPNetworkMessageFromUser(tempOBJ, client);
 		}
 		catch (Exception e)
 		{
 			Console.WriteLine("Error in Handling Incoming Data: " + e.Message);
 		}
+		
 	}
 
 	//receive function for udpCommunication
@@ -201,12 +233,6 @@ public class LocalHostServer : MonoBehaviour
 		}
 	}
 
-	//set the server owner
-	public void SetOwner(MyClient client)
-    {
-		serverInfo.serverOwner = client;
-    }
-
 	//gets the tcpport the server is listening on
 	public int GetServerTCPPort()
 	{
@@ -221,27 +247,31 @@ public class LocalHostServer : MonoBehaviour
 		connectedClients.Remove(clientToRemove);		
 	}
 
-	//move players from room x to room y
-	public void MovePlayersToDifferentRoom(Room originalRoom, Room newRoom)
+	public void AddRoomToMoveDictionary(Room originalRoom, Room newRoom)
     {
-		foreach(MyClient client in originalRoom.GetMembers())
-		{ 
-			newRoom.AddMember(client);
-        }
-		SetActiveRoom(newRoom);
-		originalRoom.ClearMembers();
+		roomsToMoveTo.Add(originalRoom, newRoom);
 	}
 
-	//sets the active room
-	void SetActiveRoom(Room newActiveRoom)
+	//move players from room x to room y
+	void MovePlayersToDifferentRoom()
     {
-		activeRoom = newActiveRoom;
-    }
+		foreach (KeyValuePair<Room, Room> entry in roomsToMoveTo)
+		{
+			foreach (MyClient client in entry.Key.GetMembers())
+			{
+				entry.Value.AddMember(client);
+			}
+			//SetActiveRoom(newRoom);
+			entry.Key.ClearMembers();
+		}
+
+		roomsToMoveTo.Clear();
+	}
 
 	//send a tcpMessage to all connected clients
 	void SendTCPMessageToAllUsers(TCPPacket outPacket)
 	{
-		foreach (MyClient client in activeRoom.GetMembers())
+		foreach (MyClient client in connectedClients)
 		{
 			try
 			{

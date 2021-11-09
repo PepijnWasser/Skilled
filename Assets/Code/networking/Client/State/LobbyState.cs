@@ -233,7 +233,9 @@ public class LobbyState : State
         {
             SendLeaveServerMessage();
             GetComponent<CreateCJScreen>().CreateCJScreenItem();
+            Debug.Log("Disconnected");
             Destroy(this.gameObject);
+
         }
     }
 }

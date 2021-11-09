@@ -42,7 +42,7 @@ public class LocalHostClientTCP : MonoBehaviour
             tryingToConnect = true;
             try
             {
-                if(tcpClient == null)
+                if(tcpClient == null || tcpClient.Connected)
                 {
                     tcpClient = new TcpClient();
                 }
@@ -65,6 +65,7 @@ public class LocalHostClientTCP : MonoBehaviour
             catch (Exception e)
             {
                 Debug.Log(e.Message);
+                Debug.Log(e.StackTrace);
                 tryingToConnect = false;
                 return false;
             }
