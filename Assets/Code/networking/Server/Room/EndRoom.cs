@@ -58,4 +58,9 @@ public class EndRoom : Room
             //server.AddRoomToMoveDictionary(this, server.lobbyRoom);
         }
     }
+
+    protected override void Reset()
+    {
+  
+    }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StationHealth : MonoBehaviour
 {
-    public static int stationHealth = 4;
+    public int stationHealth = 4;
 
     public delegate void Damage(int health);
     public static event Damage updateStationHealth;

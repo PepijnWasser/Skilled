@@ -277,6 +277,8 @@ public class GameRoom : Room
 
             server.serverInfo.finishedGamesTasksCompleted = tasksCompleted;
             server.AddRoomToMoveDictionary(this, server.endRoom);
+
+            Reset();
         }
     }
 
@@ -383,4 +385,11 @@ public class GameRoom : Room
         SendUDPMessageToAllUsersExcept(outPacket, client);
     }
 
+    protected override void Reset()
+    {
+        mapMadeMessages = 0;
+        worldSeed = Random.Range(1, 30);
+
+        tasksCompleted = 0;
+    }
 }

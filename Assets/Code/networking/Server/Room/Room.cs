@@ -177,5 +177,7 @@ public abstract class Room
 
 		}
 	}
+
+	protected abstract void Reset();
 }
 

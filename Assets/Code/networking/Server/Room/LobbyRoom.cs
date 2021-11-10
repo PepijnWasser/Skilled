@@ -362,4 +362,9 @@ public class LobbyRoom : Room
 		}
 		return true;
 	}
+
+    protected override void Reset()
+    {
+
+    }
 }

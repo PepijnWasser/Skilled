@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public PlayerPositionUpdater playerPositionUpdater;
     Dictionary<int, PlayerPrefabManager> characterDictionary = new Dictionary<int, PlayerPrefabManager>();
 
-    List<PlayerSpawnLocation> availiblePlayerSpawnLocations;
+    List<PlayerSpawnLocation> availiblePlayerSpawnLocations = new List<PlayerSpawnLocation>();
 
 
     public delegate void PlayerMade(GameObject player, Camera cam);
@@ -19,16 +19,21 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        MapGenerator.OnCompletion += GetAvailibleLocations;
+     //   MapGenerator.OnCompletion += GetAvailibleSpawnLocations;
     }
 
     private void OnDestroy()
     {
-        MapGenerator.OnCompletion -= GetAvailibleLocations;
+      //  MapGenerator.OnCompletion -= GetAvailibleSpawnLocations;
     }
 
     public void MakePlayerCharacter(bool playerControlled, Vector3 position, string _name, int playerID)
     {
+        if(availiblePlayerSpawnLocations.Count == 0 || availiblePlayerSpawnLocations == null)
+        {
+            GetAvailibleSpawnLocations();
+        }
+
         PlayerSpawnLocation newlocation = Extensions.RandomListItem(availiblePlayerSpawnLocations);
         availiblePlayerSpawnLocations.Remove(newlocation);
 
@@ -80,10 +85,9 @@ public class GameManager : MonoBehaviour
     }
 
     //gets all positions a player can spawn
-    void GetAvailibleLocations()
+    void GetAvailibleSpawnLocations()
     {
-         availiblePlayerSpawnLocations = GameObject.FindObjectsOfType<PlayerSpawnLocation>().ToList();
-    }
-
-    
+        availiblePlayerSpawnLocations.Clear();
+        availiblePlayerSpawnLocations = GameObject.FindObjectsOfType<PlayerSpawnLocation>().ToList();
+    }  
 }

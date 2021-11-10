@@ -155,7 +155,7 @@ public class GameState : State
     //handle tcp messages
     protected override void Update()
     {
-        try
+      ///  try
         {
             if (tcpClientNetwork != null && tcpClientNetwork.tcpClient.Connected && tcpClientNetwork.tcpClient.Available > 0)
             {
@@ -241,12 +241,12 @@ public class GameState : State
                 }
             }
         }
-        catch (Exception e)
+ //       catch (Exception e)
         {
-            Debug.Log(e.Message +  e.StackTrace);
-            if (tcpClientNetwork.tcpClient.Connected)
+    //        Debug.Log(e.Message +  e.StackTrace);
+        //    if (tcpClientNetwork.tcpClient.Connected)
             {
-                tcpClientNetwork.tcpClient.Close();
+      //          tcpClientNetwork.tcpClient.Close();
             }
         }
     }

@@ -130,7 +130,6 @@ public class LocalHostServer : MonoBehaviour
 		foreach(Room room in activeRooms)
         {
 			room.UpdateRoom();
-			Debug.Log(room + " " + room.GetMembers().Count);
         }
 		
 
@@ -192,7 +191,7 @@ public class LocalHostServer : MonoBehaviour
 	//send the incoming tcp message to the activeRoom
 	private void HandleIncomingMessage(MyClient client, Room roomOfPlayer)
 	{
-		Debug.Log("received TCP message from: " + client.playerName + " in: " + roomOfPlayer);
+		//Debug.Log("received TCP message from: " + client.playerName + " in: " + roomOfPlayer);
 		try
 		{
 			byte[] inBytes = NetworkUtils.Read(client.tcpClient.GetStream());
@@ -225,7 +224,7 @@ public class LocalHostServer : MonoBehaviour
 			if (connectedClient.endPoint.Address.ToString() == RemoteIP.Address.ToString() && connectedClient.sendPort.ToString() == RemoteIP.Port.ToString())
             {
 				activeRoom.HandleUDPNetworkMessageFromUser(TempOBJ, connectedClient);
-				Debug.Log("received UDP message from: " + connectedClient.playerName);
+				//Debug.Log("received UDP message from: " + connectedClient.playerName);
 				break;
             }
         }
