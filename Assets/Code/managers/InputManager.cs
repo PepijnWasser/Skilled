@@ -27,9 +27,27 @@ public class InputManager : MonoBehaviour
     public delegate void BindingsReset(string action, string newBinding, int index = 0);
     public static event BindingsReset bindingSet;
 
+    private static InputManager _instance;
+    public static InputManager Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(gameObject);
+
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
 
         Starter();
     }

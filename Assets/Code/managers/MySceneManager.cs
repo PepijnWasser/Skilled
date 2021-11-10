@@ -11,11 +11,6 @@ public class MySceneManager : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = GameObject.FindObjectOfType<MySceneManager>();
-            }
-
             return _instance;
         }
     }
@@ -23,6 +18,15 @@ public class MySceneManager : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
     }
 
     public void LoadScene(string sceneName)

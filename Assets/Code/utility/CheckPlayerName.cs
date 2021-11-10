@@ -9,6 +9,18 @@ public class CheckPlayerName : MonoBehaviour
     public GameObject CJScreenPrefab;
     public GameObject nameInput;
 
+    MySceneManager sceneManager;
+
+    private void Start()
+    {
+        sceneManager = GameObject.FindObjectOfType<MySceneManager>();
+        if(PlayerInfo.playerName != null)
+        {
+            Instantiate(CJScreenPrefab);
+            Destroy(nameInput);
+        }
+    }
+
     public bool CheckValidName()
     {
         if(nameField.text != "")

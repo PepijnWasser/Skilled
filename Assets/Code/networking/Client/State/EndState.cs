@@ -6,12 +6,15 @@ using System;
 public class EndState : State
 {
     EndView endview;
+    MySceneManager sceneManager;
 
     protected override void Awake()
     {
         base.Awake();
         endview = GetComponent<EndView>();
-        SendGameLoadedMessage();
+        SendEndScreenLoadedMessage();
+        Cursor.lockState = CursorLockMode.Confined;
+        sceneManager = GameObject.FindObjectOfType<MySceneManager>();
     }
 
     //handle tcp messages
@@ -31,6 +34,11 @@ public class EndState : State
                     TaskscompletedMessage message = tempOBJ as TaskscompletedMessage;
                     HandleTasksCompleted(message);
                 }
+                else if(tempOBJ is JoinRoomMessage)
+                {
+                    JoinRoomMessage message = tempOBJ as JoinRoomMessage;
+                    HandleJoinRoomMessage(message);
+                }
             }
         }
         catch (Exception e)
@@ -43,14 +51,32 @@ public class EndState : State
         }
     }
 
-    void SendGameLoadedMessage()
+    void SendEndScreenLoadedMessage()
     {
         SceneLoadedMessage message = new SceneLoadedMessage(SceneLoadedMessage.scenes.endScreen);
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
+    public void SendLoadLobbyMessage()
+    {
+        JoinRoomRequest request = new JoinRoomRequest(JoinRoomRequest.rooms.lobby);
+        tcpClientNetwork.SendObjectThroughTCP(request);
+    }
+
     void HandleTasksCompleted(TaskscompletedMessage message)
     {
         endview.SetTasksCompleted(message.amountOfTasksCompleted);
+    }
+
+    void HandleJoinRoomMessage(JoinRoomMessage message)
+    {
+        if(message.roomToJoin == JoinRoomMessage.rooms.lobby)
+        {
+            sceneManager.LoadScene("LobbyScene");
+        }
+        else
+        {
+            Debug.Log("unknown room");
+        }
     }
 }

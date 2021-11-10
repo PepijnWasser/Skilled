@@ -272,7 +272,7 @@ public class GameState : State
     {
         try
         {
-            UnityMainThread.wkr.AddJob(() =>
+            UnityMainThread._instance.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
                 gameManager.MovePlayer(message.playerID, message.playerPosition, message.playerRotation, message.playerNoseRotation);
@@ -357,7 +357,7 @@ public class GameState : State
     {
         try
         {
-            UnityMainThread.wkr.AddJob(() =>
+            UnityMainThread._instance.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
                 updatePlayerCamPosition?.Invoke(message.cameraPosition, message.zoom);
@@ -373,7 +373,7 @@ public class GameState : State
     {
         try
         {
-            UnityMainThread.wkr.AddJob(() =>
+            UnityMainThread._instance.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
                 updateEnergyCamPosition?.Invoke(message.cameraPosition, message.zoom);
@@ -389,7 +389,7 @@ public class GameState : State
     {
         try
         {
-            UnityMainThread.wkr.AddJob(() =>
+            UnityMainThread._instance.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
                 updateTaskCamPosition?.Invoke(message.cameraPosition, message.zoom);

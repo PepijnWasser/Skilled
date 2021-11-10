@@ -32,18 +32,15 @@ public class LocalHostServer : MonoBehaviour
 	//server info
 	public ServerInfo serverInfo = new ServerInfo();
 
-	public Dictionary<Room, Room> roomsToMoveTo = new Dictionary<Room, Room>();
+	public Dictionary<Room, Room> movePlayersFromXToY = new Dictionary<Room, Room>();
+	public Dictionary<MyClient, Room> movePlayerToY = new Dictionary<MyClient, Room>();
+
 
 	private static LocalHostServer _instance;
 	public static LocalHostServer Instance
 	{
 		get
 		{
-			if (_instance == null)
-			{
-				_instance = GameObject.FindObjectOfType<LocalHostServer>();
-			}
-
 			return _instance;
 		}
 	}
@@ -52,6 +49,15 @@ public class LocalHostServer : MonoBehaviour
 	void Awake()
 	{
 		DontDestroyOnLoad(gameObject);
+
+		if(_instance != null && _instance != this)
+        {
+			Destroy(this.gameObject);
+        }
+        else
+        {
+			_instance = this;
+        }
 	}
 
 	private void Start()
@@ -124,11 +130,13 @@ public class LocalHostServer : MonoBehaviour
 		foreach(Room room in activeRooms)
         {
 			room.UpdateRoom();
+			Debug.Log(room + " " + room.GetMembers().Count);
         }
 		
 
 		SendServerHeartbeats();
 		MovePlayersToDifferentRoom();
+		MovePlayerToDifferentRoom();
 	}
 
 	//if there is a tcpclient that wants to join, accept and give him a MyClient
@@ -256,13 +264,18 @@ public class LocalHostServer : MonoBehaviour
 
 	public void AddRoomToMoveDictionary(Room originalRoom, Room newRoom)
     {
-		roomsToMoveTo.Add(originalRoom, newRoom);
+		movePlayersFromXToY.Add(originalRoom, newRoom);
 	}
+
+	public void AddPlayerToMoveDictionary(MyClient client, Room newRoom)
+    {
+		movePlayerToY.Add(client, newRoom);
+    }
 
 	//move players from room x to room y
 	void MovePlayersToDifferentRoom()
     {
-		foreach (KeyValuePair<Room, Room> entry in roomsToMoveTo)
+		foreach (KeyValuePair<Room, Room> entry in movePlayersFromXToY)
 		{
 			foreach (MyClient client in entry.Key.GetMembers())
 			{
@@ -272,8 +285,29 @@ public class LocalHostServer : MonoBehaviour
 			entry.Key.ClearMembers();
 		}
 
-		roomsToMoveTo.Clear();
+		movePlayersFromXToY.Clear();
 	}
+
+	void MovePlayerToDifferentRoom()
+    {
+		foreach (KeyValuePair<MyClient, Room> entry in movePlayerToY)
+		{
+			foreach(Room room in activeRooms)
+            {
+				List<MyClient> clientsInRoom = new List<MyClient>(room.GetMembers());
+                if (clientsInRoom.Contains(entry.Key))
+                {
+					room.RemoveMember(entry.Key);
+					break;
+                }
+            }
+
+			entry.Value.AddMember(entry.Key);
+		}
+
+		movePlayerToY.Clear();
+	}
+
 
 	//send a tcpMessage to all connected clients
 	void SendTCPMessageToAllUsers(TCPPacket outPacket)

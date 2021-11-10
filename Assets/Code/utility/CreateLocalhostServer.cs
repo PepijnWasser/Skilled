@@ -13,10 +13,13 @@ public class CreateLocalhostServer : MonoBehaviour
     public LocalHostServer localHostServerPrefab;
     public GameObject lobbyPrefab;
 
+    MySceneManager sceneManager;
+
 
     private void Start()
     {
         localHostClient = GameObject.FindObjectOfType<LocalHostClientTCP>();
+        sceneManager = GameObject.FindObjectOfType<MySceneManager>();
     }
 
     public void CreateLocalHostServer()
@@ -27,8 +30,9 @@ public class CreateLocalhostServer : MonoBehaviour
         IPAddress _serverIP = Extensions.GetLocalIPAddress();
         if (localHostClient.ConnectToServer(_serverIP, server.GetServerTCPPort()))
         {
-            Instantiate(lobbyPrefab);
-            Destroy(this.gameObject);
+            //Instantiate(lobbyPrefab);
+            //Destroy(this.gameObject);
+            sceneManager.LoadScene("LobbyScene");
         }
         else
         {

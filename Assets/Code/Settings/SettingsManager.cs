@@ -19,6 +19,31 @@ public class SettingsManager : MonoBehaviour
     CursorLockMode originalMode = CursorLockMode.Confined;
     bool originallyVisible = true;
 
+    
+    private static SettingsManager _instance;
+
+    public static SettingsManager Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
+
     private void Start()
     {
         InputManager.savedControls.MainMenu.OpenSettings.performed += _ => SwitchOpen();

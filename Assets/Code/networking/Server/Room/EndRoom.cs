@@ -15,6 +15,11 @@ public class EndRoom : Room
             SceneLoadedMessage message = tempOBJ as SceneLoadedMessage;
             HandleSceneLoadedMessage(message, myClient);
         }
+        else if(tempOBJ is JoinRoomRequest)
+        {
+            JoinRoomRequest request = tempOBJ as JoinRoomRequest;
+            HandleJoinRoomRequest(request, myClient);
+        }
     }
 
     public override void HandleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
@@ -35,6 +40,22 @@ public class EndRoom : Room
             TaskscompletedMessage taskCompletedMessage = new TaskscompletedMessage(5);
             outPacket.Write(taskCompletedMessage);
             SendTCPMessageToTargetUser(outPacket, myClient);
+        }
+    }
+
+    void HandleJoinRoomRequest(JoinRoomRequest request, MyClient myClient)
+    {
+        if(request.roomToJoin == JoinRoomRequest.rooms.lobby)
+        {
+            TCPPacket outPacket = new TCPPacket();
+            JoinRoomMessage message = new JoinRoomMessage(JoinRoomMessage.rooms.lobby);
+            outPacket.Write(message);
+            SendTCPMessageToTargetUser(outPacket, myClient);
+
+            server.timeOutTime = 6f;
+
+            server.AddPlayerToMoveDictionary(myClient, server.lobbyRoom);
+            //server.AddRoomToMoveDictionary(this, server.lobbyRoom);
         }
     }
 }
