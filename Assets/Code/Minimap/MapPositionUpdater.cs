@@ -27,11 +27,11 @@ public class MapPositionUpdater : MonoBehaviour
             secondCounter = 0;
             if (mapCamera != null)
             {
-                if (mapCamera.transform.position != oldPos || mapCamera.camera.orthographicSize != oldZoom)
+                if (mapCamera.transform.position != oldPos || mapCamera.mapCam.orthographicSize != oldZoom)
                 {
-                    positionChanged?.Invoke(mapCamera.transform.position, mapCamera.camera.orthographicSize, this);
+                    positionChanged?.Invoke(mapCamera.transform.position, mapCamera.mapCam.orthographicSize, this);
                     oldPos = mapCamera.transform.position;
-                    oldZoom = mapCamera.camera.orthographicSize;
+                    oldZoom = mapCamera.mapCam.orthographicSize;
                 }
             }
             else

@@ -200,9 +200,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3750858999479022768}
-        m_TargetAssemblyTypeName: CreateCJScreen, Assembly-CSharp
-        m_MethodName: CreateCJScreenItem
+      - m_Target: {fileID: 2791583078373459512}
+        m_TargetAssemblyTypeName: LoadMenu, Assembly-CSharp
+        m_MethodName: LoadMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -651,9 +651,9 @@ GameObject:
   - component: {fileID: 5919268785238396666}
   - component: {fileID: 5919268785238396646}
   - component: {fileID: 5919268785238396647}
-  - component: {fileID: 3750858999479022768}
   - component: {fileID: 6058440465728679208}
   - component: {fileID: 4844125569494563240}
+  - component: {fileID: 2791583078373459512}
   m_Layer: 5
   m_Name: lobbyScreen
   m_TagString: Untagged
@@ -782,19 +782,6 @@ MonoBehaviour:
   startRoomButton: {fileID: 5919268785199162353}
   serverIP: {fileID: 4190688840267091564}
   serverPort: {fileID: 669011899679290734}
---- !u!114 &3750858999479022768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5919268785238396665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b72542527c2c4384b952ab64af73a5d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CJScreenprefab: {fileID: 899979175462829657, guid: 82b70aefbcaaca046a57b51b8f65a5f0, type: 3}
 --- !u!114 &6058440465728679208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -820,6 +807,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e6b8f2aec26d3e346998a9b02f010d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2791583078373459512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5919268785238396665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d54dddfe75c17d848a2f965732fa0be6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &5919268785276502941

@@ -155,7 +155,7 @@ public class GameState : State
     //handle tcp messages
     protected override void Update()
     {
-        try
+      ///  try
         {
             if (tcpClientNetwork != null && tcpClientNetwork.tcpClient.Connected && tcpClientNetwork.tcpClient.Available > 0)
             {
@@ -234,14 +234,19 @@ public class GameState : State
                     KeypadValidationMessage message = tempOBJ as KeypadValidationMessage;
                     HandleValidationMessage(message);
                 }
+                else if (tempOBJ is JoinRoomMessage)
+                {
+                    JoinRoomMessage message = tempOBJ as JoinRoomMessage;
+                    HandleJoinRoomMessage(message);
+                }
             }
         }
-        catch (Exception e)
+ //       catch (Exception e)
         {
-            Debug.Log(e.Message +  e.Source);
-            if (tcpClientNetwork.tcpClient.Connected)
+    //        Debug.Log(e.Message +  e.StackTrace);
+        //    if (tcpClientNetwork.tcpClient.Connected)
             {
-                tcpClientNetwork.tcpClient.Close();
+      //          tcpClientNetwork.tcpClient.Close();
             }
         }
     }
@@ -267,7 +272,7 @@ public class GameState : State
     {
         try
         {
-            UnityMainThread.wkr.AddJob(() =>
+            UnityMainThread._instance.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
                 gameManager.MovePlayer(message.playerID, message.playerPosition, message.playerRotation, message.playerNoseRotation);
@@ -352,7 +357,7 @@ public class GameState : State
     {
         try
         {
-            UnityMainThread.wkr.AddJob(() =>
+            UnityMainThread._instance.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
                 updatePlayerCamPosition?.Invoke(message.cameraPosition, message.zoom);
@@ -368,7 +373,7 @@ public class GameState : State
     {
         try
         {
-            UnityMainThread.wkr.AddJob(() =>
+            UnityMainThread._instance.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
                 updateEnergyCamPosition?.Invoke(message.cameraPosition, message.zoom);
@@ -384,7 +389,7 @@ public class GameState : State
     {
         try
         {
-            UnityMainThread.wkr.AddJob(() =>
+            UnityMainThread._instance.AddJob(() =>
             {
                 // Will run on main thread, hence issue is solved
                 updateTaskCamPosition?.Invoke(message.cameraPosition, message.zoom);
@@ -396,10 +401,23 @@ public class GameState : State
         }
     }
 
+    //loads the end scene
+    void HandleJoinRoomMessage(JoinRoomMessage message)
+    {
+        if (message.roomToJoin == JoinRoomMessage.rooms.endScreen)
+        {
+            GameObject.FindObjectOfType<MySceneManager>().LoadScene("EndScene");
+        }
+        else
+        {
+            Debug.Log("request to join room failed");
+        }
+    }
+
     //sending
     void SendGameLoadedMessage()
     {
-        GameLoadedMessage message = new GameLoadedMessage();
+        SceneLoadedMessage message = new SceneLoadedMessage(SceneLoadedMessage.scenes.game);
         tcpClientNetwork.SendObjectThroughTCP(message);
     }
 

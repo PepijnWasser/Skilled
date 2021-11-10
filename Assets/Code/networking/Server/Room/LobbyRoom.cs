@@ -119,9 +119,10 @@ public class LobbyRoom : Room
 		{
 			HandleHelpRequest(client);
 		}
-		else if(tempOBJ is StartRoomRequest)
+		else if(tempOBJ is JoinRoomRequest)
         {
-			HandleStartRoomRequest();
+			JoinRoomRequest message = tempOBJ as JoinRoomRequest;
+			HandleJoinRoomRequest(message);
         }
 	}
 
@@ -261,13 +262,16 @@ public class LobbyRoom : Room
     }
 
 	//when the owner starts the room this, move all members to the game room
-	void HandleStartRoomRequest()
+	void HandleJoinRoomRequest(JoinRoomRequest message)
     {
-		TCPPacket outPacket = new TCPPacket();
-		JoinRoomMessage startRoomMessage = new JoinRoomMessage(JoinRoomMessage.rooms.game);
-		outPacket.Write(startRoomMessage);
-		SendTCPMessageToAllUsers(outPacket);
-		server.AddRoomToMoveDictionary(this, server.gameRoom);
+		if(message.roomToJoin == JoinRoomRequest.rooms.game)
+        {
+			TCPPacket outPacket = new TCPPacket();
+			JoinRoomMessage startRoomMessage = new JoinRoomMessage(JoinRoomMessage.rooms.game);
+			outPacket.Write(startRoomMessage);
+			SendTCPMessageToAllUsers(outPacket);
+			server.AddRoomToMoveDictionary(this, server.gameRoom);
+		}
     }
 
 	//send player disconnect message to all users
@@ -358,4 +362,9 @@ public class LobbyRoom : Room
 		}
 		return true;
 	}
+
+    protected override void Reset()
+    {
+
+    }
 }

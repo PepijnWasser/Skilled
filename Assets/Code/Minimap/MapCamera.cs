@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapCamera : MonoBehaviour
 {
-    public Camera camera;
+    public Camera mapCam;
 
     public float speed;
 
@@ -17,7 +17,7 @@ public class MapCamera : MonoBehaviour
     private void Start()
     {
         transform.rotation = Quaternion.Euler(90, 0, 0);
-        transform.position = new Vector3(camera.transform.position.x, 100, camera.transform.position.z);
+        transform.position = new Vector3(mapCam.transform.position.x, 100, mapCam.transform.position.z);
         originalPos = transform.position;
     }
 
@@ -31,25 +31,25 @@ public class MapCamera : MonoBehaviour
         Vector3 difference = Vector3.zero;
         if (Input.GetMouseButtonDown(0))
         {
-            dragOrigin = camera.ScreenToWorldPoint(Input.mousePosition);
+            dragOrigin = mapCam.ScreenToWorldPoint(Input.mousePosition);
         }
 
         if (Input.GetMouseButton(0))
         {
-            difference = dragOrigin - camera.ScreenToWorldPoint(Input.mousePosition);
+            difference = dragOrigin - mapCam.ScreenToWorldPoint(Input.mousePosition);
         }
 
         Vector3 direction = Vector3.zero;
         direction.z += Input.GetAxisRaw("Vertical");
         direction.x += Input.GetAxisRaw("Horizontal");
 
-        camera.transform.position += difference;
-        camera.transform.position += direction * Time.deltaTime * speed;
+        mapCam.transform.position += difference;
+        mapCam.transform.position += direction * Time.deltaTime * speed;
     }
 
     public void ZoomCamera()
     {
-        float camZoom = camera.orthographicSize;
+        float camZoom = mapCam.orthographicSize;
 
         if(Input.mouseScrollDelta.y < 0)
         {
@@ -60,7 +60,7 @@ public class MapCamera : MonoBehaviour
             camZoom -= zoomSensitivity * Time.deltaTime;
         }
         camZoom = Mathf.Clamp(camZoom, 10, 100);
-        camera.orthographicSize = camZoom;
+        mapCam.orthographicSize = camZoom;
     }
 
     public void SetPosition(Vector3 newPos)

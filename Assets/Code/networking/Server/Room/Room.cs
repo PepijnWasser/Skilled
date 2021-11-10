@@ -23,7 +23,7 @@ public abstract class Room
 	//method for adding a member to the room
 	public virtual void AddMember(MyClient clientToAdd)
 	{
-		Debug.Log("accepted new member to: " + this.GetType());
+		Debug.Log("moved " + clientToAdd.playerName + " to: " + this.GetType());
 		clientsInRoom.Add(clientToAdd);
 	}
 
@@ -71,12 +71,13 @@ public abstract class Room
 			if (clientsInRoom[i].heartbeat <= 0)
 			{
 				clientsInRoomToRemove.Add(clientsInRoom[i]);
+				Debug.Log(clientsInRoom[i].playerName + " is being removed because " + clientsInRoom[i].heartbeat);
 			}
 		}
 
 		foreach (MyClient client in clientsInRoomToRemove)
 		{
-			Debug.Log("timeout" + client.playerName);
+			Debug.Log("timeout " + client.playerName);
 			removeAndCloseMember(client);
 		}
 	}
@@ -176,5 +177,7 @@ public abstract class Room
 
 		}
 	}
+
+	protected abstract void Reset();
 }
 

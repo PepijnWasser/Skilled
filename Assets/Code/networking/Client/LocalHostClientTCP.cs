@@ -11,19 +11,13 @@ public class LocalHostClientTCP : MonoBehaviour
 
     [HideInInspector] public TcpClient tcpClient;
 
-    private static LocalHostClientTCP _instance;
-
     bool tryingToConnect = false;
 
+    private static LocalHostClientTCP _instance;
     public static LocalHostClientTCP Instance
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = GameObject.FindObjectOfType<LocalHostClientTCP>();
-            }
-
             return _instance;
         }
     }
@@ -31,6 +25,15 @@ public class LocalHostClientTCP : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
     }
 
     //tries to connect in 1 second

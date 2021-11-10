@@ -23,6 +23,6 @@ public class EnergyMapPositionUpdater : MapPositionUpdater
     {
         Debug.Log(newZoom);
         mapCamera.transform.position = newPos;
-        mapCamera.camera.orthographicSize = newZoom;
+        mapCamera.mapCam.orthographicSize = newZoom;
     }
 }

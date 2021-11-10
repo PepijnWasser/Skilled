@@ -9,17 +9,12 @@ public class LocalHostClientUDP : MonoBehaviour
 {
     [HideInInspector] public UdpClient client = new UdpClient();
 
-    private static LocalHostClientTCP _instance;
+    private static LocalHostClientUDP _instance;
 
-    public static LocalHostClientTCP Instance
+    public static LocalHostClientUDP Instance
     {
         get
         {
-            if (_instance == null)
-            {
-                _instance = GameObject.FindObjectOfType<LocalHostClientTCP>();
-            }
-
             return _instance;
         }
     }
@@ -27,6 +22,15 @@ public class LocalHostClientUDP : MonoBehaviour
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
     }
 
     private void Start()

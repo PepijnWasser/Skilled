@@ -167,7 +167,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &301541205273119766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -637,7 +637,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7771084, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -734,7 +734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb4dd7e8270b494b88c511001c35d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 3625049173855522206}
+  mapCam: {fileID: 3625049172424927799}
   speed: 10
   zoomSensitivity: 140
 --- !u!114 &147455408415131382

@@ -4,13 +4,29 @@ using UnityEngine;
 
 internal class UnityMainThread : MonoBehaviour
 {
-    internal static UnityMainThread wkr;
+    internal static UnityMainThread _instance;
     Queue<Action> jobs = new Queue<Action>();
+
+    public static UnityMainThread Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
 
     void Awake()
     {
-        wkr = this;
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
+
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
     }
 
     void Update()

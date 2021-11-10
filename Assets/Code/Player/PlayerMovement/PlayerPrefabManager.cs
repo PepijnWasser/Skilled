@@ -6,7 +6,7 @@ using Cinemachine;
 
 public class PlayerPrefabManager : MonoBehaviour
 {
-    public Camera camera;
+    public Camera playerCam;
     public Camera skyboxCamera;
     public CinemachineVirtualCamera vCamera;
 
@@ -27,7 +27,7 @@ public class PlayerPrefabManager : MonoBehaviour
         playerMovementScript.enabled = false;
         playerRotationScript.enabled = false;
 
-        Destroy(camera.gameObject);
+        Destroy(playerCam.gameObject);
         Destroy(vCamera.gameObject);
         Destroy(skyboxCamera.gameObject);
         allignScript.enabled = false;

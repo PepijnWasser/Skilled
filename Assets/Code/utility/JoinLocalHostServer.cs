@@ -12,9 +12,12 @@ public class JoinLocalHostServer : MonoBehaviour
     public InputField IPField;
     public InputField PortField;
 
+    MySceneManager sceneManager;
+
     private void Start()
     {
         localHostClient = GameObject.FindObjectOfType<LocalHostClientTCP>();
+        sceneManager = GameObject.FindObjectOfType<MySceneManager>();
     }
 
     public void TryConnectingClient()
@@ -25,8 +28,9 @@ public class JoinLocalHostServer : MonoBehaviour
 
         if (localHostClient.ConnectToServer(_serverIP, _port))
         {
-            Destroy(this.gameObject);
-            Instantiate(lobbyPrefab);
+            //Destroy(this.gameObject);
+            //Instantiate(lobbyPrefab);
+            sceneManager.LoadScene("LobbyScene");
         }
     }
 }

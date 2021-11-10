@@ -216,7 +216,7 @@ public class LobbyState : State
 
     public void SendStartRoomRequest()
     {
-        StartRoomRequest request = new StartRoomRequest();
+        JoinRoomRequest request = new JoinRoomRequest(JoinRoomRequest.rooms.game);
         tcpClientNetwork.SendObjectThroughTCP(request);
     }
 
