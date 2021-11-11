@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         {
             manager.DisablePlayerActivity();
             manager.player.GetComponent<Rigidbody>().useGravity = false;
-            manager.player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePosition;
+            manager.player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 

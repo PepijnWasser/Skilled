@@ -52,6 +52,11 @@ public class GameRoom : Room
             UpdateTaskCamPosition message = pMessage as UpdateTaskCamPosition;
             HandleUpdateTaskCamPosition(message, pSender);
         }
+        else if (pMessage is UpdateRigidbodyPositionRequest)
+        {
+            UpdateRigidbodyPositionRequest message = pMessage as UpdateRigidbodyPositionRequest;
+            HandleUpdateRigidbodyPositionRequest(message, pSender);
+        }
     }
 
     //processes tcp message of a given user 
@@ -402,6 +407,14 @@ public class GameRoom : Room
     {
         removeAndCloseMember(myclient);
         Debug.Log("deleting character");
+    }
+
+    void HandleUpdateRigidbodyPositionRequest(UpdateRigidbodyPositionRequest message, MyClient client)
+    {
+        UDPPacket outPacket = new UDPPacket();
+        UpdateRigidbodyPositionResponse resposne = new UpdateRigidbodyPositionResponse(message.rigidbodyID, message.rigidbodyPosition, message.rigidbodyRotation);
+        outPacket.Write(resposne);
+        SendUDPMessageToAllUsersExcept(outPacket, client);
     }
 
     protected override void Reset()

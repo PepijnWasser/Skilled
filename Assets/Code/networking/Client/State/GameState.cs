@@ -51,10 +51,13 @@ public class GameState : State
     public delegate void Validate(int code, int keypadID);
     public static event Validate testKeypadCode;
 
-    public delegate void PosUpdater(Vector3 newPos, float newZoom);
-    public static event PosUpdater updatePlayerCamPosition;
-    public static event PosUpdater updateEnergyCamPosition;
-    public static event PosUpdater updateTaskCamPosition;
+    public delegate void mapPosUpdater(Vector3 newPos, float newZoom);
+    public static event mapPosUpdater updatePlayerCamPosition;
+    public static event mapPosUpdater updateEnergyCamPosition;
+    public static event mapPosUpdater updateTaskCamPosition;
+
+    public delegate void RigidbodyUpdater(int id, Vector3 newPosition, Vector3 newRotation);
+    public static event RigidbodyUpdater rigidbodyUpdater;
 
 
     protected override void Awake()
@@ -148,6 +151,11 @@ public class GameState : State
         {
             UpdateTaskCamPosition message = TempOBJ as UpdateTaskCamPosition;
             HandleUpdateTaskCamPosition(message);
+        }
+        else if(TempOBJ is UpdateRigidbodyPositionResponse)
+        {
+            UpdateRigidbodyPositionResponse message = TempOBJ as UpdateRigidbodyPositionResponse;
+            HandleUpdateRigidbodyResponse(message);
         }
         client.BeginReceive(new AsyncCallback(recv), null);
     }
@@ -443,6 +451,22 @@ public class GameState : State
         gameManager.RemovePlayerCharacter(message.playerID);
     }
 
+    void HandleUpdateRigidbodyResponse(UpdateRigidbodyPositionResponse messaage)
+    {
+        try
+        {
+            UnityMainThread._instance.AddJob(() =>
+            {
+                // Will run on main thread, hence issue is solved
+                rigidbodyUpdater?.Invoke(messaage.rigidbodyID, messaage.rigidbodyPosition, messaage.rigidbodyRotation);
+            });
+        }
+        catch (Exception e)
+        {
+            Debug.Log(e.Message);
+        }
+    }
+
     //sending
     void SendGameLoadedMessage()
     {
@@ -463,8 +487,6 @@ public class GameState : State
         
         UpdatePlayerPositionUDP message = new UpdatePlayerPositionUDP(position, rotation, noseRotation);
         udpClientNetwork.SendObjectThroughUDP(message);
-
-        Debug.Log("sending player pos on: " + ServerConnectionData.udpPort);
     }
 
     //sends map made message
@@ -570,5 +592,14 @@ public class GameState : State
             UpdateTaskCamPosition updateTaskCamPosition = new UpdateTaskCamPosition(newPos, newZoom);
             udpClientNetwork.SendObjectThroughUDP(updateTaskCamPosition);
         }
+    }
+
+    public void SendRigidBodyPosition(int ID, Vector3 position, Vector3 rotation)
+    {
+        UpdateRigidbodyPositionRequest updateRigidbodyPositionRequest = new UpdateRigidbodyPositionRequest(ID, position, rotation);
+        udpClientNetwork.SendObjectThroughUDP(updateRigidbodyPositionRequest);
+        //rigidbodyUpdater?.Invoke(ID, position, rotation);
+
+        Debug.Log(position);
     }
 }
