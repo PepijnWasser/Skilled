@@ -6,11 +6,19 @@ public class PlayerPositionUpdater : MonoBehaviour
 {
     float secondCounter = 0;
     public int updateFrequency;
-    public GameState gameState;
-    public GameObject player;
+
+    GameState gameState;
+    GameObject player;
+
     public GameObject playerNose;
     Vector3 oldPos;
     Vector3 oldRot;
+
+    private void Awake()
+    {
+        gameState = GameObject.FindObjectOfType<GameState>();
+        player = this.gameObject;
+    }
 
     //sends the new player position/rotation through udp
     void Update()
@@ -26,6 +34,7 @@ public class PlayerPositionUpdater : MonoBehaviour
                     gameState.SendPlayerPosition(player.transform.position, player.transform.rotation.eulerAngles, playerNose.transform.rotation.eulerAngles);
                     oldPos = player.transform.position;
                     oldRot = player.transform.rotation.eulerAngles;
+
                 }
             }
         }

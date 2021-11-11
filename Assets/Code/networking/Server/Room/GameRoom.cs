@@ -15,6 +15,15 @@ public class GameRoom : Room
 
     int tasksCompleted = 0;
 
+    public override void RemoveMember(MyClient clientToRemove)
+    {
+        base.RemoveMember(clientToRemove);
+        TCPPacket outPacket = new TCPPacket();
+        RemovePlayerCharacterMessage message = new RemovePlayerCharacterMessage(clientToRemove.playerID);
+        outPacket.Write(message);
+        SendTCPMessageToAllUsers(outPacket);
+    }
+
     //processes udp message of a given user
     public override void HandleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
     {
@@ -121,6 +130,10 @@ public class GameRoom : Room
         {
             KeypadValidationMessage message = tempOBJ as KeypadValidationMessage;
             HandleKeypadValidationMessage(message, myClient);
+        }else if(tempOBJ is LeaveServermessage)
+        {
+            LeaveServermessage message = tempOBJ as LeaveServermessage;
+            HandleLeaveServerMessage(message, myClient);
         }
     }
 
@@ -383,6 +396,12 @@ public class GameRoom : Room
         UDPPacket outPacket = new UDPPacket();
         outPacket.Write(message);
         SendUDPMessageToAllUsersExcept(outPacket, client);
+    }
+
+    void HandleLeaveServerMessage(LeaveServermessage message, MyClient myclient)
+    {
+        removeAndCloseMember(myclient);
+        Debug.Log("deleting character");
     }
 
     protected override void Reset()

@@ -570,7 +570,6 @@ GameObject:
   m_Component:
   - component: {fileID: 906473610}
   - component: {fileID: 906473609}
-  - component: {fileID: 906473608}
   m_Layer: 0
   m_Name: GameState
   m_TagString: Untagged
@@ -578,22 +577,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &906473608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 906473607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbd5aa9b453adf543a179adff28151f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  updateFrequency: 60
-  gameState: {fileID: 906473609}
-  player: {fileID: 0}
-  playerNose: {fileID: 0}
 --- !u!114 &906473609
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1077,7 +1060,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5732217132210592382, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
   taskManagerPrefab: {fileID: 5190529441526039828, guid: 1e392aa78cb36774db62e9446859ef59, type: 3}
-  playerPositionUpdater: {fileID: 906473608}
 --- !u!4 &1388254687
 Transform:
   m_ObjectHideFlags: 0
@@ -1200,6 +1182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c980c35a4aff194d8e185cd257046d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stationHealth: 30
 --- !u!4 &1605409415
 Transform:
   m_ObjectHideFlags: 0
@@ -1539,6 +1522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HealthText: {fileID: 1160046560}
   HealthSlider: {fileID: 819156845}
+  stationHealth: {fileID: 0}
 --- !u!1 &2025269206
 GameObject:
   m_ObjectHideFlags: 0

@@ -155,7 +155,7 @@ public class GameState : State
     //handle tcp messages
     protected override void Update()
     {
-      ///  try
+        try
         {
             if (tcpClientNetwork != null && tcpClientNetwork.tcpClient.Connected && tcpClientNetwork.tcpClient.Available > 0)
             {
@@ -238,17 +238,41 @@ public class GameState : State
                 {
                     JoinRoomMessage message = tempOBJ as JoinRoomMessage;
                     HandleJoinRoomMessage(message);
+                } 
+                else if(tempOBJ is RemovePlayerCharacterMessage)
+                {
+                    RemovePlayerCharacterMessage message = tempOBJ as RemovePlayerCharacterMessage;
+                    HandleRemovePlayerCharacterMessage(message);
                 }
             }
         }
- //       catch (Exception e)
+        catch (Exception e)
         {
-    //        Debug.Log(e.Message +  e.StackTrace);
-        //    if (tcpClientNetwork.tcpClient.Connected)
+            Debug.Log(e.Message +  e.StackTrace);
+            if (tcpClientNetwork.tcpClient.Connected)
             {
-      //          tcpClientNetwork.tcpClient.Close();
+                tcpClientNetwork.tcpClient.Close();
             }
         }
+    }
+
+    //if the server has no more heartbeat, we leave the server
+    void HandleHeartbeatStatus()
+    {
+        if (CheckHeartbeat() == false)
+        {
+            SendLeaveServerMessage();
+            sceneManager.LoadScene("Main Menu");
+            Debug.Log("Disconnected");
+            Destroy(this.gameObject);
+
+        }
+    }
+
+    void SendLeaveServerMessage()
+    {
+        LeaveServermessage message = new LeaveServermessage();
+        tcpClientNetwork.SendObjectThroughTCP(message);
     }
 
 
@@ -414,6 +438,11 @@ public class GameState : State
         }
     }
 
+    void HandleRemovePlayerCharacterMessage(RemovePlayerCharacterMessage message)
+    {
+        gameManager.RemovePlayerCharacter(message.playerID);
+    }
+
     //sending
     void SendGameLoadedMessage()
     {
@@ -433,7 +462,9 @@ public class GameState : State
     {
         
         UpdatePlayerPositionUDP message = new UpdatePlayerPositionUDP(position, rotation, noseRotation);
-        udpClientNetwork.SendObjectThroughUDP(message);       
+        udpClientNetwork.SendObjectThroughUDP(message);
+
+        Debug.Log("sending player pos on: " + ServerConnectionData.udpPort);
     }
 
     //sends map made message

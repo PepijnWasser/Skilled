@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject taskManagerPrefab;
 
-    public PlayerPositionUpdater playerPositionUpdater;
     Dictionary<int, PlayerPrefabManager> characterDictionary = new Dictionary<int, PlayerPrefabManager>();
 
     List<PlayerSpawnLocation> availiblePlayerSpawnLocations = new List<PlayerSpawnLocation>();
@@ -16,16 +15,6 @@ public class GameManager : MonoBehaviour
 
     public delegate void PlayerMade(GameObject player, Camera cam);
     public static event PlayerMade playerMade;
-
-    private void Awake()
-    {
-     //   MapGenerator.OnCompletion += GetAvailibleSpawnLocations;
-    }
-
-    private void OnDestroy()
-    {
-      //  MapGenerator.OnCompletion -= GetAvailibleSpawnLocations;
-    }
 
     public void MakePlayerCharacter(bool playerControlled, Vector3 position, string _name, int playerID)
     {
@@ -53,9 +42,6 @@ public class GameManager : MonoBehaviour
 
             manager.playerRotationScript.sensitivity = PlayerInfo.sensitivity;
 
-            playerPositionUpdater.player = manager.player;
-            playerPositionUpdater.playerNose = manager.nose;
-
             playerMade?.Invoke(manager.player, manager.playerCam);
         }
         else
@@ -72,6 +58,12 @@ public class GameManager : MonoBehaviour
         manager.player.transform.position = position;
         manager.player.transform.rotation = Quaternion.Euler(rotation);
         manager.nose.transform.rotation = Quaternion.Euler(noseRotation);
+    }
+
+    public void RemovePlayerCharacter(int playerID)
+    {
+        Destroy(characterDictionary[playerID].gameObject);
+        characterDictionary.Remove(playerID);
     }
 
 

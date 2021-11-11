@@ -83,12 +83,12 @@ public class LobbyState : State
                     HelpRespons message = tempOBJ as HelpRespons;
                     HandleHelpRespons(message);
                 }
-                else if(tempOBJ is UpdateServerInfoMessage)
+                else if (tempOBJ is UpdateServerInfoMessage)
                 {
                     UpdateServerInfoMessage message = tempOBJ as UpdateServerInfoMessage;
                     HandleServerInfoMessage(message);
                 }
-                else if(tempOBJ is JoinRoomMessage)
+                else if (tempOBJ is JoinRoomMessage)
                 {
                     JoinRoomMessage message = tempOBJ as JoinRoomMessage;
                     HandleJoinRoomMessage(message);
@@ -96,14 +96,12 @@ public class LobbyState : State
             }
             HandleHeartbeatStatus();
         }
-        catch (Exception e)
+        catch(Exception e)
         {
             Debug.Log(e.Message);
-            if (tcpClientNetwork.tcpClient.Connected)
-            {
-                tcpClientNetwork.tcpClient.Close();
-            }
+            tcpClientNetwork.tcpClient.Close();
         }
+
     }
 
     //sets the correct player count in the view
@@ -232,7 +230,7 @@ public class LobbyState : State
         if(CheckHeartbeat() == false)
         {
             SendLeaveServerMessage();
-            GetComponent<CreateCJScreen>().CreateCJScreenItem();
+            sceneManager.LoadScene("Main Menu");
             Debug.Log("Disconnected");
             Destroy(this.gameObject);
 

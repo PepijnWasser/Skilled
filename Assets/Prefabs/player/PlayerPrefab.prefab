@@ -141,7 +141,6 @@ GameObject:
   - component: {fileID: 767075814832258188}
   - component: {fileID: 767075814832258191}
   - component: {fileID: 767075814832258190}
-  - component: {fileID: 767075814832258185}
   - component: {fileID: 5651246100308450695}
   m_Layer: 13
   m_Name: PlayerCharacter
@@ -275,27 +274,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1135
   gravity: 9.81
---- !u!114 &767075814832258185
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 767075814832258177}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb9de11522765154ca4daa543e9c2815, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCam: {fileID: 8030737936671950272}
-  skyboxCamera: {fileID: 767075815121425890}
-  vCamera: {fileID: 767075815464117239}
-  allignScript: {fileID: 767075814420350581}
-  player: {fileID: 0}
-  iconText: {fileID: 0}
-  nose: {fileID: 767075814420350583}
-  playerMovementScript: {fileID: 767075814832258190}
-  playerRotationScript: {fileID: 767075814832258191}
 --- !u!114 &5651246100308450695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +443,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7764579, y: 1}
+    m_SensorSize: {x: 1.7755905, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -567,7 +545,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7764579, y: 1}
+    m_SensorSize: {x: 1.7755905, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1002,6 +980,7 @@ MonoBehaviour:
   nose: {fileID: 767075814420350583}
   playerMovementScript: {fileID: 767075814832258190}
   playerRotationScript: {fileID: 767075814832258191}
+  playerPositionUpdater: {fileID: 5651246100308450695}
 --- !u!1 &5732217132304127457
 GameObject:
   m_ObjectHideFlags: 0
