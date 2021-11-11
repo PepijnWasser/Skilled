@@ -20,6 +20,7 @@ public class PlayerPrefabManager : MonoBehaviour
     public PlayerMovement playerMovementScript;
     public PlayerRotation playerRotationScript;
 
+    public PlayerPositionUpdater playerPositionUpdater;
 
 
     public void DisablePlayerActivity()
@@ -30,6 +31,7 @@ public class PlayerPrefabManager : MonoBehaviour
         Destroy(playerCam.gameObject);
         Destroy(vCamera.gameObject);
         Destroy(skyboxCamera.gameObject);
+        Destroy(playerPositionUpdater);
         allignScript.enabled = false;
 
         this.gameObject.tag = "MainPlayer";

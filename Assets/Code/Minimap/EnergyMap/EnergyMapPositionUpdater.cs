@@ -21,7 +21,6 @@ public class EnergyMapPositionUpdater : MapPositionUpdater
 
     void SetCamPosition(Vector3 newPos, float newZoom)
     {
-        Debug.Log(newZoom);
         mapCamera.transform.position = newPos;
         mapCamera.mapCam.orthographicSize = newZoom;
     }

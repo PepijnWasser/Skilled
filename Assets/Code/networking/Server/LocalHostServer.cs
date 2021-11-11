@@ -10,7 +10,7 @@ using System.Text;
 public class LocalHostServer : MonoBehaviour
 {
 	//if a heartbeat isn't received within the timeOutTime, kick the client
-	public float timeOutTime = 10f;
+	public float timeOutTime = 5f;
 	float secondCounter = 0;
 
 	UdpClient client = new UdpClient();
@@ -23,7 +23,6 @@ public class LocalHostServer : MonoBehaviour
 	private int newPlayerID = 1;
 
 	//rooms the server has, and the room which the server needs to update
-	Room activeRoom;
 	public LobbyRoom lobbyRoom;
 	public GameRoom gameRoom;
 	public EndRoom endRoom;
@@ -31,6 +30,8 @@ public class LocalHostServer : MonoBehaviour
 
 	//server info
 	public ServerInfo serverInfo = new ServerInfo();
+
+	public Dictionary<MyClient, Room> playerRoomDictionary = new Dictionary<MyClient, Room>();
 
 	public Dictionary<Room, Room> movePlayersFromXToY = new Dictionary<Room, Room>();
 	public Dictionary<MyClient, Room> movePlayerToY = new Dictionary<MyClient, Room>();
@@ -82,6 +83,8 @@ public class LocalHostServer : MonoBehaviour
 				i++;
 			}
 		}
+
+		Debug.Log("server UDP port set to: " + serverInfo.udpPort);
 	}
 
 	//set the server port for tcp communication
@@ -118,9 +121,6 @@ public class LocalHostServer : MonoBehaviour
 		endRoom = new EndRoom();
 		activeRooms.Add(endRoom);
 		endRoom.Initialize(this);
-
-		lobbyRoom.server = this;
-		activeRoom = lobbyRoom;
 	}
 
 	private void Update()
@@ -145,7 +145,7 @@ public class LocalHostServer : MonoBehaviour
 		{
 			try
 			{
-				MyClient newClient = new MyClient(_listener.AcceptTcpClient(), timeOutTime, MyClient.colors.blue, newPlayerID, "");
+				MyClient newClient = new MyClient(_listener.AcceptTcpClient(), timeOutTime, MyClient.colors.blue, newPlayerID, "TEMP");
 				newPlayerID += 1;
 
 				if(serverInfo.serverOwner == null)
@@ -169,27 +169,15 @@ public class LocalHostServer : MonoBehaviour
 		for (int i = 0; i < connectedClients.Count; i++)
 		{
 			if (connectedClients[i].tcpClient.Available == 0) continue;
-
-			foreach(Room room in activeRooms)
-            {
-                if (room.GetMembers().Contains(connectedClients[i]))
-                {
-                    try
-                    {
-						HandleIncomingMessage(connectedClients[i], room);
-					}
-					catch(Exception e)
-                    {
-						Debug.Log(e.Message);
-                    }
-                }
+			{ 
+				HandleIncomingMessage(connectedClients[i]);
             }
 			
 		}
 	}
 
 	//send the incoming tcp message to the activeRoom
-	private void HandleIncomingMessage(MyClient client, Room roomOfPlayer)
+	private void HandleIncomingMessage(MyClient client)
 	{
 		//Debug.Log("received TCP message from: " + client.playerName + " in: " + roomOfPlayer);
 		try
@@ -199,7 +187,7 @@ public class LocalHostServer : MonoBehaviour
 
 			var tempOBJ = inPacket.ReadObject();
 
-			roomOfPlayer.HandleTCPNetworkMessageFromUser(tempOBJ, client);
+			playerRoomDictionary[client].HandleTCPNetworkMessageFromUser(tempOBJ, client);
 		}
 		catch (Exception e)
 		{
@@ -223,8 +211,8 @@ public class LocalHostServer : MonoBehaviour
         {
 			if (connectedClient.endPoint.Address.ToString() == RemoteIP.Address.ToString() && connectedClient.sendPort.ToString() == RemoteIP.Port.ToString())
             {
-				activeRoom.HandleUDPNetworkMessageFromUser(TempOBJ, connectedClient);
-				//Debug.Log("received UDP message from: " + connectedClient.playerName);
+				playerRoomDictionary[connectedClient].HandleUDPNetworkMessageFromUser(TempOBJ, connectedClient);
+				Debug.Log("received UDP message from: " + connectedClient.playerName);
 				break;
             }
         }
@@ -260,6 +248,18 @@ public class LocalHostServer : MonoBehaviour
 		clientToRemove.tcpClient.Close();
 		connectedClients.Remove(clientToRemove);		
 	}
+
+	public void SetRoomOfPlayer(MyClient client, Room roomOfPlayer)
+    {
+        if (playerRoomDictionary.ContainsKey(client))
+        {
+			playerRoomDictionary[client] = roomOfPlayer;
+        }
+        else
+        {
+			playerRoomDictionary.Add(client, roomOfPlayer);
+        }
+    }
 
 	public void AddRoomToMoveDictionary(Room originalRoom, Room newRoom)
     {

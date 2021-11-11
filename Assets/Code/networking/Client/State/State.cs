@@ -16,11 +16,15 @@ public abstract class State : MonoBehaviour
     protected float timeOutTime = 5f;
     protected float lastHeartbeat = 5f;
 
+    protected MySceneManager sceneManager;
+
 
     protected virtual void Awake()
     {
         tcpClientNetwork = GameObject.FindObjectOfType<LocalHostClientTCP>();
         udpClientNetwork = GameObject.FindObjectOfType<LocalHostClientUDP>();
+
+        sceneManager = GameObject.FindObjectOfType<MySceneManager>();
     }
 
     //handle incoming tcp data

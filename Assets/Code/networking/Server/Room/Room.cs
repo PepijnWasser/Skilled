@@ -25,6 +25,7 @@ public abstract class Room
 	{
 		Debug.Log("moved " + clientToAdd.playerName + " to: " + this.GetType());
 		clientsInRoom.Add(clientToAdd);
+		server.SetRoomOfPlayer(clientToAdd, this);
 	}
 
 	//method for removing a member of the room
