@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
 
     List<PlayerSpawnLocation> availiblePlayerSpawnLocations = new List<PlayerSpawnLocation>();
 
+    public GameObject playerCharacter;
 
     public delegate void PlayerMade(GameObject player, Camera cam);
     public static event PlayerMade playerMade;
@@ -43,6 +44,8 @@ public class GameManager : MonoBehaviour
             manager.playerRotationScript.sensitivity = PlayerInfo.sensitivity;
 
             playerMade?.Invoke(manager.player, manager.playerCam);
+
+            playerCharacter = manager.player;
         }
         else
         {

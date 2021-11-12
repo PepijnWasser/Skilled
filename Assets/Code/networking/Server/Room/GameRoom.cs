@@ -140,6 +140,11 @@ public class GameRoom : Room
             LeaveServermessage message = tempOBJ as LeaveServermessage;
             HandleLeaveServerMessage(message, myClient);
         }
+        else if(tempOBJ is LastPlayerTouchedMessage)
+        {
+            LastPlayerTouchedMessage message = tempOBJ as LastPlayerTouchedMessage;
+            HandleLastPlayerTouchedMessage(message);
+        }
     }
 
     //checks if the clients are still alive
@@ -415,6 +420,13 @@ public class GameRoom : Room
         UpdateRigidbodyPositionResponse resposne = new UpdateRigidbodyPositionResponse(message.rigidbodyID, message.rigidbodyPosition, message.rigidbodyRotation);
         outPacket.Write(resposne);
         SendUDPMessageToAllUsersExcept(outPacket, client);
+    }
+
+    void HandleLastPlayerTouchedMessage(LastPlayerTouchedMessage message)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        outPacket.Write(message);
+        SendTCPMessageToAllUsers(outPacket);
     }
 
     protected override void Reset()

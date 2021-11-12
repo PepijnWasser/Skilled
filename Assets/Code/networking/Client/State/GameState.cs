@@ -59,6 +59,9 @@ public class GameState : State
     public delegate void RigidbodyUpdater(int id, Vector3 newPosition, Vector3 newRotation);
     public static event RigidbodyUpdater rigidbodyUpdater;
 
+    public delegate void RigidbodyTouchedUpdate(int playerID, int rigidbodyID);
+    public static event RigidbodyTouchedUpdate rigidbodyTouchedUpdate;
+
 
     protected override void Awake()
     {
@@ -251,6 +254,11 @@ public class GameState : State
                 {
                     RemovePlayerCharacterMessage message = tempOBJ as RemovePlayerCharacterMessage;
                     HandleRemovePlayerCharacterMessage(message);
+                }
+                else if(tempOBJ is LastPlayerTouchedMessage)
+                {
+                    LastPlayerTouchedMessage message = tempOBJ as LastPlayerTouchedMessage;
+                    HandleLastPlayerTouchedMessage(message);
                 }
             }
         }
@@ -467,6 +475,12 @@ public class GameState : State
         }
     }
 
+    void HandleLastPlayerTouchedMessage(LastPlayerTouchedMessage message)
+    {
+        Debug.Log("received new last touched " + message.playerID);
+        rigidbodyTouchedUpdate?.Invoke(message.playerID, message.rigidbodyID);
+    }
+
     //sending
     void SendGameLoadedMessage()
     {
@@ -598,8 +612,11 @@ public class GameState : State
     {
         UpdateRigidbodyPositionRequest updateRigidbodyPositionRequest = new UpdateRigidbodyPositionRequest(ID, position, rotation);
         udpClientNetwork.SendObjectThroughUDP(updateRigidbodyPositionRequest);
-        //rigidbodyUpdater?.Invoke(ID, position, rotation);
+    }
 
-        Debug.Log(position);
+    public void SendLastPlayerTouchedMessage(int playerID, int rigidbodyID)
+    {
+        LastPlayerTouchedMessage message = new LastPlayerTouchedMessage(playerID, rigidbodyID);
+        tcpClientNetwork.SendObjectThroughTCP(message);
     }
 }
