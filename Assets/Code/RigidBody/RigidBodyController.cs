@@ -9,51 +9,53 @@ public class RigidBodyController : MonoBehaviour
 
     GameState gameState;
     GameObject thisGameobject;
-    RigidBodyManager manager;
+    Rigidbody thisRigidbody;
+
+    RigidBodyManager rigidbodyManager;
+    GameManager gameManager;
 
     Vector3 oldPos;
     Vector3 oldRot;
 
-    public int id = 0;
-
-    bool needToCheck = true;
-
-    float secondCounterReset = 0;
+    public int rigidbodyID = 0;
+    public int lastPlayerTouchedID = 0;
 
     private void Awake()
     {
         gameState = GameObject.FindObjectOfType<GameState>();
-        manager = GameObject.FindObjectOfType<RigidBodyManager>();
+        rigidbodyManager = GameObject.FindObjectOfType<RigidBodyManager>();
+        gameManager = GameObject.FindObjectOfType<GameManager>();
         thisGameobject = this.gameObject;
+        thisRigidbody = GetComponent<Rigidbody>();
 
         GameState.rigidbodyUpdater += MoveObject;
+        GameState.rigidbodyTouchedUpdate += SetLastTouched;
     }
 
     private void Start()
     {
-        id = manager.GetNewID();
+        rigidbodyID = rigidbodyManager.GetNewID();
     }
 
     private void OnDestroy()
     {
         GameState.rigidbodyUpdater -= MoveObject;
+        GameState.rigidbodyTouchedUpdate -= SetLastTouched;
     }
 
     private void Update()
     {
-        if (needToCheck)
+        if (lastPlayerTouchedID == PlayerInfo.playerID)
         {
             TestSend();
         }
-        else
-        {
-            secondCounterReset += Time.deltaTime;
-            if(secondCounterReset > 0.1f)
-            {
-                secondCounterReset = 0;
+    }
 
-                needToCheck = true;
-            }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject == gameManager.playerCharacter)
+        {
+            gameState.SendLastPlayerTouchedMessage(PlayerInfo.playerID, rigidbodyID);
         }
     }
 
@@ -67,10 +69,10 @@ public class RigidBodyController : MonoBehaviour
             {
                 if (thisGameobject.transform.position != oldPos || thisGameobject.transform.rotation.eulerAngles != oldRot)
                 {
-                    gameState.SendRigidBodyPosition(id, thisGameobject.transform.position, thisGameobject.transform.rotation.eulerAngles);
+                    Debug.Log("sending poosition");
+                    gameState.SendRigidBodyPosition(rigidbodyID, thisGameobject.transform.position, thisGameobject.transform.rotation.eulerAngles);
                     oldPos = thisGameobject.transform.position;
                     oldRot = thisGameobject.transform.rotation.eulerAngles;
-
                 }
             }
         }
@@ -79,12 +81,27 @@ public class RigidBodyController : MonoBehaviour
     void MoveObject(int ID, Vector3 newPosition, Vector3 newRotation)
     {
         Debug.Log("moving object");
-        if(ID == id)
+        if(ID == rigidbodyID)
         {
             thisGameobject.transform.position = newPosition;
             thisGameobject.transform.rotation = Quaternion.Euler(newRotation);
+        }
+    }
 
-            needToCheck = false;
+    void SetLastTouched(int _playerID, int _rigidbodyID)
+    {
+        if(rigidbodyID == _rigidbodyID)
+        {
+            lastPlayerTouchedID = _playerID;
+
+            if (lastPlayerTouchedID == PlayerInfo.playerID)
+            {
+                thisRigidbody.isKinematic = false;
+            }
+            else
+            {
+                thisRigidbody.isKinematic = true;
+            }
         }
     }
 }
