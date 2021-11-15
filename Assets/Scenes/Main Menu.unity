@@ -1581,7 +1581,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.0479385, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4181,11 +4181,6 @@ MonoBehaviour:
   - position: {x: 78, y: 0, z: 42}
     tangent: {x: 0, y: 0, z: 4.5}
     roll: 0
---- !u!1 &879478284 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1147041716820531372, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
-  m_PrefabInstance: {fileID: 4489925740976592460}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &884890682
 GameObject:
   m_ObjectHideFlags: 0
@@ -4800,6 +4795,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3800764170072717284, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: a5d126997afcadc4bb9a0d7db36be68b, type: 3}
     - target: {fileID: 3800764170072717291, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_SizeDelta.x
       value: -458.275
@@ -4816,6 +4815,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 123.862
       objectReference: {fileID: 0}
+    - target: {fileID: 3800764170309211410, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: a5d126997afcadc4bb9a0d7db36be68b, type: 3}
     - target: {fileID: 3800764171294457601, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_Type
       value: 0
@@ -4972,6 +4975,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: b0e7f3a080a41d548a42ec63bb27906c, type: 3}
+    - target: {fileID: 3800764171394523576, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: a5d126997afcadc4bb9a0d7db36be68b, type: 3}
     - target: {fileID: 3966056884132580788, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: basePort
       value: 20021
@@ -7320,25 +7327,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
   m_PrefabInstance: {fileID: 1524394213}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1524394215 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1147041716820531372, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
-  m_PrefabInstance: {fileID: 1524394213}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1524394216
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1524394215}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5427406500296363010, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
 --- !u!1 &1551288253
 GameObject:
   m_ObjectHideFlags: 0
@@ -18401,20 +18389,6 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3594330809513659642}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5427406500296363010, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
---- !u!64 &7195326656148784744
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 879478284}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
