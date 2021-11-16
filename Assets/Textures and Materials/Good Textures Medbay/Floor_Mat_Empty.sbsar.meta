@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7deb86c6508e046428d29d9513b055df
+guid: 60a2a1900fafa484a83ad36eea0af9b1
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -11,13 +11,13 @@ ScriptedImporter:
   version: 29
   projectContext: 0
   mGraphInstanceData:
-  - graphLabel: Warframe_Graph_02
-    prototypeName: Warframe_Graph_02
+  - graphLabel: Floor_Mat_Cross
+    prototypeName: Floor_Mat_Cross
     graphDescIndex: 0
     generateAllOutputs: 0
     generateMipMaps: 1
-    preset: " <sbspreset pkgurl=\"pkg://Warframe_Graph_02\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"1181145696\" type=\"8\" value=\"11,11\" />\n
+    preset: " <sbspreset pkgurl=\"pkg://Floor_Mat_Cross\" label=\"\" >\n  <presetinput
+      identifier=\"$outputsize\" uid=\"719388019\" type=\"8\" value=\"11,11\" />\n
       </sbspreset>\n"
     shaderName: Standard
     materialProperties:
@@ -30,7 +30,7 @@ ScriptedImporter:
       customRenderQueue: -1
       texEnvs:
       - name: _BumpMap
-        texture: {fileID: -5313559027280974700, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
+        texture: {fileID: -3213078811677986737, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _DetailAlbedoMap
@@ -50,19 +50,19 @@ ScriptedImporter:
         scale: {x: 3, y: 3}
         offset: {x: 0, y: 0}
       - name: _MainTex
-        texture: {fileID: 2831843762381158499, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
+        texture: {fileID: 3198715054952846209, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
         scale: {x: 3, y: 3}
         offset: {x: 0, y: 0}
       - name: _MetallicGlossMap
-        texture: {fileID: -1168012561528655122, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
+        texture: {fileID: -8516674454119680060, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _OcclusionMap
-        texture: {fileID: 6155634625860733770, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
+        texture: {fileID: 1306135415091795166, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _ParallaxMap
-        texture: {fileID: 9165964568070229696, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
+        texture: {fileID: -746557707199258164, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       floats:
@@ -190,27 +190,27 @@ ScriptedImporter:
         from: 0
         to: 3
     textureParameters:
-    - textureName: Warframe_Graph_02 - baseColor
+    - textureName: Floor_Mat_Cross - baseColor
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_02 - normal
+    - textureName: Floor_Mat_Cross - normal
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_02 - roughness
+    - textureName: Floor_Mat_Cross - roughness
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_02 - metallic
+    - textureName: Floor_Mat_Cross - metallic
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_02 - height
+    - textureName: Floor_Mat_Cross - height
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_02 - ambientOcclusion
+    - textureName: Floor_Mat_Cross - ambientOcclusion
       wrapMode: 0
       filterMode: 1
       aniso: 1
@@ -225,10 +225,10 @@ ScriptedImporter:
       textureFormatMode: 0
       normalCompressed: 0
       bGenerateOnLoad: 1
-    material: {fileID: -243321966267982135, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
+    material: {fileID: 6591039161142064104, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
     generatedTextures:
-    - {fileID: 2831843762381158499, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
-    - {fileID: -5313559027280974700, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
-    - {fileID: -1168012561528655122, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
-    - {fileID: 9165964568070229696, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
-    - {fileID: 6155634625860733770, guid: 7deb86c6508e046428d29d9513b055df, type: 3}
+    - {fileID: 3198715054952846209, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
+    - {fileID: -3213078811677986737, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
+    - {fileID: -8516674454119680060, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
+    - {fileID: -746557707199258164, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
+    - {fileID: 1306135415091795166, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
