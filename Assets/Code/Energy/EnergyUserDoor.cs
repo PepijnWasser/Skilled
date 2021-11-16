@@ -4,26 +4,86 @@ using UnityEngine;
 
 public class EnergyUserDoor : EnergyUser
 {
-    public GameObject door;
+    Animator animator;
+
+    public GameObject raycastOrigin;
     public int ID;
-    Vector3 basePos;
+
+    public bool currentState = false;
+    public bool targetState = false;
 
 
     protected virtual void Start()
     {
-        basePos = door.transform.position;
-        base.Start();
+       // base.Start();
+        animator = GetComponent<Animator>();
     }
 
     protected override void TurnOn()
     {
         base.TurnOn();
-        door.transform.position = basePos + new Vector3(0, 1, 0);
+        animator.SetInteger("DoorState", 1);
+        targetState = true;
+
+
     }
 
     protected override void TurnOff()
     {
-        base.TurnOff();
-        door.transform.position = basePos;
+      //  base.TurnOff();
+        animator.SetInteger("DoorState", 0);
+        targetState = false;
+    }
+
+    private void Update()
+    {
+        if (targetState == true)
+        {
+            animator.SetInteger("DoorState", 1);
+        }
+        else
+        {
+            animator.SetInteger("DoorState", 0);
+        }
+
+
+
+
+        if(targetState != currentState)
+        {
+            if(targetState == false)
+            {
+                Debug.Log("testing");
+                RaycastHit raycastHit;
+                if (Physics.Raycast(raycastOrigin.transform.position, Vector3.down, out raycastHit, 10))
+                {
+                    if(raycastHit.collider.gameObject != this.gameObject)
+                    {
+                        animator.enabled = false;
+                    }
+                    else
+                    {
+                        animator.enabled = true;
+                    }
+                }
+                else
+                {
+                    animator.enabled = true;
+                }
+
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Closed"))
+                {
+                    currentState = targetState;
+                }
+            }
+            else
+            {
+
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Closed") == false)
+                {
+                    currentState = targetState;
+                }
+            }
+        }
     }
 }
