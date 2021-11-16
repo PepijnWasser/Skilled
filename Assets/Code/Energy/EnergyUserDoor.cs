@@ -9,14 +9,14 @@ public class EnergyUserDoor : EnergyUser
     public GameObject raycastOrigin;
     public int ID;
 
-    public bool currentState = false;
-    public bool targetState = false;
+    bool currentState = false;
+    bool targetState = false;
 
 
-    protected virtual void Start()
+    protected override void Start()
     {
-       // base.Start();
         animator = GetComponent<Animator>();
+        base.Start();
     }
 
     protected override void TurnOn()
@@ -30,32 +30,19 @@ public class EnergyUserDoor : EnergyUser
 
     protected override void TurnOff()
     {
-      //  base.TurnOff();
+        base.TurnOff();
         animator.SetInteger("DoorState", 0);
         targetState = false;
     }
 
     private void Update()
     {
-        if (targetState == true)
-        {
-            animator.SetInteger("DoorState", 1);
-        }
-        else
-        {
-            animator.SetInteger("DoorState", 0);
-        }
-
-
-
-
         if(targetState != currentState)
         {
             if(targetState == false)
             {
-                Debug.Log("testing");
                 RaycastHit raycastHit;
-                if (Physics.Raycast(raycastOrigin.transform.position, Vector3.down, out raycastHit, 10))
+                if (Physics.Raycast(raycastOrigin.transform.position, Vector3.down, out raycastHit, 0.1f))
                 {
                     if(raycastHit.collider.gameObject != this.gameObject)
                     {
@@ -78,12 +65,28 @@ public class EnergyUserDoor : EnergyUser
             }
             else
             {
-
-                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Closed") == false)
+                if(animator.enabled == false)
                 {
-                    currentState = targetState;
+                    animator.enabled = true;
                 }
             }
         }
+
+        if(targetState == false)
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Closed"))
+            {
+                currentState = targetState;
+            }
+        }
+        else
+        {
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Opened"))
+            {
+                currentState = targetState;
+            }
+        }
+    
     }
+    
 }

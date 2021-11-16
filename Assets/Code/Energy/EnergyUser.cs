@@ -20,7 +20,6 @@ public class EnergyUser : MonoBehaviour
 
     public void switchEnergy()
     {
-        Debug.Log("hit");
         if (!on)
         {
             if (energyManager.availibleEnergy > 0)

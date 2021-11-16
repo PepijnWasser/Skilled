@@ -82,7 +82,6 @@ public class DisplayClicker : MonoBehaviour
 
                     if (Physics.Raycast(minimapCameraToEnergyUserRay, out energyUserHit, 100, energyMask))
                     {
-                        Debug.Log(energyUserHit.transform.gameObject);
                         energyUserHit.transform.parent.GetComponent<EnergyUser>().switchEnergy();
                     }
 
