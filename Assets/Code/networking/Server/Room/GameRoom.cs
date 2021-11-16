@@ -271,12 +271,12 @@ public class GameRoom : Room
     void MakeTasks()
     {
         TCPPacket outpacket = new TCPPacket();
-        MakeTaskManager makeTaskManagerMessage = new MakeTaskManager(false);
+        PlaceWorldObjects makeTaskManagerMessage = new PlaceWorldObjects(false);
         outpacket.Write(makeTaskManagerMessage);
         SendTCPMessageToAllUsersExcept(outpacket, server.serverInfo.serverOwner);
 
         TCPPacket outpacket2 = new TCPPacket();
-        MakeTaskManager makeTaskManagerMessage2 = new MakeTaskManager(true);
+        PlaceWorldObjects makeTaskManagerMessage2 = new PlaceWorldObjects(true);
         outpacket2.Write(makeTaskManagerMessage2);
         SendTCPMessageToTargetUser(outpacket2, server.serverInfo.serverOwner);
     }

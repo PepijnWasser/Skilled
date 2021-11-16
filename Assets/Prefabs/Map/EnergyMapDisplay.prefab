@@ -167,7 +167,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &301541205273119766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,8 +226,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 3.75, y: 1.3, z: 0.05}
+  m_Center: {x: 0, y: -0.1, z: 0.05}
 --- !u!114 &301541205273119763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +246,8 @@ MonoBehaviour:
   energyMask:
     serializedVersion: 2
     m_Bits: 32768
+  emptyPrefab: {fileID: 3973365716019823320, guid: 48736cf939e7aa64f9764ae10622e151, type: 3}
+  cubePrefab: {fileID: 2399247401998729319, guid: 784566c54cf0c3247816e96765e82331, type: 3}
 --- !u!114 &301541205273119762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,7 +603,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3625049173759891398}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.00000011920929, y: 0.00000023841858, z: -0.00000023841858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3625049173465484650}
@@ -637,7 +639,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7771084, y: 1}
+    m_SensorSize: {x: 1.7756411, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -700,8 +702,8 @@ Camera:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1920
-    height: 768
+    width: 1
+    height: 1
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -734,7 +736,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb4dd7e8270b494b88c511001c35d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapCam: {fileID: 3625049172424927799}
+  mapCam: {fileID: 3625049173855522206}
   speed: 10
   zoomSensitivity: 140
 --- !u!114 &147455408415131382

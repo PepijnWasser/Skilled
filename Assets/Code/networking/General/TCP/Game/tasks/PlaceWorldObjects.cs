@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MakeTaskManager : ISerializable
+public class PlaceWorldObjects : ISerializable
 {
     public bool playerIsLeader;
 
@@ -16,12 +16,12 @@ public class MakeTaskManager : ISerializable
         pPacket.Write(playerIsLeader);
     }
 
-    public MakeTaskManager()
+    public PlaceWorldObjects()
     {
 
     }
 
-    public MakeTaskManager(bool _playerIsLeader)
+    public PlaceWorldObjects(bool _playerIsLeader)
     {
         playerIsLeader = _playerIsLeader;
     }

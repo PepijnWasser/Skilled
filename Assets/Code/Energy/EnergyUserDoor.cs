@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnergyUserDoor : EnergyUser
 {
     public GameObject door;
+    public int ID;
     Vector3 basePos;
+
 
     protected virtual void Start()
     {

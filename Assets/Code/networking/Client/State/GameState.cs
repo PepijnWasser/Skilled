@@ -185,9 +185,9 @@ public class GameState : State
                     MakenewPlayerCharacterMessage message = tempOBJ as MakenewPlayerCharacterMessage;
                     HandleMakePlayerCharacterMessage(message);
                 }
-                else if(tempOBJ is MakeTaskManager)
+                else if(tempOBJ is PlaceWorldObjects)
                 {
-                    MakeTaskManager message = tempOBJ as MakeTaskManager;
+                    PlaceWorldObjects message = tempOBJ as PlaceWorldObjects;
                     HandleMakeTaskManager(message);
                 }
                 else if(tempOBJ is UpdateStationHealthResponse)
@@ -325,9 +325,9 @@ public class GameState : State
     }
 
     //makes a task manager
-    void HandleMakeTaskManager(MakeTaskManager message)
+    void HandleMakeTaskManager(PlaceWorldObjects message)
     {
-        gameManager.MakeTaskmanager(message.playerIsLeader);
+        gameManager.MakeWorldObjects(message.playerIsLeader);
     }
 
     //update station health
