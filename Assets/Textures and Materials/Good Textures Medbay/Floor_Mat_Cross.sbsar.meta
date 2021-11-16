@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4b60af6bf7280b842a62b4d3a2bf6194
+guid: bc19467a7f27f624c9d8e9059804b5e2
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -11,28 +11,28 @@ ScriptedImporter:
   version: 29
   projectContext: 0
   mGraphInstanceData:
-  - graphLabel: Warframe_Graph_01
-    prototypeName: Warframe_Graph_01
+  - graphLabel: Floor_Mat_Cross
+    prototypeName: Floor_Mat_Cross
     graphDescIndex: 0
     generateAllOutputs: 0
     generateMipMaps: 1
-    preset: " <sbspreset pkgurl=\"pkg://Warframe_Graph_01\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"3748629466\" type=\"8\" value=\"11,11\" />\n 
-      <presetinput identifier=\"edge_width\" uid=\"2975772197\" type=\"0\" value=\"1\"
-      />\n  <presetinput identifier=\"edge_roundness_1\" uid=\"2975767487\" type=\"0\"
+    preset: " <sbspreset pkgurl=\"pkg://Floor_Mat_Cross\" label=\"\" >\n  <presetinput
+      identifier=\"$outputsize\" uid=\"719388019\" type=\"8\" value=\"11,11\" />\n 
+      <presetinput identifier=\"edge_width\" uid=\"1159228504\" type=\"0\" value=\"1\"
+      />\n  <presetinput identifier=\"edge_roundness\" uid=\"1159227586\" type=\"0\"
       value=\"2\" />\n </sbspreset>\n"
     shaderName: Standard
     materialProperties:
       shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-      shaderKeywords: _BUMPMAP _EMISSION _MAINTEX _METALLICGLOSSMAP _NORMALMAP _OCCLUSIONMAP
+      shaderKeywords: _BUMPMAP _MAINTEX _METALLICGLOSSMAP _NORMALMAP _OCCLUSIONMAP
         _PARALLAXMAP
-      lightmapFlags: 1
+      lightmapFlags: 4
       enableInstancingVariants: 0
       doubleSidedGI: 0
       customRenderQueue: -1
       texEnvs:
       - name: _BumpMap
-        texture: {fileID: 7560454334704886436, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
+        texture: {fileID: -3213078811677986737, guid: bc19467a7f27f624c9d8e9059804b5e2, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _DetailAlbedoMap
@@ -48,23 +48,23 @@ ScriptedImporter:
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _EmissionMap
-        texture: {fileID: 2800000, guid: 5cc97698ffa8f0547a935de4c2be6306, type: 3}
+        texture: {instanceID: 0}
         scale: {x: 3, y: 3}
         offset: {x: 0, y: 0}
       - name: _MainTex
-        texture: {fileID: -4195550997324814631, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
+        texture: {fileID: 3198715054952846209, guid: bc19467a7f27f624c9d8e9059804b5e2, type: 3}
         scale: {x: 3, y: 3}
         offset: {x: 0, y: 0}
       - name: _MetallicGlossMap
-        texture: {fileID: 5534033484704894062, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
+        texture: {fileID: -8516674454119680060, guid: bc19467a7f27f624c9d8e9059804b5e2, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _OcclusionMap
-        texture: {fileID: 8401446867178463524, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
+        texture: {fileID: 1306135415091795166, guid: bc19467a7f27f624c9d8e9059804b5e2, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _ParallaxMap
-        texture: {fileID: 854346497037461077, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
+        texture: {fileID: -746557707199258164, guid: bc19467a7f27f624c9d8e9059804b5e2, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       floats:
@@ -104,7 +104,7 @@ ScriptedImporter:
       - name: _Color
         color: {r: 1, g: 1, b: 1, a: 1}
       - name: _EmissionColor
-        color: {r: 0, g: 14.682353, b: 16, a: 1}
+        color: {r: 0, g: 0, b: 0, a: 1}
     outputDescList:
     - outputName: baseColor
       identifier: basecolor
@@ -192,27 +192,27 @@ ScriptedImporter:
         from: 0
         to: 3
     textureParameters:
-    - textureName: Warframe_Graph_01 - baseColor
+    - textureName: Floor_Mat_Cross - baseColor
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_01 - normal
+    - textureName: Floor_Mat_Cross - normal
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_01 - roughness
+    - textureName: Floor_Mat_Cross - roughness
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_01 - metallic
+    - textureName: Floor_Mat_Cross - metallic
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_01 - height
+    - textureName: Floor_Mat_Cross - height
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_01 - ambientOcclusion
+    - textureName: Floor_Mat_Cross - ambientOcclusion
       wrapMode: 0
       filterMode: 1
       aniso: 1
@@ -227,10 +227,10 @@ ScriptedImporter:
       textureFormatMode: 0
       normalCompressed: 0
       bGenerateOnLoad: 1
-    material: {fileID: -7327167365519719354, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
+    material: {fileID: 6591039161142064104, guid: bc19467a7f27f624c9d8e9059804b5e2, type: 3}
     generatedTextures:
-    - {fileID: -4195550997324814631, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
-    - {fileID: 7560454334704886436, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
-    - {fileID: 5534033484704894062, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
-    - {fileID: 854346497037461077, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
-    - {fileID: 8401446867178463524, guid: 4b60af6bf7280b842a62b4d3a2bf6194, type: 3}
+    - {fileID: 3198715054952846209, guid: bc19467a7f27f624c9d8e9059804b5e2, type: 3}
+    - {fileID: -3213078811677986737, guid: bc19467a7f27f624c9d8e9059804b5e2, type: 3}
+    - {fileID: -8516674454119680060, guid: bc19467a7f27f624c9d8e9059804b5e2, type: 3}
+    - {fileID: -746557707199258164, guid: bc19467a7f27f624c9d8e9059804b5e2, type: 3}
+    - {fileID: 1306135415091795166, guid: bc19467a7f27f624c9d8e9059804b5e2, type: 3}

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 862632aad0e05344ab11a8dcd3d0887f
+guid: 2701113c236b7a040b224c2c08e42029
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -11,14 +11,16 @@ ScriptedImporter:
   version: 29
   projectContext: 0
   mGraphInstanceData:
-  - graphLabel: Warframe_Graph_03
-    prototypeName: Warframe_Graph_03
+  - graphLabel: Warframe_Graph_01
+    prototypeName: Warframe_Graph_01
     graphDescIndex: 0
     generateAllOutputs: 0
     generateMipMaps: 1
-    preset: " <sbspreset pkgurl=\"pkg://Warframe_Graph_03\" label=\"\" >\n  <presetinput
-      identifier=\"$outputsize\" uid=\"828500726\" type=\"8\" value=\"11,11\" />\n
-      </sbspreset>\n"
+    preset: " <sbspreset pkgurl=\"pkg://Warframe_Graph_01\" label=\"\" >\n  <presetinput
+      identifier=\"$outputsize\" uid=\"3748629466\" type=\"8\" value=\"11,11\" />\n 
+      <presetinput identifier=\"edge_width\" uid=\"2975772197\" type=\"0\" value=\"1\"
+      />\n  <presetinput identifier=\"edge_roundness_1\" uid=\"2975767487\" type=\"0\"
+      value=\"2\" />\n </sbspreset>\n"
     shaderName: Standard
     materialProperties:
       shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
@@ -30,7 +32,7 @@ ScriptedImporter:
       customRenderQueue: -1
       texEnvs:
       - name: _BumpMap
-        texture: {fileID: 5389296523474503875, guid: 862632aad0e05344ab11a8dcd3d0887f, type: 3}
+        texture: {fileID: 7560454334704886436, guid: 2701113c236b7a040b224c2c08e42029, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _DetailAlbedoMap
@@ -50,19 +52,19 @@ ScriptedImporter:
         scale: {x: 3, y: 3}
         offset: {x: 0, y: 0}
       - name: _MainTex
-        texture: {fileID: -823170930695623585, guid: 862632aad0e05344ab11a8dcd3d0887f, type: 3}
+        texture: {fileID: -4195550997324814631, guid: 2701113c236b7a040b224c2c08e42029, type: 3}
         scale: {x: 3, y: 3}
         offset: {x: 0, y: 0}
       - name: _MetallicGlossMap
-        texture: {fileID: -2501884756000136912, guid: 862632aad0e05344ab11a8dcd3d0887f, type: 3}
+        texture: {fileID: 5534033484704894062, guid: 2701113c236b7a040b224c2c08e42029, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _OcclusionMap
-        texture: {fileID: -5363232063095387840, guid: 862632aad0e05344ab11a8dcd3d0887f, type: 3}
+        texture: {fileID: 8401446867178463524, guid: 2701113c236b7a040b224c2c08e42029, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       - name: _ParallaxMap
-        texture: {fileID: 5329744269872966877, guid: 862632aad0e05344ab11a8dcd3d0887f, type: 3}
+        texture: {fileID: 854346497037461077, guid: 2701113c236b7a040b224c2c08e42029, type: 3}
         scale: {x: 1, y: 1}
         offset: {x: 0, y: 0}
       floats:
@@ -190,27 +192,27 @@ ScriptedImporter:
         from: 0
         to: 3
     textureParameters:
-    - textureName: Warframe_Graph_03 - baseColor
+    - textureName: Warframe_Graph_01 - baseColor
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_03 - normal
+    - textureName: Warframe_Graph_01 - normal
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_03 - roughness
+    - textureName: Warframe_Graph_01 - roughness
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_03 - metallic
+    - textureName: Warframe_Graph_01 - metallic
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_03 - height
+    - textureName: Warframe_Graph_01 - height
       wrapMode: 0
       filterMode: 1
       aniso: 1
-    - textureName: Warframe_Graph_03 - ambientOcclusion
+    - textureName: Warframe_Graph_01 - ambientOcclusion
       wrapMode: 0
       filterMode: 1
       aniso: 1
@@ -225,10 +227,10 @@ ScriptedImporter:
       textureFormatMode: 0
       normalCompressed: 0
       bGenerateOnLoad: 1
-    material: {fileID: 8310566758753955988, guid: 862632aad0e05344ab11a8dcd3d0887f, type: 3}
+    material: {fileID: -7327167365519719354, guid: 2701113c236b7a040b224c2c08e42029, type: 3}
     generatedTextures:
-    - {fileID: -823170930695623585, guid: 862632aad0e05344ab11a8dcd3d0887f, type: 3}
-    - {fileID: 5389296523474503875, guid: 862632aad0e05344ab11a8dcd3d0887f, type: 3}
-    - {fileID: -2501884756000136912, guid: 862632aad0e05344ab11a8dcd3d0887f, type: 3}
-    - {fileID: 5329744269872966877, guid: 862632aad0e05344ab11a8dcd3d0887f, type: 3}
-    - {fileID: -5363232063095387840, guid: 862632aad0e05344ab11a8dcd3d0887f, type: 3}
+    - {fileID: -4195550997324814631, guid: 2701113c236b7a040b224c2c08e42029, type: 3}
+    - {fileID: 7560454334704886436, guid: 2701113c236b7a040b224c2c08e42029, type: 3}
+    - {fileID: 5534033484704894062, guid: 2701113c236b7a040b224c2c08e42029, type: 3}
+    - {fileID: 854346497037461077, guid: 2701113c236b7a040b224c2c08e42029, type: 3}
+    - {fileID: 8401446867178463524, guid: 2701113c236b7a040b224c2c08e42029, type: 3}
