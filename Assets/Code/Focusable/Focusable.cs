@@ -51,7 +51,7 @@ public class Focusable : MonoBehaviour
         if (!isFocused)
         {
             isFocused = true;
-            player.GetComponent<MeshRenderer>().enabled = false;
+            player.transform.GetChild(0).gameObject.SetActive(false);
             player.GetComponent<PlayerMovement>().enabled = false;
             player.GetComponent<PlayerRotation>().enabled = false;
             Cursor.lockState = CursorLockMode.Confined;
@@ -68,7 +68,7 @@ public class Focusable : MonoBehaviour
         if (isFocused)
         {
             isFocused = false;
-            player.GetComponent<MeshRenderer>().enabled = true;
+            player.transform.GetChild(0).gameObject.SetActive(true);
             player.GetComponent<PlayerMovement>().enabled = true;
             player.GetComponent<PlayerRotation>().enabled = true;
             Cursor.lockState = CursorLockMode.Locked;

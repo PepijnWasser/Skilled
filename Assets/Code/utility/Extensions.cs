@@ -94,4 +94,19 @@ public static class Extensions
 		}
 		throw new Exception("No network adapters with an IPv4 address in the system!");
 	}
+
+	public static bool IsPointInPlane(Vector3 point, Vector3 bottomLeft, Vector3 upperRight)
+    {
+		if(point.x > bottomLeft.x && point.x < upperRight.x)
+        {
+			if (point.y > bottomLeft.y && point.y < upperRight.y)
+            {
+				if (point.z > bottomLeft.z && point.z < upperRight.z)
+                {
+					return true;
+                }
+			}
+		}
+		return false;
+    }
 }

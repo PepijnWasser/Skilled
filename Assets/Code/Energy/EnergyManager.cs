@@ -8,7 +8,8 @@ public class EnergyManager : MonoBehaviour
     public int totalEnergy;
     public int availibleEnergy;
 
-    public Text energyCount;
+    public delegate void EnergyChanged(int newAmount);
+    public static event EnergyChanged energyChanged;
 
     private void Start()
     {
@@ -18,12 +19,13 @@ public class EnergyManager : MonoBehaviour
     public void AddEnergy()
     {
         availibleEnergy += 1;
-        energyCount.text = availibleEnergy.ToString();
+        energyChanged?.Invoke(availibleEnergy);
+
     }
 
     public void RemoveEnergy()
     {
         availibleEnergy -= 1;
-        energyCount.text = availibleEnergy.ToString();
+        energyChanged?.Invoke(availibleEnergy);
     }
 }

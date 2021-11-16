@@ -9,12 +9,14 @@ public class DisplayClicker : MonoBehaviour
     public Camera energyMapCamera;
 
     public RectTransform clickWindow;
-    Vector2 xBorder;
-    Vector2 yBorder;
 
     Vector2 sizeDif;
 
     public LayerMask energyMask;
+
+    Ray testRay;
+    public GameObject emptyPrefab;
+    public GameObject cubePrefab;
 
     private void Awake()
     {
@@ -26,35 +28,54 @@ public class DisplayClicker : MonoBehaviour
         GameManager.playerMade -= SetPlayerCamera;
     }
 
-    void Start()
-    {
-        Vector3[] worldCorners = new Vector3[4];
-        clickWindow.GetWorldCorners(worldCorners);
-
-        xBorder.x = worldCorners[0].x;
-        xBorder.y = worldCorners[2].x;
-        yBorder.x = worldCorners[0].y;
-        yBorder.y = worldCorners[2].y;
-
-        sizeDif.x = xBorder.y - xBorder.x;
-        sizeDif.y = yBorder.y - yBorder.x;
-    }
 
     // Update is called once per frame
     void Update()
     {
+        if (testRay.direction != null)
+        {
+            Debug.DrawRay(displayCam.transform.position, testRay.direction * 5, Color.green);
+        }
         if (Input.GetMouseButtonDown(0))
         {
+          
             Ray mouseToDisplayRay = displayCam.ScreenPointToRay(Input.mousePosition);
+            testRay = mouseToDisplayRay;
 
             RaycastHit displayHit;
 
             if (Physics.Raycast(mouseToDisplayRay, out displayHit, 10))
             {
-                if (displayHit.point.x > xBorder.x && displayHit.point.x < xBorder.y && displayHit.point.y > yBorder.x && displayHit.point.y < yBorder.y)
+                if(displayHit.collider.gameObject == this.gameObject)
                 {
-                    float widthPercentage = ((displayHit.point.x - xBorder.x) / sizeDif.x);
-                    float heightPercentage = ((displayHit.point.y - yBorder.x) / sizeDif.y);
+                    GameObject hit = Instantiate(emptyPrefab, displayHit.point, Quaternion.identity, this.transform);
+
+                    Quaternion originalRotation = transform.rotation;
+
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    Vector3[] worldCorners = new Vector3[4];
+                    clickWindow.GetWorldCorners(worldCorners);
+
+                    Vector2 bottomLeft;
+                    Vector2 topRight;
+
+                    bottomLeft.x = worldCorners[0].x;
+                    bottomLeft.y = worldCorners[2].x;
+                    topRight.x = worldCorners[0].y;
+                    topRight.y = worldCorners[2].y;
+
+                    sizeDif.x = bottomLeft.y - bottomLeft.x;
+                    sizeDif.y = topRight.y - topRight.x;
+
+                    float widthPercentage = ((hit.transform.position.x - bottomLeft.x) / sizeDif.x);
+                    float heightPercentage = ((hit.transform.position.y - topRight.x) / sizeDif.y);
+
+                    //Debug.Log(widthPercentage + "     +      " + heightPercentage);
+
+                    transform.rotation = originalRotation;
+
+                    Destroy(hit.gameObject);
+
                     Ray minimapCameraToEnergyUserRay = energyMapCamera.ScreenPointToRay(new Vector3(energyMapCamera.pixelWidth * widthPercentage, energyMapCamera.pixelHeight * heightPercentage, 0));
 
                     RaycastHit energyUserHit;
@@ -64,6 +85,7 @@ public class DisplayClicker : MonoBehaviour
                         Debug.Log(energyUserHit.transform.gameObject);
                         energyUserHit.transform.parent.GetComponent<EnergyUser>().switchEnergy();
                     }
+
                 }
             }
         }

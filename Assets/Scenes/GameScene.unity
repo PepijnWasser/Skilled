@@ -1060,6 +1060,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 5732217132210592382, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
   taskManagerPrefab: {fileID: 5190529441526039828, guid: 1e392aa78cb36774db62e9446859ef59, type: 3}
+  energyManagerPrefab: {fileID: 5425013314323596467, guid: 750821316b2fd95429b725fe67490623, type: 3}
+  playerCharacter: {fileID: 0}
 --- !u!4 &1388254687
 Transform:
   m_ObjectHideFlags: 0
@@ -1182,7 +1184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c980c35a4aff194d8e185cd257046d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stationHealth: 30
+  stationHealth: 1000000
 --- !u!4 &1605409415
 Transform:
   m_ObjectHideFlags: 0
@@ -1261,7 +1263,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &1660510480
 Light:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject playerPrefab;
     public GameObject taskManagerPrefab;
+    public GameObject energyManagerPrefab;
 
     Dictionary<int, PlayerPrefabManager> characterDictionary = new Dictionary<int, PlayerPrefabManager>();
 
@@ -70,13 +71,15 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void MakeTaskmanager(bool playerIsLeader)
+    public void MakeWorldObjects(bool playerIsLeader)
     {
-        GameObject manager = Instantiate(taskManagerPrefab);
+        GameObject taskManager = Instantiate(taskManagerPrefab);
         if (!playerIsLeader)
         {
-            manager.GetComponent<TaskManager>().enabled = false;
+            taskManager.GetComponent<TaskManager>().enabled = false;
         }
+
+        GameObject energyManager = Instantiate(energyManagerPrefab);
     }
 
     //gets all positions a player can spawn
