@@ -4821,19 +4821,19 @@ PrefabInstance:
       objectReference: {fileID: 12800000, guid: a5d126997afcadc4bb9a0d7db36be68b, type: 3}
     - target: {fileID: 3800764170072717291, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -458.275
+      value: -457.9995
       objectReference: {fileID: 0}
     - target: {fileID: 3800764170072717291, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 123.862
+      value: 123.99975
       objectReference: {fileID: 0}
     - target: {fileID: 3800764170309211409, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -458.275
+      value: -457.9995
       objectReference: {fileID: 0}
     - target: {fileID: 3800764170309211409, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 123.862
+      value: 123.99975
       objectReference: {fileID: 0}
     - target: {fileID: 3800764170309211410, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_FontData.m_Font
@@ -4846,7 +4846,7 @@ PrefabInstance:
     - target: {fileID: 3800764171294457601, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b0e7f3a080a41d548a42ec63bb27906c, type: 3}
+      objectReference: {fileID: 21300000, guid: 8fac27f7cb8f1784383cc0ef3c54eedd, type: 3}
     - target: {fileID: 3800764171294457601, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -4869,19 +4869,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3800764171294457606, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 839.158
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 3800764171294457606, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 107.464
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3800764171294457606, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 341
+      value: 380
       objectReference: {fileID: 0}
     - target: {fileID: 3800764171294457606, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -162
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 3800764171300468370, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_AnchorMax.x
@@ -4893,15 +4893,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3800764171300468370, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1078.63
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 3800764171300468370, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 150.859
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 3800764171300468370, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0000073017577
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3800764171300468370, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4921,11 +4921,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3800764171300468370, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 379
+      value: 380
       objectReference: {fileID: 0}
     - target: {fileID: 3800764171300468370, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 9
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 3800764171300468370, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
@@ -4994,11 +4994,39 @@ PrefabInstance:
     - target: {fileID: 3800764171300468460, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: b0e7f3a080a41d548a42ec63bb27906c, type: 3}
+      objectReference: {fileID: 21300000, guid: 8fac27f7cb8f1784383cc0ef3c54eedd, type: 3}
     - target: {fileID: 3800764171394523576, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: a5d126997afcadc4bb9a0d7db36be68b, type: 3}
+    - target: {fileID: 3800764171394523576, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800764171394523576, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
+      propertyPath: m_FontData.m_MinSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800764171394523576, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800764171394523583, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -457
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800764171394523583, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800764171394523583, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 123.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3800764171394523583, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3966056884132580788, guid: acd28b4195365d542a6a8c943b25d4d3, type: 3}
       propertyPath: basePort
       value: 20021
