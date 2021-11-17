@@ -62,6 +62,9 @@ public class GameState : State
     public delegate void RigidbodyTouchedUpdate(int playerID, int rigidbodyID);
     public static event RigidbodyTouchedUpdate rigidbodyTouchedUpdate;
 
+    public delegate void EnergyUserUpdated(int id, bool on);
+    public static event EnergyUserUpdated energyUserUpdated;
+
 
     protected override void Awake()
     {
@@ -78,22 +81,26 @@ public class GameState : State
         KeypadTask.validateCode += SendValidationMessage;
 
         MapPositionUpdater.positionChanged += SendMapCameraPosition;
+
+        EnergyUser.energyChanged += SendEnergyUserStatus;
     }
 
     private void OnDestroy()
     {
-        MapGenerator.OnCompletion += SendMapMadeMessage;
+        MapGenerator.OnCompletion -= SendMapMadeMessage;
         StationHealth.updateStationHealth -= SendStationHealth;
         TaskManager.taskHasError -= SendNewTask;
 
-        TwoWayLever.leverPulled += SendTwoWayLeverPos;
+        TwoWayLever.leverPulled -= SendTwoWayLeverPos;
         ThreeWayLever.leverPulled -= SendThreeWayLeverPos;
         Keypad.keypadUsed -= SendKeypadStatus;
 
         Task.taskCompleted -= SendTaskCompleted;
         KeypadTask.validateCode -= SendValidationMessage;
 
-        MapPositionUpdater.positionChanged += SendMapCameraPosition;
+        MapPositionUpdater.positionChanged -= SendMapCameraPosition;
+
+        EnergyUser.energyChanged -= SendEnergyUserStatus;
     }
 
     //send a message to the server that we loaded the new scene
@@ -259,6 +266,11 @@ public class GameState : State
                 {
                     LastPlayerTouchedMessage message = tempOBJ as LastPlayerTouchedMessage;
                     HandleLastPlayerTouchedMessage(message);
+                }
+                else if(tempOBJ is UpdateEnergyUserStatusResponse)
+                {
+                    UpdateEnergyUserStatusResponse message = tempOBJ as UpdateEnergyUserStatusResponse;
+                    HandleEnergyStatusResponse(message);
                 }
             }
         }
@@ -481,6 +493,11 @@ public class GameState : State
         rigidbodyTouchedUpdate?.Invoke(message.playerID, message.rigidbodyID);
     }
 
+    void HandleEnergyStatusResponse(UpdateEnergyUserStatusResponse message)
+    {
+        energyUserUpdated?.Invoke(message.id, message.on);
+    }
+
     //sending
     void SendGameLoadedMessage()
     {
@@ -618,5 +635,11 @@ public class GameState : State
     {
         LastPlayerTouchedMessage message = new LastPlayerTouchedMessage(playerID, rigidbodyID);
         tcpClientNetwork.SendObjectThroughTCP(message);
+    }
+
+    public void SendEnergyUserStatus(int userID, bool on)
+    {
+        UpdateEnergyUserStatusResponse request = new UpdateEnergyUserStatusResponse(userID, on);
+        tcpClientNetwork.SendObjectThroughTCP(request);
     }
 }

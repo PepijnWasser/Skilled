@@ -145,6 +145,11 @@ public class GameRoom : Room
             LastPlayerTouchedMessage message = tempOBJ as LastPlayerTouchedMessage;
             HandleLastPlayerTouchedMessage(message);
         }
+        else if(tempOBJ is UpdateEnergyUserStatusResponse)
+        {
+            UpdateEnergyUserStatusResponse message = tempOBJ as UpdateEnergyUserStatusResponse;
+            HandleEnergyUserStatus(message, myClient);
+        }
     }
 
     //checks if the clients are still alive
@@ -427,6 +432,14 @@ public class GameRoom : Room
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);
         SendTCPMessageToAllUsers(outPacket);
+    }
+
+    void HandleEnergyUserStatus(UpdateEnergyUserStatusResponse message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        UpdateEnergyUserStatusResponse response = new UpdateEnergyUserStatusResponse(message.id, message.on);
+        outPacket.Write(response);
+        SendTCPMessageToAllUsersExcept(outPacket, client);
     }
 
     protected override void Reset()

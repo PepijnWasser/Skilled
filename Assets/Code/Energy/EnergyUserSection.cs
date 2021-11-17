@@ -6,6 +6,7 @@ public class EnergyUserSection : EnergyUser
 {
     public List<SwitchableRoom> switchableRooms = new List<SwitchableRoom>();
 
+
     protected override void TurnOn()
     {
         base.TurnOn();

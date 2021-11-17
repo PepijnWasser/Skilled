@@ -14,6 +14,7 @@ public class EnergySpawner : MonoBehaviour
     public delegate void EnergyUsersSpawned();
     public static event EnergyUsersSpawned energyUsersSpawned;
 
+    static int newID = 0;
 
     //foreach type of task, spawn the given amount of that task. Give it a name and id, and set the location
     public void SpawnEnergyUsers(Transform parent)
@@ -38,5 +39,11 @@ public class EnergySpawner : MonoBehaviour
     void GetAvailibleLocations()
     {
         availibleEnergyDoorLocation = new List<EnergyDoorLocation>(GameObject.FindObjectsOfType<EnergyDoorLocation>());
+    }
+
+    public static  int getNewID()
+    {
+        newID += 1;
+        return newID;
     }
 }

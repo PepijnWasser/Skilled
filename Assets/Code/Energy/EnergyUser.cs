@@ -12,10 +12,26 @@ public class EnergyUser : MonoBehaviour
     public Color onColor;
     public Color offColor;
 
+    public int id;
+
+    public delegate void EnergyChanged(int id, bool on);
+    public static EnergyChanged energyChanged;
+
+    private void Awake()
+    {
+        GameState.energyUserUpdated += SetStatus;
+    }
+
     protected virtual void Start()
     {
+        id = EnergySpawner.getNewID();
         energyManager = GameObject.FindObjectOfType<EnergyManager>();
         TurnOff();
+    }
+
+    private void OnDestroy()
+    {
+        GameState.energyUserUpdated -= SetStatus;
     }
 
     public void switchEnergy()
@@ -31,6 +47,8 @@ public class EnergyUser : MonoBehaviour
         {
             TurnOff();
         }
+
+        energyChanged?.Invoke(id, on);
     }
 
     protected virtual void TurnOn()
@@ -47,5 +65,20 @@ public class EnergyUser : MonoBehaviour
         energyManager.AddEnergy();
 
         minimapIcon.GetComponent<MeshRenderer>().material.color = offColor;
+    }
+
+    void SetStatus(int _id, bool _on)
+    {
+        if(_id == id)
+        {
+            if (_on)
+            {
+                TurnOn();
+            }
+            else
+            {
+                TurnOff();
+            }
+        }
     }
 }
