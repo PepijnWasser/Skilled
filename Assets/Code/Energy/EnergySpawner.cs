@@ -14,10 +14,6 @@ public class EnergySpawner : MonoBehaviour
     public delegate void EnergyUsersSpawned();
     public static event EnergyUsersSpawned energyUsersSpawned;
 
-    private void Start()
-    {
-        SpawnEnergyUsers(this.transform);
-    }
 
     //foreach type of task, spawn the given amount of that task. Give it a name and id, and set the location
     public void SpawnEnergyUsers(Transform parent)

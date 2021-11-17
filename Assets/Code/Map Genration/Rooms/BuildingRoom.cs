@@ -7,6 +7,7 @@ public class BuildingRoom : MonoBehaviour
     public List<Doorway> doorways;
     public MeshCollider[] meshColliders;
     public Doorway generatedFrom;
+    public SwitchableRoom switchableRoom;
 
     public Bounds[] RoomBounds
     {
