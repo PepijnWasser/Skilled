@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 443789837509406539}
   - component: {fileID: 1700285816135092679}
   - component: {fileID: 7344301731235629092}
+  - component: {fileID: 377421242005279393}
   m_Layer: 12
   m_Name: Hallway Window
   m_TagString: Untagged
@@ -54,6 +55,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 7344301731235629092}
   generatedFrom: {fileID: 0}
+  switchableRoom: {fileID: 377421242005279393}
 --- !u!64 &7344301731235629092
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -68,6 +70,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 34894454983237412, guid: 5f03619cae36f724ba3f97df7a9e1145, type: 3}
+--- !u!114 &377421242005279393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964746880277640689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41fd5a58975b834fb789b5d109c81d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switchables:
+  - {fileID: 865961202736261298}
 --- !u!1 &2091236557216730253
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,6 +94,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2926299010259864800}
   - component: {fileID: 2606836287439615334}
+  - component: {fileID: 865961202736261298}
+  - component: {fileID: 4621307399426898712}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -161,6 +179,31 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &865961202736261298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091236557216730253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1794d467a960a47834f25d70c8d12c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4621307399426898712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091236557216730253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41fd5a58975b834fb789b5d109c81d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switchables: []
 --- !u!1 &5943139520208501395
 GameObject:
   m_ObjectHideFlags: 0

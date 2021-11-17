@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 6291121790558342556}
   - component: {fileID: 7136555688134437947}
   - component: {fileID: 8741507756692018452}
+  - component: {fileID: 1146904001531115828}
   m_Layer: 12
   m_Name: hallway
   m_TagString: Untagged
@@ -137,6 +138,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 8741507756692018452}
   generatedFrom: {fileID: 0}
+  switchableRoom: {fileID: 1146904001531115828}
 --- !u!64 &8741507756692018452
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -151,6 +153,19 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
+--- !u!114 &1146904001531115828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630808570164369190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d41fd5a58975b834fb789b5d109c81d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  switchables: []
 --- !u!1001 &6531784752283616074
 PrefabInstance:
   m_ObjectHideFlags: 0

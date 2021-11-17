@@ -7,13 +7,14 @@ public class GameManager : MonoBehaviour
 {
     public GameObject playerPrefab;
     public GameObject taskManagerPrefab;
-    public GameObject energyManagerPrefab;
 
     Dictionary<int, PlayerPrefabManager> characterDictionary = new Dictionary<int, PlayerPrefabManager>();
 
     List<PlayerSpawnLocation> availiblePlayerSpawnLocations = new List<PlayerSpawnLocation>();
 
     public GameObject playerCharacter;
+
+    public EnergySpawner energySpawner;
 
     public delegate void PlayerMade(GameObject player, Camera cam);
     public static event PlayerMade playerMade;
@@ -79,7 +80,7 @@ public class GameManager : MonoBehaviour
             taskManager.GetComponent<TaskManager>().enabled = false;
         }
 
-        GameObject energyManager = Instantiate(energyManagerPrefab);
+        energySpawner.SpawnEnergyUsers(energySpawner.transform);
     }
 
     //gets all positions a player can spawn

@@ -16,6 +16,8 @@ public class SectionGenerator : MonoBehaviour
 	public List<Doorway> allDoorways = new List<Doorway>();
 	public List<Doorway> availableDoorways = new List<Doorway>();
 
+	public EnergyUserSection sectionPower;
+
 	[HideInInspector]
 	public Doorway startdoor;
 
@@ -108,6 +110,9 @@ public class SectionGenerator : MonoBehaviour
 				AddDoorwaysToLists(roomToCheck);
 				roomToCheck.GetComponentInChildren<Renderer>().material.color = roomColor;
 				roomToCheck.GetComponent<BuildingRoom>().generatedFrom = doorwayToFitOn;
+
+				sectionPower.AddRoom(roomToCheck.switchableRoom);
+
 				return true;
             }
             else
