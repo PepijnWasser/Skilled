@@ -11,6 +11,10 @@ public class KeypadTask : Task
     public Keypad keyPad;
     KeypadCodeEnterer keypadCodeEnterer;
 
+    public AudioSource badAudio;
+    public AudioSource correctAudio;
+
+
     public delegate void Damage(int amount);
     public static event Damage taskDealDamage;
 
@@ -101,10 +105,12 @@ public class KeypadTask : Task
             if (keypadCodeEnterer.message == code)
             {
                 CompleteTask();
+                correctAudio.Play();
             }
             else
             {
                 keypadCodeEnterer.DisplayErrorMessage();
+                badAudio.Play();
             }
         }
         else

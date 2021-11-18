@@ -6,6 +6,8 @@ using UnityEngine;
 public class SwitchableLight : Switchable
 {
     Light light;
+    public Renderer renderer;
+    public Material mat;
 
     private void Awake()
     {
@@ -15,10 +17,12 @@ public class SwitchableLight : Switchable
     public override void TurnOn()
     {
         light.enabled = true;
+        renderer.material.EnableKeyword("_EMISSION");
     }
 
     public override void TurnOff()
     {
         light.enabled = false;
+        renderer.material.DisableKeyword("_EMISSION");
     }
 }

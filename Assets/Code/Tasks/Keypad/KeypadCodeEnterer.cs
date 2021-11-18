@@ -11,11 +11,14 @@ public class KeypadCodeEnterer : MonoBehaviour
     public string nameMessage;
     string errorMessage = "Error....";
 
+    public AudioSource enterAudio;
 
     public void AddDigit(int digit)
     {
         message = message + digit;
         display.text = message;
+
+        enterAudio.Play();
     }
 
     public void DisplayWelcomeMessage()
@@ -37,6 +40,8 @@ public class KeypadCodeEnterer : MonoBehaviour
             message = message.Remove(message.Length - 1);
             display.text = message;
         }
+
+        enterAudio.Play();
     }
 
     public void SetWelcomeMessage(string message)

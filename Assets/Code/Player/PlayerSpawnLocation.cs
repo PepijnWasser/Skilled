@@ -7,7 +7,7 @@ public class PlayerSpawnLocation : MonoBehaviour
     private void OnDrawGizmos()
     {
         Ray ray = new Ray(transform.position, transform.rotation * Vector3.forward);
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.cyan;
         Gizmos.DrawRay(ray);
     }
 }
