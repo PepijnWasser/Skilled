@@ -7,6 +7,7 @@ public class MouseCursor : MonoBehaviour
 {
     bool showCursor;
     public Image cursor;
+    public Text pressE;
 
     private void Start()
     {
@@ -18,11 +19,13 @@ public class MouseCursor : MonoBehaviour
         if (showCursor)
         {
             cursor.enabled = true;
+            pressE.enabled = true;
             showCursor = false;
         }
         else
         {
             cursor.enabled = false;
+            pressE.enabled = false;
         }
     }
 
