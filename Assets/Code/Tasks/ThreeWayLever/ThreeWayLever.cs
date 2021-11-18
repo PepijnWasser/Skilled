@@ -10,6 +10,8 @@ public class ThreeWayLever : MonoBehaviour
 
     Animator animator;
 
+    AudioSource audioSource;
+
     [HideInInspector]
     public int currentPosition;
 
@@ -30,6 +32,7 @@ public class ThreeWayLever : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         interactable = GetComponent<Interactable>();
+        audioSource = GetComponent<AudioSource>();
 
         currentPosition = Random.Range(1, 4);
         animator.SetInteger("Stance", currentPosition);
@@ -55,6 +58,9 @@ public class ThreeWayLever : MonoBehaviour
                 }
                 animator.SetInteger("Stance", currentPosition);
 
+
+                audioSource.Play();
+
                 leverPulled?.Invoke(leverID, currentPosition);
             }
         }
@@ -71,6 +77,9 @@ public class ThreeWayLever : MonoBehaviour
         {
             currentPosition = message.leverPosition;
             animator.SetInteger("Stance", currentPosition);
+
+            audioSource.Play();
+
         }
     }
 }

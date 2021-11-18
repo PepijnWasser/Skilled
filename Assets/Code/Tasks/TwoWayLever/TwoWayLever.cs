@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Interactable))]
 public class TwoWayLever : MonoBehaviour
 {
     Interactable interactable;
@@ -9,6 +11,8 @@ public class TwoWayLever : MonoBehaviour
     GameObject player;
 
     Animator animator;
+
+    AudioSource audioSource;
 
     [HideInInspector]
     public int currentPosition;
@@ -30,6 +34,7 @@ public class TwoWayLever : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         interactable = GetComponent<Interactable>();
+        audioSource = GetComponent<AudioSource>();
 
         currentPosition = Random.Range(0, 2);
         animator.SetInteger("position", currentPosition);
@@ -44,8 +49,8 @@ public class TwoWayLever : MonoBehaviour
 
     //check if the lever is pulled and play the correct position
     void TestPull()
-    { 
-        if(player != null)
+    {
+        if (player != null)
         {
             if (interactable.lookingAtTarget)
             {
@@ -57,6 +62,9 @@ public class TwoWayLever : MonoBehaviour
                 animator.SetInteger("position", currentPosition);
 
                 leverPulled?.Invoke(leverID, currentPosition);
+
+
+                audioSource.Play();
             }
         }
     }
@@ -68,11 +76,13 @@ public class TwoWayLever : MonoBehaviour
 
     //updates the lever position when another player pulled it
     void UpdatePos(UpdateTwoWayLeverPositionMessage message)
-    { 
-        if(message.leverID == leverID)
+    {
+        if (message.leverID == leverID)
         {
             currentPosition = message.leverPosition;
             animator.SetInteger("position", currentPosition);
+
+            audioSource.Play();
         }
     }
 }
