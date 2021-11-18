@@ -2446,6 +2446,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 8319710874009013014}
   generatedFrom: {fileID: 0}
+  switchableRoom: {fileID: 0}
 --- !u!64 &8319710874009013014
 MeshCollider:
   m_ObjectHideFlags: 0
