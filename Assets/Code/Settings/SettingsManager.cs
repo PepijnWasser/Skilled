@@ -14,12 +14,15 @@ public class SettingsManager : MonoBehaviour
 
     Canvas settingsMenuGameObject;
 
+    InputActionMap originalMap;
+
     bool inSettings;
 
     CursorLockMode originalMode = CursorLockMode.Confined;
     bool originallyVisible = true;
 
-    
+    bool calledFromGame = false;
+
     private static SettingsManager _instance;
 
     public static SettingsManager Instance
@@ -47,7 +50,7 @@ public class SettingsManager : MonoBehaviour
     private void Start()
     {
         InputManager.savedControls.MainMenu.OpenSettings.performed += _ => SwitchOpen();
-        InputManager.savedControls.Game.OpenSettings.performed += _ => SwitchOpen();
+        InputManager.savedControls.Game.OpenSettings.performed += _ => SwitchOpenGame();
         InputManager.savedControls.Focusable.OpenSettings.performed += _ => SwitchOpen();
         InputManager.savedControls.Settings.CloseSettings.performed += _ => SwitchOpen();
         settingsMenuGameObject = GetComponent<Canvas>();
@@ -59,13 +62,27 @@ public class SettingsManager : MonoBehaviour
     private void OnDestroy()
     {
         InputManager.savedControls.MainMenu.OpenSettings.performed -= _ => SwitchOpen();
-        InputManager.savedControls.Game.OpenSettings.performed -= _ => SwitchOpen();
+        InputManager.savedControls.Game.OpenSettings.performed -= _ => SwitchOpenGame();
         InputManager.savedControls.Focusable.OpenSettings.performed -= _ => SwitchOpen();
         InputManager.savedControls.Settings.CloseSettings.performed -= _ => SwitchOpen();
     }
 
-    public void SwitchOpen()
+    void SwitchOpen()
     {
+        if (inSettings)
+        {
+            Close();
+        }
+        else
+        {
+            calledFromGame = false;
+            Open();
+        }
+    }
+
+    void SwitchOpenGame()
+    {
+        calledFromGame = true;
         if (inSettings)
         {
             Close();
@@ -85,12 +102,19 @@ public class SettingsManager : MonoBehaviour
 
         background.SetActive(true);
 
+        originalMap = InputManager.activeAction;
+
         InputManager.SetActiveActionMap(InputManager.settings);
 
         originalMode = Cursor.lockState;
         originallyVisible = Cursor.visible;
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+
+        if (calledFromGame)
+        {
+            GameObject.FindObjectOfType<PlayerRotation>().enabled = false;
+        }
     }
 
     public void Close()
@@ -101,9 +125,21 @@ public class SettingsManager : MonoBehaviour
         background.SetActive(false);
         disabled?.Invoke();
 
-        InputManager.SetActiveActionMap(InputManager.mainMenu);
+        if(originalMap != null)
+        {
+            InputManager.SetActiveActionMap(originalMap);
+        }
+        else
+        {
+            InputManager.SetActiveActionMap(InputManager.settings);
+        }
 
         Cursor.lockState = originalMode;
         Cursor.visible = originallyVisible;
+
+        if (calledFromGame)
+        {
+            GameObject.FindObjectOfType<PlayerRotation>().enabled = true;
+        }
     }
 }

@@ -16,8 +16,8 @@ public class ThreeWayLeverPositionDisplay : MonoBehaviour
 
     private void Awake()
     {
-        ThreeWayLeverTask.taskCompleted += RemoveTask;
-        TaskManager.taskHasError += AddTask;
+        //ThreeWayLeverTask.taskCompleted += RemoveTask;
+       // TaskManager.taskHasError += AddTask;
         GameState.makeThreeWayLeverTask += AddTask;
         GameState.threeWayLeverCompleted += RemoveTask;
     }
@@ -25,8 +25,8 @@ public class ThreeWayLeverPositionDisplay : MonoBehaviour
 
     private void OnDestroy()
     {
-        ThreeWayLeverTask.taskCompleted -= RemoveTask;
-        TaskManager.taskHasError -= AddTask;
+     ///   ThreeWayLeverTask.taskCompleted -= RemoveTask;
+      // // TaskManager.taskHasError -= AddTask;
         GameState.makeThreeWayLeverTask -= AddTask;
         GameState.threeWayLeverCompleted -= RemoveTask;
     }
@@ -54,17 +54,6 @@ public class ThreeWayLeverPositionDisplay : MonoBehaviour
                 imagesSpawned.Add(spawnedItem);
             }
             NeedToUpdate = false;
-        }
-    }
-
-    void RemoveTask(Task task)
-    {
-        if (task is ThreeWayLeverTask)
-        {
-            ThreeWayLeverTask threeWayLeverTask = task as ThreeWayLeverTask;
-            tasksToDisplay.Remove(threeWayLeverTask.lever.leverID);
-            Debug.Log("removing task");
-            NeedToUpdate = true;
         }
     }
 

@@ -5,12 +5,12 @@ using UnityEngine;
 public class KeypadValidationMessage : ISerializable
 {
     public int keypadID;
-    public int code;
+    public string code;
 
     public void Deserialize(TCPPacket pPacket)
     {
         keypadID = pPacket.ReadInt();
-        code = pPacket.ReadInt();
+        code = pPacket.ReadString();
     }
 
     public void Serialize(TCPPacket pPacket)
@@ -24,7 +24,7 @@ public class KeypadValidationMessage : ISerializable
 
     }
 
-    public KeypadValidationMessage(int _code, int _keypadID)
+    public KeypadValidationMessage(string _code, int _keypadID)
     {
         code = _code;
         keypadID = _keypadID;

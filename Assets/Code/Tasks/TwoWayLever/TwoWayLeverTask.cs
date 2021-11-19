@@ -51,7 +51,6 @@ public class TwoWayLeverTask : Task
     protected override void CompleteTask()
     {
         base.CompleteTask();
-        Debug.Log("task completed");
     }
 
     //test damage

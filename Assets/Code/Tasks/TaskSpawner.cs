@@ -91,6 +91,7 @@ public class TaskSpawner : MonoBehaviour
             KeypadPrefabManager manager = newObject.GetComponent<KeypadPrefabManager>();
 
             manager.keypad.keypadID = i;
+            manager.codeEnterer.id = i;
 
             string name = keypadNamer.GetName();
             manager.keypad.gameObject.name = name;
