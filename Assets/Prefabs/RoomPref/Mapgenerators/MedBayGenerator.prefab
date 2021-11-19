@@ -216,3 +216,5 @@ MonoBehaviour:
   minimapIcon: {fileID: 1179666382998448028}
   onColor: {r: 0.82269275, g: 1, b: 0, a: 1}
   offColor: {r: 1, g: 0, b: 0, a: 1}
+  id: 0
+  switchableRooms: []

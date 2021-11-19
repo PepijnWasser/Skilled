@@ -6,6 +6,15 @@ public class EnergyUserSection : EnergyUser
 {
     public List<SwitchableRoom> switchableRooms = new List<SwitchableRoom>();
 
+    private void Awake()
+    {
+        MapGenerator.onCompletion += SetIconPos;
+    }
+
+    private void OnDestroy()
+    {
+        MapGenerator.onCompletion -= SetIconPos;
+    }
 
     protected override void TurnOn()
     {
@@ -31,5 +40,25 @@ public class EnergyUserSection : EnergyUser
 
         room.TurnOff();
         
+    }
+
+    void SetIconPos()
+    {
+        Vector3 averagePos = Vector3.zero;
+        Transform[] childTransforms = transform.parent.GetComponentsInChildren<Transform>();
+        List<GameObject> children = new List<GameObject>();
+
+        foreach(Transform t in childTransforms)
+        {
+            children.Add(t.gameObject);
+        }
+
+        foreach (GameObject c in children)
+        {
+            averagePos += c.transform.position;
+        }
+        averagePos = averagePos / children.Count;
+
+        this.transform.position = averagePos;
     }
 }

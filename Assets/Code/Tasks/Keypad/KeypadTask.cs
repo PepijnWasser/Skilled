@@ -18,17 +18,18 @@ public class KeypadTask : Task
     public delegate void Damage(int amount);
     public static event Damage taskDealDamage;
 
-    public delegate void Validate(int code, int id);
+    public delegate void Validate(string code, int id);
     public static event Validate validateCode;
+
+    public delegate void SetKeypadMessage(int id, bool correct);
+    public static event SetKeypadMessage codeChecked;
 
     public string code = "";
 
-    bool isServerOwner = true;
-
     private void Awake()
     {
-        GameState.makeKeypadTask += SetCode;
         GameState.testKeypadCode += TestKeypadCode;
+        GameState.setKeypadOutcomeMessage += SetStatus;
     }
 
     private void Start()
@@ -39,8 +40,8 @@ public class KeypadTask : Task
 
     private void OnDestroy()
     {
-        GameState.makeKeypadTask += SetCode;
         GameState.testKeypadCode -= TestKeypadCode;
+        GameState.setKeypadOutcomeMessage -= SetStatus;
     }
 
     public override void InitializeTask()
@@ -52,21 +53,6 @@ public class KeypadTask : Task
         int third = Random.Range(1, 10);
 
         code = first.ToString() + second.ToString() + third.ToString();
-    }
-
-    protected override void CompleteTask()
-    {
-        if (isServerOwner)
-        {
-            base.CompleteTask();
-            keyPad.DeFocus();
-            Debug.Log(true);
-        }
-        else
-        {
-            Debug.Log(false);
-            validateCode?.Invoke(int.Parse(keypadCodeEnterer.message), keyPad.keypadID);
-        }
     }
 
 
@@ -95,28 +81,7 @@ public class KeypadTask : Task
 
     public void ValidateCode()
     {
-        if(keypadCodeEnterer == null)
-        {
-            keypadCodeEnterer = GetComponent<KeypadCodeEnterer>();
-        }
-
-        if (hasError)
-        {
-            if (keypadCodeEnterer.message == code)
-            {
-                CompleteTask();
-                correctAudio.Play();
-            }
-            else
-            {
-                keypadCodeEnterer.DisplayErrorMessage();
-                badAudio.Play();
-            }
-        }
-        else
-        {
-            keypadCodeEnterer.DisplayErrorMessage();
-        }
+        validateCode?.Invoke(keypadCodeEnterer.message, keyPad.keypadID);
     }
 
     public override int GetID()
@@ -124,26 +89,49 @@ public class KeypadTask : Task
         return keyPad.keypadID;
     }
 
-    void SetCode(KeypadTask task, int keypadID)
+    void SetStatus(int _id, bool outCome)
     {
-        hasError = true;
-        isServerOwner = false;
-        if(keyPad != null)
+        if(keyPad.keypadID == _id)
         {
-            if(keyPad.keypadID == keypadID)
+            if(outCome == true)
             {
-                code = task.code;
+                keypadCodeEnterer.DisplayWelcomeMessage();
+                correctAudio.Play();
+
+                if (ServerConnectionData.isOwner)
+                {
+                    CompleteTask();
+                }
+            }
+            else
+            {
+                keypadCodeEnterer.DisplayErrorMessage();
+                badAudio.Play();
             }
         }
     }
 
-    void TestKeypadCode(int _code, int _id)
+    void TestKeypadCode(string _code, int _id)
     {
-        if(keyPad.keypadID == _id)
+        if (ServerConnectionData.isOwner)
         {
-            if(code == _code.ToString())
+            if (keyPad.keypadID == _id)
             {
-                CompleteTask();
+                if (hasError)
+                {
+                    if (code == _code.ToString())
+                    {
+                        codeChecked?.Invoke(keyPad.keypadID, true);
+                    }
+                    else
+                    {
+                        codeChecked?.Invoke(keyPad.keypadID, false);
+                    }
+                }
+                else
+                {
+                    codeChecked?.Invoke(keyPad.keypadID, false);
+                }
             }
         }
     }

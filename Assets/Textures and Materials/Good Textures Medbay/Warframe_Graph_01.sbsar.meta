@@ -104,7 +104,7 @@ ScriptedImporter:
       - name: _Color
         color: {r: 1, g: 1, b: 1, a: 1}
       - name: _EmissionColor
-        color: {r: 0, g: 14.682353, b: 16, a: 1}
+        color: {r: 0, g: 19.683666, b: 21.361254, a: 1}
     outputDescList:
     - outputName: baseColor
       identifier: basecolor

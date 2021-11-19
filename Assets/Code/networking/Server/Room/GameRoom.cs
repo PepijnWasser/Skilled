@@ -131,11 +131,7 @@ public class GameRoom : Room
             KeypadCompletedMessage message = tempOBJ as KeypadCompletedMessage;
             HandleKeypadTaskCompleted(message, myClient);
         }
-        else if(tempOBJ is KeypadValidationMessage)
-        {
-            KeypadValidationMessage message = tempOBJ as KeypadValidationMessage;
-            HandleKeypadValidationMessage(message, myClient);
-        }else if(tempOBJ is LeaveServermessage)
+        else if(tempOBJ is LeaveServermessage)
         {
             LeaveServermessage message = tempOBJ as LeaveServermessage;
             HandleLeaveServerMessage(message, myClient);
@@ -149,6 +145,21 @@ public class GameRoom : Room
         {
             UpdateEnergyUserStatusResponse message = tempOBJ as UpdateEnergyUserStatusResponse;
             HandleEnergyUserStatus(message, myClient);
+        }
+        else if (tempOBJ is KeypadCodeUpdateRequest)
+        {
+            KeypadCodeUpdateRequest message = tempOBJ as KeypadCodeUpdateRequest;
+            HandleKeypadUpdateRequest(message, myClient);
+        }
+        else if(tempOBJ is KeypadCodeOutcomeRequest)
+        {
+            KeypadCodeOutcomeRequest message = tempOBJ as KeypadCodeOutcomeRequest;
+            HandleKeypadCodeOutcomeRequest(message);
+        }
+        else if (tempOBJ is KeypadValidationMessage)
+        {
+            KeypadValidationMessage message = tempOBJ as KeypadValidationMessage;
+            HandleKeypadValidationMessage(message, myClient);
         }
     }
 
@@ -316,21 +327,21 @@ public class GameRoom : Room
     {
         TCPPacket outpacket = new TCPPacket();
         outpacket.Write(message);
-        SendTCPMessageToAllUsersExcept(outpacket, client);
+        SendTCPMessageToAllUsers(outpacket);
     }
 
     void HandleAddTwoWayLeverTask(AddTwoWayLeverTask message, MyClient client)
     {
         TCPPacket outpacket = new TCPPacket();
         outpacket.Write(message);
-        SendTCPMessageToAllUsersExcept(outpacket, client);
+        SendTCPMessageToAllUsers(outpacket);
     }
 
     void HandleAddThreeWayLeverTask(AddThreeWayLeverTask message, MyClient client)
     {
         TCPPacket outpacket = new TCPPacket();
         outpacket.Write(message);
-        SendTCPMessageToAllUsersExcept(outpacket, client);
+        SendTCPMessageToAllUsers(outpacket);
     }
 
     //sends the new position of a lever to all other clients when a client pulls it
@@ -361,14 +372,16 @@ public class GameRoom : Room
     {
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);
-        SendTCPMessageToAllUsersExcept(outPacket, client);
+        SendTCPMessageToAllUsers(outPacket);
+
+        tasksCompleted += 1;
     }
 
     void HandleThreeWayLeverTaskCompleted(ThreeWayLeverCompletedMessage message, MyClient client)
     {
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);
-        SendTCPMessageToAllUsersExcept(outPacket, client);
+        SendTCPMessageToAllUsers(outPacket);
 
         tasksCompleted += 1;
     }
@@ -377,7 +390,7 @@ public class GameRoom : Room
     {
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);
-        SendTCPMessageToAllUsersExcept(outPacket, client);
+        SendTCPMessageToAllUsers(outPacket);
 
         tasksCompleted += 1;
     }
@@ -387,8 +400,6 @@ public class GameRoom : Room
         TCPPacket outPacket = new TCPPacket();
         outPacket.Write(message);
         SendTCPMessageToTargetUser(outPacket, server.serverInfo.serverOwner);
-
-        tasksCompleted += 1;
     }
 
     //send new pos to all users
@@ -440,6 +451,22 @@ public class GameRoom : Room
         UpdateEnergyUserStatusResponse response = new UpdateEnergyUserStatusResponse(message.id, message.on);
         outPacket.Write(response);
         SendTCPMessageToAllUsersExcept(outPacket, client);
+    }
+
+    void HandleKeypadUpdateRequest(KeypadCodeUpdateRequest message, MyClient client)
+    {
+        TCPPacket outPacket = new TCPPacket();
+        KeypadCodeUpdateResponse response = new KeypadCodeUpdateResponse(message.id, message.message);
+        outPacket.Write(response);
+        SendTCPMessageToAllUsersExcept(outPacket, client);
+    }
+
+    void HandleKeypadCodeOutcomeRequest(KeypadCodeOutcomeRequest message)
+    {
+        TCPPacket outPakcet = new TCPPacket();
+        KeypadCodeOutcomeResponse response = new KeypadCodeOutcomeResponse(message.id, message.correct);
+        outPakcet.Write(response);
+        SendTCPMessageToAllUsers(outPakcet);
     }
 
     protected override void Reset()

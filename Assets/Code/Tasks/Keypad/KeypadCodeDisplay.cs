@@ -16,16 +16,12 @@ public class KeypadCodeDisplay : MonoBehaviour
 
     private void Awake()
     {
-        KeypadTask.taskCompleted += RemoveTask;
-        TaskManager.taskHasError += AddTask;
         GameState.makeKeypadTask += AddTask;
         GameState.keypadCompleted += RemoveTask;
     }
 
     private void OnDestroy()
     {
-        KeypadTask.taskCompleted -= RemoveTask;
-        TaskManager.taskHasError -= AddTask;
         GameState.makeKeypadTask -= AddTask;
         GameState.keypadCompleted += RemoveTask;
     }
@@ -55,17 +51,6 @@ public class KeypadCodeDisplay : MonoBehaviour
         }
     }
 
-    void RemoveTask(Task task)
-    {
-        if (task is KeypadTask)
-        {
-            KeypadTask keypadTask = task as KeypadTask;
-            tasksToDisplay.Remove(keypadTask.keyPad.keypadID);
-            Debug.Log("removing task" + keypadTask.keyPad.keypadID);
-            NeedToUpdate = true;
-        }
-    }
-
     void RemoveTask(int taskID)
     {
         if (tasksToDisplay.ContainsKey(taskID))
@@ -75,12 +60,12 @@ public class KeypadCodeDisplay : MonoBehaviour
         }
     }
 
-    void AddTask(Task task, int leverID)
+    void AddTask(Task task, int taskID)
     {
         if (task is KeypadTask)
         {
             KeypadTask keypadTask = task as KeypadTask;
-            tasksToDisplay.Add(leverID, keypadTask);
+            tasksToDisplay.Add(taskID, keypadTask);
             NeedToUpdate = true;
         }
     }

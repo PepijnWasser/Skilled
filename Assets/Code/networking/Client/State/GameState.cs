@@ -38,6 +38,12 @@ public class GameState : State
     public delegate void UpdateKeypadStatus(UpdateKeypadStatusMessage message);
     public static event UpdateKeypadStatus updateKeypadStatus;
 
+    public delegate void SetKeypadOutcomeMessage(int id, bool correct);
+    public static event SetKeypadOutcomeMessage setKeypadOutcomeMessage;
+
+    public delegate void UpdateKeypadScreen(int id, string message);
+    public static event UpdateKeypadScreen updateKeypadScreen;
+
 
     public delegate void TwoWayLeverCompleted(int leverID);
     public static event TwoWayLeverCompleted twoWayLeverCompleted;
@@ -48,7 +54,7 @@ public class GameState : State
     public delegate void KeypadCompleted(int keypadID);
     public static event KeypadCompleted keypadCompleted;
 
-    public delegate void Validate(int code, int keypadID);
+    public delegate void Validate(string code, int keypadID);
     public static event Validate testKeypadCode;
 
     public delegate void mapPosUpdater(Vector3 newPos, float newZoom);
@@ -69,7 +75,7 @@ public class GameState : State
     protected override void Awake()
     {
         base.Awake();
-        MapGenerator.OnCompletion += SendMapMadeMessage;
+        MapGenerator.onCompletion += SendMapMadeMessage;
         StationHealth.updateStationHealth += SendStationHealth;
         TaskManager.taskHasError += SendNewTask;
 
@@ -77,8 +83,12 @@ public class GameState : State
         ThreeWayLever.leverPulled += SendThreeWayLeverPos;
         Keypad.keypadUsed += SendKeypadStatus;
 
-        Task.taskCompleted += SendTaskCompleted;
+        KeypadCodeEnterer.messageUpdated += SendKeypadCode;
+        KeypadTask.codeChecked += SendKeypadOutcome;
         KeypadTask.validateCode += SendValidationMessage;
+
+        Task.taskCompleted += SendTaskCompleted;
+
 
         MapPositionUpdater.positionChanged += SendMapCameraPosition;
 
@@ -87,13 +97,16 @@ public class GameState : State
 
     private void OnDestroy()
     {
-        MapGenerator.OnCompletion -= SendMapMadeMessage;
+        MapGenerator.onCompletion -= SendMapMadeMessage;
         StationHealth.updateStationHealth -= SendStationHealth;
         TaskManager.taskHasError -= SendNewTask;
 
         TwoWayLever.leverPulled -= SendTwoWayLeverPos;
         ThreeWayLever.leverPulled -= SendThreeWayLeverPos;
         Keypad.keypadUsed -= SendKeypadStatus;
+
+        KeypadCodeEnterer.messageUpdated -= SendKeypadCode;
+        KeypadTask.codeChecked -= SendKeypadOutcome;
 
         Task.taskCompleted -= SendTaskCompleted;
         KeypadTask.validateCode -= SendValidationMessage;
@@ -271,6 +284,16 @@ public class GameState : State
                 {
                     UpdateEnergyUserStatusResponse message = tempOBJ as UpdateEnergyUserStatusResponse;
                     HandleEnergyStatusResponse(message);
+                }
+                else if(tempOBJ is KeypadCodeUpdateResponse)
+                {
+                    KeypadCodeUpdateResponse message = tempOBJ as KeypadCodeUpdateResponse;
+                    HandleKeypadUpdateResponse(message);
+                }
+                else if(tempOBJ is KeypadCodeOutcomeResponse)
+                {
+                    KeypadCodeOutcomeResponse message = tempOBJ as KeypadCodeOutcomeResponse;
+                    HandleKeypadCodeOutcomeResponse(message);
                 }
             }
         }
@@ -498,6 +521,17 @@ public class GameState : State
         energyUserUpdated?.Invoke(message.id, message.on);
     }
 
+    void HandleKeypadUpdateResponse(KeypadCodeUpdateResponse message)
+    {
+        updateKeypadScreen?.Invoke(message.id, message.message);
+    }
+
+    void HandleKeypadCodeOutcomeResponse(KeypadCodeOutcomeResponse message)
+    {
+        setKeypadOutcomeMessage?.Invoke(message.id, message.correct);
+    }
+
+
     //sending
     void SendGameLoadedMessage()
     {
@@ -599,8 +633,8 @@ public class GameState : State
         }
     }
 
-    //send keypadCode to calidate
-    void SendValidationMessage(int code, int ID)
+    //send keypadCode to validate
+    void SendValidationMessage(string code, int ID)
     {
         KeypadValidationMessage message = new KeypadValidationMessage(code, ID);
         tcpClientNetwork.SendObjectThroughTCP(message);
@@ -640,6 +674,18 @@ public class GameState : State
     public void SendEnergyUserStatus(int userID, bool on)
     {
         UpdateEnergyUserStatusResponse request = new UpdateEnergyUserStatusResponse(userID, on);
+        tcpClientNetwork.SendObjectThroughTCP(request);
+    }
+
+    void SendKeypadCode(int id, string message)
+    {
+        KeypadCodeUpdateRequest request = new KeypadCodeUpdateRequest(id, message);
+        tcpClientNetwork.SendObjectThroughTCP(request);
+    }
+
+    void SendKeypadOutcome(int id, bool correct)
+    {
+        KeypadCodeOutcomeRequest request = new KeypadCodeOutcomeRequest(id, correct);
         tcpClientNetwork.SendObjectThroughTCP(request);
     }
 }

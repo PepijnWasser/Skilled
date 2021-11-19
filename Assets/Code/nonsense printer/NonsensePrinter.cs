@@ -27,12 +27,12 @@ public class NonsensePrinter : MonoBehaviour
 
     private void Awake()
     {
-        MapGenerator.OnCompletion += EnablePrinting;
+        MapGenerator.onCompletion += EnablePrinting;
     }
 
     private void OnDestroy()
     {
-        MapGenerator.OnCompletion -= EnablePrinting;
+        MapGenerator.onCompletion -= EnablePrinting;
     }
 
     // Start is called before the first frame update

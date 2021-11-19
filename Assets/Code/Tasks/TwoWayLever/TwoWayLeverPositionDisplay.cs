@@ -17,8 +17,6 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
 
     private void Awake()
     {
-        TwoWayLeverTask.taskCompleted += RemoveTask;
-        TaskManager.taskHasError += AddTask;
         GameState.makeTwoWayleverTask += AddTask;
         GameState.twoWayLeverCompleted += RemoveTask;
     }
@@ -26,8 +24,6 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
 
     private void OnDestroy()
     {
-        TwoWayLeverTask.taskCompleted -= RemoveTask;
-        TaskManager.taskHasError -= AddTask;
         GameState.makeTwoWayleverTask -= AddTask;
         GameState.twoWayLeverCompleted -= RemoveTask;
     }
@@ -66,7 +62,6 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
         {
             TwoWayLeverTask twoWayLeverTask = task as TwoWayLeverTask;
             tasksToDisplay.Remove(twoWayLeverTask.lever.leverID);
-            Debug.Log("removing task");
             NeedToUpdate = true;
         }
     }
@@ -77,7 +72,6 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
         if (tasksToDisplay.ContainsKey(taskID))
         {
             tasksToDisplay.Remove(taskID);
-            Debug.Log("removing task");
             NeedToUpdate = true;
         }
     }

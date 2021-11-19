@@ -28,7 +28,7 @@ public class MapGenerator : MonoBehaviour
     bool generating;
 
     public delegate void Completed();
-    public static event Completed OnCompletion;
+    public static event Completed onCompletion;
 
     void Start()
     {
@@ -170,7 +170,7 @@ public class MapGenerator : MonoBehaviour
 
             if(amountOfSectorsSpawned >= amountOfSectors)
             {
-                OnCompletion?.Invoke();
+                onCompletion?.Invoke();
             }
         }
         else
