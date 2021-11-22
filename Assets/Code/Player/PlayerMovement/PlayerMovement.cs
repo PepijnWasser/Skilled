@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(Physics.Raycast(transform.position, -transform.up, 2))
+        if(Physics.Raycast(transform.position, -transform.up, 1.7f))
         {
             velocityY = 0;
         }
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
         rb.velocity = moveDir * speed * Time.deltaTime;
 
-        if(rb.velocity != Vector3.zero)
+        if(Vector3.Distance(rb.velocity, Vector3.zero) > 0.1)
         {
             animations.PlayRunAnimation();
         }

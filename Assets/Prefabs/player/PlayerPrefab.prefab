@@ -240,7 +240,7 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1.5
   m_Drag: 0
-  m_AngularDrag: 3
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
@@ -274,7 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1135
   animations: {fileID: 7996905340460614437}
-  gravity: 9.81
+  gravity: 5
 --- !u!114 &5651246100308450695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,7 +442,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7758064, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -544,7 +544,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7758064, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1153,7 +1153,7 @@ MonoBehaviour:
   playerMovementScript: {fileID: 767075814832258190}
   playerRotationScript: {fileID: 767075814832258191}
   playerPositionUpdater: {fileID: 5651246100308450695}
-  playerAnimator: {fileID: 0}
+  playerAnimator: {fileID: 7996905340460614437}
 --- !u!1 &5732217132304127457
 GameObject:
   m_ObjectHideFlags: 0
