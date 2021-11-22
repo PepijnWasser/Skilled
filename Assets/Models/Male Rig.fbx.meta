@@ -12,12 +12,6 @@ ModelImporter:
   - first:
       74: 703976530177123423
     second: Root|Walk_loop
-  - first:
-      74: 7329717840514228451
-    second: Root|Run_loop (1)
-  - first:
-      74: 8090150874587106093
-    second: Root|Idle (1)
   externalObjects: {}
   materials:
     materialImportMode: 2
@@ -58,8 +52,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -87,8 +81,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -105,11 +99,11 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Root|Run_loop (1)
-      takeName: Root|Run_loop
+      name: Root|Walk_loop
+      takeName: Root|Walk_loop
       internalID: 0
       firstFrame: 0
-      lastFrame: 30
+      lastFrame: 39
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -117,7 +111,7 @@ ModelImporter:
       loop: 0
       hasAdditiveReferencePose: 0
       loopTime: 1
-      loopBlend: 0
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0

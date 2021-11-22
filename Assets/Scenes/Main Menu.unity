@@ -280,7 +280,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 40249982}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &42952645
 GameObject:
   m_ObjectHideFlags: 0
@@ -592,7 +592,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 118534780}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &152323688
 GameObject:
   m_ObjectHideFlags: 0
@@ -859,7 +859,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 168519797}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &185490394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1018,7 +1018,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 238977354}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &242838857
 GameObject:
   m_ObjectHideFlags: 0
@@ -1371,7 +1371,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 301630845}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &301671760
 GameObject:
   m_ObjectHideFlags: 0
@@ -1586,7 +1586,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7751479, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1675,7 +1675,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 324877218}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &330418965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1740,7 +1740,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 330418967}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &348364670
 GameObject:
   m_ObjectHideFlags: 0
@@ -1806,7 +1806,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 348364672}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &353547745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1927,7 +1927,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 399616279}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &402100926
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,7 +2162,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 407067683}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &408679976
 GameObject:
   m_ObjectHideFlags: 0
@@ -2739,7 +2739,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 487014208}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &500484546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2897,7 +2897,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 503857806}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &510176283
 GameObject:
   m_ObjectHideFlags: 0
@@ -3171,7 +3171,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 610400993}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &610443919
 GameObject:
   m_ObjectHideFlags: 0
@@ -3238,7 +3238,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 610443921}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &611074577
 GameObject:
   m_ObjectHideFlags: 0
@@ -3652,7 +3652,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 698944426}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &721855354
 GameObject:
   m_ObjectHideFlags: 0
@@ -3876,7 +3876,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 775537196}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &782649655
 GameObject:
   m_ObjectHideFlags: 0
@@ -4345,7 +4345,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 921258959}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &963675980
 GameObject:
   m_ObjectHideFlags: 0
@@ -4579,7 +4579,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 973499175}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &981965293
 GameObject:
   m_ObjectHideFlags: 0
@@ -4645,7 +4645,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 981965295}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &1019114999
 GameObject:
   m_ObjectHideFlags: 0
@@ -4711,7 +4711,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1019115001}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1001 &1021306902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5458,7 +5458,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1087264060}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &1091388281
 GameObject:
   m_ObjectHideFlags: 0
@@ -5608,7 +5608,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1101179794}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &1118999334
 GameObject:
   m_ObjectHideFlags: 0
@@ -6404,7 +6404,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1258491854}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &1293587316
 GameObject:
   m_ObjectHideFlags: 0
@@ -6470,7 +6470,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1293587318}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &1295964076
 GameObject:
   m_ObjectHideFlags: 0
@@ -6536,7 +6536,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1295964078}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &1309308053
 GameObject:
   m_ObjectHideFlags: 0
@@ -7095,7 +7095,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1395834768}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &1450769170
 GameObject:
   m_ObjectHideFlags: 0
@@ -7160,7 +7160,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1450769172}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &1454038890
 GameObject:
   m_ObjectHideFlags: 0
@@ -7225,7 +7225,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1454038892}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &1468842154
 GameObject:
   m_ObjectHideFlags: 0
@@ -7587,7 +7587,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1617216067}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &1628621310
 GameObject:
   m_ObjectHideFlags: 0
@@ -7746,7 +7746,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1675880783}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &1681810067
 GameObject:
   m_ObjectHideFlags: 0
@@ -7811,7 +7811,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1681810069}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &1690993114
 GameObject:
   m_ObjectHideFlags: 0
@@ -7877,7 +7877,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1690993116}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!4 &1697359084 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8269069634579788736, guid: 6ce227bbb23a6b94eb4670fed569e2ec, type: 3}
@@ -8484,7 +8484,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 1873856237}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &1945470514
 GameObject:
   m_ObjectHideFlags: 0
@@ -8743,7 +8743,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 2005621737}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &2007993391
 GameObject:
   m_ObjectHideFlags: 0
@@ -8809,7 +8809,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 2007993393}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &2009868591
 GameObject:
   m_ObjectHideFlags: 0
@@ -8875,7 +8875,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 2009868593}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &2013657874
 GameObject:
   m_ObjectHideFlags: 0
@@ -9407,7 +9407,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 2108147551}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &2135785888
 GameObject:
   m_ObjectHideFlags: 0
@@ -9582,7 +9582,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 5938200216861028855}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!1 &206403778727903189
 GameObject:
   m_ObjectHideFlags: 0
@@ -10755,7 +10755,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 4806395720798210733}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!23 &1333049831097289741
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10997,7 +10997,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 6261443731996637286}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!33 &1485614235563802383
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -11354,7 +11354,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 7344301731637912804}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!33 &1702127239452398901
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -12162,7 +12162,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 5847634303330501061}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!4 &2416796354328331284
 Transform:
   m_ObjectHideFlags: 0
@@ -18146,7 +18146,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 474020938851554719}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!114 &7054294907277458673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18165,7 +18165,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 474020938475662647}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!33 &7059894665141462619
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -18390,7 +18390,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 8741507756495398031}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!114 &7136555688549439253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18409,7 +18409,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 8741507755739754042}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!114 &7136555688629193673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18428,7 +18428,7 @@ MonoBehaviour:
   meshColliders:
   - {fileID: 8741507756129891046}
   generatedFrom: {fileID: 0}
-  lights: []
+  switchableRoom: {fileID: 0}
 --- !u!64 &7157385179444985152
 MeshCollider:
   m_ObjectHideFlags: 0
