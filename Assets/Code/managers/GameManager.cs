@@ -60,6 +60,13 @@ public class GameManager : MonoBehaviour
     public void MovePlayer(int playerID, Vector3 position, Vector3 rotation, Vector3 noseRotation)
     {
         PlayerPrefabManager manager = characterDictionary[playerID];
+
+        if (position != manager.player.transform.position)
+        {
+            manager.playerAnimator.PlayRunAnimation();
+            Debug.Log("moving");
+        }
+
         manager.player.transform.position = position;
         manager.player.transform.rotation = Quaternion.Euler(rotation);
         manager.nose.transform.rotation = Quaternion.Euler(noseRotation);

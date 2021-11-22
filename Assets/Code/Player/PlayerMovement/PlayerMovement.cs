@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 3;
+    public PlayerAnimations animations;
 
     Transform playerTransform;
     Rigidbody rb;
@@ -41,5 +42,14 @@ public class PlayerMovement : MonoBehaviour
         moveDir.y = velocityY;
 
         rb.velocity = moveDir * speed * Time.deltaTime;
+
+        if(rb.velocity != Vector3.zero)
+        {
+            animations.PlayRunAnimation();
+        }
+        else
+        {
+            animations.PlayIdleAnimation();
+        }
     }
 }

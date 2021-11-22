@@ -22,6 +22,8 @@ public class PlayerPrefabManager : MonoBehaviour
 
     public PlayerPositionUpdater playerPositionUpdater;
 
+    public PlayerAnimations playerAnimator;
+
 
     public void DisablePlayerActivity()
     {
