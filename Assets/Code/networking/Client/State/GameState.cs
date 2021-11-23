@@ -547,10 +547,9 @@ public class GameState : State
     }
 
     //sends player position
-    public void SendPlayerPosition(Vector3 position, Vector3 rotation, Vector3 noseRotation)
-    {
-        
-        UpdatePlayerPositionUDP message = new UpdatePlayerPositionUDP(position, rotation, noseRotation);
+    public void SendPlayerPosition(Vector3 position, Vector3 rotation, Vector3 targetRotation)
+    {        
+        UpdatePlayerPositionUDP message = new UpdatePlayerPositionUDP(position, rotation, targetRotation);
         udpClientNetwork.SendObjectThroughUDP(message);
     }
 

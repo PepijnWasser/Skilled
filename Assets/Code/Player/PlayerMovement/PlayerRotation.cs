@@ -31,11 +31,11 @@ public class PlayerRotation : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
 
         yRotation -= mouseY;
-        yRotation = Mathf.Clamp(yRotation, -90f, 90f);
+        yRotation = Mathf.Clamp(yRotation, -70f, 70f);
 
 
         xRotation += mouseX;
-        xRotation = Mathf.Clamp(xRotation, -90F, 90F);
+        xRotation = Mathf.Clamp(xRotation, -70F, 70F);
 
         lookTargetAxis.transform.localRotation = Quaternion.Euler(yRotation, xRotation, 0f);
         
