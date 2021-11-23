@@ -5,8 +5,11 @@ using UnityEngine;
 public class PlayerRotation : MonoBehaviour
 {
     public GameObject cameraPos;
+    public GameObject lookTargetAxis;
 
     public float sensitivity = 100f;
+
+    float yRotation = 0f;
     float xRotation = 0f;
 
     private void Start()
@@ -22,16 +25,29 @@ public class PlayerRotation : MonoBehaviour
         GameSettingsManager.settingsSaved -= SetSensitivity;
     }
 
-    void Update()
-    {
+    void LateUpdate()
+    {       
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
 
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        cameraPos.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        yRotation -= mouseY;
+        yRotation = Mathf.Clamp(yRotation, -90f, 90f);
 
-        transform.Rotate(Vector3.up, mouseX);
+
+        xRotation += mouseX;
+        xRotation = Mathf.Clamp(xRotation, -90F, 90F);
+
+        lookTargetAxis.transform.localRotation = Quaternion.Euler(yRotation, xRotation, 0f);
+        
+
+        if (lookTargetAxis.transform.localRotation.eulerAngles.y > 40 && lookTargetAxis.transform.localRotation.eulerAngles.y < 320)
+        {
+            transform.rotation = Quaternion.Euler(0, lookTargetAxis.transform.rotation.eulerAngles.y, 0);
+            lookTargetAxis.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
+
+            xRotation = 0F;
+        }
+
     }
 
     void SetSensitivity()
