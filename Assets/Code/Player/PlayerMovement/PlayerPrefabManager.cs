@@ -15,7 +15,8 @@ public class PlayerPrefabManager : MonoBehaviour
     public GameObject player;
     public Text iconText;
 
-    public GameObject nose;
+    //public GameObject nose;
+    public GameObject lookTarget;
 
     public PlayerMovement playerMovementScript;
     public PlayerRotation playerRotationScript;
@@ -37,10 +38,5 @@ public class PlayerPrefabManager : MonoBehaviour
         allignScript.enabled = false;
 
         this.gameObject.tag = "MainPlayer";
-    }
-
-    public void setNoseRotation(Vector3 degrees)
-    {
-        nose.transform.rotation = Quaternion.Euler(degrees);
     }
 }

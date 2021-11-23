@@ -9,10 +9,11 @@ public class PlayerPositionUpdater : MonoBehaviour
 
     GameState gameState;
     GameObject player;
+    public GameObject lookTarget;
 
-    public GameObject playerNose;
     Vector3 oldPos;
     Vector3 oldRot;
+    Vector3 oldRotTarget;
 
     private void Awake()
     {
@@ -29,12 +30,12 @@ public class PlayerPositionUpdater : MonoBehaviour
             secondCounter = 0;
             if(player != null)
             {
-                if (player.transform.position != oldPos || player.transform.rotation.eulerAngles != oldRot)
+                if (player.transform.position != oldPos || player.transform.rotation.eulerAngles != oldRot || lookTarget.transform.rotation.eulerAngles != oldRotTarget)
                 {
-                    gameState.SendPlayerPosition(player.transform.position, player.transform.rotation.eulerAngles, playerNose.transform.rotation.eulerAngles);
+                    gameState.SendPlayerPosition(player.transform.position, player.transform.rotation.eulerAngles, lookTarget.transform.rotation.eulerAngles);
                     oldPos = player.transform.position;
                     oldRot = player.transform.rotation.eulerAngles;
-
+                    oldRotTarget = lookTarget.transform.rotation.eulerAngles;
                 }
             }
         }

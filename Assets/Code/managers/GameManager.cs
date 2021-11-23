@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void MovePlayer(int playerID, Vector3 position, Vector3 rotation, Vector3 noseRotation)
+    public void MovePlayer(int playerID, Vector3 position, Vector3 rotation, Vector3 targetRotation)
     {
         PlayerPrefabManager manager = characterDictionary[playerID];
 
@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour
 
         manager.player.transform.position = position;
         manager.player.transform.rotation = Quaternion.Euler(rotation);
-        manager.nose.transform.rotation = Quaternion.Euler(noseRotation);
+        manager.lookTarget.transform.rotation = Quaternion.Euler(targetRotation);
     }
 
     public void RemovePlayerCharacter(int playerID)
