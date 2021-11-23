@@ -9,6 +9,8 @@ public class PlayerRotation : MonoBehaviour
 
     public float sensitivity = 100f;
 
+    public Animator animator;
+
     float yRotation = 0f;
     float xRotation = 0f;
 
@@ -31,7 +33,7 @@ public class PlayerRotation : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
 
         yRotation -= mouseY;
-        yRotation = Mathf.Clamp(yRotation, -70f, 70f);
+        yRotation = Mathf.Clamp(yRotation, -60f, 60f);
 
 
         xRotation += mouseX;
@@ -40,14 +42,23 @@ public class PlayerRotation : MonoBehaviour
         lookTargetAxis.transform.localRotation = Quaternion.Euler(yRotation, xRotation, 0f);
         
 
-        if (lookTargetAxis.transform.localRotation.eulerAngles.y > 40 && lookTargetAxis.transform.localRotation.eulerAngles.y < 320)
+        if(animator.GetInteger("MovementPlayer") == 0)
+        {
+            if (lookTargetAxis.transform.localRotation.eulerAngles.y > 40 && lookTargetAxis.transform.localRotation.eulerAngles.y < 320)
+            {
+                transform.rotation = Quaternion.Euler(0, lookTargetAxis.transform.rotation.eulerAngles.y, 0);
+                lookTargetAxis.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
+
+                xRotation = 0F;
+            }
+        }
+        else
         {
             transform.rotation = Quaternion.Euler(0, lookTargetAxis.transform.rotation.eulerAngles.y, 0);
             lookTargetAxis.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
 
             xRotation = 0F;
         }
-
     }
 
     void SetSensitivity()

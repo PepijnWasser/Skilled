@@ -9,6 +9,7 @@ public class PlayerPrefabManager : MonoBehaviour
     public Camera playerCam;
     public Camera skyboxCamera;
     public CinemachineVirtualCamera vCamera;
+    public  SkinnedMeshRenderer characterRenderer;
 
     public AllignWithCamera allignScript;
 
@@ -30,6 +31,7 @@ public class PlayerPrefabManager : MonoBehaviour
     {
         playerMovementScript.enabled = false;
         playerRotationScript.enabled = false;
+        characterRenderer.enabled = true;
 
         Destroy(playerCam.gameObject);
         Destroy(vCamera.gameObject);
