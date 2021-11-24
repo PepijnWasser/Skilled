@@ -1677,7 +1677,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7764084, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1806,7 +1806,7 @@ AudioSource:
   m_GameObject: {fileID: 4669192857401244107}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8188271425797829871, guid: 0a37050598e4796438e42fd57da272d0, type: 2}
   m_audioClip: {fileID: 8300000, guid: d488d1e9df94aba4aab17e9871d7c042, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1902,7 +1902,7 @@ AudioSource:
   m_GameObject: {fileID: 4669192857401244107}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8188271425797829871, guid: 0a37050598e4796438e42fd57da272d0, type: 2}
   m_audioClip: {fileID: 8300000, guid: b29e3118223d12f41b25882090e8e674, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -1998,7 +1998,7 @@ AudioSource:
   m_GameObject: {fileID: 4669192857401244107}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8188271425797829871, guid: 0a37050598e4796438e42fd57da272d0, type: 2}
   m_audioClip: {fileID: 8300000, guid: 5f89601a449c3bb4e8a85e3aee4e53cb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
