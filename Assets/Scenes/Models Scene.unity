@@ -227,6 +227,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.000005220195
       objectReference: {fileID: 0}
+    - target: {fileID: 2113375588403104809, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
+      propertyPath: m_Data.m_ConstrainedAxes.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2113375588403104809, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
+      propertyPath: m_Data.m_ConstrainedAxes.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2113375588403104809, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
+      propertyPath: m_Data.m_ConstrainedAxes.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2538927737857625739, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -238,6 +250,22 @@ PrefabInstance:
     - target: {fileID: 2538927737857625739, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2906057979846679651, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
+      propertyPath: m_Effectors.Array.data[0].m_Visible
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819440019823176797, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
+      propertyPath: m_Data.m_ConstrainedAxes.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819440019823176797, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
+      propertyPath: m_Data.m_ConstrainedAxes.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4819440019823176797, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
+      propertyPath: m_Data.m_SourceObjects.m_Item0.weight
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5732217132210592382, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
       propertyPath: m_Name
