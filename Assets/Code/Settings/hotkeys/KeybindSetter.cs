@@ -34,11 +34,26 @@ public class KeybindSetter : MonoBehaviour
 
         originalActionMap = InputManager.activeAction;
         InputManager.SetActiveActionMap(InputManager.rebind);
+
         rebindingOperation = actionToChange.action.PerformInteractiveRebinding()
             .WithControlsExcluding("Mouse")
+
+            .WithCancelingThrough("<Mouse>/LeftButton")
+
             .OnMatchWaitForAnother(0.1f)
+
             .OnComplete(operation => Complete())
+            .OnCancel(operation => Cancel())
+
             .Start();
+    }
+
+
+    private void Cancel()
+    {
+        rebindingOperation.Dispose();
+        startRebindObjecet.SetActive(true);
+        waitingForInputObject.SetActive(false);
     }
 
     private void Complete()
@@ -49,17 +64,15 @@ public class KeybindSetter : MonoBehaviour
         waitingForInputObject.SetActive(false);
 
         InputBinding newBinding = new InputBinding(actionToChange.action.bindings[0].effectivePath);
-        Debug.Log(newBinding);
-        InputManager.SetBinding(actionToChange.action.name, newBinding, this);
+        InputManager.SetBinding(actionToChange.action.name, newBinding);
         InputManager.SetActiveActionMap(originalActionMap);
     }
 
     void Setbinding(string action, string newBinding, int index)
     {
-        if(action == actionToChange.name)
+        if (action == actionToChange.name)
         {
             nameText.text = newBinding;
         }
     }
-
 }

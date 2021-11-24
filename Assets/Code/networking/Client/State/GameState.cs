@@ -200,6 +200,10 @@ public class GameState : State
                     MakeGameMapMessage message = tempOBJ as MakeGameMapMessage;
                     HandleMakeGameMapMessage(message);
                 }
+                else if (tempOBJ is HeartBeat)
+                {
+                    RefreshHeartbeat();
+                }
                 else if (tempOBJ is MakenewPlayerCharacterMessage)
                 {
                     MakenewPlayerCharacterMessage message = tempOBJ as MakenewPlayerCharacterMessage;
@@ -296,6 +300,7 @@ public class GameState : State
                     HandleKeypadCodeOutcomeResponse(message);
                 }
             }
+            HandleHeartbeatStatus();
         }
         catch (Exception e)
         {
@@ -316,7 +321,6 @@ public class GameState : State
             sceneManager.LoadScene("Main Menu");
             Debug.Log("Disconnected");
             Destroy(this.gameObject);
-
         }
     }
 

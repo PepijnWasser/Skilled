@@ -95,7 +95,7 @@ public class InputManager : MonoBehaviour
                         }
                         else
                         {
-                            InputBinding newBinding = new InputBinding(action.bindings[i].path);
+                            InputBinding newBinding = new InputBinding("");
                             SetInitialCompositeValue(action, i, newBinding);
                         }
                     }
@@ -110,7 +110,7 @@ public class InputManager : MonoBehaviour
                     }
                     else
                     {
-                        InputBinding newBinding = new InputBinding(action.bindings[0].path);
+                        InputBinding newBinding = new InputBinding("");
                         SetInitialValue(action, newBinding);
                     }
 
@@ -152,7 +152,16 @@ public class InputManager : MonoBehaviour
     {
         if (action.bindings.Count > actionIndex)
         {
-            action.ApplyBindingOverride(actionIndex, newKeyBinding.path);
+            if (newKeyBinding.path != "")
+            {
+                action.ApplyBindingOverride(actionIndex, newKeyBinding.path);
+            }
+            else
+            {
+                action.ApplyBindingOverride(actionIndex, "");
+                Debug.Log("removing binding");
+            }
+
         }
         else
         {
@@ -171,8 +180,10 @@ public class InputManager : MonoBehaviour
     }
 
     //set bingdings of controlsToChange
-    public static void SetBinding(string actionName, InputBinding newKeyBinding, KeybindSetter keybindSetter)
+    public static void SetBinding(string actionName, InputBinding newKeyBinding)
     {
+        Dictionary<InputAction, List<string>> xafas = GetBindings();
+
         List<InputAction> actionsToChange = new List<InputAction>();
 
         foreach (InputActionMap map in actionMapsToChange)
@@ -188,17 +199,60 @@ public class InputManager : MonoBehaviour
 
         foreach(InputAction actionToChange in actionsToChange)
         {
-            actionToChange.ApplyBindingOverride(newKeyBinding.path);
+            if(newKeyBinding.path == null)
+            {
+                actionToChange.ChangeBinding(0).Erase();
+                actionToChange.AddBinding("");
+                Debug.Log("removing binding" + actionToChange);
+            }
+            else
+            {
+                actionToChange.ApplyBindingOverride(newKeyBinding.path);
+                foreach (KeyValuePair<InputAction, List<string>> pair in xafas)
+                {
+                    if (pair.Value.Contains(newKeyBinding.path))
+                    {
+                        if (pair.Key.bindings[0].isComposite)
+                        {
+                            
+                            for(int i = 0; i < pair.Key.bindings.Count; i++)
+                            {
+                                
+                                if(pair.Key.bindings[i].path == newKeyBinding.path)
+                                {
+                                    InputManager.SetBindingComposite(pair.Key.name, i, new InputBinding());
+                                }
+                                
+                            }
+                            
+                        }
+                        else
+                        {
+                            InputManager.SetBinding(pair.Key.name, new InputBinding());
+                        }
+                        break;
+                    }
+                }
+            }
 
-            string binding = InputControlPath.ToHumanReadableString(actionToChange.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
-            bindingSet?.Invoke(actionToChange.actionMap.name + "/" + actionToChange.name, binding);
+            if(actionToChange.bindings.Count != 0)
+            {
+                string binding = InputControlPath.ToHumanReadableString(actionToChange.bindings[0].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+                bindingSet?.Invoke(actionToChange.actionMap.name + "/" + actionToChange.name, binding);
+            }
+            else
+            {
+                bindingSet?.Invoke(actionToChange.actionMap.name + "/" + actionToChange.name, "");
+            }
+
         }
         
         changeCreated?.Invoke();
 
     }
 
-    public static void SetBindingComposite(string actionName, int actionIndex, InputBinding newKeyBinding, KeybindSetterComposite keybindSetter)
+    public static void SetBindingComposite(string actionName, int actionIndex, InputBinding newKeyBinding)
     {
         InputAction actionToChange = null;
 
@@ -212,24 +266,35 @@ public class InputManager : MonoBehaviour
                 }
             }
         }
-
+        
         if (actionToChange.bindings.Count > actionIndex)
         {
-            actionToChange.ApplyBindingOverride(actionIndex, newKeyBinding.path);
+            
+            if (newKeyBinding.path == null)
+            {
+                actionToChange.ApplyBindingOverride(actionIndex, "");
 
-            keybindSetter.nameText.text = InputControlPath.ToHumanReadableString(actionToChange.bindings[actionIndex].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+                bindingSet?.Invoke(actionToChange.actionMap.name + "/" + actionToChange.name, "", actionIndex);
 
-            string binding = InputControlPath.ToHumanReadableString(actionToChange.bindings[actionIndex].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
-            bindingSet?.Invoke(actionToChange.actionMap.name + "/" + actionToChange.name, binding, actionIndex);
+                changeCreated?.Invoke();
 
+            }
+            else
+            {
+                actionToChange.ApplyBindingOverride(actionIndex, newKeyBinding.path);
 
+                string binding = InputControlPath.ToHumanReadableString(actionToChange.bindings[actionIndex].effectivePath, InputControlPath.HumanReadableStringOptions.OmitDevice);
+                bindingSet?.Invoke(actionToChange.actionMap.name + "/" + actionToChange.name, binding, actionIndex);
 
-            changeCreated?.Invoke();
+                changeCreated?.Invoke();
+            }
+            
         }
         else
         {
             Debug.Log("index not found");
         }
+        
     }
 
 
@@ -326,6 +391,33 @@ public class InputManager : MonoBehaviour
         }
 
         changeCreated?.Invoke();
+    }
+
+    public static Dictionary<InputAction, List<string>> GetBindings()
+    {
+        Dictionary<InputAction, List<string>> bindingDictionary = new Dictionary<InputAction, List<string>>();
+
+        foreach(InputActionMap actionMap in actionMapsToChange)
+        {
+            foreach(InputAction action in actionMap)
+            {
+                if (bindingDictionary.ContainsKey(action))
+                {
+                    break;
+                }
+                else
+                {
+                    List<string> bindingsInAction = new List<string>();
+                    foreach (InputBinding binding in action.bindings)
+                    {
+                        bindingsInAction.Add(binding.path);
+                    }
+                    bindingDictionary.Add(action, bindingsInAction);
+                }
+            }
+        }
+
+        return bindingDictionary;
     }
 
     public static void SaveBindings()

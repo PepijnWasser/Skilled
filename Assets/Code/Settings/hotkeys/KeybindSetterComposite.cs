@@ -34,11 +34,25 @@ public class KeybindSetterComposite : MonoBehaviour
 
         originalActionMap = InputManager.activeAction;
         InputManager.SetActiveActionMap(InputManager.rebind);
+
         rebindingOperation = actionToChange.action.PerformInteractiveRebinding(index)
             .WithControlsExcluding("Mouse")
+
+            .WithCancelingThrough("<Mouse>/LeftButton")
+
             .OnMatchWaitForAnother(0.1f)
+
             .OnComplete(operation => Complete())
+            .OnCancel(operation => Cancel())
+
             .Start();
+    }
+
+    private void Cancel()
+    {
+        rebindingOperation.Dispose();
+        startRebindObjecet.SetActive(true);
+        waitingForInputObject.SetActive(false);
     }
 
     private void Complete()
@@ -47,9 +61,8 @@ public class KeybindSetterComposite : MonoBehaviour
         startRebindObjecet.SetActive(true);
         waitingForInputObject.SetActive(false);
 
-
         InputBinding newBinding = new InputBinding(actionToChange.action.bindings[index].effectivePath);
-        InputManager.SetBindingComposite(actionToChange.action.name, index, newBinding, this);
+        InputManager.SetBindingComposite(actionToChange.action.name, index, newBinding);
         InputManager.SetActiveActionMap(originalActionMap);
     }
 
@@ -57,7 +70,6 @@ public class KeybindSetterComposite : MonoBehaviour
     {
         if (action == actionToChange.name && actionIndex == index)
         {
-            //Debug.Log(nameText + " " + newBinding +  this.gameObject.name);
             nameText.text = newBinding;
         }
     }

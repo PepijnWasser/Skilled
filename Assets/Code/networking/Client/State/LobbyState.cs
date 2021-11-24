@@ -232,7 +232,7 @@ public class LobbyState : State
             SendLeaveServerMessage();
             sceneManager.LoadScene("Main Menu");
             Debug.Log("Disconnected");
-            Destroy(this.gameObject);
+          //  Destroy(this.gameObject);
 
         }
     }
