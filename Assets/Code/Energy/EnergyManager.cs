@@ -18,8 +18,12 @@ public class EnergyManager : MonoBehaviour
 
     public void AddEnergy()
     {
-        availibleEnergy += 1;
-        energyChanged?.Invoke(availibleEnergy);
+        if(availibleEnergy + 1 <= totalEnergy)
+        {
+            availibleEnergy += 1;
+            energyChanged?.Invoke(availibleEnergy);
+            Debug.Log("add energy");
+        }
 
     }
 

@@ -70,8 +70,6 @@ public class DisplayClicker : MonoBehaviour
                     float widthPercentage = ((hit.transform.position.x - bottomLeft.x) / sizeDif.x);
                     float heightPercentage = ((hit.transform.position.y - topRight.x) / sizeDif.y);
 
-                    //Debug.Log(widthPercentage + "     +      " + heightPercentage);
-
                     transform.rotation = originalRotation;
 
                     Destroy(hit.gameObject);

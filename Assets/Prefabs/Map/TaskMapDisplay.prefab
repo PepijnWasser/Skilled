@@ -401,7 +401,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 303854553248267367}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00000023841858}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00000023841858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 303854552468989643}
@@ -437,7 +437,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.78, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 303854553387509310}
   - component: {fileID: 303854553387509311}
   - component: {fileID: 303854553387509308}
-  - component: {fileID: 6201088641609185475}
+  - component: {fileID: 3959483349084805388}
   m_Layer: 0
   m_Name: TaskIconCamera
   m_TagString: Untagged
@@ -534,10 +534,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eb4dd7e8270b494b88c511001c35d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapCam: {fileID: 303854553508430230}
+  mapCam: {fileID: 303854553387509311}
   speed: 10
   zoomSensitivity: 140
---- !u!114 &6201088641609185475
+--- !u!114 &3959483349084805388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -546,7 +546,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 303854553387509309}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ded91f2ec25aaca48aa04b5af9b88a77, type: 3}
+  m_Script: {fileID: 11500000, guid: 1fb305c931ac5e74aba9f7ae96f96384, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   updateFrequency: 30
@@ -757,7 +757,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537285216273343983}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
@@ -1137,9 +1137,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3627098918250473395}
-        m_TargetAssemblyTypeName: CenterMinimap, Assembly-CSharp
-        m_MethodName: ResetCamera
+      - m_Target: {fileID: 6137564239688446876}
+        m_TargetAssemblyTypeName: Focusable, Assembly-CSharp
+        m_MethodName: DeFocus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1396,7 +1396,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &3627098918250473399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1425,7 +1425,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 0.1}
+  m_Size: {x: 2.56, y: 1, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3627098918250473389
 MonoBehaviour:
@@ -1840,7 +1840,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8213bba1204e41844821f6a5c41a4dea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9ba610447b5409c47b00c68a9764743a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

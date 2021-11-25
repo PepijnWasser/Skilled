@@ -167,7 +167,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &301541205273119766
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,8 +226,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.75, y: 1.3, z: 0.05}
-  m_Center: {x: 0, y: -0.1, z: 0.05}
+  m_Size: {x: 3.75, y: 1.78, z: 0.05}
+  m_Center: {x: 0, y: 0, z: 0.05}
 --- !u!114 &301541205273119763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1004,7 +1004,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3625049173759891398}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.00000035762793, y: -0.00000023841858, z: -0.00000047683716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3625049173465484650}
@@ -1040,7 +1040,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.78, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1297,6 +1297,7 @@ GameObject:
   - component: {fileID: 3625049174083547022}
   - component: {fileID: 3625049174083547021}
   - component: {fileID: 3625049174083547020}
+  - component: {fileID: 7196395913748508993}
   m_Layer: 5
   m_Name: Power
   m_TagString: Untagged
@@ -1365,6 +1366,19 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 123
+--- !u!114 &7196395913748508993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3625049174083547027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98f16c1d27cf1704099da9b9739c3732, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 3625049174083547020}
 --- !u!1 &3652171226303280366
 GameObject:
   m_ObjectHideFlags: 0
@@ -2101,9 +2115,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 301541205273119762}
-        m_TargetAssemblyTypeName: CenterMinimap, Assembly-CSharp
-        m_MethodName: ResetCamera
+      - m_Target: {fileID: 301541205273119761}
+        m_TargetAssemblyTypeName: Focusable, Assembly-CSharp
+        m_MethodName: DeFocus
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
