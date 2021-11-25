@@ -13,7 +13,7 @@ public class MapIcon : MonoBehaviour
         this.transform.rotation = Quaternion.identity; 
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         this.transform.position = new Vector3(parent.transform.position.x, targetPos.y, parent.transform.position.z);
     }
