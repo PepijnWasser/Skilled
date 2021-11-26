@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     List<PlayerSpawnLocation> availiblePlayerSpawnLocations = new List<PlayerSpawnLocation>();
 
-    public GameObject playerCharacter;
+    public static GameObject playerCharacter;
 
     public EnergySpawner energySpawner;
 
@@ -45,15 +45,19 @@ public class GameManager : MonoBehaviour
 
             manager.playerRotationScript.sensitivity = PlayerInfo.sensitivity;
 
-            playerMade?.Invoke(manager.player, manager.playerCam);
-
             playerCharacter = manager.player;
+
+            Destroy(manager.playerName.transform.parent.gameObject);
+
+            playerMade?.Invoke(manager.player, manager.playerCam);
         }
         else
         {
             manager.DisablePlayerActivity();
             manager.player.GetComponent<Rigidbody>().useGravity = false;
             manager.player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+
+            manager.playerName.text = _name;
         }
     }
 
@@ -64,7 +68,6 @@ public class GameManager : MonoBehaviour
         if (position != manager.player.transform.position)
         {
             manager.playerAnimator.PlayRunAnimation();
-            Debug.Log("moving");
         }
 
         manager.player.transform.position = position;
@@ -79,12 +82,19 @@ public class GameManager : MonoBehaviour
     }
 
 
-    public void MakeWorldObjects(bool playerIsLeader)
+    public void MakeWorldObjects(bool playerIsLeader, int maxErrors, int tasksOfTypeToSpawn)
     {
         GameObject taskManager = Instantiate(taskManagerPrefab);
+
+        taskManager.GetComponent<TaskSpawner>().tasksOfTypeToSpawn = tasksOfTypeToSpawn;
         if (!playerIsLeader)
         {
-            taskManager.GetComponent<TaskManager>().enabled = false;
+            Destroy(taskManager.GetComponent<TaskManager>());
+        }
+        else
+        {
+            taskManager.GetComponent<TaskManager>().maxErrors = maxErrors;
+            Debug.Log("Making map: max errors_" + maxErrors + ", tasks of type_" + tasksOfTypeToSpawn);
         }
 
         energySpawner.SpawnEnergyUsers(energySpawner.transform);

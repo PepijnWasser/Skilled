@@ -12,18 +12,18 @@ public class SectionGenerator : MonoBehaviour
 {
 	public List<BuildingRoom> roomPrefabs = new List<BuildingRoom>();
 
-	public Vector2 minMaxRooms = new Vector2(3, 10);
 	public List<Doorway> allDoorways = new List<Doorway>();
 	public List<Doorway> availableDoorways = new List<Doorway>();
 
 	public EnergyUserSection sectionPower;
 
-	[HideInInspector]
 	public Doorway startdoor;
 
 	public Color roomColor;
 
 	LayerMask roomLayerMask;
+
+	int roomsToSpawn = 0;
 
 	public delegate void Completed(bool succeeded);
 	public static event Completed OnCompletion;
@@ -33,9 +33,10 @@ public class SectionGenerator : MonoBehaviour
 
     }
 
-    public void Initialize(LayerMask mask)
+    public void Initialize(LayerMask mask, int _roomsToSpawn)
 	{
 		roomLayerMask = mask;
+		roomsToSpawn = _roomsToSpawn;
 		AddDoorwayToLists(startdoor);
 	}
 
@@ -48,11 +49,7 @@ public class SectionGenerator : MonoBehaviour
 	{
 		bool succesfullLevelGenerated = true;
 
-		//spawn between the min and max amount of rooms
-		int iterations = Random.Range((int)minMaxRooms.x, (int)minMaxRooms.y);
-
-
-		for (int i = 0; i < iterations; i++)
+		for (int i = 0; i < roomsToSpawn; i++)
 		{
 			yield return new WaitForFixedUpdate();
 			yield return 200;

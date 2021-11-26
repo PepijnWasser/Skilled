@@ -337,7 +337,7 @@ public class GameState : State
     void HandleMakeGameMapMessage(MakeGameMapMessage message)
     {
         Extensions.SetSeed(message.worldSeed);
-        mapGenerator.Initizlize(message.amountOfSectors);
+        mapGenerator.Initizlize(message.amountOfSectors, message.roomsPerSector);
     }
 
     //makes a new player character
@@ -366,7 +366,7 @@ public class GameState : State
     //makes a task manager
     void HandleMakeTaskManager(PlaceWorldObjects message)
     {
-        gameManager.MakeWorldObjects(message.playerIsLeader);
+        gameManager.MakeWorldObjects(message.playerIsLeader, message.maxErrors, message.tasksOfTypeToSpawn);
     }
 
     //update station health

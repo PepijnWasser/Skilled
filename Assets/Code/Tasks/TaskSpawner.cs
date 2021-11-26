@@ -9,9 +9,8 @@ public class TaskSpawner : MonoBehaviour
     public GameObject ThreeWayLeverPrefab;
     public GameObject KeypadPrefab;
 
-    public int amountOfTwoWayLeversToSpawn;
-    public int amountOfThreeLeverssToSpawn;
-    public int amountOfKeypadsToSpawn;
+    [HideInInspector]
+    public int tasksOfTypeToSpawn;
 
     List<TwoWayLeverLocation> availibleTwoWayLeverLocations;
     List<ThreeWayLeverLocation> availibleThreeWayLeverLocations;
@@ -43,63 +42,72 @@ public class TaskSpawner : MonoBehaviour
 
 
         GetAvailibleLocations();
-        
-        for (int i = 0; i < amountOfTwoWayLeversToSpawn; i++)
+
+        for (int i = 0; i < tasksOfTypeToSpawn; i++)
         {
-            TwoWayLeverLocation newlocation = Extensions.RandomListItem(availibleTwoWayLeverLocations);
-            availibleTwoWayLeverLocations.Remove(newlocation);
+            if(availibleTwoWayLeverLocations.Count > 0)
+            {
+                TwoWayLeverLocation newlocation = Extensions.RandomListItem(availibleTwoWayLeverLocations);
+                availibleTwoWayLeverLocations.Remove(newlocation);
 
-            GameObject newObject = Instantiate(TwoWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
-            TwoWayLeverPrefabManager manager = newObject.GetComponent<TwoWayLeverPrefabManager>();
+                GameObject newObject = Instantiate(TwoWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
+                TwoWayLeverPrefabManager manager = newObject.GetComponent<TwoWayLeverPrefabManager>();
 
-            manager.lever.leverID = i;
+                manager.lever.leverID = i;
 
-            string name = twoWayLeverNamer.GetName();
-            manager.gameObject.name = name;
-            manager.leverTask.taskName = name;
-            manager.iconText.text = name;
-            manager.taskName.text = name;
+                string name = twoWayLeverNamer.GetName();
+                manager.gameObject.name = name;
+                manager.leverTask.taskName = name;
+                manager.iconText.text = name;
+                manager.taskName.text = name;
 
-            tasksSpawned.Add(manager.leverTask);
+                tasksSpawned.Add(manager.leverTask);
+            }
         }
 
-        for (int i = 0; i < amountOfThreeLeverssToSpawn; i++)
+        for (int i = 0; i < tasksOfTypeToSpawn; i++)
         {
-            ThreeWayLeverLocation newlocation = Extensions.RandomListItem(availibleThreeWayLeverLocations);
-            availibleThreeWayLeverLocations.Remove(newlocation);
+            if(availibleThreeWayLeverLocations.Count > 0)
+            {
+                ThreeWayLeverLocation newlocation = Extensions.RandomListItem(availibleThreeWayLeverLocations);
+                availibleThreeWayLeverLocations.Remove(newlocation);
 
-            GameObject newObject = Instantiate(ThreeWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
-            ThreeWayLeverPrefabManager manager = newObject.GetComponent<ThreeWayLeverPrefabManager>();
+                GameObject newObject = Instantiate(ThreeWayLeverPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
+                ThreeWayLeverPrefabManager manager = newObject.GetComponent<ThreeWayLeverPrefabManager>();
 
-            manager.lever.leverID = i;
+                manager.lever.leverID = i;
 
-            string name = threeWayLeverNamer.GetName();
-            manager.lever.gameObject.name = name;
-            manager.leverTask.taskName = name;
-            manager.iconText.text = name;
-            manager.taskName.text = name;
+                string name = threeWayLeverNamer.GetName();
+                manager.lever.gameObject.name = name;
+                manager.leverTask.taskName = name;
+                manager.iconText.text = name;
+                manager.taskName.text = name;
 
-            tasksSpawned.Add(manager.leverTask);
+                tasksSpawned.Add(manager.leverTask);
+            }
         }
 
-        for (int i = 0; i < amountOfKeypadsToSpawn; i++)
+        for (int i = 0; i < tasksOfTypeToSpawn; i++)
         {
-            KeypadLocation newlocation = Extensions.RandomListItem(availibleKeypadLocations);
-            availibleKeypadLocations.Remove(newlocation);
+            if(availibleKeypadLocations.Count > 0)
+            {
+                KeypadLocation newlocation = Extensions.RandomListItem(availibleKeypadLocations);
+                availibleKeypadLocations.Remove(newlocation);
 
-            GameObject newObject = Instantiate(KeypadPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
-            KeypadPrefabManager manager = newObject.GetComponent<KeypadPrefabManager>();
+                GameObject newObject = Instantiate(KeypadPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
+                KeypadPrefabManager manager = newObject.GetComponent<KeypadPrefabManager>();
 
-            manager.keypad.keypadID = i;
-            manager.codeEnterer.id = i;
+                manager.keypad.keypadID = i;
+                manager.codeEnterer.id = i;
 
-            string name = keypadNamer.GetName();
-            manager.keypad.gameObject.name = name;
-            manager.keypadTask.taskName = name;
-            manager.iconText.text = name;
-            manager.codeEnterer.SetWelcomeMessage(name);
+                string name = keypadNamer.GetName();
+                manager.keypad.gameObject.name = name;
+                manager.keypadTask.taskName = name;
+                manager.iconText.text = name;
+                manager.codeEnterer.SetWelcomeMessage(name);
 
-            tasksSpawned.Add(manager.keypadTask);
+                tasksSpawned.Add(manager.keypadTask);
+            }
         }
 
         allTasksSpawned?.Invoke(tasksSpawned);

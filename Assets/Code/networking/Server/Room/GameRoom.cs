@@ -12,8 +12,19 @@ public class GameRoom : Room
     int mapMadeMessages = 0;
     int worldSeed = Random.Range(1, 30);
     int amountOfSectors = 1;
+    int roomsPerSector = 10;
+    int tasksToSpawn = 0;
+    int maxErrors = 0;
 
     int tasksCompleted = 0;
+
+    public void SetRoomsAmount(int amountOfPlayers)
+    {
+        amountOfSectors = (int)Mathf.Ceil((float)amountOfPlayers / (float)3);
+        roomsPerSector = 20 + 5 * amountOfPlayers;
+        tasksToSpawn = (int)Mathf.Ceil((float)roomsPerSector * amountOfSectors * (float)0.1);
+        maxErrors = (int)Mathf.Ceil((float)tasksToSpawn / (float)2);
+    }
 
     public override void RemoveMember(MyClient clientToRemove)
     {
@@ -214,7 +225,7 @@ public class GameRoom : Room
         if(_message.sceneJoined == SceneLoadedMessage.scenes.game)
         {
             TCPPacket outPacket = new TCPPacket();
-            MakeGameMapMessage makeGameMapMessage = new MakeGameMapMessage(worldSeed, amountOfSectors);
+            MakeGameMapMessage makeGameMapMessage = new MakeGameMapMessage(worldSeed, amountOfSectors, roomsPerSector);
             outPacket.Write(makeGameMapMessage);
             SendTCPMessageToTargetUser(outPacket, client);
         }
@@ -287,12 +298,12 @@ public class GameRoom : Room
     void MakeTasks()
     {
         TCPPacket outpacket = new TCPPacket();
-        PlaceWorldObjects makeTaskManagerMessage = new PlaceWorldObjects(false);
+        PlaceWorldObjects makeTaskManagerMessage = new PlaceWorldObjects(false, maxErrors, tasksToSpawn);
         outpacket.Write(makeTaskManagerMessage);
         SendTCPMessageToAllUsersExcept(outpacket, server.serverInfo.serverOwner);
 
         TCPPacket outpacket2 = new TCPPacket();
-        PlaceWorldObjects makeTaskManagerMessage2 = new PlaceWorldObjects(true);
+        PlaceWorldObjects makeTaskManagerMessage2 = new PlaceWorldObjects(true, maxErrors, tasksToSpawn);
         outpacket2.Write(makeTaskManagerMessage2);
         SendTCPMessageToTargetUser(outpacket2, server.serverInfo.serverOwner);
     }

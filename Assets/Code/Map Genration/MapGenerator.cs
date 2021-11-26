@@ -10,7 +10,8 @@ public class MapGenerator : MonoBehaviour
 
     List<SectionGenerator> availibleSectionGenerators;
 
-    [HideInInspector] int amountOfSectors = 0;
+    int amountOfSectors = 0;
+    int roomsPerSector = 0;
     int amountOfSectorsSpawned = 0;
 
     public List<Doorway> posibleStartingDoors = new List<Doorway>();
@@ -41,9 +42,10 @@ public class MapGenerator : MonoBehaviour
         SectionGenerator.OnCompletion -= FinishSectionGeneration;
     }
 
-    public void Initizlize(int _amountOfSectors)
+    public void Initizlize(int _amountOfSectors, int _roomsPerSector)
     {
         amountOfSectors = _amountOfSectors;
+        roomsPerSector = _roomsPerSector;
 
         ConsoleRoom consoleRoom = Instantiate(consoleRoomPrefab, this.transform);
         foreach (Doorway doorway in consoleRoom.doorways)
@@ -72,12 +74,13 @@ public class MapGenerator : MonoBehaviour
     {
         UpdateAvailibleDoorList();
         SectionGenerator sectionGenerator = Instantiate(GetSectionGenerator(), this.transform);
+
         Doorway startDoor = Extensions.RandomListItem(posibleStartingDoors);
 
         sectionGenerator.transform.position = startDoor.transform.position;
 
         sectionGenerator.startdoor = startDoor;
-        sectionGenerator.Initialize(LayerMask.GetMask("Room"));
+        sectionGenerator.Initialize(LayerMask.GetMask("Room"), roomsPerSector);
 
         sectionGenerator.StartGeneration();
         lastSectionGenerated = sectionGenerator;

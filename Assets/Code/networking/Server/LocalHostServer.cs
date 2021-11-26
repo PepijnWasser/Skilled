@@ -278,6 +278,11 @@ public class LocalHostServer : MonoBehaviour
 		{
 			foreach (MyClient client in entry.Key.GetMembers())
 			{
+				if(entry.Value is GameRoom)
+                {
+					GameRoom gameRoom = entry.Value as GameRoom;
+					gameRoom.SetRoomsAmount(entry.Key.GetMembers().Count);
+                }
 				entry.Value.AddMember(client);
 			}
 			//SetActiveRoom(newRoom);

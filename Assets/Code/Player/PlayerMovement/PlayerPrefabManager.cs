@@ -16,7 +16,6 @@ public class PlayerPrefabManager : MonoBehaviour
     public GameObject player;
     public Text iconText;
 
-    //public GameObject nose;
     public GameObject lookTarget;
 
     public PlayerMovement playerMovementScript;
@@ -25,6 +24,8 @@ public class PlayerPrefabManager : MonoBehaviour
     public PlayerPositionUpdater playerPositionUpdater;
 
     public PlayerAnimations playerAnimator;
+
+    public Text playerName;
 
 
     public void DisablePlayerActivity()

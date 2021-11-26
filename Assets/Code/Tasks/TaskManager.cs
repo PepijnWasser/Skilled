@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class TaskManager : MonoBehaviour
 {
+    [HideInInspector]
     public int maxErrors;
     
     public Vector2 timeBetweenErrors;

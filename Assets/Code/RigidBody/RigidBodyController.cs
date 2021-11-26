@@ -53,7 +53,7 @@ public class RigidBodyController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject == gameManager.playerCharacter)
+        if(collision.gameObject == GameManager.playerCharacter)
         {
             gameState.SendLastPlayerTouchedMessage(PlayerInfo.playerID, rigidbodyID);
         }

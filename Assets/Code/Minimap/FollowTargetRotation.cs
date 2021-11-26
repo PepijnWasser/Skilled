@@ -9,7 +9,6 @@ public class FollowTargetRotation : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(this.transform.rotation.eulerAngles.x);
         Vector3 targetRotation = new Vector3(90, 0, 0);
         foreach (GameObject target in targets)
         {
