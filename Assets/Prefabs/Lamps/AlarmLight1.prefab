@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateAble: {fileID: 5757442429056060576}
+  lights:
+  - {fileID: 1463324082067867891}
+  - {fileID: 145272370136555924}
   rotationSpeed: 500
 --- !u!1 &4150501310576872712
 GameObject:

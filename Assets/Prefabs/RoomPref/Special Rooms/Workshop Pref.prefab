@@ -757,8 +757,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d41fd5a58975b834fb789b5d109c81d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  switchables:
-  - {fileID: 3574430107998928412}
+  onWhenPowered:
   - {fileID: 8909119575198466297}
   - {fileID: 6170928373248677555}
   - {fileID: 8282677032370046095}
@@ -769,6 +768,8 @@ MonoBehaviour:
   - {fileID: 3268959552841141463}
   - {fileID: 3395986485595015542}
   - {fileID: 548799661720346546}
+  - {fileID: 3574430107998928412}
+  offWhenPowered: []
 --- !u!1 &3572118783499143868
 GameObject:
   m_ObjectHideFlags: 0

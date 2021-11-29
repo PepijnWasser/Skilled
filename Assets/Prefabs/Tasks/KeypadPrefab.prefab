@@ -575,7 +575,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5258647628960216679
 Transform:
   m_ObjectHideFlags: 0
@@ -1677,7 +1677,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7764084, y: 1}
+    m_SensorSize: {x: 1.7800633, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1797,6 +1797,7 @@ MonoBehaviour:
   keypadID: 0
   resetTime: 3
   playerIsUsing: 0
+  cameraParent: {fileID: 4576995068447200373}
 --- !u!82 &8119508863886036020
 AudioSource:
   m_ObjectHideFlags: 0

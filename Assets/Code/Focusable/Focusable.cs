@@ -9,6 +9,8 @@ public class Focusable : MonoBehaviour
 {
     public CinemachineVirtualCamera displayCam;
 
+    public Camera cameraParent;
+
     public bool isFocused;
     protected GameObject player;
 
@@ -60,6 +62,8 @@ public class Focusable : MonoBehaviour
 
             originalActionMap = InputManager.activeAction;
             InputManager.SetActiveActionMap(InputManager.focusable);
+
+            cameraParent.gameObject.SetActive(true);
         }
     }
 
@@ -76,6 +80,8 @@ public class Focusable : MonoBehaviour
             displayCam.Priority = 10;
 
             InputManager.SetActiveActionMap(originalActionMap);
+
+            cameraParent.gameObject.SetActive(false);
         }
     }
 

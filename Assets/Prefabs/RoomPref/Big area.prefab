@@ -90,8 +90,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d41fd5a58975b834fb789b5d109c81d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  switchables:
+  onWhenPowered:
   - {fileID: 8155249638007406162}
+  offWhenPowered: []
 --- !u!1001 &53811247181532388
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class alarmLight : Switchable
 {
     bool on;
     public GameObject rotateAble;
+    public Light[] lights;
     public int rotationSpeed;
 
     private void Awake()
@@ -16,11 +17,19 @@ public class alarmLight : Switchable
     public override void TurnOff()
     {
         on = false;
+        foreach (Light light in lights)
+        {
+            light.enabled = false;
+        }
     }
 
     public override void TurnOn()
     {
         on = true;
+        foreach(Light light in lights)
+        {
+            light.enabled = true;
+        }
     }
 
     private void Update()

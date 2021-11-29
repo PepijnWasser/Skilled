@@ -78,6 +78,7 @@ public class Keypad : Focusable
         playerIsUsing = false;
         keypadUsed?.Invoke(keypadID, playerIsUsing);
     }
+
     protected override void TestFocus()
     {
         if (player != null)

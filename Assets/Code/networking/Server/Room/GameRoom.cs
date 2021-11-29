@@ -13,7 +13,7 @@ public class GameRoom : Room
     int worldSeed = Random.Range(1, 30);
     int amountOfSectors = 1;
     int roomsPerSector = 10;
-    int tasksToSpawn = 0;
+    int tasksOfTypeToSpawn = 0;
     int maxErrors = 0;
 
     int tasksCompleted = 0;
@@ -22,8 +22,8 @@ public class GameRoom : Room
     {
         amountOfSectors = (int)Mathf.Ceil((float)amountOfPlayers / (float)3);
         roomsPerSector = 20 + 5 * amountOfPlayers;
-        tasksToSpawn = (int)Mathf.Ceil((float)roomsPerSector * amountOfSectors * (float)0.1);
-        maxErrors = (int)Mathf.Ceil((float)tasksToSpawn / (float)2);
+        tasksOfTypeToSpawn = (int)Mathf.Ceil((float)roomsPerSector * amountOfSectors * (float)0.1 / (float)3);
+        maxErrors = (int)Mathf.Ceil((float)tasksOfTypeToSpawn / (float)2);
     }
 
     public override void RemoveMember(MyClient clientToRemove)
@@ -298,12 +298,12 @@ public class GameRoom : Room
     void MakeTasks()
     {
         TCPPacket outpacket = new TCPPacket();
-        PlaceWorldObjects makeTaskManagerMessage = new PlaceWorldObjects(false, maxErrors, tasksToSpawn);
+        PlaceWorldObjects makeTaskManagerMessage = new PlaceWorldObjects(false, maxErrors, tasksOfTypeToSpawn);
         outpacket.Write(makeTaskManagerMessage);
         SendTCPMessageToAllUsersExcept(outpacket, server.serverInfo.serverOwner);
 
         TCPPacket outpacket2 = new TCPPacket();
-        PlaceWorldObjects makeTaskManagerMessage2 = new PlaceWorldObjects(true, maxErrors, tasksToSpawn);
+        PlaceWorldObjects makeTaskManagerMessage2 = new PlaceWorldObjects(true, maxErrors, tasksOfTypeToSpawn);
         outpacket2.Write(makeTaskManagerMessage2);
         SendTCPMessageToTargetUser(outpacket2, server.serverInfo.serverOwner);
     }

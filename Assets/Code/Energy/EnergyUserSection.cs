@@ -9,11 +9,13 @@ public class EnergyUserSection : EnergyUser
     private void Awake()
     {
         MapGenerator.onCompletion += SetIconPos;
+        MapGenerator.onCompletion += TurnOff;
     }
 
     private void OnDestroy()
     {
         MapGenerator.onCompletion -= SetIconPos;
+        MapGenerator.onCompletion -= TurnOff;
     }
 
     protected override void TurnOn()

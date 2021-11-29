@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class InputManager : MonoBehaviour
 {
-
     public static InputActionMap mainMenu;
     public static InputActionMap game;
     public static InputActionMap inputField;
@@ -95,7 +95,7 @@ public class InputManager : MonoBehaviour
                         }
                         else
                         {
-                            InputBinding newBinding = new InputBinding("");
+                            InputBinding newBinding = action.bindings[i];
                             SetInitialCompositeValue(action, i, newBinding);
                         }
                     }
@@ -110,7 +110,7 @@ public class InputManager : MonoBehaviour
                     }
                     else
                     {
-                        InputBinding newBinding = new InputBinding("");
+                        InputBinding newBinding = action.bindings[0];
                         SetInitialValue(action, newBinding);
                     }
 
@@ -119,7 +119,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    //sets the setter text to the hotkey from the actionMap
+    //sets the setter text to the hotkey from the actionMap 
     public static void SetSavedValues()
     {
         foreach (InputActionMap map in savedActionMaps)
