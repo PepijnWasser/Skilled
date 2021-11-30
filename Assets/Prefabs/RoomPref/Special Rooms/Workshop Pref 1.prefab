@@ -6040,7 +6040,7 @@ Animator:
   m_GameObject: {fileID: 8325061878032965082}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 6f4f2130caf50554c90e6b0e13b42175, type: 2}
+  m_Controller: {fileID: 9100000, guid: a37b02bdb295e6f49b00b3cd81df990f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6331,6 +6331,7 @@ GameObject:
   - component: {fileID: 1162711216973197522}
   - component: {fileID: 574382820951662572}
   - component: {fileID: 7620457390069998866}
+  - component: {fileID: 1647006478819717916}
   m_Layer: 0
   m_Name: bottom_track
   m_TagString: Untagged
@@ -6346,7 +6347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8613840929286623591}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.7434874, z: 0.000120162964}
+  m_LocalPosition: {x: 0, y: 5.7434874, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7919459525240930}
@@ -6402,6 +6403,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &1647006478819717916
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8613840929286623591}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a83c15e311336fc45ad90fedc326684a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8652485738531300908
 GameObject:
   m_ObjectHideFlags: 0
@@ -6965,6 +6985,7 @@ GameObject:
   - component: {fileID: 5012491337369610313}
   - component: {fileID: 7316036222371773533}
   - component: {fileID: 5617267023446080456}
+  - component: {fileID: 1217671820914651484}
   m_Layer: 0
   m_Name: Crane_Hook
   m_TagString: Untagged
@@ -6980,7 +7001,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9205310893853437932}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.5, y: -2.1701694, z: 0}
+  m_LocalPosition: {x: 0, y: -2.1701694, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1162711216973197522}
@@ -7049,3 +7070,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 461730777802287721, guid: 12ecc9bfac2f9934d83a286ebf6e04e2, type: 3}
+--- !u!95 &1217671820914651484
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9205310893853437932}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e541291efd1d39141bb082a6efe290bf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
