@@ -6573,6 +6573,7 @@ MonoBehaviour:
   - {fileID: 9057537581754698191}
   - {fileID: 6129288747262697227}
   - {fileID: 7136178979092496037}
+  - {fileID: 6562050643403364923}
   offWhenPowered: []
 --- !u!1 &8877609334986987038
 GameObject:

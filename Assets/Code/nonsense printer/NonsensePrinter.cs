@@ -15,6 +15,8 @@ public class NonsensePrinter : MonoBehaviour
 
     public List<string> nonsenseList;
 
+    public int prefabCountPossible;
+
     float secondCounter = 0;
     float secondCounterSpeed = 0;
 
@@ -38,7 +40,7 @@ public class NonsensePrinter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < 16; i++)
+        for(int i = 0; i < prefabCountPossible; i++)
         {
             Image image = Instantiate(textPrefab, content.transform);
             textList.Add(image.GetComponent<NonsensePrefabManager>().text);
@@ -53,39 +55,47 @@ public class NonsensePrinter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        secondCounter += Time.deltaTime;
-        secondCounterSpeed += Time.deltaTime;
-        if (secondCounter > currentSpeed)
+
+        if (needToPrint)
         {
-            secondCounter = 0;
-            for (int i = 0; i < 16; i++)
+            secondCounter += Time.deltaTime;
+            secondCounterSpeed += Time.deltaTime;
+
+            
+            //printing lines
+            if (secondCounter > currentSpeed)
             {
-                if (i == 15)
+                secondCounter = 0;
+                for (int i = 0; i < prefabCountPossible; i++)
                 {
-                    textList[i].text = nonsenseList[0];
-                    nonsenseList.RemoveAt(0);
-                }
-                else if (i == 0)
-                {
-                    nonsenseList.Add(textList[i].text);
-                    textList[i].text = textList[i + 1].text;
-                }
-                else
-                {
-                    textList[i].text = textList[i + 1].text;
+                    if (i == prefabCountPossible - 1)
+                    {
+                        textList[i].text = nonsenseList[0];
+                        nonsenseList.RemoveAt(0);
+                    }
+                    else if (i == 0)
+                    {
+                        nonsenseList.Add(textList[i].text);
+                        textList[i].text = textList[i + 1].text;
+                    }
+                    else
+                    {
+                        textList[i].text = textList[i + 1].text;
+                    }
                 }
             }
-        }
 
-        if (secondCounterSpeed > currentSpeedDuration)
-        {
-          //  int i = Random.Range(0, 2);
-            currentSpeedDuration = 2;
-            currentSpeedDuration = 2; // Random.Range(speedDuration.x, speedDuration.y);
-            currentSpeed = 2;// Random.Range(speed.x, speed.y);
-            secondCounterSpeed = 0;
-        }
+            
 
+            //setting speed
+            if (secondCounterSpeed > currentSpeedDuration)
+            {
+                currentSpeedDuration = Random.Range(speedDuration.x, speedDuration.y);
+                currentSpeed = Random.Range(speed.x, speed.y);
+                secondCounterSpeed = 0;
+            }
+
+        }
     }
 
     void EnablePrinting()
