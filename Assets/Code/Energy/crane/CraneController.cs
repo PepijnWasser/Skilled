@@ -10,7 +10,7 @@ public class CraneController : Switchable
     public float moveTime;
     public float waitTime;
 
-    bool on = true;
+    bool on = false;
 
     public float secondCounter = 0;
 
