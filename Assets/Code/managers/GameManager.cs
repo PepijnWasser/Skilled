@@ -42,8 +42,6 @@ public class GameManager : MonoBehaviour
         Color unityColor = new Color32(c.R, c.G, c.B, c.A);
         manager.characterRenderer.material.color = unityColor;
 
-        //Debug.Log(color);
-
         if (playerControlled)
         {
             manager.player.name += " controlled";
@@ -69,6 +67,8 @@ public class GameManager : MonoBehaviour
 
     public void MovePlayer(int playerID, Vector3 position, Vector3 rotation, Vector3 targetRotation)
     {
+        Debug.Log("moving player " + playerID);
+        
         PlayerPrefabManager manager = characterDictionary[playerID];
 
         if (position != manager.player.transform.position)
