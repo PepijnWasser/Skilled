@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public delegate void PlayerMade(GameObject player, Camera cam);
     public static event PlayerMade playerMade;
 
-    public void MakePlayerCharacter(bool playerControlled, Vector3 position, string _name, int playerID)
+    public void MakePlayerCharacter(bool playerControlled, string _name, int playerID, string color)
     {
         if(availiblePlayerSpawnLocations.Count == 0 || availiblePlayerSpawnLocations == null)
         {
@@ -37,6 +37,12 @@ public class GameManager : MonoBehaviour
         manager.player.name = _name + " " + playerID;
         manager.name = _name + " " + playerID;
         manager.iconText.text = _name;
+
+        System.Drawing.Color c = System.Drawing.Color.FromName(color);
+        Color unityColor = new Color32(c.R, c.G, c.B, c.A);
+        manager.characterRenderer.material.color = unityColor;
+
+        //Debug.Log(color);
 
         if (playerControlled)
         {
@@ -94,7 +100,6 @@ public class GameManager : MonoBehaviour
         else
         {
             taskManager.GetComponent<TaskManager>().maxErrors = maxErrors;
-            Debug.Log("Making map: max errors_" + maxErrors + ", tasks of type_" + tasksOfTypeToSpawn);
         }
 
         energySpawner.SpawnEnergyUsers(energySpawner.transform);

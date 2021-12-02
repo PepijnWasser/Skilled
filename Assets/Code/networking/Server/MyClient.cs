@@ -21,11 +21,6 @@ public class MyClient
     public int playerID;
     public string playerName;
 
-    public Vector3 playerPosition = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 10));
-    public Vector3 playerRotation;
-
-
-
 
     public enum colors
     {

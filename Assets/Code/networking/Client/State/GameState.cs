@@ -343,7 +343,7 @@ public class GameState : State
     //makes a new player character
     void HandleMakePlayerCharacterMessage(MakenewPlayerCharacterMessage message)
     {
-        gameManager.MakePlayerCharacter(message.isPlayer, message.characterPosition, message.playerName, message.playerID);
+        gameManager.MakePlayerCharacter(message.isPlayer, message.playerName, message.playerID, message.colorS);
     }
 
     //moves a player to the new position

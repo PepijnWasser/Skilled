@@ -277,17 +277,18 @@ public class GameRoom : Room
                 if (clientToSend != clientToSendTo)
                 {
                     TCPPacket outpacket2 = new TCPPacket();
-                    MakenewPlayerCharacterMessage makePlayerCharacterMessage2 = new MakenewPlayerCharacterMessage(false, clientToSend.playerPosition, clientToSend.playerID, clientToSend.playerName);
+                    MakenewPlayerCharacterMessage makePlayerCharacterMessage2 = new MakenewPlayerCharacterMessage(false, clientToSend.playerID, clientToSend.playerName, clientToSend.playerColor);
                     outpacket2.Write(makePlayerCharacterMessage2);
                     SendTCPMessageToTargetUser(outpacket2, clientToSendTo);
+
+                    Debug.Log(clientToSend.playerName + " " + clientToSend.playerColor);
                 }
                 else
                 {
                     TCPPacket outpacket = new TCPPacket();
-                    MakenewPlayerCharacterMessage makePlayerCharacterMessage = new MakenewPlayerCharacterMessage(true, clientToSend.playerPosition, clientToSend.playerID, clientToSend.playerName);
+                    MakenewPlayerCharacterMessage makePlayerCharacterMessage = new MakenewPlayerCharacterMessage(true, clientToSend.playerID, clientToSend.playerName, clientToSend.playerColor);
                     outpacket.Write(makePlayerCharacterMessage);
                     SendTCPMessageToTargetUser(outpacket, clientToSendTo);
-
                 }
             }
         }
