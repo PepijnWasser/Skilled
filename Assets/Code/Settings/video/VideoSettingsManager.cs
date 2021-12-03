@@ -203,7 +203,7 @@ public class VideoSettingsManager : SettingsTab
 
     public void SetResolution(int resX, int resY, bool startup)
     {
-        /*
+        
         FullScreenMode mode = Screen.fullScreenMode;
         bool fullScreen = Screen.fullScreen;
 
@@ -217,7 +217,6 @@ public class VideoSettingsManager : SettingsTab
                 changeCreated?.Invoke(this);
             }
         }
-        */
     }
 
     public void SetMode(int value)
