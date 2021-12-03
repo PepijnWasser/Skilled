@@ -1968,17 +1968,21 @@ PrefabInstance:
       value: -5.02
       objectReference: {fileID: 0}
     - target: {fileID: -2357884022608881519, guid: 5f7bd245245728e488ba148cd320727d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: db41748ec39d2e143a33f150b6865a46, type: 2}
+    - target: {fileID: -2357884022608881519, guid: 5f7bd245245728e488ba148cd320727d, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 3446888796575484674, guid: 48897e3439caf1f46abd24b4ff8e5bca, type: 3}
+      objectReference: {fileID: 2100000, guid: ae6623573df99e24595c2e3bfebdf771, type: 2}
     - target: {fileID: -2357884022608881519, guid: 5f7bd245245728e488ba148cd320727d, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 3446888796575484674, guid: bc7b92282c333414abb1cc47148c78e5, type: 3}
+      objectReference: {fileID: 2100000, guid: 329139d0cfc77c84a83c66569d5633a0, type: 2}
     - target: {fileID: -2357884022608881519, guid: 5f7bd245245728e488ba148cd320727d, type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: -3923719579521889243, guid: a0e2b26f25620354fb45e563dd0cef85, type: 3}
+      objectReference: {fileID: 2100000, guid: fb03b2bb9be63f7448b6610387d57b7c, type: 2}
     - target: {fileID: 919132149155446097, guid: 5f7bd245245728e488ba148cd320727d, type: 3}
       propertyPath: m_Name
       value: Medbay Room
@@ -1995,6 +1999,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5725592296428733111, guid: 5f7bd245245728e488ba148cd320727d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fb03b2bb9be63f7448b6610387d57b7c, type: 2}
     - target: {fileID: 5725592296428733111, guid: 5f7bd245245728e488ba148cd320727d, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
