@@ -35,14 +35,12 @@ public class VideoSettingsManager : SettingsTab
             setting.ResetSetting();
         }
     }
-    /*
-
+   
     private void OnDisable()
     {
         SetSavedValues();
     }
 
-    */
     void SetSavedValues()
     {
         SetOverallQuality(PlayerPrefs.GetInt("overallQuality"), true);
