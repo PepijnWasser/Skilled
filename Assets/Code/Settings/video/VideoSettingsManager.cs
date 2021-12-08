@@ -5,15 +5,18 @@ using UnityEngine.UI;
 
 public class VideoSettingsManager : SettingsTab
 {
+    
     public Dropdown overAllQualityDropdown;
     public Dropdown textureQualityDropdown;
     public Dropdown shadowQualityDropdown;
 
     public ResolutionLoader resolutionLoader;
 
+    
     public delegate void Changes(SettingsTab tab);
     public static event Changes changeCreated;
 
+    
     public delegate void Reset();
     public static event Reset settingsReset;
 
@@ -24,6 +27,7 @@ public class VideoSettingsManager : SettingsTab
         SetSavedValues();
     }
 
+    
     protected override void OnEnable()
     {
         foreach(VideoSetting setting in videoSettings)
@@ -31,7 +35,7 @@ public class VideoSettingsManager : SettingsTab
             setting.ResetSetting();
         }
     }
-
+   
     private void OnDisable()
     {
         SetSavedValues();
@@ -199,10 +203,11 @@ public class VideoSettingsManager : SettingsTab
 
     public void SetResolution(int resX, int resY, bool startup)
     {
+        /*
         FullScreenMode mode = Screen.fullScreenMode;
         bool fullScreen = Screen.fullScreen;
 
-        if(Screen.currentResolution.width != resX && Screen.currentResolution.height != resY)
+        if(Screen.currentResolution.width != resX && Screen.currentResolution.height != resY && resX != 0 && resY != 0)
         {
             Screen.SetResolution(resX, resY, false);
             Screen.fullScreenMode = mode;
@@ -212,6 +217,7 @@ public class VideoSettingsManager : SettingsTab
                 changeCreated?.Invoke(this);
             }
         }
+        */
     }
 
     public void SetMode(int value)
@@ -241,7 +247,6 @@ public class VideoSettingsManager : SettingsTab
             changeCreated?.Invoke(this);
         }
     }
-
 
     public override void SaveSettings()
     {
@@ -288,9 +293,9 @@ public class VideoSettingsManager : SettingsTab
         PlayerPrefs.SetInt("shadowQuality", shadowQualityDropdown.value);
         PlayerPrefs.SetInt("textureQuality", textureQualityDropdown.value);
     }
-
+    
     public override void RestoreDefaults()
-    {
+    {       
         SetOverallQuality(2);
         SetAntialiasing(0);
         SetVsync(1);
