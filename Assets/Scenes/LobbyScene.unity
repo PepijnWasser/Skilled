@@ -368,18 +368,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: lobbyScreen
       objectReference: {fileID: 0}
-    - target: {fileID: 5919268785662334047, guid: ec570f46a30c0fa46abffba18e76e56f, type: 3}
-      propertyPath: m_Color.b
-      value: 0.6039216
-      objectReference: {fileID: 0}
-    - target: {fileID: 5919268785662334047, guid: ec570f46a30c0fa46abffba18e76e56f, type: 3}
-      propertyPath: m_Color.g
-      value: 0.40501422
-      objectReference: {fileID: 0}
-    - target: {fileID: 5919268785662334047, guid: ec570f46a30c0fa46abffba18e76e56f, type: 3}
-      propertyPath: m_Color.r
-      value: 0.39607844
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec570f46a30c0fa46abffba18e76e56f, type: 3}
 --- !u!1 &1440741176
