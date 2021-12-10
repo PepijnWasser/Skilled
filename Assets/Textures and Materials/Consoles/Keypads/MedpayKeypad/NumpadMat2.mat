@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: KeypadMedbay1
+  m_Name: NumpadMat2
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP _PARALLAXMAP
   m_LightmapFlags: 4
@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 9e240a06f4284fa4a845b368135123d7, type: 3}
+        m_Texture: {fileID: 2800000, guid: cf83b29aed17e4f46acda9d4cee85790, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -40,19 +40,19 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 4a0b52186cbc1314eb33b7526ac9187b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3cbb2b19c03b06547ad67c4431ed2eeb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: cc088a680c9198e4fa1d31a48935b6f0, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5fa4ef9a5fc4b89488a6a1ea7909065f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
-        m_Texture: {fileID: 2800000, guid: 54468d8d369d00345a1909478003261a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9a8044e0b5a5bfc4fae354396ce689f9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
-        m_Texture: {fileID: 2800000, guid: 6381f63f66e1dc2458ac2e1884b6c388, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3f5f5ccc2be20344d9dc937c66ad3165, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
