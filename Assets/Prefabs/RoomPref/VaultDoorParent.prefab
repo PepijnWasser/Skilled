@@ -110,20 +110,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5945109750441759816
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7010885246201224451}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5779197439840542771, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
 --- !u!1001 &6641255233307348320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191,6 +177,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: VaultDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 8439796992618771461, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90d532e2d4a418c4dabc064e447960c7, type: 2}
+    - target: {fileID: 9077926073120308842, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90d532e2d4a418c4dabc064e447960c7, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
 --- !u!4 &6602491526629059211 stripped
@@ -203,3 +197,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4423045620967985251, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
   m_PrefabInstance: {fileID: 6641255233307348320}
   m_PrefabAsset: {fileID: 0}
+--- !u!64 &5945109750441759816
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7010885246201224451}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5779197439840542771, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}

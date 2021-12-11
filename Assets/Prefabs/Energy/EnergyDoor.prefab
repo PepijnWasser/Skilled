@@ -79,6 +79,7 @@ MonoBehaviour:
   minimapIcon: {fileID: 3124668101873218446}
   onColor: {r: 0.90254116, g: 1, b: 0, a: 1}
   offColor: {r: 1, g: 0, b: 0, a: 1}
+  id: 0
   raycastOrigin: {fileID: 1363279872584768011}
   ID: 0
 --- !u!95 &6959421747071493126
@@ -161,9 +162,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -59136025557594432, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
-  - {fileID: 4470879953007488850, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
-  - {fileID: 1881431616094867325, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 2100000, guid: 90d532e2d4a418c4dabc064e447960c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -401,7 +402,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -59136025557594432, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
+  - {fileID: 2100000, guid: 90d532e2d4a418c4dabc064e447960c7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
