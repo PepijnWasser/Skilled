@@ -56,7 +56,6 @@ public class TwoWayLeverTask : Task
     //test damage
     public override void TestDamage()
     {
-        Debug.Log("twl", this.gameObject);
         secondCounter += Time.deltaTime;
         if (dealingDamage)
         {

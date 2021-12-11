@@ -280,8 +280,6 @@ public class GameRoom : Room
                     MakenewPlayerCharacterMessage makePlayerCharacterMessage2 = new MakenewPlayerCharacterMessage(false, clientToSend.playerID, clientToSend.playerName, clientToSend.playerColor);
                     outpacket2.Write(makePlayerCharacterMessage2);
                     SendTCPMessageToTargetUser(outpacket2, clientToSendTo);
-
-                    Debug.Log(clientToSend.playerName + " " + clientToSend.playerColor);
                 }
                 else
                 {

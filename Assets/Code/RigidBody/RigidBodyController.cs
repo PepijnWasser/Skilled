@@ -34,7 +34,10 @@ public class RigidBodyController : MonoBehaviour
 
     private void Start()
     {
-        rigidbodyID = rigidbodyManager.GetNewID();
+        if(rigidbodyManager != null)
+        {
+            rigidbodyID = rigidbodyManager.GetNewID();
+        }
     }
 
     private void OnDestroy()
@@ -69,10 +72,13 @@ public class RigidBodyController : MonoBehaviour
             {
                 if (thisGameobject.transform.position != oldPos || thisGameobject.transform.rotation.eulerAngles != oldRot)
                 {
-                    Debug.Log("sending poosition");
-                    gameState.SendRigidBodyPosition(rigidbodyID, thisGameobject.transform.position, thisGameobject.transform.rotation.eulerAngles);
-                    oldPos = thisGameobject.transform.position;
-                    oldRot = thisGameobject.transform.rotation.eulerAngles;
+                    if(gameState != null)
+                    {
+                        Debug.Log("sending poosition");
+                        gameState.SendRigidBodyPosition(rigidbodyID, thisGameobject.transform.position, thisGameobject.transform.rotation.eulerAngles);
+                        oldPos = thisGameobject.transform.position;
+                        oldRot = thisGameobject.transform.rotation.eulerAngles;
+                    }
                 }
             }
         }

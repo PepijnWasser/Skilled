@@ -91,7 +91,7 @@ public class NonsensePrinter : MonoBehaviour
             if (secondCounterSpeed > currentSpeedDuration)
             {
                 currentSpeedDuration = Random.Range(speedDuration.x, speedDuration.y);
-                currentSpeed = Random.Range(speed.x, speed.y);
+                currentSpeed = 2;
                 secondCounterSpeed = 0;
             }
 
