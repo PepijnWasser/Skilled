@@ -6,8 +6,15 @@ public class StationHealth : MonoBehaviour
 {
     public int stationHealth = 4;
 
+    int startHealth = 0;
+
     public delegate void Damage(int health);
     public static event Damage updateStationHealth;
+
+    public delegate void DamageLine();
+    public static event DamageLine stationHalfWay;
+    public static event DamageLine stationThreeQuarterWay;
+
 
     private void Awake()
     {
@@ -15,6 +22,8 @@ public class StationHealth : MonoBehaviour
         TwoWayLeverTask.taskDealDamage += TakeDamage;
         KeypadTask.taskDealDamage += TakeDamage;
         GameState.stationHealthUpdated += SetHealth;
+
+        startHealth = stationHealth;
     }
 
 
@@ -30,6 +39,18 @@ public class StationHealth : MonoBehaviour
     {
         stationHealth -= amount;
         updateStationHealth?.Invoke(stationHealth);
+
+        int halfHealth = startHealth / 2;
+        int threeQuarterHealth = startHealth / 4 * 3;
+
+        if(stationHealth == halfHealth)
+        {
+            stationHalfWay?.Invoke();
+        }
+        if (stationHealth == threeQuarterHealth)
+        {
+            stationThreeQuarterWay?.Invoke();
+        }
     }
 
     void SetHealth(int health)

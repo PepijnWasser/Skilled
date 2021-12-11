@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    public bool nextIntensity = false;
-
     public Animator musicAnimator;
 
     int intensity = 0;
@@ -16,13 +14,33 @@ public class MusicManager : MonoBehaviour
 
     public AudioSource musicPlayer;
 
-    private void Update()
+    private void Awake()
     {
-        if (nextIntensity)
+        if (ServerConnectionData.isOwner)
         {
-            StartCoroutine("NextIntensity");
-            nextIntensity = false;
+            StationHealth.stationHalfWay += SetNextIntensity;
+            StationHealth.stationThreeQuarterWay += SetNextIntensity;
+
+            AudioClip newClip = Extensions.RandomListItem(calmClips);
+            musicPlayer.clip = newClip;
+            musicPlayer.Play();
+
+            musicAnimator.SetTrigger("FadeIn");
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (ServerConnectionData.isOwner)
+        {
+            StationHealth.stationHalfWay -= SetNextIntensity;
+            StationHealth.stationThreeQuarterWay -= SetNextIntensity;
+        }
+    }
+
+    void SetNextIntensity()
+    {
+        StartCoroutine("NextIntensity");
     }
 
     IEnumerator NextIntensity()

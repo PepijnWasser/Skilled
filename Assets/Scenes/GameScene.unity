@@ -247,8 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e5741c64b34281419fcc9264a296a54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalEnergy: 20
-  availibleEnergy: 20
+  totalEnergy: 4
+  availibleEnergy: 4
 --- !u!4 &423307908
 Transform:
   m_ObjectHideFlags: 0
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doorPrefab: {fileID: 1476569861299040871, guid: 1bbcb392fcccb854aadaa03a9e21b447, type: 3}
-  amountOfDoorsToSpawn: 1
+  amountOfDoorsToSpawn: 6
 --- !u!1 &545684501
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,10 +441,10 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 08803013b9c6e4947b5f9580f9498dfb, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -538,7 +538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415252cbaec73ef4d9a50df6c87029a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextIntensity: 0
   musicAnimator: {fileID: 601183347}
   calmClips:
   - {fileID: 8300000, guid: 08803013b9c6e4947b5f9580f9498dfb, type: 3}
@@ -1537,7 +1536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c980c35a4aff194d8e185cd257046d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stationHealth: 1000000
+  stationHealth: 70
 --- !u!4 &1605409415
 Transform:
   m_ObjectHideFlags: 0
