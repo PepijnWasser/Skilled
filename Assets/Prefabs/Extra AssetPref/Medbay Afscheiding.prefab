@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 6146002360716583146}
   - component: {fileID: 1656951721642457098}
   - component: {fileID: 4278086729802202396}
+  - component: {fileID: 4171348844531840171}
   m_Layer: 0
   m_Name: Medbay Afscheiding
   m_TagString: Untagged
@@ -226,3 +227,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4171348844531840171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773743938160900688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 633429de4cffc6644ad281f26ce06827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateFrequency: 30
+  rigidbodyID: 0
+  lastPlayerTouchedID: 0
