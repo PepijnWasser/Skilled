@@ -1057,7 +1057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeTillDamage: 2
   damageAmount: 1
-  DamageRate: 15
+  DamageRate: 1
   hasError: 0
   taskName: 
   targetPosition: 0

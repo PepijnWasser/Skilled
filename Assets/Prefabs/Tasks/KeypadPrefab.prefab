@@ -1741,7 +1741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timeTillDamage: 2
   damageAmount: 1
-  DamageRate: 15
+  DamageRate: 1
   hasError: 0
   taskName: 
   keyPad: {fileID: 0}
@@ -1793,11 +1793,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayCam: {fileID: 4457895110820608436}
+  cameraParent: {fileID: 4576995068447200373}
   isFocused: 0
   keypadID: 0
   resetTime: 3
   playerIsUsing: 0
-  cameraParent: {fileID: 4576995068447200373}
 --- !u!82 &8119508863886036020
 AudioSource:
   m_ObjectHideFlags: 0
