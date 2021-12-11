@@ -1055,10 +1055,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d21090ec610b31c4cb26a2f5c8203bf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeTillDamage: 2
+  timeTillDamage: 20
   damageAmount: 1
-  DamageRate: 1
+  DamageRate: 10
+  secondCounter: 0
   hasError: 0
+  dealingDamage: 0
   taskName: 
   targetPosition: 0
   validationTime: 5

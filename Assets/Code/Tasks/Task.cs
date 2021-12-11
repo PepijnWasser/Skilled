@@ -18,10 +18,10 @@ public abstract class Task : MonoBehaviour
     [SerializeField]
     protected float DamageRate;
 
-    protected float secondCounter;
+    public float secondCounter;
 
     public bool hasError = false;
-    protected bool dealingDamage = false;
+    public bool dealingDamage = false;
 
     //name of the task
     public string taskName;

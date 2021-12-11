@@ -12,7 +12,7 @@ public class TaskManager : MonoBehaviour
     float secondCounter = 0;
 
     public List<Task> tasksWithoutErrors = new List<Task>();
-    List<Task> tasksWithErrors = new List<Task>();
+    public List<Task> tasksWithErrors = new List<Task>();
 
     public delegate void Spawning(Task taskSpawned, int taskID);
     public static event Spawning taskHasError;

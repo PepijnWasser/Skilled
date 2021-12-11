@@ -1739,10 +1739,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f921d455150b614790e9a1ed52b28ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeTillDamage: 2
+  timeTillDamage: 20
   damageAmount: 1
-  DamageRate: 1
+  DamageRate: 10
+  secondCounter: 0
   hasError: 0
+  dealingDamage: 0
   taskName: 
   keyPad: {fileID: 0}
   badAudio: {fileID: 7695661359584341310}
@@ -3826,6 +3828,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 80, z: 0}
   parent: {fileID: 4669192857401244107}
+--- !u!65 &6463843839742817179
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8802967679958110846}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.21, y: 1.37, z: 0.48}
+  m_Center: {x: 0, y: 0, z: -0.18}
 --- !u!1 &9094957002426535036
 GameObject:
   m_ObjectHideFlags: 0
@@ -4074,16 +4089,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d8b1a4cb1c26ef24994e51c182b6b4b5, type: 3}
   m_PrefabInstance: {fileID: 8568948931242290991}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &6463843839742817179
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8802967679958110846}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.21, y: 1.37, z: 0.48}
-  m_Center: {x: 0, y: 0, z: -0.18}

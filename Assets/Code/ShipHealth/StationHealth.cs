@@ -37,6 +37,7 @@ public class StationHealth : MonoBehaviour
 
     void TakeDamage(int amount)
     {
+        Debug.Log("take damage");
         stationHealth -= amount;
         updateStationHealth?.Invoke(stationHealth);
 

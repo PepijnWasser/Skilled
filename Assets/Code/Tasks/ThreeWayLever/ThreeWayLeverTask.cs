@@ -59,7 +59,7 @@ public class ThreeWayLeverTask : Task
 
     public override void TestDamage()
     {
-
+        Debug.Log("3wl");
         secondCounter += Time.deltaTime;
         if (dealingDamage)
         {
