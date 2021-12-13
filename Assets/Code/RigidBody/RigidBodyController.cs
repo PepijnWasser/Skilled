@@ -5,27 +5,23 @@ using UnityEngine;
 public class RigidBodyController : MonoBehaviour
 {
     float secondCounter = 0;
-    public int updateFrequency;
+    public int updateFrequency = 10;
 
     GameState gameState;
-    GameObject thisGameobject;
     Rigidbody thisRigidbody;
 
     RigidBodyManager rigidbodyManager;
-    GameManager gameManager;
 
     Vector3 oldPos;
     Vector3 oldRot;
 
     public int rigidbodyID = 0;
-    public int lastPlayerTouchedID = 0;
+    int lastPlayerTouchedID = 1;
 
     private void Awake()
     {
         gameState = GameObject.FindObjectOfType<GameState>();
         rigidbodyManager = GameObject.FindObjectOfType<RigidBodyManager>();
-        gameManager = GameObject.FindObjectOfType<GameManager>();
-        thisGameobject = this.gameObject;
         thisRigidbody = GetComponent<Rigidbody>();
 
         GameState.rigidbodyUpdater += MoveObject;
@@ -47,11 +43,11 @@ public class RigidBodyController : MonoBehaviour
     }
 
     private void Update()
-    {
+    {      
         if (lastPlayerTouchedID == PlayerInfo.playerID)
         {
             TestSend();
-        }
+        }      
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -59,6 +55,18 @@ public class RigidBodyController : MonoBehaviour
         if(collision.gameObject == GameManager.playerCharacter)
         {
             gameState.SendLastPlayerTouchedMessage(PlayerInfo.playerID, rigidbodyID);
+        }
+        else if(collision.collider.gameObject.GetComponent<RigidBodyController>() != null)
+        {
+            RigidBodyController toucher = collision.collider.gameObject.GetComponent<RigidBodyController>();
+
+            if(toucher.rigidbodyID == PlayerInfo.playerID)
+            {
+                if(gameState != null)
+                {
+                    gameState.SendLastPlayerTouchedMessage(PlayerInfo.playerID, rigidbodyID);
+                }
+            }
         }
     }
 
@@ -68,18 +76,16 @@ public class RigidBodyController : MonoBehaviour
         if (secondCounter >= (float)1 / (float)updateFrequency)
         {
             secondCounter = 0;
-            if (thisGameobject != null)
+            if (this.transform.position != oldPos || this.transform.rotation.eulerAngles != oldRot)
             {
-                if (thisGameobject.transform.position != oldPos || thisGameobject.transform.rotation.eulerAngles != oldRot)
+                if (gameState != null)
                 {
-                    if(gameState != null)
-                    {
-                        Debug.Log("sending poosition");
-                        gameState.SendRigidBodyPosition(rigidbodyID, thisGameobject.transform.position, thisGameobject.transform.rotation.eulerAngles);
-                        oldPos = thisGameobject.transform.position;
-                        oldRot = thisGameobject.transform.rotation.eulerAngles;
-                    }
+                    Debug.Log("sending position");
+                    gameState.SendRigidBodyPosition(rigidbodyID, this.transform.position, this.transform.rotation.eulerAngles);
+                    oldPos = this.transform.position;
+                    oldRot = this.transform.rotation.eulerAngles;
                 }
+
             }
         }
     }
@@ -89,8 +95,8 @@ public class RigidBodyController : MonoBehaviour
         Debug.Log("moving object");
         if(ID == rigidbodyID)
         {
-            thisGameobject.transform.position = newPosition;
-            thisGameobject.transform.rotation = Quaternion.Euler(newRotation);
+            this.transform.position = newPosition;
+            this.transform.rotation = Quaternion.Euler(newRotation);
         }
     }
 

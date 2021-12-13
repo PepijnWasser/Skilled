@@ -117,6 +117,8 @@ MonoBehaviour:
   - {fileID: 6261443730901526306}
   generatedFrom: {fileID: 0}
   switchableRoom: {fileID: 264117730981110836}
+  mapIcons:
+  - {fileID: 7879100194201281887}
 --- !u!64 &6261443730901526306
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -267,7 +269,7 @@ GameObject:
   - component: {fileID: 3729536105462309428}
   - component: {fileID: 7231412697604467283}
   - component: {fileID: 4521377330098907713}
-  m_Layer: 0
+  m_Layer: 18
   m_Name: MedbayRoof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +284,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7879100194201281887}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.25, y: 5.3646903, z: 0.25000286}
+  m_LocalPosition: {x: -0.25, y: 13.8, z: 0.25000286}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2861357998898035543}

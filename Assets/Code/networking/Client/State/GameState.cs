@@ -516,7 +516,6 @@ public class GameState : State
 
     void HandleLastPlayerTouchedMessage(LastPlayerTouchedMessage message)
     {
-        Debug.Log("received new last touched " + message.playerID);
         rigidbodyTouchedUpdate?.Invoke(message.playerID, message.rigidbodyID);
     }
 
