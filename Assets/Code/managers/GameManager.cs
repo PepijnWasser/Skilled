@@ -8,13 +8,13 @@ public class GameManager : MonoBehaviour
     public GameObject playerPrefab;
     public GameObject taskManagerPrefab;
 
+    public GameObject energyManagerPrefab;
+
     Dictionary<int, PlayerPrefabManager> characterDictionary = new Dictionary<int, PlayerPrefabManager>();
 
     List<PlayerSpawnLocation> availiblePlayerSpawnLocations = new List<PlayerSpawnLocation>();
 
     public static GameObject playerCharacter;
-
-    public EnergySpawner energySpawner;
 
     public delegate void PlayerMade(GameObject player, Camera cam);
     public static event PlayerMade playerMade;
@@ -67,18 +67,21 @@ public class GameManager : MonoBehaviour
 
     public void MovePlayer(int playerID, Vector3 position, Vector3 rotation, Vector3 targetRotation)
     {
-        Debug.Log("moving player " + playerID);
-        
-        PlayerPrefabManager manager = characterDictionary[playerID];
-
-        if (position != manager.player.transform.position)
+        if (characterDictionary[playerID] != null)
         {
-            manager.playerAnimator.PlayRunAnimation();
-        }
+            Debug.Log("moving player " + playerID);
 
-        manager.player.transform.position = position;
-        manager.player.transform.rotation = Quaternion.Euler(rotation);
-        manager.lookTarget.transform.rotation = Quaternion.Euler(targetRotation);
+            PlayerPrefabManager manager = characterDictionary[playerID];
+
+            if (position != manager.player.transform.position)
+            {
+                manager.playerAnimator.PlayRunAnimation();
+            }
+
+            manager.player.transform.position = position;
+            manager.player.transform.rotation = Quaternion.Euler(rotation);
+            manager.lookTarget.transform.rotation = Quaternion.Euler(targetRotation);
+        }
     }
 
     public void RemovePlayerCharacter(int playerID)
@@ -91,8 +94,8 @@ public class GameManager : MonoBehaviour
     public void MakeWorldObjects(bool playerIsLeader, int maxErrors, int tasksOfTypeToSpawn)
     {
         GameObject taskManager = Instantiate(taskManagerPrefab);
-
         taskManager.GetComponent<TaskSpawner>().tasksOfTypeToSpawn = tasksOfTypeToSpawn;
+
         if (!playerIsLeader)
         {
             Destroy(taskManager.GetComponent<TaskManager>());
@@ -102,7 +105,8 @@ public class GameManager : MonoBehaviour
             taskManager.GetComponent<TaskManager>().maxErrors = maxErrors;
         }
 
-        energySpawner.SpawnEnergyUsers(energySpawner.transform);
+        GameObject energyManager = Instantiate(energyManagerPrefab);
+        //taskManager.GetComponent<EnergySpawner>().SpawnEnergyUsers(energyManager.transform);
     }
 
     //gets all positions a player can spawn
