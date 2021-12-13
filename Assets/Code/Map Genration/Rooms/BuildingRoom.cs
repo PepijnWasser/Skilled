@@ -8,6 +8,7 @@ public class BuildingRoom : MonoBehaviour
     public MeshCollider[] meshColliders;
     public Doorway generatedFrom;
     public SwitchableRoom switchableRoom;
+    public List<GameObject> mapIcons;
 
     public Bounds[] RoomBounds
     {

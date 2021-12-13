@@ -22,7 +22,6 @@ public class EnergyManager : MonoBehaviour
         {
             availibleEnergy += 1;
             energyChanged?.Invoke(availibleEnergy);
-            Debug.Log("add energy");
         }
 
     }

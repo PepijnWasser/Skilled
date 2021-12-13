@@ -1629,7 +1629,7 @@ GameObject:
   - component: {fileID: 2451319401590896550}
   - component: {fileID: 4641578518347875797}
   - component: {fileID: 8900776386662929446}
-  m_Layer: 12
+  m_Layer: 18
   m_Name: For color
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5265,6 +5265,8 @@ MonoBehaviour:
   - {fileID: 7792665023019750351}
   generatedFrom: {fileID: 0}
   switchableRoom: {fileID: 5226140668015677875}
+  mapIcons:
+  - {fileID: 3460252592811698412}
 --- !u!114 &5226140668015677875
 MonoBehaviour:
   m_ObjectHideFlags: 0

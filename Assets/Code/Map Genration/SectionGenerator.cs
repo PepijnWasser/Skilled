@@ -105,7 +105,12 @@ public class SectionGenerator : MonoBehaviour
 			if(TestDoors(doorwayToFitOn, roomToCheck))
             {
 				AddDoorwaysToLists(roomToCheck);
-				roomToCheck.GetComponentInChildren<Renderer>().material.color = roomColor;
+
+				foreach(GameObject mapIcon in roomToCheck.mapIcons)
+                {
+					mapIcon.GetComponent<Renderer>().material.color = roomColor;
+
+				}
 				roomToCheck.GetComponent<BuildingRoom>().generatedFrom = doorwayToFitOn;
 
 				sectionPower.AddRoom(roomToCheck.switchableRoom);

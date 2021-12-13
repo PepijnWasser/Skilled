@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnergyUser : MonoBehaviour
 {
     EnergyManager energyManager;
-    protected bool on = false;
+    public bool on = false;
 
     public GameObject minimapIcon;
 

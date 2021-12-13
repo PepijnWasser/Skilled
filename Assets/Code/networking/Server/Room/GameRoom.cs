@@ -22,7 +22,7 @@ public class GameRoom : Room
     {
         amountOfSectors = (int)Mathf.Ceil((float)amountOfPlayers / (float)3);
         roomsPerSector = 20 + 5 * amountOfPlayers;
-        tasksOfTypeToSpawn = (int)Mathf.Ceil((float)roomsPerSector * amountOfSectors * (float)0.1 / (float)3);
+        tasksOfTypeToSpawn = (int)Mathf.Ceil((float)roomsPerSector * amountOfSectors * (float)0.1);
         maxErrors = (int)Mathf.Ceil((float)tasksOfTypeToSpawn / (float)2);
     }
 
