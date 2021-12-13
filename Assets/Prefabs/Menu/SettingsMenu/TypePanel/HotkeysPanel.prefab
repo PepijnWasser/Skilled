@@ -3252,7 +3252,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Open sesttings
+  m_Text: Open settings
 --- !u!1 &4395662648495411833
 GameObject:
   m_ObjectHideFlags: 0
