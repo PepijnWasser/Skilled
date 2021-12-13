@@ -7,10 +7,9 @@ public class EnergyUserDoor : EnergyUser
     Animator animator;
 
     public GameObject raycastOrigin;
-    public int ID;
+    public BoxCollider collider;
 
-    bool currentState = false;
-    bool targetState = false;
+    public bool targetState = false;
 
 
     protected override void Start()
@@ -24,8 +23,6 @@ public class EnergyUserDoor : EnergyUser
         base.TurnOn();
         animator.SetInteger("DoorState", 1);
         targetState = true;
-
-
     }
 
     protected override void TurnOff()
@@ -37,56 +34,33 @@ public class EnergyUserDoor : EnergyUser
 
     private void Update()
     {
-        if(targetState != currentState)
+        if(targetState == false)
         {
-            if(targetState == false)
-            {
-                RaycastHit raycastHit;
-                if (Physics.Raycast(raycastOrigin.transform.position, Vector3.down, out raycastHit, 0.1f))
-                {
-                    if(raycastHit.collider.gameObject != this.gameObject)
-                    {
-                        animator.enabled = false;
-                    }
-                    else
-                    {
-                        animator.enabled = true;
-                    }
-                }
-                else
-                {
-                    animator.enabled = true;
-                }
+            Collider[] hitColliders = Physics.OverlapSphere(raycastOrigin.transform.position, 2);
 
-                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Closed"))
+            bool touchingPlayer = false;
+            foreach (Collider hitCollider in hitColliders)
+            {
+                if (hitCollider.gameObject.layer == 13)
                 {
-                    currentState = targetState;
+                    touchingPlayer = true;
                 }
+            }
+
+            if (touchingPlayer)
+            {
+                animator.enabled = false;
             }
             else
             {
-                if(animator.enabled == false)
-                {
-                    animator.enabled = true;
-                }
-            }
-        }
-
-        if(targetState == false)
-        {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Closed"))
-            {
-                currentState = targetState;
+                animator.enabled = true;
             }
         }
         else
         {
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Opened"))
-            {
-                currentState = targetState;
-            }
+            animator.enabled = true;
         }
-    
+
     }
     
 }

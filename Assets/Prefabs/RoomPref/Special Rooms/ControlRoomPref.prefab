@@ -1845,21 +1845,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8319710874009013008}
     m_Modifications:
-    - target: {fileID: 303854553248267361, guid: 6fe0997ae94c30a40b792c00481d89eb, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.00000023841858
-      objectReference: {fileID: 0}
-    - target: {fileID: 303854553248267366, guid: 6fe0997ae94c30a40b792c00481d89eb, type: 3}
-      propertyPath: m_Lens.m_SensorSize.x
-      value: 1.7777778
-      objectReference: {fileID: 0}
     - target: {fileID: 3627098918250473398, guid: 6fe0997ae94c30a40b792c00481d89eb, type: 3}
       propertyPath: m_Name
       value: TaskMapDisplay
-      objectReference: {fileID: 0}
-    - target: {fileID: 3627098918250473400, guid: 6fe0997ae94c30a40b792c00481d89eb, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3627098918250473402, guid: 6fe0997ae94c30a40b792c00481d89eb, type: 3}
       propertyPath: m_Pivot.x
@@ -3281,10 +3269,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyMapDisplay
       objectReference: {fileID: 0}
-    - target: {fileID: 301541205273119769, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 301541205273119771, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3368,54 +3352,6 @@ PrefabInstance:
     - target: {fileID: 301541205273119771, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625049173759891392, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.00000035762793
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625049173759891392, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.00000023841858
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625049173759891392, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.00000047683716
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625049173759891399, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
-      propertyPath: m_Lens.m_SensorSize.x
-      value: 1.7777778
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625049174083547020, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
-      propertyPath: m_FontData.m_MaxSize
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625049174083547020, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
-      propertyPath: m_FontData.m_FontSize
-      value: 44
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625049174083547020, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
-      propertyPath: m_FontData.m_Alignment
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625049174083547022, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625049174083547022, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625049174083547022, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625049174083547022, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 1.875
-      objectReference: {fileID: 0}
-    - target: {fileID: 3625049174083547022, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.285
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
@@ -4951,11 +4887,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1428435694618391850, guid: 83e54fbc43c037f44b4755c53804188b, type: 3}
       propertyPath: m_Lens.m_SensorSize.x
-      value: 1.7777778
+      value: 1.2729017
       objectReference: {fileID: 0}
     - target: {fileID: 1428435694618391853, guid: 83e54fbc43c037f44b4755c53804188b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.00000023841858
+      objectReference: {fileID: 0}
+    - target: {fileID: 1428435694740893555, guid: 83e54fbc43c037f44b4755c53804188b, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 327680
+      objectReference: {fileID: 0}
+    - target: {fileID: 1428435694896384218, guid: 83e54fbc43c037f44b4755c53804188b, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 20535
+      objectReference: {fileID: 0}
+    - target: {fileID: 2716615703192743668, guid: 83e54fbc43c037f44b4755c53804188b, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2716615703192743670, guid: 83e54fbc43c037f44b4755c53804188b, type: 3}
       propertyPath: m_Pivot.x

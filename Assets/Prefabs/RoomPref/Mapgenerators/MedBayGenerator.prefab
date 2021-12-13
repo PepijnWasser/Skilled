@@ -163,12 +163,11 @@ MonoBehaviour:
   - {fileID: 7136555688134437947, guid: 188c21035c3f53048965ffecbf0896ee, type: 3}
   - {fileID: 4806160391475138319, guid: cae4c5e9b0917a74b89bdba2a57b50ed, type: 3}
   - {fileID: 4345375341482280295, guid: 1b2f83698110b5c4ab78d0fdfb313d8f, type: 3}
-  minMaxRooms: {x: 80, y: 80}
   allDoorways: []
   availableDoorways: []
   sectionPower: {fileID: 3072146864927314499}
   startdoor: {fileID: 0}
-  roomColor: {r: 0, g: 1, b: 0.9804356, a: 0}
+  roomColor: {r: 0, g: 0.6886792, b: 0.6751757, a: 0}
 --- !u!1 &3422697445051917941
 GameObject:
   m_ObjectHideFlags: 0
@@ -213,6 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82dc63733d16aed42b8c2122843d16e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  on: 0
   minimapIcon: {fileID: 1179666382998448028}
   onColor: {r: 0.82269275, g: 1, b: 0, a: 1}
   offColor: {r: 1, g: 0, b: 0, a: 1}
