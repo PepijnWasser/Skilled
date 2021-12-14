@@ -19,11 +19,11 @@ public class EnergySpawner : MonoBehaviour
 
     private void Start()
     {
-        SpawnEnergyUsers(this.transform);
+        SpawnEnergyUsers();
     }
 
     //foreach type of task, spawn the given amount of that task. Give it a name and id, and set the location
-    public void SpawnEnergyUsers(Transform parent)
+    public void SpawnEnergyUsers()
     {
         GetAvailibleLocations();
 
@@ -32,7 +32,7 @@ public class EnergySpawner : MonoBehaviour
             EnergyDoorLocation newlocation = Extensions.RandomListItem(availibleEnergyDoorLocation);
             availibleEnergyDoorLocation.Remove(newlocation);
 
-            GameObject newObject = Instantiate(doorPrefab, newlocation.transform.position, newlocation.transform.rotation, parent);
+            GameObject newObject = Instantiate(doorPrefab, newlocation.transform.position, newlocation.transform.rotation, newlocation.transform);
         }
 
         energyUsersSpawned?.Invoke();
@@ -42,6 +42,31 @@ public class EnergySpawner : MonoBehaviour
     void GetAvailibleLocations()
     {
         availibleEnergyDoorLocation = GameObject.FindObjectsOfType<EnergyDoorLocation>().ToList();
+        RemoveLocationsInSameSpace(availibleEnergyDoorLocation);
+    }
+
+    void RemoveLocationsInSameSpace(List<EnergyDoorLocation> locations)
+    {
+        List<EnergyDoorLocation> locationsToRemove = new List<EnergyDoorLocation>();
+
+        foreach (EnergyDoorLocation location in locations)
+        {
+            foreach (EnergyDoorLocation location2 in locations)
+            {
+                if (location != location2)
+                {
+                    if (Vector3.Distance(location.transform.position, location2.transform.position) < 1 && locationsToRemove.Contains(location2) == false)
+                    {
+                        locationsToRemove.Add(location);
+                    }
+                }
+            }
+        }
+
+        foreach(EnergyDoorLocation location in locationsToRemove)
+        {
+            availibleEnergyDoorLocation.Remove(location);
+        }
     }
 
     public static  int getNewID()
