@@ -381,9 +381,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainCam: {fileID: 8030737936671950272}
-  player: {fileID: 1519590205447692536}
+  player: {fileID: 3464843729972646113}
   rotationSpeed: 5
-  rotationAxis: {x: 0, y: 1, z: 0}
+  rotationAxis: {x: 1, y: 2, z: 0}
 --- !u!1 &767075815334729547
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,7 +445,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.0911736, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -547,7 +547,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.0911736, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
