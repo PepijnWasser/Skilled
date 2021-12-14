@@ -126,7 +126,7 @@ MonoBehaviour:
   availableDoorways: []
   sectionPower: {fileID: 690708294541801209}
   startdoor: {fileID: 0}
-  roomColor: {r: 0.2830189, g: 0.022143397, b: 0, a: 1}
+  roomColor: {r: 1, g: 0.82214797, b: 0, a: 1}
 --- !u!1 &3141895394157510664
 GameObject:
   m_ObjectHideFlags: 0
