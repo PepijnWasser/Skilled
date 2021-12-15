@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Net;
+using System;
 
 public class JoinLocalHostServer : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class JoinLocalHostServer : MonoBehaviour
 
     public InputField IPField;
     public InputField PortField;
+
+    public FadingText errorText;
 
     MySceneManager sceneManager;
 
@@ -22,15 +25,25 @@ public class JoinLocalHostServer : MonoBehaviour
 
     public void TryConnectingClient()
     {
-        IPAddress _serverIP = IPAddress.Parse(IPField.text);
-        int _port;
-        int.TryParse(PortField.text, out _port);
-
-        if (localHostClient.ConnectToServer(_serverIP, _port))
+        try
         {
-            //Destroy(this.gameObject);
-            //Instantiate(lobbyPrefab);
-            sceneManager.LoadScene("LobbyScene");
+            IPAddress _serverIP = IPAddress.Parse(IPField.text);
+            int _port;
+            int.TryParse(PortField.text, out _port);;
+
+            ConnectionFeedback connectionFeedback = localHostClient.ConnectToServer(_serverIP, _port);
+            if (connectionFeedback.connected)
+            {
+                sceneManager.LoadScene("LobbyScene");
+            }
+            else
+            {
+                throw connectionFeedback.error;
+            }
+        }
+        catch(Exception e)
+        {
+            errorText.StartFade("Error joining server: " + e.Message);
         }
     }
 }
