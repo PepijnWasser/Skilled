@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using System.Net;
 using System.Net.Sockets;
 
@@ -13,6 +14,8 @@ public class CreateLocalhostServer : MonoBehaviour
     public LocalHostServer localHostServerPrefab;
     public GameObject lobbyPrefab;
 
+    public FadingText errorText;
+
     MySceneManager sceneManager;
 
 
@@ -24,19 +27,27 @@ public class CreateLocalhostServer : MonoBehaviour
 
     public void CreateLocalHostServer()
     {
-        LocalHostServer server = Instantiate(localHostServerPrefab);
-        server.Initialize(basePort);
+        try
+        {
+            LocalHostServer server = Instantiate(localHostServerPrefab);
+            server.Initialize(basePort);
 
-        IPAddress _serverIP = Extensions.GetLocalIPAddress();
-        if (localHostClient.ConnectToServer(_serverIP, server.GetServerTCPPort()))
+            IPAddress _serverIP = Extensions.GetLocalIPAddress();
+
+            ConnectionFeedback connectionFeedback = localHostClient.ConnectToServer(_serverIP, server.GetServerTCPPort());
+            if (connectionFeedback.connected)
+            {
+                sceneManager.LoadScene("LobbyScene");
+            }
+            else
+            {
+                Destroy(server.gameObject);
+                throw connectionFeedback.error;
+            }
+        }    
+        catch(Exception e)
         {
-            //Instantiate(lobbyPrefab);
-            //Destroy(this.gameObject);
-            sceneManager.LoadScene("LobbyScene");
+            errorText.StartFade("Error creating server: " + e.Message);
         }
-        else
-        {
-            Destroy(server.gameObject);
-        }              
     }
 }

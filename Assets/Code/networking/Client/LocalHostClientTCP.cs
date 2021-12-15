@@ -5,6 +5,19 @@ using System.Net.Sockets;
 using System.Text;
 using UnityEngine;
 
+public struct ConnectionFeedback
+{
+    public bool connected;
+
+    public Exception error;
+
+    public ConnectionFeedback(bool _connected, Exception _error)
+    {
+        this.connected = _connected;
+        this.error = _error;
+    }
+}
+
 public class LocalHostClientTCP : MonoBehaviour
 {
     float secondCounter = 0;
@@ -38,44 +51,51 @@ public class LocalHostClientTCP : MonoBehaviour
 
     //tries to connect in 1 second
     //prints a message on fail
-    public bool ConnectToServer(System.Net.IPAddress address, int _port)
+    public ConnectionFeedback ConnectToServer(System.Net.IPAddress address, int _port)
     {
         if (tryingToConnect == false)
         {
             tryingToConnect = true;
             try
             {
-                if(tcpClient == null || tcpClient.Connected)
+                if (tcpClient == null || tcpClient.Connected)
                 {
                     tcpClient = new TcpClient();
                 }
 
-                bool result = tcpClient.ConnectAsync(address, _port).Wait(100);
-                if (result)
+                if(_port == 0)
                 {
-                    Debug.Log("Connected to server on port " + _port);
                     tryingToConnect = false;
-                    return true;
+                    return new ConnectionFeedback(false, new Exception("Port cannot be zero"));
                 }
                 else
                 {
-                    Debug.Log("failed to connect");
-                    tryingToConnect = false;
-                    return false;
+                    bool result = tcpClient.ConnectAsync(address, _port).Wait(10);
+                    if (result)
+                    {
+                        tryingToConnect = false;
+                        return new ConnectionFeedback(true, null);
+                    }
+                    else
+                    {
+                        tryingToConnect = false;
+                        return new ConnectionFeedback(false, new Exception("Failed to connect to given IP and port"));
+                    }
                 }
-
             }
+
             catch (Exception e)
             {
                 Debug.Log(e.Message);
                 Debug.Log(e.StackTrace);
                 tryingToConnect = false;
-                return false;
+                return new ConnectionFeedback(false, new Exception(e.Message));
+
             }
         }
         else
         {
-            return false;
+            return new ConnectionFeedback(false, new Exception("Already trying to connect"));
         }
     
     }
