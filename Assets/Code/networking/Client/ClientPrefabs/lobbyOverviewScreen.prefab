@@ -270,6 +270,7 @@ GameObject:
   - component: {fileID: 3026914877065497834}
   - component: {fileID: 5409286594430846884}
   - component: {fileID: 7552518924954001629}
+  - component: {fileID: 4261060433781118394}
   m_Layer: 5
   m_Name: lobbyOverviewScreen
   m_TagString: Untagged
@@ -391,6 +392,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CJScreenprefab: {fileID: 899979175462829657, guid: 82b70aefbcaaca046a57b51b8f65a5f0, type: 3}
+--- !u!114 &4261060433781118394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3026914877065497835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a34ea15efdcc84fb8031d4731aa014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3110022252348840423
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +694,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 4261060433781118394}
+        m_TargetAssemblyTypeName: PlaySound, Assembly-CSharp
+        m_MethodName: PlayAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &4171810734157435318
 GameObject:
   m_ObjectHideFlags: 0
@@ -884,6 +909,18 @@ MonoBehaviour:
       - m_Target: {fileID: 7552518924954001629}
         m_TargetAssemblyTypeName: CreateCJScreen, Assembly-CSharp
         m_MethodName: CreateCJScreenItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4261060433781118394}
+        m_TargetAssemblyTypeName: PlaySound, Assembly-CSharp
+        m_MethodName: PlayAudio
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

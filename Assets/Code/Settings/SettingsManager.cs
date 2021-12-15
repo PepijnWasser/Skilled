@@ -9,6 +9,8 @@ public class SettingsManager : MonoBehaviour
     public GameObject background;
     public TypeSelectorManager typeSelectionManager;
 
+    public PlaySound menuSoundFX;
+
     public delegate void OnDisable();
     public static event OnDisable disabled;
 
@@ -69,6 +71,8 @@ public class SettingsManager : MonoBehaviour
 
     void SwitchOpen()
     {
+        menuSoundFX.PlayAudio();
+
         if (inSettings)
         {
             Close();
@@ -82,6 +86,8 @@ public class SettingsManager : MonoBehaviour
 
     void SwitchOpenGame()
     {
+        menuSoundFX.PlayAudio();
+
         calledFromGame = true;
         if (inSettings)
         {

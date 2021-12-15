@@ -133,6 +133,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 8974905581785093868}
+        m_TargetAssemblyTypeName: PlaySound, Assembly-CSharp
+        m_MethodName: PlayAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &899979175029758032
 GameObject:
   m_ObjectHideFlags: 0
@@ -307,6 +319,7 @@ GameObject:
   - component: {fileID: 899979175462829656}
   - component: {fileID: 4500238052081240999}
   - component: {fileID: 4865220144718808316}
+  - component: {fileID: 8974905581785093868}
   m_Layer: 5
   m_Name: c&jScreen
   m_TagString: Untagged
@@ -412,6 +425,7 @@ MonoBehaviour:
   basePort: 55555
   localHostServerPrefab: {fileID: 1762931389194518095, guid: 5a7ddb2d496811149877258a47360caf, type: 3}
   lobbyPrefab: {fileID: 5919268785238396665, guid: ec570f46a30c0fa46abffba18e76e56f, type: 3}
+  errorText: {fileID: 0}
 --- !u!114 &4865220144718808316
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,6 +439,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lobbyListViewPrefab: {fileID: 3026914877065497835, guid: c388bf997c5a79e429426c082cf12c1f, type: 3}
+--- !u!114 &8974905581785093868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 899979175462829657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9a34ea15efdcc84fb8031d4731aa014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &899979175485784061
 GameObject:
   m_ObjectHideFlags: 0
@@ -549,6 +575,18 @@ MonoBehaviour:
       - m_Target: {fileID: 4500238052081240999}
         m_TargetAssemblyTypeName: CreateLocalhostServer, Assembly-CSharp
         m_MethodName: CreateLocalHostServer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8974905581785093868}
+        m_TargetAssemblyTypeName: PlaySound, Assembly-CSharp
+        m_MethodName: PlayAudio
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
