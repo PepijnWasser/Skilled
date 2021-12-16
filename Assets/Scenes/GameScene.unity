@@ -639,8 +639,6 @@ MonoBehaviour:
   consoleRoomPrefab: {fileID: 8319710874009013015, guid: efc8da3fca09b7d40b5dc1ed9003fe09, type: 3}
   sectionGeneratorPrefabs:
   - {fileID: 1940732853011553374, guid: d3ee0ba67e62a1b48ae88118f3f9bd75, type: 3}
-  - {fileID: 1940732853011553374, guid: 1cc04b0e0ac9e1f4fbf254799d2c34ff, type: 3}
-  - {fileID: 1940732853011553374, guid: 588f076d50178ee41920e020d31ea98c, type: 3}
   posibleStartingDoors: []
   availableDoorwaysFromThis: []
 --- !u!1 &819156843
