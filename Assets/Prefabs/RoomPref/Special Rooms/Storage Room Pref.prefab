@@ -1918,19 +1918,19 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: a57b9fcf18ceb4d44bf7d85769dee861, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 6591039161142064104, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
+      objectReference: {fileID: 2100000, guid: ae7f15680c59f3a4b9126c8b7d2acb1d, type: 2}
     - target: {fileID: -7511558181221131132, guid: a57b9fcf18ceb4d44bf7d85769dee861, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 6208f8a30daafed48bc50e9416b14786, type: 2}
+      objectReference: {fileID: 2100000, guid: c6d745f4e8cb5b64aa17d9cee82eba37, type: 2}
     - target: {fileID: -7511558181221131132, guid: a57b9fcf18ceb4d44bf7d85769dee861, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 6591039161142064104, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
+      objectReference: {fileID: 2100000, guid: 9418b8230e7c3a94c8de88e62aba4062, type: 2}
     - target: {fileID: -7511558181221131132, guid: a57b9fcf18ceb4d44bf7d85769dee861, type: 3}
       propertyPath: m_Materials.Array.data[3]
       value: 
-      objectReference: {fileID: 6591039161142064104, guid: 60a2a1900fafa484a83ad36eea0af9b1, type: 3}
+      objectReference: {fileID: 2100000, guid: d78fae676171c2447abc6878ac608070, type: 2}
     - target: {fileID: 919132149155446097, guid: a57b9fcf18ceb4d44bf7d85769dee861, type: 3}
       propertyPath: m_Name
       value: Storage Room
