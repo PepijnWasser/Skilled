@@ -58,21 +58,23 @@ public class TwoWayLeverTask : Task
     //test damage
     public override void TestDamage()
     {
-        secondCounterValidate += Time.deltaTime;
-        if (dealingDamage)
+        if (hasError)
         {
-
-            if (secondCounterValidate > DamageRate)
+            secondCounter += Time.deltaTime;
+            if (dealingDamage)
             {
-                secondCounterValidate = 0;
-                taskDealDamage?.Invoke(damageAmount);
+                if (secondCounter > DamageRate)
+                {
+                    secondCounter = 0;
+                    taskDealDamage?.Invoke(damageAmount);
+                }
             }
-        }
-        else
-        {
-            if (secondCounterValidate > timeTillDamage)
+            else
             {
-                dealingDamage = true;
+                if (secondCounter > timeTillDamage)
+                {
+                    dealingDamage = true;
+                }
             }
         }
     }
@@ -83,7 +85,7 @@ public class TwoWayLeverTask : Task
         if (lever.currentPosition == targetPosition)
         {
             secondCounterValidate += Time.deltaTime;
-            if (secondCounter > validationTime)
+            if (secondCounterValidate > validationTime)
             {
                 completed = true;
             }
