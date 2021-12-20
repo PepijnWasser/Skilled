@@ -784,6 +784,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerSpawnLocation
       objectReference: {fileID: 0}
+    - target: {fileID: 8898158447909694541, guid: 97d777ea11af3da49a9e59038d8474b6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97d777ea11af3da49a9e59038d8474b6, type: 3}
 --- !u!4 &200558948963297441 stripped
