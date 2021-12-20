@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class StationHealth : MonoBehaviour
 {
-    public int stationHealth = 4;
+    [SerializeField]
+    private int startHealth = 0;
 
-    int startHealth = 0;
-
-    public delegate void Damage(int health);
-    public static event Damage updateStationHealth;
+    public delegate void Damage(int newHealth);
+    public static event Damage stationTookDamage;
 
     public delegate void DamageLine();
     public static event DamageLine stationHalfWay;
     public static event DamageLine stationThreeQuarterWay;
 
+    private int halfHealth;
+    private int quarterHealth;
 
+    private int stationHealth;
+
+    //we subsribe to the event launched when a task deals damage, and the event when we get a stationHealthUpdate from the server
+    //we also calculate the halfHealth and quaterHealth
     private void Awake()
     {
         ThreeWayLeverTask.taskDealDamage += TakeDamage;
@@ -23,7 +28,9 @@ public class StationHealth : MonoBehaviour
         KeypadTask.taskDealDamage += TakeDamage;
         GameState.stationHealthUpdated += SetHealth;
 
-        startHealth = stationHealth;
+        stationHealth = startHealth;
+        halfHealth = startHealth / 2;
+        quarterHealth = startHealth / 4;
     }
 
 
@@ -35,26 +42,40 @@ public class StationHealth : MonoBehaviour
         GameState.stationHealthUpdated -= SetHealth;
     }
 
+    //reduce the station health by x amount, and send it to the server
+    //on certain values launch an event
     void TakeDamage(int amount)
     {
+        Debug.Log("taking damage");
         stationHealth -= amount;
-        updateStationHealth?.Invoke(stationHealth);
-
-        int halfHealth = startHealth / 2;
-        int threeQuarterHealth = startHealth / 4 * 3;
+        stationTookDamage?.Invoke(stationHealth);
 
         if(stationHealth == halfHealth)
         {
             stationHalfWay?.Invoke();
         }
-        if (stationHealth == threeQuarterHealth)
+        if (stationHealth == quarterHealth)
         {
             stationThreeQuarterWay?.Invoke();
         }
     }
 
+    //if we get a new health amount from the server, update the health
     void SetHealth(int health)
     {
         stationHealth = health;
+        if (stationHealth == halfHealth)
+        {
+            stationHalfWay?.Invoke();
+        }
+        if (stationHealth == quarterHealth)
+        {
+            stationThreeQuarterWay?.Invoke();
+        }
+    }
+
+    public int GetStationHealth()
+    {
+        return stationHealth;
     }
 }

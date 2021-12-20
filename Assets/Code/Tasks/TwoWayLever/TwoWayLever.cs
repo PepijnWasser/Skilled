@@ -6,13 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(Interactable))]
 public class TwoWayLever : MonoBehaviour
 {
-    Interactable interactable;
+    private Interactable interactable;
 
-    GameObject player;
+    private GameObject player;
 
-    Animator animator;
+    private Animator animator;
 
-    AudioSource audioSource;
+    private AudioSource audioSource;
 
     [HideInInspector]
     public int currentPosition;

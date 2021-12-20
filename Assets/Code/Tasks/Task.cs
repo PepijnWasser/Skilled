@@ -7,23 +7,19 @@ public abstract class Task : MonoBehaviour
     public delegate void Completed(Task taskCompleted);
     public static event Completed taskCompleted;
 
-    //time in seconds until task starts doing damage to the station
     [SerializeField]
     protected float timeTillDamage;
 
-    //amount of damage the task does each time
     [SerializeField]
     protected int damageAmount;
-    //how fast the task does damage once it starts doing damage
+
     [SerializeField]
     protected float DamageRate;
 
-    public float secondCounter;
+    protected float secondCounter;
+    protected bool hasError = false;
+    protected bool dealingDamage = false;
 
-    public bool hasError = false;
-    public bool dealingDamage = false;
-
-    //name of the task
     public string taskName;
 
 

@@ -8,7 +8,6 @@ using System;
 
 public class LobbyRoom : Room
 {
-
 	//sends all the correct lobby info to all players
     public override void AddMember(MyClient newClient)
     {
@@ -23,13 +22,13 @@ public class LobbyRoom : Room
 
 		//send new player to all users
 		TCPPacket outpacket3 = new TCPPacket();
-		MakeNewPlayerBarMessage makePlayerBarMessage = new MakeNewPlayerBarMessage(newClient.playerID, newClient.playerColor, newClient.playerName, false);
-		outpacket3.Write(makePlayerBarMessage);
+		MakeNewPlayerBarMessage makePlayerBarMessageExistingUsers = new MakeNewPlayerBarMessage(newClient.playerID, newClient.playerColor, newClient.playerName, false);
+		outpacket3.Write(makePlayerBarMessageExistingUsers);
 		SendTCPMessageToAllUsersExcept(outpacket3, newClient);
 
 		TCPPacket outpacket4 = new TCPPacket();
-		MakeNewPlayerBarMessage makePlayerBarMessage2 = new MakeNewPlayerBarMessage(newClient.playerID, newClient.playerColor, newClient.playerName, true);
-		outpacket4.Write(makePlayerBarMessage2);
+		MakeNewPlayerBarMessage makePlayerBarMessageNewUser = new MakeNewPlayerBarMessage(newClient.playerID, newClient.playerColor, newClient.playerName, true);
+		outpacket4.Write(makePlayerBarMessageNewUser);
 		SendTCPMessageToTargetUser(outpacket4, newClient);
 
 		//send all existing users to new client
@@ -38,32 +37,11 @@ public class LobbyRoom : Room
 			if (client != newClient)
 			{
 				TCPPacket outpacket5 = new TCPPacket();
-				MakeNewPlayerBarMessage makePlayerBarMessage3 = new MakeNewPlayerBarMessage(client.playerID, client.playerColor, client.playerName, false);
-				outpacket5.Write(makePlayerBarMessage3);
+				MakeNewPlayerBarMessage makePlayerBarMessageExistingUser = new MakeNewPlayerBarMessage(client.playerID, client.playerColor, client.playerName, false);
+				outpacket5.Write(makePlayerBarMessageExistingUser);
 				SendTCPMessageToTargetUser(outpacket5, newClient);
 			}
 		}
-
-		if(newClient == server.serverInfo.serverOwner)
-        {
-			//send server info to new user
-			TCPPacket serverInfoPacket = new TCPPacket();
-			ServerInfo serverInfo = server.serverInfo;
-			UpdateServerInfoMessage serverInfoMessage = new UpdateServerInfoMessage(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, true);
-			serverInfoPacket.Write(serverInfoMessage);
-			SendTCPMessageToTargetUser(serverInfoPacket, newClient);
-		}
-        else
-        {
-
-			//send server info to new user
-			TCPPacket serverInfoPacket = new TCPPacket();
-			ServerInfo serverInfo = server.serverInfo;
-			UpdateServerInfoMessage serverInfoMessage = new UpdateServerInfoMessage(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, false);
-			serverInfoPacket.Write(serverInfoMessage);
-			SendTCPMessageToTargetUser(serverInfoPacket, newClient);
-		}
-
 	}
 
 	//removes the player bar from all users's screens and updates player count
@@ -83,6 +61,7 @@ public class LobbyRoom : Room
 	}
 
 	//udp messages from user
+	//we do not have UDP messages in the lobby
 	public override void HandleUDPNetworkMessageFromUser(USerializable pMessage, MyClient pSender)
 	{
 		
@@ -149,9 +128,9 @@ public class LobbyRoom : Room
 	}
 
 	//refreshes the heartbeat of a client
-    private void RefreshHeartbeat(MyClient pClient)
+    private void RefreshHeartbeat(MyClient client)
 	{
-		pClient.heartbeat = server.timeOutTime;
+		client.heartbeat = server.timeOutTime;
 	}
 
 	//checks of the name is availible and sends the new name to all users

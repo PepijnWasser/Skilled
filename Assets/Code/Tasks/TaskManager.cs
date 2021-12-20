@@ -7,12 +7,15 @@ public class TaskManager : MonoBehaviour
     [HideInInspector]
     public int maxErrors;
     
-    public Vector2 timeBetweenErrors;
-    public float timeToNextError;
-    float secondCounter = 0;
+    [SerializeField]
+    Vector2 timeBetweenErrors;
+    private float timeToNextError;
+    private float secondCounter = 0;
 
-    public List<Task> tasksWithoutErrors = new List<Task>();
-    public List<Task> tasksWithErrors = new List<Task>();
+    [SerializeField]
+    List<Task> tasksWithoutErrors = new List<Task>();
+    [SerializeField]
+    List<Task> tasksWithErrors = new List<Task>();
 
     public delegate void Spawning(Task taskSpawned, int taskID);
     public static event Spawning taskHasError;
@@ -20,7 +23,7 @@ public class TaskManager : MonoBehaviour
     private void Awake()
     {
         Task.taskCompleted += FinishTask;
-        TaskSpawner.allTasksSpawned += getTasks;
+        TaskSpawner.allTasksSpawned += SetTasks;
     }
 
     void Start()
@@ -31,7 +34,7 @@ public class TaskManager : MonoBehaviour
     private void OnDestroy()
     {
         Task.taskCompleted -= FinishTask;
-        TaskSpawner.allTasksSpawned -= getTasks;
+        TaskSpawner.allTasksSpawned -= SetTasks;
     }
 
     //if there is a task availible, and we need to spawn a task, spawn a random task from list
@@ -85,13 +88,15 @@ public class TaskManager : MonoBehaviour
         }
     }
 
+    //add the task to the correct list
     void FinishTask(Task task)
     {
         tasksWithErrors.Remove(task);
         tasksWithoutErrors.Add(task);
     }
 
-    void getTasks(List<Task> tasks)
+    //sets the availible tasks
+    void SetTasks(List<Task> tasks)
     {
         tasksWithoutErrors = tasks;
     }

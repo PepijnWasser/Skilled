@@ -76,7 +76,7 @@ public class GameState : State
     {
         base.Awake();
         MapGenerator.onCompletion += SendMapMadeMessage;
-        StationHealth.updateStationHealth += SendStationHealth;
+        StationHealth.stationTookDamage += SendStationHealth;
         TaskManager.taskHasError += SendNewTask;
 
         TwoWayLever.leverPulled += SendTwoWayLeverPos;
@@ -98,7 +98,7 @@ public class GameState : State
     private void OnDestroy()
     {
         MapGenerator.onCompletion -= SendMapMadeMessage;
-        StationHealth.updateStationHealth -= SendStationHealth;
+        StationHealth.stationTookDamage -= SendStationHealth;
         TaskManager.taskHasError -= SendNewTask;
 
         TwoWayLever.leverPulled -= SendTwoWayLeverPos;

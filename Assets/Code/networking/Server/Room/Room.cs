@@ -8,10 +8,11 @@ using System;
 
 public abstract class Room
 {
-	public LocalHostServer server;
 	protected List<MyClient> clientsInRoom = new List<MyClient>();
 
-	UdpClient client = new UdpClient();
+	private UdpClient client = new UdpClient();
+
+	protected LocalHostServer server;
 
 
 	//sets the udpClient of the room
@@ -178,6 +179,8 @@ public abstract class Room
 
 		}
 	}
+
+	//reset the room
 
 	protected abstract void Reset();
 }

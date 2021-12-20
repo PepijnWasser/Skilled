@@ -46,7 +46,7 @@ public class TwoWayLeverPositionDisplay : MonoBehaviour
                 Image spawnedItem = Instantiate(itemPrefab, content[display].transform);
 
                 TwoWayLeverDisplayItemPrefabManager manager = spawnedItem.GetComponent<TwoWayLeverDisplayItemPrefabManager>();
-                manager.position.text = task.targetPosition.ToString();
+                manager.position.text = task.GetTargetPosition().ToString();
                 manager.taskName.text = task.taskName;
 
                 imagesSpawned.Add(spawnedItem);

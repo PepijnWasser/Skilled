@@ -11,13 +11,13 @@ public class LocalHostServer : MonoBehaviour
 {
 	//if a heartbeat isn't received within the timeOutTime, kick the client
 	public float timeOutTime = 5f;
-	float secondCounter = 0;
+	private float secondCounter = 0;
 
-	UdpClient client = new UdpClient();
+	private UdpClient client = new UdpClient();
 
 	//list of all connected clients
 	private List<MyClient> connectedClients = new List<MyClient>();
-	private TcpListener _listener;
+	private TcpListener listener;
 
 	//id given to a new player upon joining
 	private int newPlayerID = 1;
@@ -26,15 +26,17 @@ public class LocalHostServer : MonoBehaviour
 	public LobbyRoom lobbyRoom;
 	public GameRoom gameRoom;
 	public EndRoom endRoom;
-	List<Room> activeRooms = new List<Room>();
+	private List<Room> activeRooms = new List<Room>();
 
 	//server info
 	public ServerInfo serverInfo = new ServerInfo();
 
-	public Dictionary<MyClient, Room> playerRoomDictionary = new Dictionary<MyClient, Room>();
+	//list of all users and what room the yare in
+	private Dictionary<MyClient, Room> playerRoomDictionary = new Dictionary<MyClient, Room>();
 
-	public Dictionary<Room, Room> movePlayersFromXToY = new Dictionary<Room, Room>();
-	public Dictionary<MyClient, Room> movePlayerToY = new Dictionary<MyClient, Room>();
+	//dictionarys used to move members between rooms
+	private Dictionary<Room, Room> movePlayersFromRoomToRoom = new Dictionary<Room, Room>();
+	private Dictionary<MyClient, Room> movePlayerToRoom = new Dictionary<MyClient, Room>();
 
 
 	private static LocalHostServer _instance;
@@ -45,7 +47,6 @@ public class LocalHostServer : MonoBehaviour
 			return _instance;
 		}
 	}
-
 
 	void Awake()
 	{
@@ -78,8 +79,7 @@ public class LocalHostServer : MonoBehaviour
 				serverInfo.ip = Extensions.GetLocalIPAddress();
 			}
 			catch (Exception e)
-			{
-				e.ToString();
+			{				
 				i++;
 			}
 		}
@@ -98,18 +98,18 @@ public class LocalHostServer : MonoBehaviour
 		{
 			try
 			{
-				_listener = new TcpListener(IPAddress.Any, startPort + i);
-				_listener.Start();
+				listener = new TcpListener(IPAddress.Any, startPort + i);
+				listener.Start();
 				finishedInitialization = true;
 				serverInfo.tcpPort = startPort + i;
 				Debug.Log("Server started on port: " + (startPort + i), this.gameObject);
 			}
 			catch (Exception e)
 			{
-				e.ToString();
 				i++;
 			}
 		}
+
 		lobbyRoom = new LobbyRoom();
 		activeRooms.Add(lobbyRoom);
 		lobbyRoom.Initialize(this);
@@ -138,14 +138,14 @@ public class LocalHostServer : MonoBehaviour
 		MovePlayerToDifferentRoom();
 	}
 
-	//if there is a tcpclient that wants to join, accept and give him a MyClient
+	//if there is a tcpclient that wants to join, accept and give him a encapsulating MyClient
 	private void ProcessNewClients()
 	{
-		while (_listener.Pending())
+		while (listener.Pending())
 		{
 			try
 			{
-				MyClient newClient = new MyClient(_listener.AcceptTcpClient(), timeOutTime, MyClient.colors.blue, newPlayerID, "TEMP");
+				MyClient newClient = new MyClient(listener.AcceptTcpClient(), timeOutTime, MyClient.colors.blue, newPlayerID, "TEMP");
 				newPlayerID += 1;
 
 				if(serverInfo.serverOwner == null)
@@ -154,6 +154,22 @@ public class LocalHostServer : MonoBehaviour
 				}
 
 				lobbyRoom.AddMember(newClient);
+				if (newClient == serverInfo.serverOwner)
+				{
+					//send server info to new user
+					TCPPacket serverInfoPacket = new TCPPacket();
+					UpdateServerInfoMessage serverInfoMessage = new UpdateServerInfoMessage(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, true);
+					serverInfoPacket.Write(serverInfoMessage);
+					SendTCPMessageToTargetUser(serverInfoPacket, newClient);
+				}
+				else
+				{
+					//send server info to new user
+					TCPPacket serverInfoPacket = new TCPPacket();
+					UpdateServerInfoMessage serverInfoMessage = new UpdateServerInfoMessage(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, false);
+					serverInfoPacket.Write(serverInfoMessage);
+					SendTCPMessageToTargetUser(serverInfoPacket, newClient);
+				}
 				connectedClients.Add(newClient);
 			}
 			catch (Exception e)
@@ -263,18 +279,18 @@ public class LocalHostServer : MonoBehaviour
 
 	public void AddRoomToMoveDictionary(Room originalRoom, Room newRoom)
     {
-		movePlayersFromXToY.Add(originalRoom, newRoom);
+		movePlayersFromRoomToRoom.Add(originalRoom, newRoom);
 	}
 
 	public void AddPlayerToMoveDictionary(MyClient client, Room newRoom)
     {
-		movePlayerToY.Add(client, newRoom);
+		movePlayerToRoom.Add(client, newRoom);
     }
 
 	//move players from room x to room y
 	void MovePlayersToDifferentRoom()
     {
-		foreach (KeyValuePair<Room, Room> entry in movePlayersFromXToY)
+		foreach (KeyValuePair<Room, Room> entry in movePlayersFromRoomToRoom)
 		{
 			foreach (MyClient client in entry.Key.GetMembers())
 			{
@@ -285,16 +301,15 @@ public class LocalHostServer : MonoBehaviour
                 }
 				entry.Value.AddMember(client);
 			}
-			//SetActiveRoom(newRoom);
 			entry.Key.ClearMembers();
 		}
 
-		movePlayersFromXToY.Clear();
+		movePlayersFromRoomToRoom.Clear();
 	}
 
 	void MovePlayerToDifferentRoom()
     {
-		foreach (KeyValuePair<MyClient, Room> entry in movePlayerToY)
+		foreach (KeyValuePair<MyClient, Room> entry in movePlayerToRoom)
 		{
 			foreach(Room room in activeRooms)
             {
@@ -309,7 +324,7 @@ public class LocalHostServer : MonoBehaviour
 			entry.Value.AddMember(entry.Key);
 		}
 
-		movePlayerToY.Clear();
+		movePlayerToRoom.Clear();
 	}
 
 
@@ -327,5 +342,11 @@ public class LocalHostServer : MonoBehaviour
 				Console.WriteLine("Error sending message to target users: " + e.Message);
 			}
 		}
+	}
+
+	//send TCP message to target user
+	void SendTCPMessageToTargetUser(TCPPacket outPacket, MyClient client)
+	{
+		NetworkUtils.Write(client.tcpClient.GetStream(), outPacket.GetBytes());
 	}
 }
