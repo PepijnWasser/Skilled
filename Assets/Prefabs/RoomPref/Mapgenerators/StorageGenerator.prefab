@@ -122,6 +122,7 @@ MonoBehaviour:
   - {fileID: 4806160391475138319, guid: cae4c5e9b0917a74b89bdba2a57b50ed, type: 3}
   - {fileID: 4345375341482280295, guid: 1b2f83698110b5c4ab78d0fdfb313d8f, type: 3}
   - {fileID: 6216671890211530366, guid: 90fd77560541cea43a03c8ca02956cbd, type: 3}
+  - {fileID: 6216671890211530366, guid: 90fd77560541cea43a03c8ca02956cbd, type: 3}
   allDoorways: []
   availableDoorways: []
   sectionPower: {fileID: 690708294541801209}
