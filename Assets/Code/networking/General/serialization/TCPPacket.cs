@@ -47,7 +47,7 @@ public class TCPPacket
 	public void Write(IPAddress pIP) { string ips = pIP.ToString(); writer.Write(ips); }
 	public void Write(Vector3 pVector) { writer.Write(pVector.x); writer.Write(pVector.y); writer.Write(pVector.z); }
 
-	public void Write(TwoWayLeverTask task) { writer.Write(task.taskName); writer.Write(task.targetPosition); }
+	public void Write(TwoWayLeverTask task) { writer.Write(task.taskName); writer.Write(task.GetTargetPosition()); }
 	public void Write(ThreeWayLeverTask task) { writer.Write(task.taskName); writer.Write(task.targetPosition); }
 	public void Write(KeypadTask task) { writer.Write(task.taskName); writer.Write(task.code); }
 
@@ -80,7 +80,7 @@ public class TCPPacket
 	{
 		GameObject tempO = new GameObject();
 		TwoWayLeverTask task = tempO.AddComponent<TwoWayLeverTask>();
-		task.taskName = reader.ReadString(); task.targetPosition = reader.ReadInt32();
+		task.taskName = reader.ReadString(); task.SetTargetPosition(reader.ReadInt32());
 		GameObject.Destroy(tempO);
 		return task;
 	}

@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject taskManagerPrefab;
 
     public GameObject energyManagerPrefab;
+    public GameObject itemSpawnerPrefab;
 
     Dictionary<int, PlayerPrefabManager> characterDictionary = new Dictionary<int, PlayerPrefabManager>();
 
@@ -106,7 +107,7 @@ public class GameManager : MonoBehaviour
         }
 
         GameObject energyManager = Instantiate(energyManagerPrefab);
-        //taskManager.GetComponent<EnergySpawner>().SpawnEnergyUsers(energyManager.transform);
+        GameObject itemManager = Instantiate(itemSpawnerPrefab);
     }
 
     //gets all positions a player can spawn

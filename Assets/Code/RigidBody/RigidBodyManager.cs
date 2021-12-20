@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RigidBodyManager : MonoBehaviour
+public class RigidbodyManager : MonoBehaviour
 {
     int id = 0;
 

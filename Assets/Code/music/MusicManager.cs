@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    public Animator musicAnimator;
+    [SerializeField]
+    private Animator musicAnimator;
 
-    int intensity = 0;
+    [SerializeField]
+    private List<AudioClip> calmClips;
+    [SerializeField]
+    private List<AudioClip> mediumClips;
+    [SerializeField]
+    private List<AudioClip> fastClips;
 
-    public List<AudioClip> calmClips;
-    public List<AudioClip> mediumClips;
-    public List<AudioClip> fastClips;
+    [SerializeField]
+    private AudioSource musicPlayer;
 
-    public AudioSource musicPlayer;
+    private int intensity = 0;
 
+    //if we are the owner of the room, we are the ones that play audio
     private void Awake()
     {
         if (ServerConnectionData.isOwner)
@@ -29,6 +35,7 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    //unsubscribe from events when destroyed
     private void OnDestroy()
     {
         if (ServerConnectionData.isOwner)
@@ -40,9 +47,11 @@ public class MusicManager : MonoBehaviour
 
     void SetNextIntensity()
     {
-        StartCoroutine("NextIntensity");
+        StartCoroutine(NextIntensity());
     }
 
+    //the music intensity has 3 values which it loops through
+    //the old music fades out, and the new music fades in
     IEnumerator NextIntensity()
     {
         musicAnimator.SetTrigger("FadeOut");

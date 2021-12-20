@@ -14,26 +14,27 @@ public class ShipHealthSlider : MonoBehaviour
     private void Awake()
     {
         stationHealth = GameObject.FindObjectOfType<StationHealth>();
-        UpdateSlider(GameObject.FindObjectOfType<StationHealth>().stationHealth);
+        UpdateSlider(GameObject.FindObjectOfType<StationHealth>().GetStationHealth());
     }
 
     void Start()
     {
-        HealthSlider.maxValue = stationHealth.stationHealth;
+        HealthSlider.maxValue = stationHealth.GetStationHealth();
 
-        StationHealth.updateStationHealth += UpdateSlider;
+        StationHealth.stationTookDamage += UpdateSlider;
         GameState.stationHealthUpdated += UpdateSlider;
     }
 
     private void OnDestroy()
     {
-        StationHealth.updateStationHealth -= UpdateSlider;
+        StationHealth.stationTookDamage -= UpdateSlider;
         GameState.stationHealthUpdated -= UpdateSlider;
     }
 
 
     void UpdateSlider(int newHealth)
     {
+        Debug.Log("removing health");
         if (newHealth > 0)
         {
             HealthText.text = newHealth.ToString();

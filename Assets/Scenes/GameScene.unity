@@ -1562,6 +1562,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 5732217132210592382, guid: 7c6d176fc54b02c438b5b9d0e2c955d5, type: 3}
   taskManagerPrefab: {fileID: 5190529441526039828, guid: 1e392aa78cb36774db62e9446859ef59, type: 3}
   energyManagerPrefab: {fileID: 7547029871630555756, guid: 894be065bea73e74b9914794a6747cfd, type: 3}
+  itemSpawnerPrefab: {fileID: 7486657939579241682, guid: d2b268d1e2591eb45966812c9457849c, type: 3}
 --- !u!4 &1388254687
 Transform:
   m_ObjectHideFlags: 0
@@ -1684,7 +1685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c980c35a4aff194d8e185cd257046d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stationHealth: 70
+  startHealth: 14
 --- !u!4 &1605409415
 Transform:
   m_ObjectHideFlags: 0

@@ -7,14 +7,16 @@ public class TwoWayLeverTask : Task
     public delegate void Damage(int amount);
     public static event Damage taskDealDamage;
 
-    public int targetPosition = 0;
+    [SerializeField]
+    private int targetPosition = 0;
 
-    public float validationTime;
-    float secondCounterValidate = 0;
+    [SerializeField]
+    private float validationTime;
+    private float secondCounterValidate = 0;
 
     public TwoWayLever lever;
 
-    bool completed = false;
+    private bool completed = false;
 
     private void Start()
     {
@@ -56,19 +58,19 @@ public class TwoWayLeverTask : Task
     //test damage
     public override void TestDamage()
     {
-        secondCounter += Time.deltaTime;
+        secondCounterValidate += Time.deltaTime;
         if (dealingDamage)
         {
 
-            if (secondCounter > DamageRate)
+            if (secondCounterValidate > DamageRate)
             {
-                secondCounter = 0;
+                secondCounterValidate = 0;
                 taskDealDamage?.Invoke(damageAmount);
             }
         }
         else
         {
-            if (secondCounter > timeTillDamage)
+            if (secondCounterValidate > timeTillDamage)
             {
                 dealingDamage = true;
             }
@@ -91,9 +93,18 @@ public class TwoWayLeverTask : Task
             secondCounterValidate = 0;
         }
     }
-
     public override int GetID()
     {
         return lever.leverID;
+    }
+
+    public int GetTargetPosition()
+    {
+        return targetPosition;
+    }
+
+    public void SetTargetPosition(int _position)
+    {
+        targetPosition = _position;
     }
 }
