@@ -44,8 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smallObjects:
-  - {fileID: 5127009482663478745, guid: 36a0ddbeab0a0d74fb2bcd51a994a085, type: 3}
+  - {fileID: 7909874555351340398, guid: 122c2167854098b4dbaf0415be6d8eaf, type: 3}
+  - {fileID: 6828697177110915237, guid: dc6c76d54e498fb4db39b15fb70f9407, type: 3}
+  - {fileID: 7304934546089686528, guid: 06f6986481901404d903b4f246ea1d43, type: 3}
   mediumObjects:
-  - {fileID: 5127009482663478745, guid: 36a0ddbeab0a0d74fb2bcd51a994a085, type: 3}
+  - {fileID: 9074848101207591633, guid: 079a1dea0d125eb4dbf4afd7f9ab8000, type: 3}
+  - {fileID: 2003666538334745688, guid: f036786a6c25fd74e8a3aac64e2687d4, type: 3}
+  - {fileID: 387502933836369424, guid: a699f1d8ef6066c4093bdc310b33d6fc, type: 3}
   bigObjects:
-  - {fileID: 5127009482663478745, guid: 36a0ddbeab0a0d74fb2bcd51a994a085, type: 3}
+  - {fileID: 3503078835476196689, guid: e80d680713b887f4197d63f7bfe157e5, type: 3}
