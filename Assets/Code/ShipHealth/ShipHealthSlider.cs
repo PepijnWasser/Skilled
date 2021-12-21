@@ -34,7 +34,6 @@ public class ShipHealthSlider : MonoBehaviour
 
     void UpdateSlider(int newHealth)
     {
-        Debug.Log("removing health");
         if (newHealth > 0)
         {
             HealthText.text = newHealth.ToString();

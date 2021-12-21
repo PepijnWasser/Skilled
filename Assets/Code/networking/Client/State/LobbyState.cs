@@ -92,6 +92,10 @@ public class LobbyState : State
                 {
                     JoinRoomMessage message = tempOBJ as JoinRoomMessage;
                     HandleJoinRoomMessage(message);
+                }else if(tempOBJ is SwitchMuteResponse)
+                {
+                    SwitchMuteResponse message = tempOBJ as SwitchMuteResponse;
+                    HandleSwitchMuteResponse(message);
                 }
             }
             HandleHeartbeatStatus();
@@ -143,7 +147,7 @@ public class LobbyState : State
         lobbyView.RemovePlayer(message.playerID);
     }
 
-    //sets tje color of a player in the view
+    //sets the color of a player in the view
     void HandleUpdateColorMessage(UpdateColorRespons message)
     {
         lobbyView.UpdatePlayerColor(message.playerID, message.color.ToString());
@@ -185,6 +189,11 @@ public class LobbyState : State
         }
     }
 
+    void HandleSwitchMuteResponse(SwitchMuteResponse message)
+    {
+        lobbyView.UpdatePlayerMute(message.playerID, message.muted);
+    }
+
     //
     //Sending Messages to the server
     //
@@ -197,6 +206,12 @@ public class LobbyState : State
     public void SendUpdateColorRequest(int sideToChangeTo)
     {
         UpdateColorRequest request = new UpdateColorRequest(sideToChangeTo);
+        tcpClientNetwork.SendObjectThroughTCP(request);
+    }
+
+    public void SendUpdateMuteRequest()
+    {
+        SwitchMuteRequest request = new SwitchMuteRequest();
         tcpClientNetwork.SendObjectThroughTCP(request);
     }
 

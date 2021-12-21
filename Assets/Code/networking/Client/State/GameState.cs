@@ -298,6 +298,10 @@ public class GameState : State
                 {
                     KeypadCodeOutcomeResponse message = tempOBJ as KeypadCodeOutcomeResponse;
                     HandleKeypadCodeOutcomeResponse(message);
+                }else if(tempOBJ is PlayerStatusMessage)
+                {
+                    PlayerStatusMessage message = tempOBJ as PlayerStatusMessage;
+                    HandlePlayerStatus(message);
                 }
             }
             HandleHeartbeatStatus();
@@ -532,6 +536,16 @@ public class GameState : State
     void HandleKeypadCodeOutcomeResponse(KeypadCodeOutcomeResponse message)
     {
         setKeypadOutcomeMessage?.Invoke(message.id, message.correct);
+    }
+
+    void HandlePlayerStatus(PlayerStatusMessage message)
+    {
+        Debug.Log("muted" + message.muted);
+        if (message.muted)
+        {
+            gameManager.DeleteMusicPlayer();
+
+        }
     }
 
 

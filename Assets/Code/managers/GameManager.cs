@@ -91,6 +91,12 @@ public class GameManager : MonoBehaviour
         characterDictionary.Remove(playerID);
     }
 
+    public void DeleteMusicPlayer()
+    {
+        GameObject musicPlayer = GameObject.FindObjectOfType<MusicManager>().gameObject;
+        Destroy(musicPlayer);
+    }
+
 
     public void MakeWorldObjects(bool playerIsLeader, int maxErrors, int tasksOfTypeToSpawn)
     {

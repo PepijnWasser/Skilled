@@ -145,7 +145,7 @@ public class LocalHostServer : MonoBehaviour
 		{
 			try
 			{
-				MyClient newClient = new MyClient(listener.AcceptTcpClient(), timeOutTime, MyClient.colors.blue, newPlayerID, "TEMP");
+				MyClient newClient = new MyClient(listener.AcceptTcpClient(), timeOutTime, MyClient.colors.blue, newPlayerID, "TEMP", false);
 				newPlayerID += 1;
 
 				if(serverInfo.serverOwner == null)
