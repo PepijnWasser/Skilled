@@ -8,10 +8,12 @@ public class ItemSpawners : MonoBehaviour
     public List<GameObject> smallObjects;
     public List<GameObject> mediumObjects;
     public List<GameObject> bigObjects;
+    public List<GameManager> posters;
 
     List<SmallItemLocation> availibleSmallLocations;
     List<MediumItemLocation> availibleMediumLocations;
     List<BigItemLocation> availibleBigLocations;
+    List<PaperLocation> availiblePosterLocations;
 
     private void Start()
     {
@@ -49,6 +51,15 @@ public class ItemSpawners : MonoBehaviour
                 Instantiate(newObject, location.transform.position, location.transform.rotation);
             }
         }
+        foreach (PaperLocation location in availiblePosterLocations)
+        {
+            int random = Random.Range(1, 4);
+            if (random == 1)
+            {
+                GameObject newObject = Extensions.RandomListItem(bigObjects);
+                Instantiate(newObject, location.transform.position, location.transform.rotation);
+            }
+        }
     }
 
     void GetAvailibleLocations()
@@ -56,5 +67,6 @@ public class ItemSpawners : MonoBehaviour
         availibleSmallLocations = GameObject.FindObjectsOfType<SmallItemLocation>().ToList();
         availibleMediumLocations = GameObject.FindObjectsOfType<MediumItemLocation>().ToList();
         availibleBigLocations = GameObject.FindObjectsOfType<BigItemLocation>().ToList();
+        availiblePosterLocations = GameObject.FindObjectsOfType<PaperLocation>().ToList();
     }
 }

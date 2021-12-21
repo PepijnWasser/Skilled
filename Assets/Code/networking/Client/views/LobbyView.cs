@@ -45,6 +45,12 @@ public class LobbyView : MonoBehaviour
         lobbyPlayers[playerID].playerBar.GetComponent<PlayerBarManager>().SwitchColor(unityColor);
     }
 
+    //updates mute of a player
+    public void UpdatePlayerMute(int playerID, bool on)
+    {
+        lobbyPlayers[playerID].playerBar.GetComponent<PlayerBarManager>().SetMute(on);
+    }
+
     //updates name of a player
     public void UpdateName(int playerID, string name)
     {

@@ -102,6 +102,10 @@ public class LobbyRoom : Room
         {
 			JoinRoomRequest message = tempOBJ as JoinRoomRequest;
 			HandleJoinRoomRequest(message);
+        }else if(tempOBJ is SwitchMuteRequest)
+        {
+			SwitchMuteRequest message = tempOBJ as SwitchMuteRequest;
+			HandleSwitchMuteRequest(client, message);
         }
 	}
 
@@ -237,6 +241,22 @@ public class LobbyRoom : Room
 		TCPPacket outPacket = new TCPPacket();
 		ChatRespons chatMessage = new ChatRespons(message.chatMessage, client.playerName, time.Hour, time.Minute, time.Second);
 		outPacket.Write(chatMessage);
+		SendTCPMessageToAllUsers(outPacket);
+    }
+
+	void HandleSwitchMuteRequest(MyClient client, SwitchMuteRequest message)
+    {
+        if (client.muted)
+        {
+			client.muted = false;
+        }
+        else
+        {
+			client.muted = true;
+        }
+		TCPPacket outPacket = new TCPPacket();
+		SwitchMuteResponse response = new SwitchMuteResponse(client.playerID, client.muted);
+		outPacket.Write(response);
 		SendTCPMessageToAllUsers(outPacket);
     }
 

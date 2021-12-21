@@ -25,6 +25,14 @@ public class GameRoom : Room
         tasksOfTypeToSpawn = (int)Mathf.Ceil((float)roomsPerSector * amountOfSectors * (float)0.1);
         maxErrors = (int)Mathf.Ceil((float)tasksOfTypeToSpawn / (float)2);
     }
+    public override void AddMember(MyClient clientToAdd)
+    {
+        base.AddMember(clientToAdd);
+        TCPPacket outPacket = new TCPPacket();
+        PlayerStatusMessage message = new PlayerStatusMessage(clientToAdd.muted);
+        outPacket.Write(message);
+        SendTCPMessageToTargetUser(outPacket, clientToAdd);
+    }
 
     public override void RemoveMember(MyClient clientToRemove)
     {
