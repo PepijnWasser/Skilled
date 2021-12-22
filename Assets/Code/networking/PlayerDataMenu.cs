@@ -7,6 +7,7 @@ public class PlayerDataMenu
     public Color playerColor;
     public string playerName;
     public GameObject playerBar;
+    public bool muted;
 
     public PlayerDataMenu(string _playerColor, string PlayerName)
     {

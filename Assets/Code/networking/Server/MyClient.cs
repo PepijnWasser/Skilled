@@ -21,6 +21,8 @@ public class MyClient
     public int playerID;
     public string playerName;
 
+    public bool muted;
+
 
     public enum colors
     {
@@ -33,12 +35,13 @@ public class MyClient
     public colors playerColor;
 
 
-    public MyClient(TcpClient _TcpClient, float _heartbeat, colors _playerColor, int _playerID, string _playerName)
+    public MyClient(TcpClient _TcpClient, float _heartbeat, colors _playerColor, int _playerID, string _playerName, bool _muted)
     {
         heartbeat = _heartbeat;
         tcpClient = _TcpClient;
         playerColor = _playerColor;
         playerID = _playerID;
         playerName = _playerName;
+        muted = _muted;
     }
 }
