@@ -8,7 +8,7 @@ public class ItemSpawners : MonoBehaviour
     public List<GameObject> smallObjects;
     public List<GameObject> mediumObjects;
     public List<GameObject> bigObjects;
-    public List<GameManager> posters;
+    public List<GameObject> posters;
 
     List<SmallItemLocation> availibleSmallLocations;
     List<MediumItemLocation> availibleMediumLocations;
@@ -56,7 +56,7 @@ public class ItemSpawners : MonoBehaviour
             int random = Random.Range(1, 4);
             if (random == 1)
             {
-                GameObject newObject = Extensions.RandomListItem(bigObjects);
+                GameObject newObject = Extensions.RandomListItem(posters);
                 Instantiate(newObject, location.transform.position, location.transform.rotation);
             }
         }

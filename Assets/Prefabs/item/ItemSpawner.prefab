@@ -57,3 +57,8 @@ MonoBehaviour:
   - {fileID: 7909874555351340398, guid: 122c2167854098b4dbaf0415be6d8eaf, type: 3}
   bigObjects:
   - {fileID: 3503078835476196689, guid: e80d680713b887f4197d63f7bfe157e5, type: 3}
+  posters:
+  - {fileID: 66806063998215918, guid: 7d392fc90f88c12449e514fa3dbca850, type: 3}
+  - {fileID: 66806063998215918, guid: 6f905ed7da7bab64dac709ebae5ddb5f, type: 3}
+  - {fileID: 66806063998215918, guid: f8e0ac7825ab6714e8740a0cbb8e3b26, type: 3}
+  - {fileID: 66806063998215918, guid: 761b9c00acfaa264795678bb9ca6d15f, type: 3}
