@@ -540,7 +540,6 @@ public class GameState : State
 
     void HandlePlayerStatus(PlayerStatusMessage message)
     {
-        Debug.Log("muted" + message.muted);
         if (message.muted)
         {
             gameManager.DeleteMusicPlayer();

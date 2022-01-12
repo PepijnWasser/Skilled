@@ -11,12 +11,12 @@ public class EnergyText : MonoBehaviour
     {
         EnergyManager.energyChanged += SetEnergyText;
         SetEnergyText(GameObject.FindObjectOfType<EnergyManager>().availibleEnergy);
+        text = GetComponent<Text>();
     }
 
     private void OnDestroy()
     {
-        EnergyManager.energyChanged += SetEnergyText;
-
+        EnergyManager.energyChanged -= SetEnergyText;
     }
 
     void SetEnergyText(int amount)

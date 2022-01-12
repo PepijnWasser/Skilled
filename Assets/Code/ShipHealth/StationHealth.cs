@@ -46,7 +46,6 @@ public class StationHealth : MonoBehaviour
     //on certain values launch an event
     void TakeDamage(int amount)
     {
-        Debug.Log("taking damage");
         stationHealth -= amount;
         stationTookDamage?.Invoke(stationHealth);
 
