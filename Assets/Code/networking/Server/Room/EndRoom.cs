@@ -37,7 +37,7 @@ public class EndRoom : Room
         if(message.sceneJoined == SceneLoadedMessage.scenes.endScreen)
         {
             TCPPacket outPacket = new TCPPacket();
-            TaskscompletedMessage taskCompletedMessage = new TaskscompletedMessage(5);
+            TaskscompletedMessage taskCompletedMessage = new TaskscompletedMessage(server.serverInfo.finishedGamesTasksCompleted);
             outPacket.Write(taskCompletedMessage);
             SendTCPMessageToTargetUser(outPacket, myClient);
         }

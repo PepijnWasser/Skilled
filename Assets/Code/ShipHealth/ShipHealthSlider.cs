@@ -9,12 +9,11 @@ public class ShipHealthSlider : MonoBehaviour
     public Text HealthText;
     public Slider HealthSlider;
 
-    public StationHealth stationHealth;
+    StationHealth stationHealth;
 
     private void Awake()
     {
         stationHealth = GameObject.FindObjectOfType<StationHealth>();
-        UpdateSlider(GameObject.FindObjectOfType<StationHealth>().GetStationHealth());
     }
 
     void Start()
@@ -23,6 +22,8 @@ public class ShipHealthSlider : MonoBehaviour
 
         StationHealth.stationTookDamage += UpdateSlider;
         GameState.stationHealthUpdated += UpdateSlider;
+
+        UpdateSlider(GameObject.FindObjectOfType<StationHealth>().GetStationHealth());
     }
 
     private void OnDestroy()
