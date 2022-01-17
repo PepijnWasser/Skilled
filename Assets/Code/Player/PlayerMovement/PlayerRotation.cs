@@ -44,15 +44,20 @@ public class PlayerRotation : MonoBehaviour
 
         if(animator.GetInteger("MovementPlayer") == 0)
         {
-            if (lookTargetAxis.transform.localRotation.eulerAngles.y > 30 && lookTargetAxis.transform.localRotation.eulerAngles.y < 330)
+            if (lookTargetAxis.transform.localRotation.eulerAngles.y > 40 && lookTargetAxis.transform.localRotation.eulerAngles.y < 320)
             {
-                
+                if (lookTargetAxis.transform.localRotation.eulerAngles.y <= 160)
+                {
+                    animator.SetTrigger("PlayerTurnLeft");
+                }
+                else
+                {
+                    animator.SetTrigger("PlayerTurnRight");
+                }
                 transform.rotation = Quaternion.Euler(0, lookTargetAxis.transform.rotation.eulerAngles.y, 0);
                 lookTargetAxis.transform.localRotation = Quaternion.Euler(yRotation, 0, 0);
 
                 xRotation = 0F;
-
-                animator.SetTrigger("PlayerTurn");
             }
         }
         else
