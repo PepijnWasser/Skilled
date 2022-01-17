@@ -42,6 +42,8 @@ public class LobbyRoom : Room
 				SendTCPMessageToTargetUser(outpacket5, newClient);
 			}
 		}
+
+		SendServerInfo(newClient);
 	}
 
 	//removes the player bar from all users's screens and updates player count
@@ -102,7 +104,8 @@ public class LobbyRoom : Room
         {
 			JoinRoomRequest message = tempOBJ as JoinRoomRequest;
 			HandleJoinRoomRequest(message);
-        }else if(tempOBJ is SwitchMuteRequest)
+        }
+		else if(tempOBJ is SwitchMuteRequest)
         {
 			SwitchMuteRequest message = tempOBJ as SwitchMuteRequest;
 			HandleSwitchMuteRequest(client, message);
@@ -347,6 +350,16 @@ public class LobbyRoom : Room
 		UpdateServerInfoMessage serverInfoMessage2 = new UpdateServerInfoMessage(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, false);
 		serverInfoPacket2.Write(serverInfoMessage2);
 		SendTCPMessageToAllUsersExcept(serverInfoPacket, client);
+	}
+
+	void SendServerInfo(MyClient client)
+    {
+		//send server info to user
+		TCPPacket serverInfoPacket2 = new TCPPacket();
+		ServerInfo serverInfo = server.serverInfo;
+		UpdateServerInfoMessage serverInfoMessage2 = new UpdateServerInfoMessage(serverInfo.udpPort, serverInfo.tcpPort, serverInfo.ip, serverInfo.serverOwner.playerName, client == serverInfo.serverOwner);
+		serverInfoPacket2.Write(serverInfoMessage2);
+		SendTCPMessageToTargetUser(serverInfoPacket2, client);
 	}
 
 	//checks if a given name is already in use

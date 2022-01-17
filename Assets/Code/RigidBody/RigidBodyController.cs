@@ -20,6 +20,8 @@ public class RigidBodyController : MonoBehaviour
     private Vector3 oldPos;
     private Vector3 oldRot;
 
+    private bool playerMade = false;
+
     private void Awake()
     {
         gameState = GameObject.FindObjectOfType<GameState>();
@@ -28,6 +30,7 @@ public class RigidBodyController : MonoBehaviour
 
         GameState.rigidbodyUpdater += MoveObject;
         GameState.rigidbodyTouchedUpdate += SetLastTouched;
+        GameManager.playerMade += SetPlayerMade;
 
         updateTime = (float)1 / (float)updateFrequency;
     }
@@ -53,8 +56,15 @@ public class RigidBodyController : MonoBehaviour
     {      
         if (lastPlayerTouchedID == PlayerInfo.playerID)
         {
-            TestSend();
-        }      
+            if (playerMade)
+            {
+                TestSend();
+            }
+        }   
+        if(this.transform.position.y < -100)
+        {
+            this.transform.position = new Vector3(this.transform.position.x, 2, this.transform.position.z);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -85,11 +95,11 @@ public class RigidBodyController : MonoBehaviour
         if (secondCounter >= updateTime)
         {
             secondCounter = 0;
-            if (this.transform.position != oldPos || this.transform.rotation.eulerAngles != oldRot)
+            if (Vector3.Distance(this.transform.position, oldPos) > 0.001 || Vector3.Distance(this.transform.rotation.eulerAngles, oldRot) > 0.01)
             {
                 if (gameState != null)
                 {
-                    Debug.Log("sending position");
+                    Debug.Log("sending position", this.gameObject);
                     gameState.SendRigidBodyPosition(rbID, this.transform.position, this.transform.rotation.eulerAngles);
                     oldPos = this.transform.position;
                     oldRot = this.transform.rotation.eulerAngles;
@@ -127,5 +137,10 @@ public class RigidBodyController : MonoBehaviour
                 rb.isKinematic = true;
             }
         }
+    }
+
+    void SetPlayerMade(GameObject player, Camera cam)
+    {
+        playerMade = true;
     }
 }

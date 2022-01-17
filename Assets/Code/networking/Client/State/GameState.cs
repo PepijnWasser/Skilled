@@ -323,6 +323,10 @@ public class GameState : State
         {
             SendLeaveServerMessage();
             sceneManager.LoadScene("Main Menu");
+            InputManager.SetActiveActionMap(InputManager.mainMenu);
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+
             Debug.Log("Disconnected");
             Destroy(this.gameObject);
         }
