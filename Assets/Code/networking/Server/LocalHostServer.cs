@@ -219,19 +219,26 @@ public class LocalHostServer : MonoBehaviour
 		IPEndPoint RemoteIP = new IPEndPoint(IPAddress.Any, 60240);
 		byte[] received = client.EndReceive(res, ref RemoteIP);
 
-
-		UDPPacket packet = new UDPPacket(received);
-		var TempOBJ = packet.ReadObject();
-
-		foreach(MyClient connectedClient in connectedClients)
+        try
         {
-			if (connectedClient.endPoint.Address.ToString() == RemoteIP.Address.ToString() && connectedClient.sendPort.ToString() == RemoteIP.Port.ToString())
-            {
-				playerRoomDictionary[connectedClient].HandleUDPNetworkMessageFromUser(TempOBJ, connectedClient);
-				Debug.Log("received UDP message from: " + connectedClient.playerName);
-				break;
-            }
+			UDPPacket packet = new UDPPacket(received);
+			var TempOBJ = packet.ReadObject();
+
+			foreach (MyClient connectedClient in connectedClients)
+			{
+				if (connectedClient.endPoint.Address.ToString() == RemoteIP.Address.ToString() && connectedClient.sendPort.ToString() == RemoteIP.Port.ToString())
+				{
+					playerRoomDictionary[connectedClient].HandleUDPNetworkMessageFromUser(TempOBJ, connectedClient);
+					Debug.Log("received UDP message from: " + connectedClient.playerName);
+					break;
+				}
+			}
+		}
+		catch(Exception e)
+        {
+			Debug.Log(e.Message);
         }
+
 
 		client.BeginReceive(new AsyncCallback(recv), null);
 	}
