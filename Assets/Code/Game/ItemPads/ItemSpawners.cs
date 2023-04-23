@@ -30,7 +30,7 @@ public class ItemSpawners : MonoBehaviour
             if(random == 1)
             {
                 GameObject newObject = Extensions.RandomListItem(smallObjects);
-                Instantiate(newObject, location.transform.position, location.transform.rotation);
+                Instantiate(newObject, location.transform.position, location.transform.rotation, this.transform);
             }
         }
         foreach (MediumItemLocation location in availibleMediumLocations)
@@ -39,7 +39,7 @@ public class ItemSpawners : MonoBehaviour
             if (random == 1)
             {
                 GameObject newObject = Extensions.RandomListItem(mediumObjects);
-                Instantiate(newObject, location.transform.position, location.transform.rotation);
+                Instantiate(newObject, location.transform.position, location.transform.rotation, this.transform);
             }
         }
         foreach (BigItemLocation location in availibleBigLocations)
@@ -48,7 +48,7 @@ public class ItemSpawners : MonoBehaviour
             if (random == 1)
             {
                 GameObject newObject = Extensions.RandomListItem(bigObjects);
-                Instantiate(newObject, location.transform.position, location.transform.rotation);
+                Instantiate(newObject, location.transform.position, location.transform.rotation, this.transform);
             }
         }
         foreach (PaperLocation location in availiblePosterLocations)
@@ -57,7 +57,7 @@ public class ItemSpawners : MonoBehaviour
             if (random == 1)
             {
                 GameObject newObject = Extensions.RandomListItem(posters);
-                Instantiate(newObject, location.transform.position, location.transform.rotation);
+                Instantiate(newObject, location.transform.position, location.transform.rotation, this.transform);
             }
         }
     }

@@ -308,10 +308,13 @@ public class GameState : State
         }
         catch (Exception e)
         {
-            Debug.Log(e.Message +  e.StackTrace);
-            if (tcpClientNetwork.tcpClient.Connected)
+            if(tcpClientNetwork != null)
             {
-                tcpClientNetwork.tcpClient.Close();
+                Debug.Log(e.Message + e.StackTrace);
+                if (tcpClientNetwork.tcpClient.Connected)
+                {
+                    tcpClientNetwork.tcpClient.Close();
+                }
             }
         }
     }

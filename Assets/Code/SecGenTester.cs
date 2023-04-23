@@ -10,7 +10,7 @@ using Random = UnityEngine.Random;
 
 public class SecGenTester : MonoBehaviour
 {
-	public List<BuildingRoom> roomPrefabs = new List<BuildingRoom>();
+	public List<SpawnableRoom> roomPrefabs = new List<SpawnableRoom>();
 
 	public Vector2 minMaxRooms = new Vector2(3, 10);
 	public List<Doorway> allDoorways = new List<Doorway>();
@@ -95,9 +95,9 @@ public class SecGenTester : MonoBehaviour
 
 	bool TestRooms(Doorway doorwayToFitOn)
 	{
-		List<BuildingRoom> roomsToCheck = roomPrefabs;
-		List<BuildingRoom> roomsChecked = new List<BuildingRoom>();
-		BuildingRoom roomToCheck = Extensions.RandomListItem(roomsToCheck);
+		List<SpawnableRoom> roomsToCheck = roomPrefabs;
+		List<SpawnableRoom> roomsChecked = new List<SpawnableRoom>();
+		SpawnableRoom roomToCheck = Extensions.RandomListItem(roomsToCheck);
 
 		while (roomsChecked.Count < roomsToCheck.Count)
 		{
@@ -108,7 +108,7 @@ public class SecGenTester : MonoBehaviour
 			{
 				AddDoorwaysToLists(roomToCheck);
 				roomToCheck.GetComponentInChildren<Renderer>().material.color = roomColor;
-				roomToCheck.GetComponent<BuildingRoom>().generatedFrom = doorwayToFitOn;
+				roomToCheck.GetComponent<SpawnableRoom>().generatedFrom = doorwayToFitOn;
 				return true;
 			}
 			else
@@ -120,7 +120,7 @@ public class SecGenTester : MonoBehaviour
 		return false;
 	}
 
-	bool TestDoors(Doorway doorwayToFitOn, BuildingRoom buildingToTest)
+	bool TestDoors(Doorway doorwayToFitOn, SpawnableRoom buildingToTest)
 	{
 		List<Doorway> doorwaysOfRoom = buildingToTest.doorways;
 		List<Doorway> doorwaysOfRoomChecked = new List<Doorway>();
@@ -138,7 +138,7 @@ public class SecGenTester : MonoBehaviour
 		return false;
 	}
 
-	bool TestDoor(Doorway doorwayToFitOn, BuildingRoom room, Doorway doorwayToTest)
+	bool TestDoor(Doorway doorwayToFitOn, SpawnableRoom room, Doorway doorwayToTest)
 	{
 		PositionRoomAtDoorway(room, doorwayToTest, doorwayToFitOn);
 		if (!CheckRoomOverlap(room))
@@ -151,7 +151,7 @@ public class SecGenTester : MonoBehaviour
 		}
 	}
 
-	void PositionRoomAtDoorway(BuildingRoom room, Doorway roomDoorway, Doorway targetDoorway)
+	void PositionRoomAtDoorway(SpawnableRoom room, Doorway roomDoorway, Doorway targetDoorway)
 	{
 		// Reset room position and rotation
 		room.transform.position = Vector3.zero;
@@ -180,7 +180,7 @@ public class SecGenTester : MonoBehaviour
 	}
 
 
-	bool CheckRoomOverlap(BuildingRoom room)
+	bool CheckRoomOverlap(SpawnableRoom room)
 	{
 		Bounds[] bounds = room.RoomBounds;
 		for (int i = 0; i < bounds.Count(); i++)
@@ -234,7 +234,7 @@ public class SecGenTester : MonoBehaviour
 		}
 	}
 
-	void AddDoorwaysToLists(BuildingRoom room)
+	void AddDoorwaysToLists(SpawnableRoom room)
 	{
 		foreach (Doorway doorway in room.doorways)
 		{

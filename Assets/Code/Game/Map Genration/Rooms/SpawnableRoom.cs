@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingRoom : MonoBehaviour
+public class SpawnableRoom : MonoBehaviour
 {
     public List<Doorway> doorways;
     public MeshCollider[] meshColliders;
