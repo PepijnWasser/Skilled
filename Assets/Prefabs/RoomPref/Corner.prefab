@@ -336,7 +336,7 @@ MonoBehaviour:
   - {fileID: 1991730318339355200}
   - {fileID: 1394063176787073492}
   meshColliders:
-  - {fileID: 0}
+  - {fileID: 901271927053264439}
   generatedFrom: {fileID: 0}
   sectionId: 0
   mapIcons: []
