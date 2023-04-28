@@ -1,13 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MyBox;
 
 public class SpawnableRoom : MonoBehaviour
 {
     public List<Doorway> doorways;
     public MeshCollider[] meshColliders;
+    [ReadOnly]
     public Doorway generatedFrom;
-    public SwitchableRoom switchableRoom;
+    [ReadOnly]
+    public int sectionId;
+    [ReadOnly]
     public List<GameObject> mapIcons;
 
     public Bounds[] RoomBounds

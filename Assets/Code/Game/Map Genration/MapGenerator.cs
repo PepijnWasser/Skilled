@@ -27,6 +27,7 @@ public class MapGenerator : MonoBehaviour
     List<Doorway> doorsWaysRemoved = new List<Doorway>();
 
     bool generating;
+    int newSectionID = 0;
 
     public delegate void Completed();
     public static event Completed onCompletion;
@@ -72,6 +73,7 @@ public class MapGenerator : MonoBehaviour
 
     void GenerateSection()
     {
+        newSectionID += 1;
         UpdateAvailibleDoorList();
         SectionGenerator sectionGenerator = Instantiate(GetSectionGenerator(), this.transform);
 
@@ -80,7 +82,7 @@ public class MapGenerator : MonoBehaviour
         sectionGenerator.transform.position = startDoor.transform.position;
 
         sectionGenerator.startdoor = startDoor;
-        sectionGenerator.Initialize(LayerMask.GetMask("Room"), roomsPerSector);
+        sectionGenerator.Initialize(LayerMask.GetMask("Room"), roomsPerSector, newSectionID);
 
         sectionGenerator.StartGeneration();
         lastSectionGenerated = sectionGenerator;

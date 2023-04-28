@@ -24,19 +24,17 @@ public class SectionGenerator : MonoBehaviour
 	LayerMask roomLayerMask;
 
 	int roomsToSpawn = 0;
+	int sectionID;
 
 	public delegate void Completed(bool succeeded);
 	public static event Completed OnCompletion;
 
-    private void Update()
-    {
 
-    }
-
-    public void Initialize(LayerMask mask, int _roomsToSpawn)
+    public void Initialize(LayerMask mask, int _roomsToSpawn, int _newSectionID)
 	{
 		roomLayerMask = mask;
 		roomsToSpawn = _roomsToSpawn;
+		sectionID = _newSectionID;
 		AddDoorwayToLists(startdoor);
 	}
 
@@ -112,8 +110,7 @@ public class SectionGenerator : MonoBehaviour
 
 				}
 				roomToCheck.GetComponent<SpawnableRoom>().generatedFrom = doorwayToFitOn;
-
-				sectionPower.AddRoom(roomToCheck.switchableRoom);
+				roomToCheck.sectionId = sectionID;
 
 				return true;
             }
