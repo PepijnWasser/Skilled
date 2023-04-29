@@ -149,8 +149,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629785011480315531}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7, z: 0}
-  m_LocalScale: {x: 3.4157758, y: 3.4157758, z: 3.4157758}
+  m_LocalPosition: {x: 0, y: 11.43, z: 0}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.55}
   m_Children: []
   m_Father: {fileID: 8031521505666696215}
   m_RootOrder: 0
@@ -182,7 +182,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f4c082416d386864d846c9ea85d7b523, type: 2}
+  - {fileID: 2100000, guid: 05f30c90030c13f44b133c762ff05fe2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2053,6 +2053,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6807480402040861140}
     m_Modifications:
+    - target: {fileID: 303854553248267361, guid: 6fe0997ae94c30a40b792c00481d89eb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00000071525574
+      objectReference: {fileID: 0}
     - target: {fileID: 303854553248267366, guid: 6fe0997ae94c30a40b792c00481d89eb, type: 3}
       propertyPath: m_Lens.FarClipPlane
       value: 90
@@ -3277,7 +3281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3625049173759891392, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00000035762793
+      value: 0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 3625049173759891392, guid: aa5f3ead82fe3334fbfadd4d6f49e390, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4339,7 +4343,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1428435694618391853, guid: 83e54fbc43c037f44b4755c53804188b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000023841858
+      value: -0.00000023841858
+      objectReference: {fileID: 0}
+    - target: {fileID: 1428435694618391853, guid: 83e54fbc43c037f44b4755c53804188b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.00000011920929
       objectReference: {fileID: 0}
     - target: {fileID: 1428435694740893555, guid: 83e54fbc43c037f44b4755c53804188b, type: 3}
       propertyPath: m_CullingMask.m_Bits

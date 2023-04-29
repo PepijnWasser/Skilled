@@ -5,6 +5,7 @@ using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject managersParent;
     public GameObject playerPrefab;
     public GameObject taskManagerPrefab;
 
@@ -31,38 +32,38 @@ public class GameManager : MonoBehaviour
         availiblePlayerSpawnLocations.Remove(newlocation);
 
         GameObject newPlayer = Instantiate(playerPrefab, newlocation.transform.position + new Vector3(0, 0, 0), newlocation.transform.rotation);
-        PlayerPrefabManager manager = newPlayer.GetComponent<PlayerPrefabManager>();
+        PlayerPrefabManager playerPrefabManager = newPlayer.GetComponent<PlayerPrefabManager>();
 
-        characterDictionary.Add(playerID, manager);
+        characterDictionary.Add(playerID, playerPrefabManager);
 
-        manager.player.name = _name + " " + playerID;
-        manager.name = _name + " " + playerID;
-        manager.iconText.text = _name;
+        playerPrefabManager.player.name = _name + " " + playerID;
+        playerPrefabManager.name = _name + " " + playerID;
+        playerPrefabManager.iconText.text = _name;
 
         System.Drawing.Color c = System.Drawing.Color.FromName(color);
         Color unityColor = new Color32(c.R, c.G, c.B, c.A);
-        manager.characterRenderer.material.color = unityColor;
+        playerPrefabManager.characterRenderer.material.color = unityColor;
 
         if (playerControlled)
         {
-            manager.player.name += " controlled";
-            manager.name += " controlled";
+            playerPrefabManager.player.name += " controlled";
+            playerPrefabManager.name += " controlled";
 
-            manager.playerRotationScript.sensitivity = PlayerInfo.sensitivity;
+            playerPrefabManager.playerRotationScript.sensitivity = PlayerInfo.sensitivity;
 
-            playerCharacter = manager.player;
+            playerCharacter = playerPrefabManager.player;
 
-            Destroy(manager.playerName.transform.parent.gameObject);
+            Destroy(playerPrefabManager.playerName.transform.parent.gameObject);
 
-            playerMade?.Invoke(manager.player, manager.playerCam);
+            playerMade?.Invoke(playerPrefabManager.player, playerPrefabManager.playerCam);
         }
         else
         {
-            manager.DisablePlayerActivity();
-            manager.player.GetComponent<Rigidbody>().useGravity = false;
-            manager.player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+            playerPrefabManager.DisablePlayerActivity();
+            playerPrefabManager.player.GetComponent<Rigidbody>().useGravity = false;
+            playerPrefabManager.player.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
 
-            manager.playerName.text = _name;
+            playerPrefabManager.playerName.text = _name;
         }
     }
 
@@ -100,7 +101,7 @@ public class GameManager : MonoBehaviour
 
     public void MakeWorldObjects(bool playerIsLeader, int maxErrors, int tasksOfTypeToSpawn)
     {
-        GameObject taskManager = Instantiate(taskManagerPrefab);
+        GameObject taskManager = Instantiate(taskManagerPrefab, managersParent.transform);
         taskManager.GetComponent<TaskSpawner>().tasksOfTypeToSpawn = tasksOfTypeToSpawn;
 
         if (!playerIsLeader)
@@ -112,8 +113,8 @@ public class GameManager : MonoBehaviour
             taskManager.GetComponent<TaskManager>().maxErrors = maxErrors;
         }
 
-        GameObject energyManager = Instantiate(energyManagerPrefab);
-        GameObject itemManager = Instantiate(itemSpawnerPrefab);
+        GameObject energyManager = Instantiate(energyManagerPrefab, managersParent.transform);
+        GameObject itemManager = Instantiate(itemSpawnerPrefab, managersParent.transform);
     }
 
     //gets all positions a player can spawn

@@ -1135,7 +1135,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 6843643121014818256}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: VerticalLayoutGroupContentSizeFitter, Assembly-CSharp
         m_MethodName: SetProperties
         m_Mode: 1
@@ -1788,7 +1788,6 @@ GameObject:
   - component: {fileID: 806063362070458292}
   - component: {fileID: 1995928799647172384}
   - component: {fileID: 7861868139853783667}
-  - component: {fileID: 6843643121014818256}
   m_Layer: 5
   m_Name: content
   m_TagString: Untagged
@@ -1895,20 +1894,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 1
   m_VerticalFit: 1
---- !u!114 &6843643121014818256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022355274230374635}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37098ef66f1e70144bd0359a5e40e413, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  children: []
-  parent: {fileID: 0}
 --- !u!1 &2143347357308468792
 GameObject:
   m_ObjectHideFlags: 0
@@ -2726,7 +2711,6 @@ GameObject:
   - component: {fileID: 2001289426364821957}
   - component: {fileID: 8218041214763191433}
   - component: {fileID: 3496485241075596097}
-  - component: {fileID: 2625571053782202486}
   m_Layer: 5
   m_Name: content
   m_TagString: Untagged
@@ -2833,20 +2817,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 1
   m_VerticalFit: 1
---- !u!114 &2625571053782202486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3287212274799039396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37098ef66f1e70144bd0359a5e40e413, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  children: []
-  parent: {fileID: 0}
 --- !u!1 &3777385752723562044
 GameObject:
   m_ObjectHideFlags: 0
@@ -3506,7 +3476,6 @@ GameObject:
   - component: {fileID: 5246478323608462268}
   - component: {fileID: 7903558313344508243}
   - component: {fileID: 8206635721151704054}
-  - component: {fileID: 2728686366388512410}
   m_Layer: 5
   m_Name: Interacting
   m_TagString: Untagged
@@ -3630,20 +3599,6 @@ MonoBehaviour:
   closedSprite: {fileID: 21300000, guid: bbf9248ff77cf3243820dc78de1f535f, type: 3}
   content: {fileID: 3287212274799039396}
   children: []
---- !u!114 &2728686366388512410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4519623647532309499}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37098ef66f1e70144bd0359a5e40e413, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  children: []
-  parent: {fileID: 0}
 --- !u!1 &4550248510391667061
 GameObject:
   m_ObjectHideFlags: 0
@@ -3736,7 +3691,6 @@ GameObject:
   - component: {fileID: 5172470343880252842}
   - component: {fileID: 8429547239072387125}
   - component: {fileID: 7491685847173809420}
-  - component: {fileID: 8352115854779159086}
   m_Layer: 5
   m_Name: content
   m_TagString: Untagged
@@ -3845,20 +3799,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 1
   m_VerticalFit: 1
---- !u!114 &8352115854779159086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4673036712303205910}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37098ef66f1e70144bd0359a5e40e413, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  children: []
-  parent: {fileID: 0}
 --- !u!1 &4835348264399755338
 GameObject:
   m_ObjectHideFlags: 0
@@ -4104,7 +4044,6 @@ GameObject:
   - component: {fileID: 5077061484887940577}
   - component: {fileID: 7542791186517442993}
   - component: {fileID: 796042771790460731}
-  - component: {fileID: 7907287297434405800}
   m_Layer: 5
   m_Name: Sound
   m_TagString: Untagged
@@ -4228,20 +4167,6 @@ MonoBehaviour:
   closedSprite: {fileID: 21300000, guid: bbf9248ff77cf3243820dc78de1f535f, type: 3}
   content: {fileID: 2022355274230374635}
   children: []
---- !u!114 &7907287297434405800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5034925642154912500}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37098ef66f1e70144bd0359a5e40e413, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  children: []
-  parent: {fileID: 0}
 --- !u!1 &5062903692094261229
 GameObject:
   m_ObjectHideFlags: 0
@@ -4374,7 +4299,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 8352115854779159086}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: VerticalLayoutGroupContentSizeFitter, Assembly-CSharp
         m_MethodName: SetProperties
         m_Mode: 1
@@ -4945,7 +4870,6 @@ GameObject:
   - component: {fileID: 3144150869028319707}
   - component: {fileID: 6569000733810725946}
   - component: {fileID: 4444531676324228485}
-  - component: {fileID: 8807624547077753063}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -5039,20 +4963,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &8807624547077753063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5564752527225913063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37098ef66f1e70144bd0359a5e40e413, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  children: []
-  parent: {fileID: 0}
 --- !u!1 &5574128459259138460
 GameObject:
   m_ObjectHideFlags: 0
@@ -5067,7 +4977,6 @@ GameObject:
   - component: {fileID: 6689489575446183954}
   - component: {fileID: 194496485155238206}
   - component: {fileID: 2423019427972245987}
-  - component: {fileID: 1579746110335927733}
   m_Layer: 5
   m_Name: Movement
   m_TagString: Untagged
@@ -5191,20 +5100,6 @@ MonoBehaviour:
   closedSprite: {fileID: 21300000, guid: bbf9248ff77cf3243820dc78de1f535f, type: 3}
   content: {fileID: 4673036712303205910}
   children: []
---- !u!114 &1579746110335927733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5574128459259138460}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37098ef66f1e70144bd0359a5e40e413, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  children: []
-  parent: {fileID: 0}
 --- !u!1 &5751640686332357552
 GameObject:
   m_ObjectHideFlags: 0
@@ -6424,7 +6319,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 2625571053782202486}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: VerticalLayoutGroupContentSizeFitter, Assembly-CSharp
         m_MethodName: SetProperties
         m_Mode: 1

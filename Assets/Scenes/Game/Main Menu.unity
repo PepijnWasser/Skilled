@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.29571208, g: 0.150058, b: 0.3602642, a: 1}
+  m_IndirectSpecularColor: {r: 0.2957707, g: 0.15004498, b: 0.36012337, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -279,7 +279,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 40249981}
-  - component: {fileID: 40249983}
   - component: {fileID: 40249982}
   m_Layer: 12
   m_Name: hallway (6)
@@ -316,26 +315,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &40249983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 40249980}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 40249982}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &42952645
 GameObject:
   m_ObjectHideFlags: 0
@@ -846,7 +825,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 118534779}
-  - component: {fileID: 118534781}
   - component: {fileID: 118534780}
   m_Layer: 12
   m_Name: hallway (11)
@@ -884,26 +862,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &118534781
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 118534778}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 118534780}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!4 &122627667 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6291121790558342556, guid: 188c21035c3f53048965ffecbf0896ee, type: 3}
@@ -1214,7 +1172,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 168519796}
-  - component: {fileID: 168519798}
   - component: {fileID: 168519797}
   m_Layer: 12
   m_Name: Hallway Window (1)
@@ -1252,26 +1209,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 34894454983237412, guid: 5f03619cae36f724ba3f97df7a9e1145, type: 3}
---- !u!114 &168519798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 168519795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 168519797}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!4 &171112232 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8269069634579788736, guid: 6ce227bbb23a6b94eb4670fed569e2ec, type: 3}
@@ -1469,7 +1406,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 238977353}
-  - component: {fileID: 238977355}
   - component: {fileID: 238977354}
   m_Layer: 12
   m_Name: hallway (7)
@@ -1507,26 +1443,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &238977355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 238977352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 238977354}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &242838857
 GameObject:
   m_ObjectHideFlags: 0
@@ -1823,7 +1739,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 301630844}
-  - component: {fileID: 301630846}
   - component: {fileID: 301630845}
   m_Layer: 12
   m_Name: hallway (7)
@@ -1861,26 +1776,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &301630846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 301630843}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 301630845}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &301671760
 GameObject:
   m_ObjectHideFlags: 0
@@ -2138,7 +2033,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 324877217}
-  - component: {fileID: 324877219}
   - component: {fileID: 324877218}
   m_Layer: 12
   m_Name: hallway (10)
@@ -2176,26 +2070,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &324877219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324877216}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 324877218}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &330418965
 GameObject:
   m_ObjectHideFlags: 0
@@ -2205,7 +2079,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 330418966}
-  - component: {fileID: 330418968}
   - component: {fileID: 330418967}
   m_Layer: 12
   m_Name: hallway (4)
@@ -2242,26 +2115,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &330418968
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330418965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 330418967}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1001 &343186861
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2356,7 +2209,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 348364671}
-  - component: {fileID: 348364673}
   - component: {fileID: 348364672}
   m_Layer: 12
   m_Name: hallway (4)
@@ -2394,26 +2246,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &348364673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 348364670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 348364672}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &353547745
 GameObject:
   m_ObjectHideFlags: 0
@@ -2738,7 +2570,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 399616278}
-  - component: {fileID: 399616280}
   - component: {fileID: 399616279}
   m_Layer: 12
   m_Name: hallway (11)
@@ -2776,26 +2607,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &399616280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 399616277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 399616279}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &402100926
 GameObject:
   m_ObjectHideFlags: 0
@@ -3064,7 +2875,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 407067682}
-  - component: {fileID: 407067684}
   - component: {fileID: 407067683}
   m_Layer: 12
   m_Name: Corner
@@ -3102,26 +2912,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5498571671143409992, guid: 6ccdc5ab9c75abe4ab537d3c428353ca, type: 3}
---- !u!114 &407067684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 407067681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 407067683}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &408679976
 GameObject:
   m_ObjectHideFlags: 0
@@ -3374,10 +3164,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3898237990512589112, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
+      propertyPath: confirmButton
+      value: 
+      objectReference: {fileID: 717329491}
     - target: {fileID: 4148054395141447650, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: menuSoundFX
       value: 
       objectReference: {fileID: 1345980974}
+    - target: {fileID: 6427796210616196450, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
+      propertyPath: confirmButton
+      value: 
+      objectReference: {fileID: 717329491}
+    - target: {fileID: 7449986584583033955, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
+      propertyPath: confirmButton
+      value: 
+      objectReference: {fileID: 717329491}
+    - target: {fileID: 8217218951441186897, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
+      propertyPath: confirmButton
+      value: 
+      objectReference: {fileID: 717329491}
     - target: {fileID: 8217218951441186902, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4035,7 +3841,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 487014207}
-  - component: {fileID: 487014209}
   - component: {fileID: 487014208}
   m_Layer: 12
   m_Name: hallway (8)
@@ -4073,26 +3878,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &487014209
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 487014206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 487014208}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &500484546
 GameObject:
   m_ObjectHideFlags: 0
@@ -4200,7 +3985,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 503857805}
-  - component: {fileID: 503857807}
   - component: {fileID: 503857806}
   m_Layer: 12
   m_Name: hallway (3)
@@ -4237,26 +4021,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &503857807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 503857804}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 503857806}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &510176283
 GameObject:
   m_ObjectHideFlags: 0
@@ -5183,7 +4947,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 610400992}
-  - component: {fileID: 610400994}
   - component: {fileID: 610400993}
   m_Layer: 12
   m_Name: Corner
@@ -5221,26 +4984,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 5498571671143409992, guid: 6ccdc5ab9c75abe4ab537d3c428353ca, type: 3}
---- !u!114 &610400994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 610400991}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 610400993}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &610443919
 GameObject:
   m_ObjectHideFlags: 0
@@ -5250,7 +4993,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 610443920}
-  - component: {fileID: 610443922}
   - component: {fileID: 610443921}
   m_Layer: 12
   m_Name: hallway (6)
@@ -5289,26 +5031,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &610443922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 610443919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 610443921}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &611074577
 GameObject:
   m_ObjectHideFlags: 0
@@ -5907,7 +5629,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 698944425}
-  - component: {fileID: 698944427}
   - component: {fileID: 698944426}
   m_Layer: 12
   m_Name: Hallway Window (1)
@@ -5946,26 +5667,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 34894454983237412, guid: 5f03619cae36f724ba3f97df7a9e1145, type: 3}
---- !u!114 &698944427
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 698944424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 698944426}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1001 &702802547
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6056,6 +5757,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6291121790558342556, guid: 188c21035c3f53048965ffecbf0896ee, type: 3}
   m_PrefabInstance: {fileID: 702802547}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &717329491 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8217218952778183217, guid: e6b86d0804e514145826d204c21cb2be, type: 3}
+  m_PrefabInstance: {fileID: 426714129}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &721855354
 GameObject:
   m_ObjectHideFlags: 0
@@ -6408,7 +6120,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 775537195}
-  - component: {fileID: 775537197}
   - component: {fileID: 775537196}
   m_Layer: 12
   m_Name: hallway (3)
@@ -6446,26 +6157,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &775537197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 775537194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 775537196}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &782649655
 GameObject:
   m_ObjectHideFlags: 0
@@ -7284,7 +6975,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 921258958}
-  - component: {fileID: 921258960}
   - component: {fileID: 921258959}
   m_Layer: 12
   m_Name: hallway (3)
@@ -7321,26 +7011,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &921258960
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 921258957}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 921258959}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1001 &952027883
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7641,7 +7311,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 973499174}
-  - component: {fileID: 973499176}
   - component: {fileID: 973499175}
   m_Layer: 12
   m_Name: hallway (8)
@@ -7679,26 +7348,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &973499176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973499173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 973499175}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &981965293
 GameObject:
   m_ObjectHideFlags: 0
@@ -7708,7 +7357,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 981965294}
-  - component: {fileID: 981965296}
   - component: {fileID: 981965295}
   m_Layer: 12
   m_Name: hallway (9)
@@ -7746,26 +7394,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &981965296
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 981965293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 981965295}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1001 &990227738
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7955,7 +7583,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1019115000}
-  - component: {fileID: 1019115002}
   - component: {fileID: 1019115001}
   m_Layer: 12
   m_Name: Hallway Window (1)
@@ -7993,26 +7620,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 34894454983237412, guid: 5f03619cae36f724ba3f97df7a9e1145, type: 3}
---- !u!114 &1019115002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1019114999}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1019115001}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1001 &1021306902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8978,7 +8585,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1087264059}
-  - component: {fileID: 1087264061}
   - component: {fileID: 1087264060}
   m_Layer: 12
   m_Name: hallway
@@ -9016,26 +8622,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &1087264061
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1087264058}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1087264060}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &1091388281
 GameObject:
   m_ObjectHideFlags: 0
@@ -9129,7 +8715,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1101179793}
-  - component: {fileID: 1101179795}
   - component: {fileID: 1101179794}
   m_Layer: 12
   m_Name: hallway (8)
@@ -9167,26 +8752,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &1101179795
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1101179792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1101179794}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &1105323257
 GameObject:
   m_ObjectHideFlags: 0
@@ -10349,7 +9914,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1258491853}
-  - component: {fileID: 1258491855}
   - component: {fileID: 1258491854}
   m_Layer: 12
   m_Name: hallway (5)
@@ -10386,26 +9950,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &1258491855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1258491852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1258491854}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!4 &1285285234 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6291121790558342556, guid: 188c21035c3f53048965ffecbf0896ee, type: 3}
@@ -10420,7 +9964,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1293587317}
-  - component: {fileID: 1293587319}
   - component: {fileID: 1293587318}
   m_Layer: 12
   m_Name: hallway
@@ -10458,26 +10001,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &1293587319
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1293587316}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1293587318}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &1295964076
 GameObject:
   m_ObjectHideFlags: 0
@@ -10487,7 +10010,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1295964077}
-  - component: {fileID: 1295964079}
   - component: {fileID: 1295964078}
   m_Layer: 12
   m_Name: hallway (7)
@@ -10525,26 +10047,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &1295964079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1295964076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1295964078}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &1309308053
 GameObject:
   m_ObjectHideFlags: 0
@@ -11374,7 +10876,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1395834767}
-  - component: {fileID: 1395834769}
   - component: {fileID: 1395834768}
   m_Layer: 12
   m_Name: hallway (9)
@@ -11412,26 +10913,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &1395834769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1395834766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1395834768}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &1450769170
 GameObject:
   m_ObjectHideFlags: 0
@@ -11441,7 +10922,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1450769171}
-  - component: {fileID: 1450769173}
   - component: {fileID: 1450769172}
   m_Layer: 12
   m_Name: hallway (6)
@@ -11478,26 +10958,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &1450769173
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1450769170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1450769172}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &1454038890
 GameObject:
   m_ObjectHideFlags: 0
@@ -11507,7 +10967,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1454038891}
-  - component: {fileID: 1454038893}
   - component: {fileID: 1454038892}
   m_Layer: 12
   m_Name: hallway (2)
@@ -11544,26 +11003,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &1454038893
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1454038890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1454038892}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &1468842154
 GameObject:
   m_ObjectHideFlags: 0
@@ -12128,7 +11567,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1617216066}
-  - component: {fileID: 1617216068}
   - component: {fileID: 1617216067}
   m_Layer: 12
   m_Name: hallway (10)
@@ -12167,26 +11605,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &1617216068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1617216065}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1617216067}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1001 &1622884859
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12512,7 +11930,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1675880782}
-  - component: {fileID: 1675880784}
   - component: {fileID: 1675880783}
   m_Layer: 12
   m_Name: hallway (5)
@@ -12550,26 +11967,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &1675880784
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1675880781}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1675880783}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &1681810067
 GameObject:
   m_ObjectHideFlags: 0
@@ -12579,7 +11976,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1681810068}
-  - component: {fileID: 1681810070}
   - component: {fileID: 1681810069}
   m_Layer: 12
   m_Name: hallway (4)
@@ -12616,26 +12012,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &1681810070
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1681810067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1681810069}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1001 &1689082432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12735,7 +12111,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1690993115}
-  - component: {fileID: 1690993117}
   - component: {fileID: 1690993116}
   m_Layer: 12
   m_Name: hallway (9)
@@ -12773,26 +12148,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &1690993117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690993114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1690993116}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!4 &1697359084 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8269069634579788736, guid: 6ce227bbb23a6b94eb4670fed569e2ec, type: 3}
@@ -13654,7 +13009,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1873856236}
-  - component: {fileID: 1873856238}
   - component: {fileID: 1873856237}
   m_Layer: 12
   m_Name: hallway (5)
@@ -13691,26 +13045,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &1873856238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1873856235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 1873856237}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1001 &1904291905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14013,7 +13347,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2005621736}
-  - component: {fileID: 2005621738}
   - component: {fileID: 2005621737}
   m_Layer: 12
   m_Name: hallway (1)
@@ -14051,26 +13384,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &2005621738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005621735}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 2005621737}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &2007993391
 GameObject:
   m_ObjectHideFlags: 0
@@ -14080,7 +13393,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2007993392}
-  - component: {fileID: 2007993394}
   - component: {fileID: 2007993393}
   m_Layer: 12
   m_Name: hallway (1)
@@ -14118,26 +13430,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &2007993394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2007993391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 2007993393}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &2009868591
 GameObject:
   m_ObjectHideFlags: 0
@@ -14147,7 +13439,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2009868592}
-  - component: {fileID: 2009868594}
   - component: {fileID: 2009868593}
   m_Layer: 12
   m_Name: hallway (12)
@@ -14185,26 +13476,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &2009868594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009868591}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 2009868593}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &2013657874
 GameObject:
   m_ObjectHideFlags: 0
@@ -14982,7 +14253,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2108147550}
-  - component: {fileID: 2108147552}
   - component: {fileID: 2108147551}
   m_Layer: 12
   m_Name: hallway (2)
@@ -15019,26 +14289,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6047012985341678578, guid: 48214a70b4d073849860f729612cd75c, type: 3}
---- !u!114 &2108147552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2108147549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 2108147551}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1001 &2128993189
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15283,28 +14533,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &185890243222439184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7724993643069361352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 3048708911216344462}
-  - {fileID: 1649012348575816717}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 5938200216861028855}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!1 &206403778727903189
 GameObject:
   m_ObjectHideFlags: 0
@@ -16068,7 +15296,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 443789837911933835}
-  - component: {fileID: 1700285816000505095}
   - component: {fileID: 7344301731637912804}
   m_Layer: 12
   m_Name: Hallway Window
@@ -16457,28 +15684,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!114 &1319392938282237514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8930556808150939538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 448514077935576919}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 4806395720798210733}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!23 &1333049831097289741
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16702,26 +15907,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289614834047106010}
   m_Mesh: {fileID: 9202301845904423975, guid: 73701f7ae2833544380b2bc4e0d74799, type: 3}
---- !u!114 &1482037252026094882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3242105044308360873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 6261443731996637286}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!33 &1485614235563802383
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -17060,26 +16245,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4952639518888205531}
   m_Mesh: {fileID: 6508942946276188115, guid: e8a51c2f1a3552d4a9d4ea07df5d9919, type: 3}
---- !u!114 &1700285816000505095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 964746879874832689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 7344301731637912804}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!33 &1702127239452398901
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -17867,28 +17032,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
   m_IsActive: 1
---- !u!114 &2407116755840241981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3737171208096612474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 1596926577661715775}
-  - {fileID: 0}
-  - {fileID: 1525508272561360645}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 5847634303330501061}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!4 &2416796354328331284
 Transform:
   m_ObjectHideFlags: 0
@@ -19112,7 +18255,6 @@ GameObject:
   - component: {fileID: 2861357999915541523}
   - component: {fileID: 1160326052354927542}
   - component: {fileID: 4034865916749537148}
-  - component: {fileID: 1482037252026094882}
   - component: {fileID: 6261443731996637286}
   m_Layer: 12
   m_Name: Medbay Room
@@ -19464,7 +18606,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4205073895367171778}
-  - component: {fileID: 7054294907277458673}
   - component: {fileID: 474020938475662647}
   m_Layer: 12
   m_Name: Corner
@@ -19482,7 +18623,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4205073896011507306}
-  - component: {fileID: 7054294906867991641}
   - component: {fileID: 474020938851554719}
   m_Layer: 12
   m_Name: Corner
@@ -19885,7 +19025,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4077668361815382720}
   - component: {fileID: 5847634303330501061}
-  - component: {fileID: 2407116755840241981}
   m_Layer: 12
   m_Name: Massive Area
   m_TagString: Untagged
@@ -23396,7 +22535,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6291121790361730055}
-  - component: {fileID: 7136555688196709792}
   - component: {fileID: 8741507756495398031}
   m_Layer: 12
   m_Name: hallway (1)
@@ -23414,7 +22552,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6291121791216694962}
-  - component: {fileID: 7136555688549439253}
   - component: {fileID: 8741507755739754042}
   m_Layer: 12
   m_Name: hallway (2)
@@ -23432,7 +22569,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6291121791137065582}
-  - component: {fileID: 7136555688629193673}
   - component: {fileID: 8741507756129891046}
   m_Layer: 12
   m_Name: hallway
@@ -23911,46 +23047,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 989303027773781596}
   m_Mesh: {fileID: 8634086028926297924, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
---- !u!114 &7054294906867991641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3535533245820632272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 474020938851554719}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
---- !u!114 &7054294907277458673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3535533245423715448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 474020938475662647}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!33 &7059894665141462619
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -24157,66 +23253,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5884911088205242585}
   m_Mesh: {fileID: 7731867773946417782, guid: 552e4ee1097c6b84fa2c48551131e3f6, type: 3}
---- !u!114 &7136555688196709792
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6630808570252928701}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 8741507756495398031}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
---- !u!114 &7136555688549439253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6630808570571058184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 8741507755739754042}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
---- !u!114 &7136555688629193673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6630808570692759764}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 297d1a9ce96c86c48bba716472b4ccfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  doorways:
-  - {fileID: 0}
-  - {fileID: 0}
-  meshColliders:
-  - {fileID: 8741507756129891046}
-  generatedFrom: {fileID: 0}
-  switchableRoom: {fileID: 0}
-  mapIcons: []
 --- !u!64 &7157385179444985152
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -24541,7 +23577,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6953382344006604402}
-  - component: {fileID: 185890243222439184}
   - component: {fileID: 5938200216861028855}
   m_Layer: 12
   m_Name: Cross section
@@ -25825,7 +24860,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8116725357328477480}
-  - component: {fileID: 1319392938282237514}
   - component: {fileID: 4806395720798210733}
   m_Layer: 12
   m_Name: Cross section
